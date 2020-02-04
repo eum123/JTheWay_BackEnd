@@ -18,3 +18,4 @@ target/classes/*
 /target/
 .classpath
 .tern-project
+.factorypath
