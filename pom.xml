@@ -19,12 +19,12 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.1.RELEASE</version>
+		<version>1.5.3.RELEASE</version>
 	</parent>
 
 	<build>
-
 		<plugins>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -45,7 +45,6 @@
 					<webResources>
 						<resource>
 							<directory>src/main/webapp</directory>
-							<!-- it's not a good idea to filter binary files -->
 							<filtering>false</filtering>
 						</resource>
 					</webResources>
@@ -70,13 +69,12 @@
 			<artifactId>spring-data-jpa</artifactId>
 		</dependency>
 
-		<!-- <dependency>
+		<dependency>
 			<groupId>javax.persistence</groupId>
 			<artifactId>persistence-api</artifactId>
-			<version>[1.0.2</version>
+			<version>1.0.2</version>
 		</dependency>
- -->
-		<!-- swagger -->
+
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
@@ -87,7 +85,6 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.9.2</version>
 		</dependency>
-		<!-- end of swagger -->
 
 
 		<dependency>
@@ -95,7 +92,7 @@
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -109,9 +106,9 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- <dependency> <groupId>org.junit.jupiter</groupId> <artifactId>junit-jupiter-engine</artifactId>
+		<!-- <dependency> <groupId>org.junit.jupiter</groupId> <artifactId>junit-jupiter-engine</artifactId> 
 			<scope>test</scope> </dependency> -->
-		<!-- <dependency> <groupId>org.mockito</groupId> <artifactId>mockito-junit-jupiter</artifactId>
+		<!-- <dependency> <groupId>org.mockito</groupId> <artifactId>mockito-junit-jupiter</artifactId> 
 			<scope>test</scope> </dependency> -->
 		<dependency>
 			<groupId>junit</groupId>
