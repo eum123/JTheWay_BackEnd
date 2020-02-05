@@ -26,4 +26,11 @@ public class ApiResponseMessage {
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
     }
+    
+    public ApiResponseMessage(Throwable t) {
+    	this.httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+    	this.userResponse = "";
+    	this.errorMessage = t.getMessage();
+    	this.errorCode = "";
+    }
 }
