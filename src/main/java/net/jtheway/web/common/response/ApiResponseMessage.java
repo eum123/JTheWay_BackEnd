@@ -1,5 +1,6 @@
 package net.jtheway.web.common.response;
 
+
 import org.springframework.http.HttpStatus;
 
 import lombok.Data;
@@ -9,7 +10,7 @@ import lombok.ToString;
 @ToString
 public class ApiResponseMessage {
 	// HttpStatus
-    private HttpStatus status;
+    private HttpStatus httpStatus = HttpStatus.OK;
     // Http Default Message
     private Object userResponse;
     // Error Message to USER
@@ -20,7 +21,7 @@ public class ApiResponseMessage {
     public ApiResponseMessage() {}
  
     public ApiResponseMessage(HttpStatus status, Object userResponse, String errorCode, String errorMessage) {
-        this.status = status;
+        this.httpStatus = status;
         this.userResponse = userResponse;
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;

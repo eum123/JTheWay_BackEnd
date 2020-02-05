@@ -6,15 +6,23 @@ spring:
     datasource:
         driver-class-name: com.mysql.jdbc.Driver
         url: jdbc:mysql://localhost:3306/testdb?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&charaterEncoding=utf-8&serverTimezone=UTC
-        username: admin
-        password: jtheway
+        username: jtheway
+        password: jtheway01
         
     jpa:
         hibernate.ddl-auto: none
         generate-ddl: true
         show-sql: true
+        
+    output.ansi.enabled: always
 
-    
+
+
+logging:
+  level:
+    org.springframework: INFO
+    org.springframework.web: DEBUG
+        
 ---
 spring:
     profiles: prod
