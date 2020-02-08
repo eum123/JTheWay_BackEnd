@@ -5,7 +5,7 @@ spring:
     
     datasource:
         driver-class-name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/testdb?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&charaterEncoding=utf-8&serverTimezone=UTC
+        url: jdbc:mysql://localhost:3306/jtheway_db?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&charaterEncoding=utf-8&serverTimezone=UTC
         username: jtheway
         password: jtheway01
         
@@ -22,7 +22,8 @@ logging:
   level:
     org.springframework: INFO
     org.springframework.web: DEBUG
-        
+    org.hibernate: DEBUG
+      
 ---
 spring:
     profiles: prod
