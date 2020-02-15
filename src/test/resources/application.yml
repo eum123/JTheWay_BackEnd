@@ -15,7 +15,10 @@ spring:
         show-sql: true
         
     output.ansi.enabled: always
-
+    
+    jwt:
+        secret: http://www.jdi.net/
+        expiration: 3600000
 
 
 logging:
