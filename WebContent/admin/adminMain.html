@@ -1,0 +1,312 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>haami admin</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+    <!-- c3 Charts -->
+    <link href="../css/plugins/c3/c3.min.css" rel="stylesheet" />
+
+    <!-- FooTable -->
+    <link href="../css/plugins/footable/footable.core.css" rel="stylesheet" />
+
+    <link href="../css/animate.css" rel="stylesheet" />
+    <link href="../css/style.css" rel="stylesheet" />
+
+    <link
+      href="../css/plugins/jQueryUI/jquery-ui-1.10.4.custom.min.css"
+      rel="stylesheet"
+    />
+    <link href="../css/plugins/jqGrid/ui.jqgrid.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+          <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+              <div class="dropdown profile-element">
+                <img
+                  alt="image"
+                  class="rounded-circle"
+                  src="../img/profile_small.jpg"
+                />
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                  <span class="block m-t-xs font-bold">David Williams</span>
+                  <span class="text-muted text-xs block"
+                    >Art Director <b class="caret"></b
+                  ></span>
+                </a>
+                <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                  <li>
+                    <a class="dropdown-item" href="profile.html">Profile</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="contacts.html">Contacts</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="mailbox.html">Mailbox</a>
+                  </li>
+                  <li class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="login.html">Logout</a></li>
+                </ul>
+              </div>
+              <div class="logo-element">
+                IN+
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div id="page-wrapper" class="gray-bg">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-content">
+                <h5 align="center">A 2020.05.27(Firday) B</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="ibox">
+              <div class="ibox-title">
+                <h5>FooTable with row toggler, sorting and pagination</h5>
+              </div>
+              <div class="ibox-content">
+                <div class="jqGrid_wrapper">
+                  <table id="table_list_1"></table>
+                  <div id="pager_list_1"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="ibox">
+              <div class="ibox-title">
+                <h5>출석율</h5>
+              </div>
+              <div class="ibox-content">
+                <div>
+                  <div id="pie_1"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3">
+            <div class="ibox-title">
+              <h5>온라인 테스트 응시율</h5>
+            </div>
+            <div class="ibox-content">
+              <div>
+                <div id="pie_2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-content">
+                <h5 align="center">3월 4주차 온라인 텍스트 결과</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-title">
+                <h5>
+                  Line Chart Example
+                  <small>With custom colors.</small>
+                </h5>
+              </div>
+              <div class="ibox-content">
+                <div>
+                  <div id="lineChart"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-content">
+                <h5 align="center">3월 4주차 수업 스케줄</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row"></div>
+
+        <div class="footer">
+          <div class="float-right">10GB of <strong>250GB</strong> Free.</div>
+          <div><strong>Copyright</strong> Example Company &copy; 2014-2018</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="../js/jquery-3.1.1.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- FooTable -->
+    <script src="../js/plugins/footable/footable.all.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="../js/inspinia.js"></script>
+    <script src="../js/plugins/pace/pace.min.js"></script>
+
+    <!-- ChartJS-->
+    <script src="../js/plugins/d3/d3.min.js"></script>
+    <script src="../js/plugins/c3/c3.min.js"></script>
+
+    <!-- jqGrid -->
+    <script src="../js/plugins/jqGrid/i18n/grid.locale-en.js"></script>
+    <script src="../js/plugins/jqGrid/jquery.jqGrid.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        //목록
+        var mydata = [
+          {
+            id: "1",
+            class: "중3 심화반",
+            participation: "6/6",
+            examination: "6/6",
+            pass: "90%",
+            average: "82",
+          },
+          {
+            id: "2",
+            class: "중3 상위권반",
+            participation: "5/6",
+            examination: "6/6",
+            pass: "87%",
+            average: "90",
+          },
+        ];
+        $("#table_list_1").jqGrid({
+          data: mydata,
+          datatype: "local",
+          height: 250,
+          autowidth: true,
+          shrinkToFit: true,
+          rowNum: 14,
+          rowList: [10, 20, 30],
+          colNames: [
+            "No",
+            "클래스",
+            "출석",
+            "온라인테스트",
+            "Pass비율",
+            "평균점수",
+          ],
+          colModel: [
+            {
+              name: "id",
+              index: "id",
+              width: 20,
+              sorttype: "int",
+              align: "center",
+            },
+            {
+              name: "class",
+              index: "class",
+              width: 45,
+              align: "center",
+            },
+            {
+              name: "participation",
+              index: "participation",
+              width: 20,
+              align: "center",
+            },
+            {
+              name: "examination",
+              index: "examination",
+              width: 20,
+              align: "center",
+            },
+            {
+              name: "pass",
+              index: "pass",
+              width: 30,
+              align: "center",
+            },
+            {
+              name: "average",
+              index: "average",
+              width: 30,
+              align: "right",
+              sorttype: "float",
+              align: "center",
+            },
+          ],
+          pager: "#pager_list_1",
+          viewrecords: true,
+          caption: "",
+          hidegrid: false,
+        });
+
+        //출석률
+        c3.generate({
+          bindto: "#pie_1",
+          data: {
+            columns: [
+              ["출석", 30],
+              ["결석", 120],
+            ],
+            colors: {
+              출석: "#1ab394",
+              결석: "#BABABA",
+            },
+            type: "pie",
+          },
+        });
+
+        //시험응시율
+        c3.generate({
+          bindto: "#pie_2",
+          data: {
+            columns: [
+              ["응시", 30],
+              ["미응시", 120],
+            ],
+            colors: {
+              응시: "#1ab394",
+              미응시: "#BABABA",
+            },
+            type: "pie",
+          },
+        });
+
+        //온라인 테스트 결과
+        c3.generate({
+          bindto: "#lineChart",
+          data: {
+            columns: [
+              ["data1", 30, 200, 100, 400, 150, 250],
+              ["data2", 50, 20, 10, 40, 15, 25],
+            ],
+            colors: {
+              data1: "#1ab394",
+              data2: "#BABABA",
+            },
+          },
+        });
+      });
+    </script>
+  </body>
+</html>
