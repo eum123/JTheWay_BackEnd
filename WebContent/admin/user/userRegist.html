@@ -1,0 +1,174 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>사용자 등록</title>
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+    <link href="../../css/animate.css" rel="stylesheet" />
+    <link href="../../css/style.css" rel="stylesheet" />
+
+    <!-- select2 -->
+    <link href="../../css/plugins/select2/select2.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+          <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+              <div class="dropdown profile-element">
+                <img
+                  alt="image"
+                  class="rounded-circle"
+                  src="../../img/profile_small.jpg"
+                />
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                  <span class="block m-t-xs font-bold">David Williams</span>
+                  <span class="text-muted text-xs block"
+                    >Art Director <b class="caret"></b
+                  ></span>
+                </a>
+                <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                  <li>
+                    <a class="dropdown-item" href="profile.html">Profile</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="contacts.html">Contacts</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="mailbox.html">Mailbox</a>
+                  </li>
+                  <li class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="login.html">Logout</a></li>
+                </ul>
+              </div>
+              <div class="logo-element">
+                IN+
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div id="page-wrapper" class="gray-bg">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-title">
+                <h5>사용자 정보 관리</h5>
+              </div>
+              <div class="ibox-content">
+                <table class="table table-bordered">
+                  <thead></thead>
+                  <tbody>
+                    <tr>
+                      <td>사용자 구분</td>
+                      <td>
+                        <select class="form-control" name="account">
+                          <option>관리자/원장</option>
+                          <option>선생</option>
+                          <option>알바</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>성명</td>
+                      <td>
+                        <input
+                          type="text"
+                          placeholder="이름을 입력하세요"
+                          class="form-control"
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-title">
+                <h5>계정 관리</h5>
+              </div>
+              <div class="ibox-content">
+                <table class="table table-bordered">
+                  <thead></thead>
+                  <tbody>
+                    <tr>
+                      <td>아이디</td>
+                      <td>
+                        <input
+                          type="text"
+                          placeholder="ID를 입력하세요"
+                          class="form-control"
+                        />
+                        <button
+                          class="btn btn-sm btn-primary float-right m-t-n-xs"
+                          type="submit"
+                        >
+                          <strong>중복확인</strong>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>비밀번호</td>
+                      <td>
+                        <input
+                          type="password"
+                          placeholder="Password"
+                          class="form-control"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>비밀번호 확인</td>
+                      <td>
+                        <input
+                          type="password"
+                          placeholder="Password"
+                          class="form-control"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>사용</td>
+                      <td>
+                        <select class="form-control" name="account">
+                          <option>사용</option>
+                          <option>사용안함</option>
+                        </select>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <button
+              class="btn btn-sm btn-primary float-right m-t-n-xs"
+              type="submit"
+            >
+              <strong>등록</strong>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Select2 -->
+
+    <script>
+      $(document).ready(function () {});
+    </script>
+  </body>
+</html>
