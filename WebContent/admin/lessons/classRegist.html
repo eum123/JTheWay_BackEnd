@@ -10,6 +10,14 @@
 
     <link href="../../css/animate.css" rel="stylesheet" />
     <link href="../../css/style.css" rel="stylesheet" />
+    <link
+      href="../../css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../../css/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="wrapper">
@@ -73,56 +81,266 @@
                           </select>
                         </td>
                       </tr>
-
                       <tr>
-                        <td>학년</td>
+                        <td>클래스명</td>
                         <td>
-                          <select class="form-control" name="account">
-                            <option>중3</option>
-                            <option>중2</option>
-                            <option>중1</option>
-                            <option>고1</option>
-                          </select>
+                          <input
+                            type="text"
+                            placeholder="클래스명"
+                            class="form-control"
+                          />
                         </td>
                       </tr>
                       <tr>
-                        <td>학기/과정</td>
-                        <td>
-                          <select class="form-control" name="account">
-                            <option>1학기</option>
-                            <option>2학기</option>
-                          </select>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>대분류</td>
+                        <td>커리큘럼</td>
                         <td>
                           <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                               <select class="form-control" name="account">
-                                <option>대분류1</option>
-                                <option>대분류2</option>
-                                <option>대분류3</option>
+                                <option>중3</option>
+                                <option>중2</option>
+                                <option>중1</option>
+                                <option>고1</option>
                               </select>
                             </div>
-                            <div class="col-md-6">
-                              <input
-                                type="text"
-                                placeholder="중분류"
-                                class="form-control"
-                              />
+                            <div class="col-md-4">
+                              <select class="form-control" name="account">
+                                <option>1학기</option>
+                                <option>2학기</option>
+                              </select>
+                            </div>
+                            <div class="col-md-1">
+                              <i class="fa fa-plus-square"></i>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-4">
+                              <select class="form-control" name="account">
+                                <option>중3</option>
+                                <option>중2</option>
+                                <option>중1</option>
+                                <option>고1</option>
+                              </select>
+                            </div>
+                            <div class="col-md-4">
+                              <select class="form-control" name="account">
+                                <option>1학기</option>
+                                <option>2학기</option>
+                              </select>
+                            </div>
+                            <div class="col-md-1">
+                              <i class="fa fa-minus-square"></i>
                             </div>
                           </div>
                         </td>
                       </tr>
                       <tr>
-                        <td>중분류</td>
+                        <td>클래스 설명</td>
+                        <td>
+                          <textarea> </textarea>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>시간</td>
+                        <td>
+                          <div class="row">
+                            <div class="col-md-4">
+                              <input
+                                type="text"
+                                placeholder="시작일자"
+                                class="form-control"
+                              />
+                            </div>
+                            <div class="col-md-1">~</div>
+                            <div class="col-md-4">
+                              <input
+                                type="text"
+                                placeholder="종료일자"
+                                class="form-control"
+                              />
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-1">
+                              <input
+                                id="checkbox1"
+                                type="checkbox"
+                                checked=""
+                              />
+                              <label for="checkbox1">월</label>
+                            </div>
+                            <div class="col-md-1">
+                              <input
+                                id="checkbox2"
+                                type="checkbox"
+                                checked=""
+                              />
+                              <label for="checkbox2">화</label>
+                            </div>
+                            <div class="col-md-1">
+                              <input
+                                id="checkbox3"
+                                type="checkbox"
+                                checked=""
+                              />
+                              <label for="checkbox3">수</label>
+                            </div>
+                            <div class="col-md-1">
+                              <input
+                                id="checkbox4"
+                                type="checkbox"
+                                checked=""
+                              />
+                              <label for="checkbox4">목</label>
+                            </div>
+                            <div class="col-md-1">
+                              <input
+                                id="checkbox5"
+                                type="checkbox"
+                                checked=""
+                              />
+                              <label for="checkbox5">금</label>
+                            </div>
+                            <div class="col-md-1">
+                              <input
+                                id="checkbox6"
+                                type="checkbox"
+                                checked=""
+                              />
+                              <label for="checkbox6">토</label>
+                            </div>
+                            <div class="col-md-1">
+                              <input
+                                id="checkbox7"
+                                type="checkbox"
+                                checked=""
+                              />
+                              <label for="checkbox7">일</label>
+                            </div>
+                            <div class="col-md-1">
+                              <i class="fa fa-plus-square"></i>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-1">
+                              <input
+                                id="checkbox1"
+                                type="checkbox"
+                                checked=""
+                              />
+                              <label for="checkbox1">월</label>
+                            </div>
+                            <div class="col-md-1">
+                              <input
+                                id="checkbox2"
+                                type="checkbox"
+                                checked=""
+                              />
+                              <label for="checkbox2">화</label>
+                            </div>
+                            <div class="col-md-1">
+                              <input
+                                id="checkbox3"
+                                type="checkbox"
+                                checked=""
+                              />
+                              <label for="checkbox3">수</label>
+                            </div>
+                            <div class="col-md-1">
+                              <input
+                                id="checkbox4"
+                                type="checkbox"
+                                checked=""
+                              />
+                              <label for="checkbox4">목</label>
+                            </div>
+                            <div class="col-md-1">
+                              <input
+                                id="checkbox5"
+                                type="checkbox"
+                                checked=""
+                              />
+                              <label for="checkbox5">금</label>
+                            </div>
+                            <div class="col-md-1">
+                              <input
+                                id="checkbox6"
+                                type="checkbox"
+                                checked=""
+                              />
+                              <label for="checkbox6">토</label>
+                            </div>
+                            <div class="col-md-1">
+                              <input
+                                id="checkbox7"
+                                type="checkbox"
+                                checked=""
+                              />
+                              <label for="checkbox7">일</label>
+                            </div>
+                            <div class="col-md-1">
+                              <i class="fa fa-minus-square"></i>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>교재</td>
+                        <td>
+                          <textarea> </textarea>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>담당교사</td>
+                        <td>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <select class="form-control" name="account">
+                                <option>나교사</option>
+                                <option>박교사</option>
+                                <option>김교사</option>
+                              </select>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>학생</td>
+                        <td>
+                          <div class="row">
+                            <div class="col-md-2">총 1명</div>
+                            <div class="col-md-9">
+                              <input
+                                class="tagsinput form-control"
+                                type="text"
+                                value="나학생1,학생2,학생3,Beijing,Cairo"
+                              />
+                            </div>
+                            <div class="col-md-1">
+                              <button
+                                class="btn btn-sm btn-primary float-right m-t-n-xs"
+                                type="submit"
+                              >
+                                <strong>학생선택</strong>
+                              </button>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Pass 기준 점수</td>
                         <td>
                           <input
                             type="text"
-                            placeholder="중분류"
+                            placeholder="Pass 기준 점수"
                             class="form-control"
                           />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>기타정보</td>
+                        <td>
+                          <textarea></textarea>
                         </td>
                       </tr>
                     </tbody>
@@ -146,5 +364,20 @@
         </div>
       </div>
     </div>
+    <!-- Mainly scripts -->
+    <script src="../../js/jquery-3.1.1.min.js"></script>
+    <script src="../../js/popper.min.js"></script>
+    <script src="../../js/bootstrap.js"></script>
+    <!-- iCheck -->
+    <script src="../../js/plugins/iCheck/icheck.min.js"></script>
+    <!-- Tags Input -->
+    <script src="../../js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".tagsinput").tagsinput({
+          tagClass: "label label-primary",
+        });
+      });
+    </script>
   </body>
 </html>
