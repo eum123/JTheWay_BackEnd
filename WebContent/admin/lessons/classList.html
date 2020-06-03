@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>커리큘럼 목록</title>
+    <title>클래스 목록</title>
 
     <link href="../../css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../font-awesome/css/font-awesome.css" rel="stylesheet" />
@@ -55,7 +55,7 @@
           <div class="col-lg-12">
             <div class="ibox">
               <div class="ibox-title">
-                <h5>커리큘럼 목록</h5>
+                <h5>클래스 목록</h5>
               </div>
               <div class="ibox-content">
                 <div class="form-group row">
@@ -89,6 +89,13 @@
                       <option>대분류4</option>
                     </select>
                   </div>
+                  <div class="col-md-2">
+                    <input
+                      type="text"
+                      placeholder="교사명 입력하세요"
+                      class="form-control"
+                    />
+                  </div>
                   <div class="col-md-1">
                     <button
                       class="btn btn-sm btn-primary float-right m-t-n-xs"
@@ -97,7 +104,7 @@
                       <strong>조회</strong>
                     </button>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-1">
                     <button
                       class="btn btn-sm btn-primary float-right m-t-n-xs"
                       type="submit"
@@ -119,28 +126,31 @@
                     <tr>
                       <th>NO</th>
                       <th>년도</th>
-                      <th>학년</th>
-                      <th>학기/과정</th>
-                      <th>대분류</th>
-                      <th>중분류</th>
+                      <th>클래스</th>
+                      <th>커리큘럼</th>
+                      <th>인원</th>
+                      <th>시간</th>
+                      <th>담당교사</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td>1</td>
                       <td>2020</td>
-                      <td>1학년</td>
-                      <td>2학기</td>
-                      <td>대분류1</td>
-                      <td>중분류2</td>
+                      <td>중3 심화반</td>
+                      <td>중3 > 2학기</td>
+                      <td>5</td>
+                      <td>월요일/금요일 4:30 ~ 5:30 확률과 통계 심화</td>
+                      <td>나선생</td>
                     </tr>
                     <tr>
-                      <td>2</td>
+                      <td>1</td>
                       <td>2020</td>
-                      <td>1학년</td>
-                      <td>2학기</td>
-                      <td>대분류2</td>
-                      <td>중분류2</td>
+                      <td>중2 심화반</td>
+                      <td>중2 > 1학기</td>
+                      <td>5</td>
+                      <td>월요일/금요일 4:30 ~ 5:30 확률과 통계 심화</td>
+                      <td>너선생</td>
                     </tr>
                   </tbody>
                 </table>
