@@ -1,0 +1,161 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>학생 목록</title>
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+    <link href="../../css/animate.css" rel="stylesheet" />
+    <link href="../../css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+          <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+              <div class="dropdown profile-element">
+                <img
+                  alt="image"
+                  class="rounded-circle"
+                  src="../../img/profile_small.jpg"
+                />
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                  <span class="block m-t-xs font-bold">David Williams</span>
+                  <span class="text-muted text-xs block"
+                    >Art Director <b class="caret"></b
+                  ></span>
+                </a>
+                <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                  <li>
+                    <a class="dropdown-item" href="profile.html">Profile</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="contacts.html">Contacts</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="mailbox.html">Mailbox</a>
+                  </li>
+                  <li class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="login.html">Logout</a></li>
+                </ul>
+              </div>
+              <div class="logo-element">
+                IN+
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div id="page-wrapper" class="gray-bg">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-title">
+                <h5>학생 목록</h5>
+              </div>
+              <div class="ibox-content">
+                <div class="form-group row">
+                  <div class="col-md-2">
+                    <select class="form-control" name="account">
+                      <option>2020</option>
+                      <option>2019</option>
+                      <option>2018</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-1">
+                    <select class="form-control" name="account">
+                      <option>클래스1</option>
+                      <option>클래서2</option>
+                    </select>
+                  </div>
+                  <div class="col-md-2">
+                    <input
+                      type="text"
+                      placeholder="이름이나 전화번호"
+                      class="form-control"
+                    />
+                  </div>
+
+                  <div class="col-md-1">
+                    <button
+                      class="btn btn-sm btn-primary float-right m-t-n-xs"
+                      type="submit"
+                    >
+                      <strong>조회</strong>
+                    </button>
+                  </div>
+                  <div class="col-md-1">
+                    <button
+                      class="btn btn-sm btn-primary float-right m-t-n-xs"
+                      type="submit"
+                    >
+                      <strong>등록</strong>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-content">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>NO</th>
+                      <th>학교/학년</th>
+                      <th>클래스</th>
+                      <th>학생명</th>
+                      <th>학생 휴대폰</th>
+                      <th>부모님 휴대폰</th>
+                      <th>등록일자</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>나학교 3학년</td>
+                      <td>중3 심화반</td>
+                      <td>이름1</td>
+                      <td>010-0000-0000</td>
+                      <td>010-0000-1000</td>
+                      <td>2020.01.02</td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>너학교 2학년</td>
+                      <td>중2 심화반</td>
+                      <td>이름2</td>
+                      <td>010-0000-0001</td>
+                      <td>010-0000-1001</td>
+                      <td>2020.03.02</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-white">
+                    <i class="fa fa-chevron-left"></i>
+                  </button>
+                  <button class="btn btn-white">1</button>
+                  <button class="btn btn-white active">2</button>
+                  <button class="btn btn-white">3</button>
+                  <button class="btn btn-white">4</button>
+                  <button type="button" class="btn btn-white">
+                    <i class="fa fa-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
