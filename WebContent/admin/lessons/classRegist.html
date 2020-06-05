@@ -18,6 +18,10 @@
       href="../../css/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css"
       rel="stylesheet"
     />
+    <link
+      href="../../css/plugins/chosen/bootstrap-chosen.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="wrapper">
@@ -309,21 +313,20 @@
                         <td>
                           <div class="row">
                             <div class="col-md-2">총 1명</div>
-                            <div class="col-md-9">
-                              <input
-                                class="tagsinput form-control"
-                                type="text"
-                                value="나학생1,학생2,학생3,Beijing,Cairo"
-                              />
-                            </div>
-                            <div class="col-md-1">
-                              <button
-                                class="btn btn-sm btn-primary float-right m-t-n-xs"
-                                type="submit"
+                            <div class="col-md-10">
+                              <select
+                                data-placeholder="Choose a Country..."
+                                class="chosen-select"
+                                multiple
+                                style="width: 350px;"
+                                tabindex="4"
                               >
-                                <strong>학생선택</strong>
-                              </button>
-                            </div>
+                                <option value="United States">학생1</option>
+                                <option value="United Kingdom">학생2</option>
+                                <option value="Afghanistan">학생3</option>
+                                <option value="United Kingdom">학생4</option>
+                                <option value="Afghanistan">학생5</option>
+                              </select>
                           </div>
                         </td>
                       </tr>
@@ -372,11 +375,16 @@
     <script src="../../js/plugins/iCheck/icheck.min.js"></script>
     <!-- Tags Input -->
     <script src="../../js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+
+    <!-- Chosen -->
+    <script src="../../js/plugins/chosen/chosen.jquery.js"></script>
     <script>
       $(document).ready(function () {
         $(".tagsinput").tagsinput({
           tagClass: "label label-primary",
         });
+
+        $(".chosen-select").chosen({ width: "100%" });
       });
     </script>
   </body>
