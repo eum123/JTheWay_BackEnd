@@ -1,0 +1,407 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>학생 등록</title>
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+    <link href="../../css/animate.css" rel="stylesheet" />
+    <link href="../../css/style.css" rel="stylesheet" />
+    <link
+      href="../../css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../../css/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../../css/plugins/chosen/bootstrap-chosen.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="wrapper">
+      <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+          <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+              <div class="dropdown profile-element">
+                <img
+                  alt="image"
+                  class="rounded-circle"
+                  src="../../img/profile_small.jpg"
+                />
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                  <span class="block m-t-xs font-bold">David Williams</span>
+                  <span class="text-muted text-xs block"
+                    >Art Director <b class="caret"></b
+                  ></span>
+                </a>
+                <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                  <li>
+                    <a class="dropdown-item" href="profile.html">Profile</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="contacts.html">Contacts</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="mailbox.html">Mailbox</a>
+                  </li>
+                  <li class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="login.html">Logout</a></li>
+                </ul>
+              </div>
+              <div class="logo-element">
+                IN+
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div id="page-wrapper" class="gray-bg">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-title">
+                <h5>학생 등록</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-content">
+                <table class="table table-bordered">
+                  <thead></thead>
+                  <tbody>
+                    <tr>
+                      <td>학교/학년</td>
+                      <td>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <input
+                              type="text"
+                              placeholder="학교"
+                              class="form-control"
+                            />
+                          </div>
+                          <div class="col-md-6">
+                            <select class="form-control" name="account">
+                              <option>중3</option>
+                              <option>중2</option>
+                              <option>중1</option>
+                              <option>고1</option>
+                            </select>
+                          </div>
+                        </div>
+                      </td>
+                      <td>이름</td>
+                      <td>
+                        <div class="row">
+                          <div class="col-md-8">
+                            <input
+                              type="text"
+                              placeholder="이름"
+                              class="form-control"
+                            />
+                          </div>
+                          <div class="col-md-2">
+                            <button
+                              class="btn btn-sm btn-primary float-right m-t-n-xs"
+                              type="submit"
+                            >
+                              <strong>검색</strong>
+                            </button>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-title">
+                학생정보
+              </div>
+              <div class="ibox-content">
+                <div class="form-group row">
+                  <table class="table table-bordered">
+                    <thead></thead>
+                    <tbody>
+                      <tr>
+                        <td>학생 핸드폰</td>
+                        <td>
+                          <select class="form-control" name="account">
+                            <option>010</option>
+                            <option>019</option>
+                            <option>011</option>
+                            <option>017</option>
+                          </select>
+                          <input
+                            type="text"
+                            placeholder=""
+                            class="form-control"
+                          />
+                          <input
+                            type="text"
+                            placeholder=""
+                            class="form-control"
+                          />
+                        </td>
+                        <td>부모님 핸드폰</td>
+                        <td>
+                          <select class="form-control" name="account">
+                            <option>010</option>
+                            <option>019</option>
+                            <option>011</option>
+                            <option>017</option>
+                          </select>
+                          <input
+                            type="text"
+                            placeholder=""
+                            class="form-control"
+                          />
+                          <input
+                            type="text"
+                            placeholder=""
+                            class="form-control"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>아이디</td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="아이디"
+                            class="form-control"
+                          />
+                          중복체크
+                        </td>
+                        <td>비밀번호</td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="아이디"
+                            class="form-control"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>이메일</td>
+                        <td colspan="3">
+                          <div class="row">
+                            <div class="col-md-4">
+                              <input
+                                type="text"
+                                placeholder="아이디"
+                                class="form-control"
+                              />@
+                            </div>
+                            <div class="col-md-4">
+                              <select class="form-control" name="account">
+                                <option>google.com</option>
+                                <option>naver.com</option>
+                              </select>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>테스트일자</td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="아이디"
+                            class="form-control"
+                          />
+                        </td>
+                        <td>테스트범위</td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="아이디"
+                            class="form-control"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>상담일자</td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="아이디"
+                            class="form-control"
+                          />
+                        </td>
+                        <td>등록일자</td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="아이디"
+                            class="form-control"
+                          />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-title">
+                테스트 결과
+              </div>
+              <div class="ibox-content">
+                <div class="form-group row">
+                  <table class="table table-bordered">
+                    <thead></thead>
+                    <tbody>
+                      <tr>
+                        <td>이해도</td>
+                        <td>*****</td>
+                        <td>집중도</td>
+                        <td>*****</td>
+                      </tr>
+                      <tr>
+                        <td>응용력</td>
+                        <td>*****</td>
+                        <td>선행정도</td>
+                        <td>*****</td>
+                      </tr>
+                      <tr>
+                        <td>클래스</td>
+                        <td>
+                          <select
+                            data-placeholder="Choose a Country..."
+                            class="chosen-select"
+                            multiple
+                            style="width: 350px;"
+                            tabindex="4"
+                          >
+                            <option value="United States">클래스 1</option>
+                            <option value="United Kingdom">클래스 2</option>
+                            <option value="Afghanistan">클래스 3</option>
+                          </select>
+                        </td>
+                        <td>최초 수업일</td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="2020.04.03"
+                            class="form-control"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>학원 목표치</td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="100점 만점 기준 숫자입력"
+                            class="form-control"
+                          />
+                        </td>
+                        <td>학부모님 목표치</td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="100점 만점 기준 숫자입력"
+                            class="form-control"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>특이사항</td>
+                        <td colspan="3"><textarea></textarea></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-title">
+                학생 tracking
+              </div>
+              <div class="ibox-content">
+                <div class="form-group row">
+                  <table class="table table-bordered">
+                    <thead></thead>
+                    <tbody>
+                      <tr>
+                        <td>학생장점</td>
+                        <td><textarea></textarea></td>
+                      </tr>
+                      <tr>
+                        <td>학습목표</td>
+                        <td><textarea></textarea></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-content">
+                <button
+                  class="btn btn-sm btn-primary float-right m-t-n-xs"
+                  type="submit"
+                >
+                  <strong>취소</strong>
+                </button>
+                <button
+                  class="btn btn-sm btn-primary float-right m-t-n-xs"
+                  type="submit"
+                >
+                  <strong>등록</strong>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Mainly scripts -->
+    <script src="../../js/jquery-3.1.1.min.js"></script>
+    <script src="../../js/popper.min.js"></script>
+    <script src="../../js/bootstrap.js"></script>
+    <!-- iCheck -->
+    <script src="../../js/plugins/iCheck/icheck.min.js"></script>
+    <!-- Tags Input -->
+    <script src="../../js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+    <!-- Chosen -->
+    <script src="../../js/plugins/chosen/chosen.jquery.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".tagsinput").tagsinput({
+          tagClass: "label label-primary",
+        });
+
+        $(".chosen-select").chosen({ width: "100%" });
+      });
+    </script>
+  </body>
+</html>
