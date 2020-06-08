@@ -1,0 +1,162 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>문제 출제 목록</title>
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="../../css/plugins/iCheck/custom.css" rel="stylesheet" />
+    <link href="../../css/animate.css" rel="stylesheet" />
+    <link href="../../css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+          <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+              <div class="dropdown profile-element">
+                <img
+                  alt="image"
+                  class="rounded-circle"
+                  src="../../img/profile_small.jpg"
+                />
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                  <span class="block m-t-xs font-bold">David Williams</span>
+                  <span class="text-muted text-xs block"
+                    >Art Director <b class="caret"></b
+                  ></span>
+                </a>
+                <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                  <li>
+                    <a class="dropdown-item" href="profile.html">Profile</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="contacts.html">Contacts</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="mailbox.html">Mailbox</a>
+                  </li>
+                  <li class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="login.html">Logout</a></li>
+                </ul>
+              </div>
+              <div class="logo-element">
+                IN+
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div id="page-wrapper" class="gray-bg">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-title">
+                <h5>문제 선택</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-content">
+                <div class="row">
+                  <div class="col-md-2">
+                    <select class="form-control" name="account">
+                      <option>1 소인수분해</option>
+                      <option>2 소인수분해</option>
+                    </select>
+                  </div>
+                  <div class="col-md-2">
+                    <select class="form-control" name="account">
+                      <option>01 소인수분해</option>
+                      <option>02 소인수분해</option>
+                    </select>
+                  </div>
+                  <div class="col-md-2">
+                    <select class="form-control" name="account">
+                      <option>A 유형</option>
+                      <option>B 유형</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-2">
+                    <input
+                      type="text"
+                      placeholder="문제"
+                      class="form-control"
+                    />
+                  </div>
+
+                  <div class="col-md-4">
+                    <button
+                      class="btn btn-sm btn-primary float-right m-t-n-xs"
+                      type="submit"
+                    >
+                      <strong>검색</strong>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="ibox-content">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>NO</th>
+                      <th>문제</th>
+                      <th>난이도</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <label>
+                          <input type="checkbox" class="i-checks"
+                        /></label>
+                      </td>
+                      <td>1</td>
+
+                      <td>중3 > 1학기 > Ⅰ 소인수분해 > 01 소인수분해</td>
+                      <td>*****</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-white">
+                    <i class="fa fa-chevron-left"></i>
+                  </button>
+                  <button class="btn btn-white">1</button>
+                  <button class="btn btn-white active">2</button>
+                  <button class="btn btn-white">3</button>
+                  <button class="btn btn-white">4</button>
+                  <button type="button" class="btn btn-white">
+                    <i class="fa fa-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Mainly scripts -->
+    <script src="../../js/jquery-3.1.1.min.js"></script>
+    <script src="../../js/popper.min.js"></script>
+    <script src="../../js/bootstrap.js"></script>
+    <!-- iCheck -->
+    <script src="../../js/plugins/iCheck/icheck.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".i-checks").iCheck({
+          checkboxClass: "icheckbox_square-green",
+          radioClass: "iradio_square-green",
+        });
+      });
+    </script>
+  </body>
+</html>
