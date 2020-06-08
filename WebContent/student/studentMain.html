@@ -1,10 +1,9 @@
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>haami admin</title>
+    <title>haami student</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link href="../font-awesome/css/font-awesome.css" rel="stylesheet" />
@@ -12,210 +11,223 @@
     <!-- FooTable -->
     <link href="../css/plugins/footable/footable.core.css" rel="stylesheet" />
 
+    <link href="../css/plugins/iCheck/custom.css" rel="stylesheet" />
+
     <link href="../css/animate.css" rel="stylesheet" />
     <link href="../css/style.css" rel="stylesheet" />
     <link href="../css/plugins/slick/slick.css" rel="stylesheet" />
     <link href="../css/plugins/slick/slick-theme.css" rel="stylesheet" />
 
-    <link href="../css/plugins/jQueryUI/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
+    <link
+      href="../css/plugins/jQueryUI/jquery-ui-1.10.4.custom.min.css"
+      rel="stylesheet"
+    />
     <link href="../css/plugins/jqGrid/ui.jqgrid.css" rel="stylesheet" />
 
     <link href="../css/plugins/select2/select2.min.css" rel="stylesheet" />
-</head>
+  </head>
 
-<body>
+  <body class="top-navigation">
     <div id="wrapper">
-        <nav class="navbar-default navbar-static-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav metismenu" id="side-menu">
-                    <li class="nav-header">
-                        <div class="dropdown profile-element">
-                            <img alt="image" class="rounded-circle" src="../img/profile_small.jpg" />
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="block m-t-xs font-bold">David Williams</span>
-                                <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
-                            </a>
-                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li>
-                                    <a class="dropdown-item" href="profile.html">Profile</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="contacts.html">Contacts</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="mailbox.html">Mailbox</a>
-                                </li>
-                                <li class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="login.html">Logout</a></li>
-                            </ul>
-                        </div>
-                        <div class="logo-element">
-                            IN+
-                        </div>
-                    </li>
-                </ul>
+      <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom white-bg">
+          <nav
+            class="navbar navbar-expand-lg navbar-static-top"
+            role="navigation"
+          >
+            <a href="#" class="navbar-brand">haami</a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbar"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <i class="fa fa-reorder"></i>
+            </button>
+
+            <div class="navbar-collapse collapse" id="navbar">
+              <ul class="nav navbar-nav mr-auto"></ul>
+              <ul class="nav navbar-top-links navbar-right">
+                <li>
+                  <a href="login.html">
+                    <i class="fa fa-sign-out"></i> Log out
+                  </a>
+                </li>
+              </ul>
             </div>
-        </nav>
-        <div id="page-wrapper" class="gray-bg">
+          </nav>
+        </div>
+        <div class="wrapper wrapper-content">
+          <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="ibox">
-                        <div class="ibox-content">
-                            <h5>홍길동 학생, 안녕하세요</h5>
-                        </div>
-                    </div>
+              <div class="col-lg-12">
+                <div class="ibox">
+                  <div class="ibox-content">
+                    <h5>홍길동 학생, 안녕하세요</h5>
+                  </div>
                 </div>
+              </div>
             </div>
             <div class="row">
-                <div class="col-lg-4">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>학원 공지사항</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>코로나 19관련 공지사항</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>코로나 18관련 공지사항</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>코로나 17관련 공지사항</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+              <div class="col-lg-4">
+                <div class="ibox">
+                  <div class="ibox-title">
+                    <h5>학원 공지사항</h5>
+                  </div>
+                  <div class="ibox-content">
+                    <table class="table">
+                      <thead></thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>코로나 19관련 공지사항</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>코로나 18관련 공지사항</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>코로나 17관련 공지사항</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-                <div class="col-lg-8">
-                    <div class="ibox">
-                        <div class="ibox-content">
-                            <div>
-                                <h5>3월 출결 상황</h5>
-                                <h2>65%</h2>
-                                <div class="progress progress">
-                                    <div style="width: 68%;" class="progress-bar"></div>
-                                </div>
-                            </div>
-                        </div>
+              </div>
+              <div class="col-lg-8">
+                <div class="ibox">
+                  <div class="ibox-content">
+                    <div>
+                      <h5>3월 출결 상황</h5>
+                      <h2>65%</h2>
+                      <div class="progress progress">
+                        <div style="width: 68%;" class="progress-bar"></div>
+                      </div>
                     </div>
-                    <div class="ibox">
-                        <div class="ibox-content">
-                            <div>
-                                <h5>3월 온라인 테스트</h5>
-                                <h2>80%</h2>
-                                <div class="progress progress">
-                                    <div style="width: 80%;" class="progress-bar"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  </div>
                 </div>
+                <div class="ibox">
+                  <div class="ibox-content">
+                    <div>
+                      <h5>3월 온라인 테스트</h5>
+                      <h2>80%</h2>
+                      <div class="progress progress">
+                        <div style="width: 80%;" class="progress-bar"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="wrapper wrapper-content animated fadeInRight">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="ibox ">
-                            <div class="ibox-title">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <select class="select2_demo_1 form-control">
-                                            <option value="2020.03">2020.03</option>
-                                            <option value="2020.02">2020.02</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <select class="select2_demo_2 form-control">
-                                            <option></option>
-                                            <option value="미응시">미응시</option>
-                                            <option value="응시">응시</option>
-                                            <option value="채점">채점</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button class="btn btn-sm btn-primary float-right m-t-n-xs" type="submit"><strong>검색</strong></button>
-                                    </div>
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-2">
-                                        전체 55건
-                                    </div>
-                                </div>
-
-                            </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="ibox">
+                    <div class="ibox-title">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <select class="select2_demo_1 form-control">
+                            <option value="2020.03">2020.03</option>
+                            <option value="2020.02">2020.02</option>
+                          </select>
                         </div>
-                        <div class="ibox-content">
-                            <table class="footable table table-stripped toggle-arrow-tiny">
-                                <thead>
-                                    <tr>
-                                        <th>NO</th>
-                                        <th>년도</th>
-                                        <th>클래스</th>
-                                        <th>커리큘럼</th>
-                                        <th>출제일자</th>
-                                        <th>응시일자</th>
-                                        <th>문항수</th>
-                                        <th>점수</th>
-                                        <th>응시여부</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>2020</td>
-                                        <td>중1 1학기</td>
-                                        <td>중1 > 1학기 > 소인수분해 > 01 소인수분해</td>
-                                        <td>2020.03.08</td>
-                                        <td>-</td>
-                                        <td>10</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>2020</td>
-                                        <td>중1 1학기</td>
-                                        <td>중1 > 1학기 > 소인수분해 > 01 소인수분해</td>
-                                        <td>2020.03.08</td>
-                                        <td>2020.03.05</td>
-                                        <td>7</td>
-                                        <td><span class="badge badge-primary">Pass : 95</span></td>
-                                        <td>채점</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>2020</td>
-                                        <td>중1 1학기</td>
-                                        <td>중1 > 1학기 > 소인수분해 > 01 소인수분해</td>
-                                        <td>2020.03.08</td>
-                                        <td>2020.03.05</td>
-                                        <td>7</td>
-                                        <td><span class="badge badge-danger">Fail : 80</span></td>
-                                        <td>채점</td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="5">
-                                            <ul class="pagination float-right"></ul>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-
+                        <div class="col-md-3">
+                          <select class="select2_demo_2 form-control">
+                            <option></option>
+                            <option value="미응시">미응시</option>
+                            <option value="응시">응시</option>
+                            <option value="채점">채점</option>
+                          </select>
                         </div>
+                        <div class="col-md-2">
+                          <button
+                            class="btn btn-sm btn-primary float-right m-t-n-xs"
+                            type="submit"
+                          >
+                            <strong>검색</strong>
+                          </button>
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2">
+                          전체 55건
+                        </div>
+                      </div>
                     </div>
+                  </div>
+                  <div class="ibox-content">
+                    <table
+                      class="footable table table-stripped toggle-arrow-tiny"
+                    >
+                      <thead>
+                        <tr>
+                          <th>NO</th>
+                          <th>년도</th>
+                          <th>클래스</th>
+                          <th>커리큘럼</th>
+                          <th>출제일자</th>
+                          <th>응시일자</th>
+                          <th>문항수</th>
+                          <th>점수</th>
+                          <th>응시여부</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>2</td>
+                          <td>2020</td>
+                          <td>중1 1학기</td>
+                          <td>중1 > 1학기 > 소인수분해 > 01 소인수분해</td>
+                          <td>2020.03.08</td>
+                          <td>-</td>
+                          <td>10</td>
+                          <td>-</td>
+                          <td>-</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>2020</td>
+                          <td>중1 1학기</td>
+                          <td>중1 > 1학기 > 소인수분해 > 01 소인수분해</td>
+                          <td>2020.03.08</td>
+                          <td>2020.03.05</td>
+                          <td>7</td>
+                          <td>
+                            <span class="badge badge-primary">Pass : 95</span>
+                          </td>
+                          <td>채점</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>2020</td>
+                          <td>중1 1학기</td>
+                          <td>중1 > 1학기 > 소인수분해 > 01 소인수분해</td>
+                          <td>2020.03.08</td>
+                          <td>2020.03.05</td>
+                          <td>7</td>
+                          <td>
+                            <span class="badge badge-danger">Fail : 80</span>
+                          </td>
+                          <td>채점</td>
+                        </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td colspan="5">
+                            <ul class="pagination float-right"></ul>
+                          </td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
                 </div>
+              </div>
             </div>
-
+          </div>
         </div>
-    </div>
-
-
+      </div>
     </div>
 
     <!-- Mainly scripts -->
@@ -251,17 +263,15 @@
     <script src="../js/plugins/select2/select2.full.min.js"></script>
 
     <script>
-        $(document).ready(function() {
+      $(document).ready(function () {
+        $(".footable").footable();
 
-            $('.footable').footable();
-
-            $(".select2_demo_1").select2();
-            $(".select2_demo_2").select2({
-                placeholder: "응시여부 선택",
-                allowClear: true
-            });
-        })
+        $(".select2_demo_1").select2();
+        $(".select2_demo_2").select2({
+          placeholder: "응시여부 선택",
+          allowClear: true,
+        });
+      });
     </script>
-</body>
-
+  </body>
 </html>
