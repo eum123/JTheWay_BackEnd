@@ -1,0 +1,288 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>문제은행 등록</title>
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="../../css/plugins/iCheck/custom.css" rel="stylesheet" />
+    <link href="../../css/animate.css" rel="stylesheet" />
+    <link href="../../css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+          <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+              <div class="dropdown profile-element">
+                <img
+                  alt="image"
+                  class="rounded-circle"
+                  src="../../img/profile_small.jpg"
+                />
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                  <span class="block m-t-xs font-bold">David Williams</span>
+                  <span class="text-muted text-xs block"
+                    >Art Director <b class="caret"></b
+                  ></span>
+                </a>
+                <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                  <li>
+                    <a class="dropdown-item" href="profile.html">Profile</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="contacts.html">Contacts</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="mailbox.html">Mailbox</a>
+                  </li>
+                  <li class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="login.html">Logout</a></li>
+                </ul>
+              </div>
+              <div class="logo-element">
+                IN+
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div id="page-wrapper" class="gray-bg">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-title">문제은행 등록</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-content">
+                <table class="table table-bordered">
+                  <thead></thead>
+                  <tbody>
+                    <tr>
+                      <td>년도</td>
+                      <td>
+                        <select class="form-control" name="account">
+                          <option>2020</option>
+                          <option>2021</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>커리큘럼</td>
+                      <td>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <select class="form-control" name="account">
+                              <option>3학년</option>
+                              <option>2학년</option>
+                            </select>
+                          </div>
+                          <div class="col-md-4">
+                            <select class="form-control" name="account">
+                              <option>2학기</option>
+                              <option>1학기</option>
+                            </select>
+                          </div>
+                          <div class="col-md-4">
+                            <select class="form-control" name="account">
+                              <option>중분류1</option>
+                              <option>중분류2</option>
+                            </select>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>유형</td>
+                      <td>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <select class="form-control" name="account">
+                              <option>기초(A)</option>
+                              <option>기초(B)</option>
+                            </select>
+                          </div>
+                          <div class="col-md-4">
+                            <select class="form-control" name="account">
+                              <option>15유형</option>
+                              <option>14유형</option>
+                            </select>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>문제</td>
+                      <td>
+                        <div class="row">
+                          <div class="col-md-3">
+                            <select class="form-control" name="account">
+                              <option>객관식</option>
+                              <option>주관식</option>
+                            </select>
+                          </div>
+                          <div class="col-md-9">
+                            <input
+                              type="text"
+                              placeholder="문제"
+                              class="form-control"
+                            />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-1">1)</div>
+                          <div class="col-md-11">
+                            <input
+                              type="text"
+                              placeholder="문제"
+                              class="form-control"
+                            />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-1">2)</div>
+                          <div class="col-md-11">
+                            <input
+                              type="text"
+                              placeholder="문제"
+                              class="form-control"
+                            />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-1">3)</div>
+                          <div class="col-md-11">
+                            <input
+                              type="text"
+                              placeholder="문제"
+                              class="form-control"
+                            />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-1">4)</div>
+                          <div class="col-md-11">
+                            <input
+                              type="text"
+                              placeholder="문제"
+                              class="form-control"
+                            />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>정답</td>
+                      <td>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <select class="form-control" name="account">
+                              <option>자동채점</option>
+                              <option>수동채점</option>
+                            </select>
+                          </div>
+                          <div class="col-md-8">
+                            <input
+                              type="text"
+                              placeholder="문제"
+                              class="form-control"
+                            />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>출판사</td>
+                      <td>
+                        <select class="form-control" name="account">
+                          <option>출판사1</option>
+                          <option>출판사2</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>문제집 이름</td>
+                      <td>
+                        <select class="form-control" name="account">
+                          <option>문제집1</option>
+                          <option>문제집2</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>난이도</td>
+                      <td>
+                        *****
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>사용</td>
+                      <td>
+                        <select class="form-control" name="account">
+                          <option>사용</option>
+                          <option>미사용</option>
+                        </select>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-content">
+                <button
+                  class="btn btn-sm btn-primary float-right m-t-n-xs"
+                  type="submit"
+                >
+                  <strong>취소</strong>
+                </button>
+                <button
+                  class="btn btn-sm btn-primary float-right m-t-n-xs"
+                  type="submit"
+                >
+                  <strong>등록</strong>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="../../js/jquery-3.1.1.min.js"></script>
+    <script src="../../js/popper.min.js"></script>
+    <script src="../../js/bootstrap.js"></script>
+    <script src="../../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Peity -->
+    <script src="../../js/plugins/peity/jquery.peity.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="../../js/inspinia.js"></script>
+    <script src="../../js/plugins/pace/pace.min.js"></script>
+
+    <!-- iCheck -->
+    <script src="../../js/plugins/iCheck/icheck.min.js"></script>
+
+    <!-- Peity -->
+    <script src="../../js/demo/peity-demo.js"></script>
+
+    <script>
+      $(document).ready(function () {});
+    </script>
+  </body>
+</html>
