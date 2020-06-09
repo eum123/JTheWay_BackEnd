@@ -6,10 +6,10 @@
 
     <title>haami student</title>
 
-    <link href="../css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="../css/animate.css" rel="stylesheet" />
-    <link href="../css/style.css" rel="stylesheet" />
+    <link href="../theme/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../theme/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="../theme/css/animate.css" rel="stylesheet" />
+    <link href="../theme/css/style.css" rel="stylesheet" />
   </head>
 
   <body class="top-navigation">
@@ -148,7 +148,7 @@
                             <option value="채점">채점</option>
                           </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                           <button
                             type="button"
                             class="btn btn-outline btn-primary"
@@ -156,14 +156,16 @@
                             등록
                           </button>
                         </div>
-                        <div class="col-md-4 text-right">
-                          전체 55건
-                        </div>
                       </div>
                     </div>
                   </div>
                   <div class="ibox-content">
                     <div class="m-t-sm">
+                      <div class="row">
+                        <div class="col-md-12 text-right">
+                          전체 55건
+                        </div>
+                      </div>
                       <div class="row">
                         <div class="col-md-12">
                           <table class="table table-bordered">
@@ -264,31 +266,51 @@
     </div>
 
     <!-- Mainly scripts -->
-    <script src="../js/jquery-3.1.1.min.js"></script>
-    <script src="../js/popper.min.js"></script>
-    <script src="../js/bootstrap.js"></script>
-    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="../theme/js/jquery-3.1.1.min.js"></script>
+    <script src="../theme/js/popper.min.js"></script>
+    <script src="../theme/js/bootstrap.js"></script>
+    <script src="../theme/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../theme/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
     <!-- Custom and plugin javascript -->
-    <script src="../js/inspinia.js"></script>
-    <script src="../js/plugins/pace/pace.min.js"></script>
+    <script src="../theme/js/inspinia.js"></script>
+    <script src="../theme/js/plugins/pace/pace.min.js"></script>
 
     <!-- Flot -->
-    <script src="../js/plugins/flot/jquery.flot.js"></script>
-    <script src="../js/plugins/flot/jquery.flot.tooltip.min.js"></script>
-    <script src="../js/plugins/flot/jquery.flot.resize.js"></script>
+    <script src="../theme/js/plugins/flot/jquery.flot.js"></script>
+    <script src="../theme/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="../theme/js/plugins/flot/jquery.flot.resize.js"></script>
 
     <!-- ChartJS-->
-    <script src="../js/plugins/chartJs/Chart.min.js"></script>
+    <script src="../theme/js/plugins/chartJs/Chart.min.js"></script>
 
     <!-- Peity -->
-    <script src="../js/plugins/peity/jquery.peity.min.js"></script>
+    <script src="../theme/js/plugins/peity/jquery.peity.min.js"></script>
     <!-- Peity demo -->
-    <script src="../js/demo/peity-demo.js"></script>
+    <script src="../theme/js/demo/peity-demo.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
       $(document).ready(function () {});
+
+      var app = new Vue({
+        el: "#app",
+        methods: {
+          getData: function () {
+            axios
+              .get(
+                "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json"
+              )
+              .then(function (res) {
+                console.log(res);
+              })
+              .catch(function (e) {
+                console.error(e);
+              });
+          },
+        },
+      });
     </script>
   </body>
 </html>
