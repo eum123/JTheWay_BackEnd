@@ -10,243 +10,272 @@
     <link href="../theme/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="../theme/css/animate.css" rel="stylesheet" />
     <link href="../theme/css/style.css" rel="stylesheet" />
+    <!-- Toastr style -->
+    <link href="../theme/css/plugins/toastr/toastr.min.css" rel="stylesheet" />
   </head>
 
   <body class="top-navigation">
-    <div id="wrapper">
-      <div id="page-wrapper" class="gray-bg">
-        <div class="row border-bottom white-bg">
-          <nav
-            class="navbar navbar-expand-lg navbar-static-top"
-            role="navigation"
-          >
-            <a href="#" class="navbar-brand">haami</a>
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbar"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
+    <div id="app">
+      <div id="wrapper">
+        <div id="page-wrapper" class="gray-bg">
+          <div class="row border-bottom white-bg">
+            <nav
+              class="navbar navbar-expand-lg navbar-static-top"
+              role="navigation"
             >
-              <i class="fa fa-reorder"></i>
-            </button>
+              <a href="#" class="navbar-brand">haami</a>
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <i class="fa fa-reorder"></i>
+              </button>
 
-            <div class="navbar-collapse collapse" id="navbar">
-              <ul class="nav navbar-nav mr-auto"></ul>
-              <ul class="nav navbar-top-links navbar-right">
-                <li>
-                  <a href="login.html">
-                    <i class="fa fa-sign-out"></i> Log out
-                  </a>
-                </li>
-              </ul>
+              <div class="navbar-collapse collapse" id="navbar">
+                <ul class="nav navbar-nav mr-auto"></ul>
+                <ul class="nav navbar-top-links navbar-right">
+                  <li>
+                    <a href="login.html">
+                      <i class="fa fa-sign-out"></i> Log out
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+          <div class="wrapper wrapper-content">
+            <div>
+              <div class="row col-lg-12" id="empty">
+                <div class="sk-spinner sk-spinner-fading-circle">
+                  <div class="sk-circle1 sk-circle"></div>
+                  <div class="sk-circle2 sk-circle"></div>
+                  <div class="sk-circle3 sk-circle"></div>
+                  <div class="sk-circle4 sk-circle"></div>
+                  <div class="sk-circle5 sk-circle"></div>
+                  <div class="sk-circle6 sk-circle"></div>
+                  <div class="sk-circle7 sk-circle"></div>
+                  <div class="sk-circle8 sk-circle"></div>
+                  <div class="sk-circle9 sk-circle"></div>
+                  <div class="sk-circle10 sk-circle"></div>
+                  <div class="sk-circle11 sk-circle"></div>
+                  <div class="sk-circle12 sk-circle"></div>
+                </div>
+              </div>
             </div>
-          </nav>
-        </div>
-        <div class="wrapper wrapper-content">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="ibox">
-                  <div class="ibox-title">
-                    <div class="row">
-                      <h3 class="no-margins">홍길동 학생,</h3>
-                      <h5 class="no-margins">안녕하세요</h5>
+            <div class="container" style="display: none;" id="content">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="ibox" id="studentName">
+                    <div class="ibox-title">
+                      <div class="row">
+                        <h3>
+                          {{studentInfo.name}} 학생,
+                        </h3>
+                        <h5>안녕하세요</h5>
+                      </div>
+                    </div>
+                    <div class="ibox-content">
+                      <div class="m-t-sm">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div><h4>학원 공지사항</h4></div>
+                            <div class="animated fadeIn">
+                              <table class="table">
+                                <thead></thead>
+                                <tbody>
+                                  <tr v-for="noti in notice">
+                                    <td>{{noti}}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                          <div class="col-md-8 animated fadeIn">
+                            <h3>{{month.month}}월 현황</h3>
+                            <ul class="list-group clear-list m-t">
+                              <li class="list-group-item fist-item">
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <h5>출결 상황</h5>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <span class="text-right"
+                                      ><h2>{{month.attendanceRate}}%</h2></span
+                                    >
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <div class="progress progress">
+                                      <div
+                                        :style="{width: month.attendanceRate + '%'}"
+                                        class="progress-bar"
+                                      ></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </li>
+                              <li class="list-group-item">
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <h5>온라인 테스트</h5>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <span class="text-right"
+                                      ><h2>{{month.examRate}}%</h2></span
+                                    >
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <div class="progress progress">
+                                      <div
+                                        :style="{width: month.examRate + '%'}"
+                                        class="progress-bar"
+                                      ></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="ibox-content">
-                    <div class="m-t-sm">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <div><h4>학원 공지사항</h4></div>
-                          <div>
-                            <table class="table">
-                              <thead></thead>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="ibox" id="questionList">
+                    <div class="ibox-title">
+                      <div class="m-t-sm">
+                        <div class="row">
+                          <div class="col-md-3">
+                            <select class="select2_demo_1 form-control">
+                              <option value="2020.03">2020.03</option>
+                              <option value="2020.02">2020.02</option>
+                            </select>
+                          </div>
+                          <div class="col-md-3">
+                            <select class="select2_demo_2 form-control">
+                              <option></option>
+                              <option value="미응시">미응시</option>
+                              <option value="응시">응시</option>
+                              <option value="채점">채점</option>
+                            </select>
+                          </div>
+                          <div class="col-md-3">
+                            <button
+                              type="button"
+                              class="btn btn-outline btn-primary"
+                            >
+                              검색
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ibox-content animated fadeIn">
+                      <div class="sk-spinner sk-spinner-fading-circle">
+                        <div class="sk-circle1 sk-circle"></div>
+                        <div class="sk-circle2 sk-circle"></div>
+                        <div class="sk-circle3 sk-circle"></div>
+                        <div class="sk-circle4 sk-circle"></div>
+                        <div class="sk-circle5 sk-circle"></div>
+                        <div class="sk-circle6 sk-circle"></div>
+                        <div class="sk-circle7 sk-circle"></div>
+                        <div class="sk-circle8 sk-circle"></div>
+                        <div class="sk-circle9 sk-circle"></div>
+                        <div class="sk-circle10 sk-circle"></div>
+                        <div class="sk-circle11 sk-circle"></div>
+                        <div class="sk-circle12 sk-circle"></div>
+                      </div>
+                      <div class="m-t-sm">
+                        <div class="row">
+                          <div class="col-md-12 text-right">
+                            전체 {{questions.pagination.total}}건
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <table class="table table-bordered">
+                              <thead>
+                                <tr>
+                                  <th class="text-center">NO</th>
+                                  <th class="text-center">년도</th>
+                                  <th class="text-center">클래스</th>
+                                  <th class="text-center">커리큘럼</th>
+                                  <th class="text-center">출제일자</th>
+                                  <th class="text-center">응시일자</th>
+                                  <th class="text-center">문항수</th>
+                                  <th class="text-center">점수</th>
+                                  <th class="text-center">응시여부</th>
+                                </tr>
+                              </thead>
                               <tbody>
-                                <tr>
-                                  <td>1. 코로나 19관련 공지사항</td>
-                                </tr>
-                                <tr>
-                                  <td>2. 코로나 18관련 공지사항</td>
-                                </tr>
-                                <tr>
-                                  <td>3. 코로나 17관련 공지사항</td>
+                                <tr v-for="question in questions.list">
+                                  <td class="text-center">{{question.no}}</td>
+                                  <td class="text-center">{{question.year}}</td>
+                                  <td>{{question.class}}</td>
+                                  <td>
+                                    {{question.curriculum}}
+                                  </td>
+                                  <td class="text-center">
+                                    {{question.exam.questionsDate}}
+                                  </td>
+                                  <td class="text-center">
+                                    {{question.exam.isTakeExam == 1 ?
+                                    question.exam.doDate : '-'}}
+                                  </td>
+                                  <td class="text-center">
+                                    {{question.exam.count}}
+                                  </td>
+                                  <td class="text-center">
+                                    <span v-if="question.exam.isTakeExam == 0"
+                                      >-</span
+                                    >
+                                    <span
+                                      v-else-if="question.exam.status == 'fail'"
+                                      class="badge badge-danger"
+                                      >Fail : {{question.exam.score}}</span
+                                    >
+                                    <span
+                                      v-else="question.exam.status == 'fail'"
+                                      class="badge badge-primary"
+                                      >Pass : {{question.exam.score}}</span
+                                    >
+                                  </td>
+                                  <td class="text-center">
+                                    {{question.exam.isTakeExam == 1 ?
+                                    question.exam.doDate : '미응시'}}
+                                  </td>
                                 </tr>
                               </tbody>
                             </table>
                           </div>
                         </div>
-                        <div class="col-md-8">
-                          <h3>3월 현황</h3>
-                          <ul class="list-group clear-list m-t">
-                            <li class="list-group-item fist-item">
-                              <div class="row">
-                                <div class="col-md-6">
-                                  <h5>출결 상황</h5>
-                                </div>
-                                <div class="col-md-6">
-                                  <span class="text-right"><h2>65%</h2></span>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-md-12">
-                                  <div class="progress progress">
-                                    <div
-                                      style="width: 68%;"
-                                      class="progress-bar"
-                                    ></div>
-                                  </div>
-                                </div>
-                              </div>
-                            </li>
-                            <li class="list-group-item">
-                              <div class="row">
-                                <div class="col-md-6">
-                                  <h5>온라인 테스트</h5>
-                                </div>
-                                <div class="col-md-6">
-                                  <span class="text-right"><h2>80%</h2></span>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-md-12">
-                                  <div class="progress progress">
-                                    <div
-                                      style="width: 80%;"
-                                      class="progress-bar"
-                                    ></div>
-                                  </div>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="ibox">
-                  <div class="ibox-title">
-                    <div class="m-t-sm">
-                      <div class="row">
-                        <div class="col-md-3">
-                          <select class="select2_demo_1 form-control">
-                            <option value="2020.03">2020.03</option>
-                            <option value="2020.02">2020.02</option>
-                          </select>
-                        </div>
-                        <div class="col-md-3">
-                          <select class="select2_demo_2 form-control">
-                            <option></option>
-                            <option value="미응시">미응시</option>
-                            <option value="응시">응시</option>
-                            <option value="채점">채점</option>
-                          </select>
-                        </div>
-                        <div class="col-md-3">
-                          <button
-                            type="button"
-                            class="btn btn-outline btn-primary"
-                          >
-                            등록
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="ibox-content">
-                    <div class="m-t-sm">
-                      <div class="row">
-                        <div class="col-md-12 text-right">
-                          전체 55건
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-12">
-                          <table class="table table-bordered">
-                            <thead>
-                              <tr>
-                                <th class="text-center">NO</th>
-                                <th class="text-center">년도</th>
-                                <th class="text-center">클래스</th>
-                                <th class="text-center">커리큘럼</th>
-                                <th class="text-center">출제일자</th>
-                                <th class="text-center">응시일자</th>
-                                <th class="text-center">문항수</th>
-                                <th class="text-center">점수</th>
-                                <th class="text-center">응시여부</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td class="text-center">2</td>
-                                <td class="text-center">2020</td>
-                                <td>중1 1학기</td>
-                                <td>
-                                  중1 > 1학기 > 소인수분해 > 01 소인수분해
-                                </td>
-                                <td class="text-center">2020.03.08</td>
-                                <td class="text-center">-</td>
-                                <td class="text-center">10</td>
-                                <td class="text-center">-</td>
-                                <td class="text-center">-</td>
-                              </tr>
-                              <tr>
-                                <td class="text-center">2</td>
-                                <td class="text-center">2020</td>
-                                <td>중1 1학기</td>
-                                <td>
-                                  중1 > 1학기 > 소인수분해 > 01 소인수분해
-                                </td>
-                                <td class="text-center">2020.03.08</td>
-                                <td class="text-center">2020.03.05</td>
-                                <td class="text-center">7</td>
-                                <td class="text-center">
-                                  <span class="badge badge-primary"
-                                    >Pass : 95</span
-                                  >
-                                </td>
-                                <td class="text-center">채점</td>
-                              </tr>
-                              <tr>
-                                <td class="text-center">2</td>
-                                <td class="text-center">2020</td>
-                                <td>중1 1학기</td>
-                                <td>
-                                  중1 > 1학기 > 소인수분해 > 01 소인수분해
-                                </td>
-                                <td class="text-center">2020.03.08</td>
-                                <td class="text-center">2020.03.05</td>
-                                <td class="text-center">7</td>
-                                <td class="text-center">
-                                  <span class="badge badge-danger"
-                                    >Fail : 80</span
-                                  >
-                                </td>
-                                <td class="text-center">채점</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-12 text-center">
-                          <div class="btn-group">
-                            <button type="button" class="btn btn-white">
-                              <i class="fa fa-chevron-left"></i>
-                            </button>
-                            <button class="btn btn-white">1</button>
-                            <button class="btn btn-white active">2</button>
-                            <button class="btn btn-white">3</button>
-                            <button class="btn btn-white">4</button>
-                            <button type="button" class="btn btn-white">
-                              <i class="fa fa-chevron-right"></i>
-                            </button>
+                        <div class="row">
+                          <div class="col-md-12 text-center">
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-white">
+                                <i class="fa fa-chevron-left"></i>
+                              </button>
+                              <button
+                                v-for="page in questions.pagination.pageNumbers"
+                                v-bind:class="pageClassObject(page)"
+                                @click="movePage(page)"
+                              >
+                                {{page}}
+                              </button>
+                              <button type="button" class="btn btn-white">
+                                <i class="fa fa-chevron-right"></i>
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -256,15 +285,14 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="footer">
-          <div class="float-right">
-            <strong>haami</strong> institute &copy; 2020
+          <div class="footer">
+            <div class="float-right">
+              <strong>haami</strong> institute &copy; 2020
+            </div>
           </div>
         </div>
       </div>
     </div>
-
     <!-- Mainly scripts -->
     <script src="../theme/js/jquery-3.1.1.min.js"></script>
     <script src="../theme/js/popper.min.js"></script>
@@ -292,25 +320,174 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-      $(document).ready(function () {});
+      // $(document).ready(function () {});
+      var LIST_COUNT = 10;
+      var PAGENUMBER_COUNT = 10;
 
-      var app = new Vue({
+      var data = new Object();
+      init();
+
+      var vm = new Vue({
         el: "#app",
+        data() {
+          return data;
+        },
         methods: {
-          getData: function () {
-            axios
-              .get(
-                "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json"
-              )
-              .then(function (res) {
-                console.log(res);
-              })
-              .catch(function (e) {
-                console.error(e);
-              });
+          movePage: function (page) {
+            $("#questionList")
+              .children(".ibox-content")
+              .toggleClass("sk-loading");
+
+            console.log("move page : " + page);
+
+            $("#questionList")
+              .children(".ibox-content")
+              .toggleClass("sk-loading");
+          },
+          pageClassObject: function (page) {
+            if (this.questions.pagination.currentPage == page) {
+              return "btn btn-white active";
+            } else {
+              return "btn btn-white ";
+            }
           },
         },
+        mounted: function () {
+          //로딩 화면 제거하고 화면 표시
+          $("#empty").css("display", "none");
+          $("#content").css("display", "");
+        },
       });
+
+      function init() {
+        //학생정보
+        $.ajax({
+          type: "GET",
+          url:
+            "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
+          async: false,
+          success: function (res) {
+            if (res != null) {
+              //test
+              data.studentInfo = JSON.parse('{"name": "홍길동"}');
+            }
+          },
+        });
+
+        //공지사항
+        $.ajax({
+          type: "GET",
+          url:
+            "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
+          async: false,
+          success: function (res) {
+            if (res != null) {
+              //data.notice = res;
+              //test
+              data.notice = JSON.parse(
+                '["1. 공지사항1","2. 공지사항1","3. 공지사항1","4. 공지사항1","5. 공지사항1"]'
+              );
+            }
+          },
+        });
+
+        //월현황
+        $.ajax({
+          type: "GET",
+          url:
+            "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
+          async: false,
+          success: function (res) {
+            if (res != null) {
+              //test
+              data.month = JSON.parse(
+                '{"month": 3, "attendanceRate": 30, "examRate": 30}'
+              );
+            }
+          },
+        });
+
+        //문제현황
+        $.ajax({
+          type: "GET",
+          url:
+            "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
+          async: false,
+          success: function (res) {
+            if (data != null) {
+              //test
+              data.questions = JSON.parse(
+                '{"list":[{"no":2,"year":"2020","class":"class","curriculum":"중1 > 1학기 > 소인수분해 > 01 소인수분해","exam":{"count":10,"questionsDate":"2020.02.09","doDate":"2020.02.10","status":"pass","score":10,"isTakeExam":"1"}},{"no":1,"year":"2020","class":"class","curriculum":"중1 > 1학기 > 소인수분해 > 01 소인수분해","exam":{"count":10,"questionsDate":"","doDate":"","status":"-","score":0,"isTakeExam":"0"}}],"pagination":{"total":50, "currentPage":1}}'
+              );
+
+              //현재페이지
+              var currentPage = data.questions.pagination.currentPage;
+              var totalCount = data.questions.pagination.total;
+
+              data.questions.pagination.pageNumbers = getPageNumbers(
+                totalCount,
+                currentPage
+              );
+            }
+          },
+        });
+      }
+      /**
+       * page 번호 목록 생성
+       */
+      function getPageNumbers(totalCount, currentPage) {
+        var totalPage = totalCount / LIST_COUNT;
+
+        if (totalCount % LIST_COUNT > 0) {
+          totalPage++;
+        }
+
+        //currentPage = 현재 보고있는 페이지
+        if (totalPage < currentPage) {
+          currentPage = totalPage;
+        }
+
+        var startPage =
+          ((currentPage - 1) / PAGENUMBER_COUNT) * PAGENUMBER_COUNT + 1;
+        //현재 페이지가 pageCount와 같을 때를 유의하며 (page-1)을 하고
+        // +1은 첫페이지가 0이나 10이 아니라 1이나 11로 하기 위함임
+        var endPage = startPage + PAGENUMBER_COUNT - 1;
+        // -1은 첫페이지가 1이나 11 등과 같을때 1~10, 11~20으로 지정하기 위함임
+
+        if (endPage > totalPage) {
+          endPage = totalPage;
+        }
+
+        var pageNumbers = new Array();
+
+        for (var i = startPage; i <= endPage; i++) {
+          pageNumbers.push(i);
+        }
+
+        return pageNumbers;
+      }
+
+      function sleep(delay) {
+        var start = new Date().getTime();
+        while (new Date().getTime() < start + delay);
+      }
+
+      function init1() {
+        //axios 테스트
+        axios
+          .get(
+            "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json"
+          )
+          .then(function (res) {
+            //data.result.studentInfo = res.result;
+            //test
+            console.log(JSON.parse('{"name": "홍길동"}'));
+            data.studentInfo = JSON.parse('{"name": "홍길동"}');
+          })
+          .catch(function (e) {
+            console.error(e);
+          });
+      }
     </script>
   </body>
 </html>
