@@ -168,7 +168,7 @@
                                   id="questionDate"
                                   type="text"
                                   class="form-control"
-                                  value="2020/03/04"
+                                  value=""
                                 />
                               </div>
                             </div>
@@ -178,15 +178,15 @@
                               id="isTakeExam"
                               class="select2_demo_2 form-control"
                             >
-                              <option value="미응시" selected>미응시</option>
-                              <option value="응시">응시</option>
-                              <option value="채점">채점</option>
+                              <option value="0" selected>미응시</option>
+                              <option value="1">응시</option>
                             </select>
                           </div>
                           <div class="col-md-3">
                             <button
                               type="button"
                               class="btn btn-outline btn-primary"
+                              @click="search"
                             >
                               검색
                             </button>
@@ -259,10 +259,11 @@
                                       >Fail : {{question.exam.score}}</span
                                     >
                                     <span
-                                      v-else="question.exam.status == 'fail'"
+                                      v-else-if="question.exam.status == 'pass'"
                                       class="badge badge-primary"
                                       >Pass : {{question.exam.score}}</span
                                     >
+                                    <span v-else>-</span>
                                   </td>
                                   <td class="text-center">
                                     {{question.exam.isTakeExam == 1 ?
@@ -345,6 +346,7 @@
 
     <!-- Data picker -->
     <script src="../theme/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="../theme/js/plugins/datapicker/bootstrap-datepicker.ko.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -363,25 +365,22 @@
         methods: {
           movePage: function (page) {
             //start loading
-            $("#questionList")
-              .children(".ibox-content")
-              .toggleClass("sk-loading");
+            toggleLoading();
 
             console.log("move page : " + page);
 
-            //현재 페이지 설정
-            this.questions.pagination.currentPage = page;
+            //데이터 조회
             syncGet(
               "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-              "",
+              getSearchParameter(),
               questions,
               null
             );
+            //현재 페이지 설정
+            this.questions.pagination.currentPage = page;
 
             //end loading
-            $("#questionList")
-              .children(".ibox-content")
-              .toggleClass("sk-loading");
+            toggleLoading();
           },
           pageClassObject: function (page) {
             if (this.questions.pagination.currentPage == page) {
@@ -389,6 +388,21 @@
             } else {
               return "btn btn-white ";
             }
+          },
+          search: function () {
+            //start loading
+            toggleLoading();
+
+            //데이터 조회
+            syncGet(
+              "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
+              getSearchParameter(),
+              questions,
+              null
+            );
+
+            //end loading
+            toggleLoading();
           },
         },
         mounted: function () {
@@ -398,24 +412,26 @@
 
           var mem = $("#data_1 .input-group.date").datepicker({
             format: "yyyymmdd",
-            update: new Date(),
+
             todayBtn: "linked",
             keyboardNavigation: false,
             forceParse: false,
             calendarWeeks: true,
             autoclose: true,
+            language: "ko",
+            todayHighlight: true,
           });
-          $("#questionDate").val(new Date().format("yyyymmdd"));
-          console.log($("#questionDate").val());
+          $("#questionDate").val(new Date().format("yyyyMMdd"));
         },
       });
-
+      //학생 정보 수신 데이터 처리
       function studentInfo(res) {
         if (res != null) {
           //test
           data.studentInfo = JSON.parse('{"name": "홍길동"}');
         }
       }
+      //공지사항 수신 데이터 처리
       function notice(res) {
         if (res != null) {
           //data.notice = res;
@@ -425,6 +441,7 @@
           );
         }
       }
+      //월간 현황 수신 데이터 처리
       function monthly(res) {
         if (res != null) {
           //test
@@ -433,7 +450,7 @@
           );
         }
       }
-
+      //온라인 테스트 수신데이터 처리
       function questions(res) {
         if (data != null) {
           //test
@@ -536,6 +553,27 @@
         pageInfo.nextPageNumber = nextPageNumber;
 
         return pageInfo;
+      }
+      /**
+       * 검색 조건으로 parameter 생성
+       */
+      function getSearchParameter() {
+        var questionDate = $("#questionDate").val(); //출제일자
+        var isTakeExam = $("#isTakeExam option:selected").val(); //응시 여부
+
+        var param = "";
+        if (isTakeExam != "") {
+          param = "isTakeExam=" + isTakeExam;
+        }
+        if (questionDate != "") {
+          param = "questionDate=" + questionDate + "," + param;
+        }
+
+        return param;
+      }
+
+      function toggleLoading() {
+        $("#questionList").children(".ibox-content").toggleClass("sk-loading");
       }
     </script>
   </body>
