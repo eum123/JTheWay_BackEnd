@@ -12,6 +12,10 @@
     <link href="../theme/css/style.css" rel="stylesheet" />
     <!-- Toastr style -->
     <link href="../theme/css/plugins/toastr/toastr.min.css" rel="stylesheet" />
+    <link
+      href="../theme/css/plugins/datapicker/datepicker3.css"
+      rel="stylesheet"
+    />
   </head>
 
   <body class="top-navigation">
@@ -156,15 +160,25 @@
                       <div class="m-t-sm">
                         <div class="row">
                           <div class="col-md-3">
-                            <select class="select2_demo_1 form-control">
-                              <option value="2020.03">2020.03</option>
-                              <option value="2020.02">2020.02</option>
-                            </select>
+                            <div class="form-group" id="data_1">
+                              <div class="input-group date">
+                                <span class="input-group-addon"
+                                  ><i class="fa fa-calendar"></i></span
+                                ><input
+                                  id="questionDate"
+                                  type="text"
+                                  class="form-control"
+                                  value="2020/03/04"
+                                />
+                              </div>
+                            </div>
                           </div>
                           <div class="col-md-3">
-                            <select class="select2_demo_2 form-control">
-                              <option></option>
-                              <option value="미응시">미응시</option>
+                            <select
+                              id="isTakeExam"
+                              class="select2_demo_2 form-control"
+                            >
+                              <option value="미응시" selected>미응시</option>
                               <option value="응시">응시</option>
                               <option value="채점">채점</option>
                             </select>
@@ -262,17 +276,25 @@
                         <div class="row">
                           <div class="col-md-12 text-center">
                             <div class="btn-group">
-                              <button type="button" class="btn btn-white">
+                              <button
+                                type="button"
+                                class="btn btn-white"
+                                @click="movePage(questions.pagination.pageInfo.prePageNumber)"
+                              >
                                 <i class="fa fa-chevron-left"></i>
                               </button>
                               <button
-                                v-for="page in questions.pagination.pageNumbers"
+                                v-for="page in questions.pagination.pageInfo.pageNumbers"
                                 v-bind:class="pageClassObject(page)"
                                 @click="movePage(page)"
                               >
                                 {{page}}
                               </button>
-                              <button type="button" class="btn btn-white">
+                              <button
+                                type="button"
+                                class="btn btn-white"
+                                @click="movePage(questions.pagination.pageInfo.nextPageNumber)"
+                              >
                                 <i class="fa fa-chevron-right"></i>
                               </button>
                             </div>
@@ -293,6 +315,10 @@
         </div>
       </div>
     </div>
+
+    <script src="../resources/js/api.js"></script>
+    <script src="../resources/js/common.js"></script>
+
     <!-- Mainly scripts -->
     <script src="../theme/js/jquery-3.1.1.min.js"></script>
     <script src="../theme/js/popper.min.js"></script>
@@ -317,10 +343,12 @@
     <!-- Peity demo -->
     <script src="../theme/js/demo/peity-demo.js"></script>
 
+    <!-- Data picker -->
+    <script src="../theme/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-      // $(document).ready(function () {});
       var LIST_COUNT = 10;
       var PAGENUMBER_COUNT = 10;
 
@@ -334,12 +362,23 @@
         },
         methods: {
           movePage: function (page) {
+            //start loading
             $("#questionList")
               .children(".ibox-content")
               .toggleClass("sk-loading");
 
             console.log("move page : " + page);
 
+            //현재 페이지 설정
+            this.questions.pagination.currentPage = page;
+            syncGet(
+              "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
+              "",
+              questions,
+              null
+            );
+
+            //end loading
             $("#questionList")
               .children(".ibox-content")
               .toggleClass("sk-loading");
@@ -356,86 +395,102 @@
           //로딩 화면 제거하고 화면 표시
           $("#empty").css("display", "none");
           $("#content").css("display", "");
+
+          var mem = $("#data_1 .input-group.date").datepicker({
+            format: "yyyymmdd",
+            update: new Date(),
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true,
+          });
+          $("#questionDate").val(new Date().format("yyyymmdd"));
+          console.log($("#questionDate").val());
         },
       });
 
+      function studentInfo(res) {
+        if (res != null) {
+          //test
+          data.studentInfo = JSON.parse('{"name": "홍길동"}');
+        }
+      }
+      function notice(res) {
+        if (res != null) {
+          //data.notice = res;
+          //test
+          data.notice = JSON.parse(
+            '["1. 공지사항1","2. 공지사항1","3. 공지사항1","4. 공지사항1","5. 공지사항1"]'
+          );
+        }
+      }
+      function monthly(res) {
+        if (res != null) {
+          //test
+          data.month = JSON.parse(
+            '{"month": 3, "attendanceRate": 30, "examRate": 30}'
+          );
+        }
+      }
+
+      function questions(res) {
+        if (data != null) {
+          //test
+          data.questions = JSON.parse(
+            '{"list":[{"no":2,"year":"2020","class":"class","curriculum":"중1 > 1학기 > 소인수분해 > 01 소인수분해","exam":{"count":10,"questionsDate":"2020.02.09","doDate":"2020.02.10","status":"pass","score":10,"isTakeExam":"1"}},{"no":1,"year":"2020","class":"class","curriculum":"중1 > 1학기 > 소인수분해 > 01 소인수분해","exam":{"count":10,"questionsDate":"","doDate":"","status":"-","score":0,"isTakeExam":"0"}}],"pagination":{"total":50, "currentPage":1}}'
+          );
+
+          //현재페이지
+          var currentPage = data.questions.pagination.currentPage;
+          var totalCount = data.questions.pagination.total;
+
+          data.questions.pagination.pageInfo = getPageInfo(
+            totalCount,
+            currentPage
+          );
+
+          console.log(data.questions.pagination);
+        }
+      }
+
       function init() {
         //학생정보
-        $.ajax({
-          type: "GET",
-          url:
-            "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-          async: false,
-          success: function (res) {
-            if (res != null) {
-              //test
-              data.studentInfo = JSON.parse('{"name": "홍길동"}');
-            }
-          },
-        });
+        syncGet(
+          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
+          "",
+          studentInfo,
+          null
+        );
 
         //공지사항
-        $.ajax({
-          type: "GET",
-          url:
-            "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-          async: false,
-          success: function (res) {
-            if (res != null) {
-              //data.notice = res;
-              //test
-              data.notice = JSON.parse(
-                '["1. 공지사항1","2. 공지사항1","3. 공지사항1","4. 공지사항1","5. 공지사항1"]'
-              );
-            }
-          },
-        });
+        syncGet(
+          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
+          "",
+          notice,
+          null
+        );
 
         //월현황
-        $.ajax({
-          type: "GET",
-          url:
-            "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-          async: false,
-          success: function (res) {
-            if (res != null) {
-              //test
-              data.month = JSON.parse(
-                '{"month": 3, "attendanceRate": 30, "examRate": 30}'
-              );
-            }
-          },
-        });
+        syncGet(
+          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
+          "",
+          monthly,
+          null
+        );
 
         //문제현황
-        $.ajax({
-          type: "GET",
-          url:
-            "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-          async: false,
-          success: function (res) {
-            if (data != null) {
-              //test
-              data.questions = JSON.parse(
-                '{"list":[{"no":2,"year":"2020","class":"class","curriculum":"중1 > 1학기 > 소인수분해 > 01 소인수분해","exam":{"count":10,"questionsDate":"2020.02.09","doDate":"2020.02.10","status":"pass","score":10,"isTakeExam":"1"}},{"no":1,"year":"2020","class":"class","curriculum":"중1 > 1학기 > 소인수분해 > 01 소인수분해","exam":{"count":10,"questionsDate":"","doDate":"","status":"-","score":0,"isTakeExam":"0"}}],"pagination":{"total":50, "currentPage":1}}'
-              );
-
-              //현재페이지
-              var currentPage = data.questions.pagination.currentPage;
-              var totalCount = data.questions.pagination.total;
-
-              data.questions.pagination.pageNumbers = getPageNumbers(
-                totalCount,
-                currentPage
-              );
-            }
-          },
-        });
+        syncGet(
+          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
+          "",
+          questions,
+          null
+        );
       }
       /**
        * page 번호 목록 생성
        */
-      function getPageNumbers(totalCount, currentPage) {
+      function getPageInfo(totalCount, currentPage) {
         var totalPage = totalCount / LIST_COUNT;
 
         if (totalCount % LIST_COUNT > 0) {
@@ -464,29 +519,23 @@
           pageNumbers.push(i);
         }
 
-        return pageNumbers;
-      }
+        //pre page
+        var prePageNumber = 1;
+        if (startPage > 1) {
+          prePageNumber = startPage - 1;
+        }
+        //next page
+        var nextPageNumber = totalPage;
+        if (totalPage > endPage) {
+          nextPageNumber = endPage + 1;
+        }
 
-      function sleep(delay) {
-        var start = new Date().getTime();
-        while (new Date().getTime() < start + delay);
-      }
+        var pageInfo = new Object();
+        pageInfo.pageNumbers = pageNumbers;
+        pageInfo.prePageNumber = prePageNumber;
+        pageInfo.nextPageNumber = nextPageNumber;
 
-      function init1() {
-        //axios 테스트
-        axios
-          .get(
-            "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json"
-          )
-          .then(function (res) {
-            //data.result.studentInfo = res.result;
-            //test
-            console.log(JSON.parse('{"name": "홍길동"}'));
-            data.studentInfo = JSON.parse('{"name": "홍길동"}');
-          })
-          .catch(function (e) {
-            console.error(e);
-          });
+        return pageInfo;
       }
     </script>
   </body>
