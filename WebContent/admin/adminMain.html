@@ -80,104 +80,124 @@
             navigation
           </div>
           <div class="wrapper wrapper-content">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="ibox">
-                  <div class="ibox-content text-center">
-                    <div class="row text-center">
-                      <div class="text-right">
-                        <a class="btn btn-white btn-bitbucket">
-                          <i class="fa fa-angle-double-left"></i>
-                        </a>
-                      </div>
-                      <div class="form-group" id="data_1">
-                        <div class="input-group date">
-                          <span class="input-group-addon"
-                            ><i class="fa fa-calendar"></i></span
-                          ><input
-                            id="questionDate"
-                            type="text"
-                            class="form-control"
-                            value=""
-                          />
+            <div>
+              <div class="row col-lg-12" id="empty">
+                <div class="sk-spinner sk-spinner-fading-circle">
+                  <div class="sk-circle1 sk-circle"></div>
+                  <div class="sk-circle2 sk-circle"></div>
+                  <div class="sk-circle3 sk-circle"></div>
+                  <div class="sk-circle4 sk-circle"></div>
+                  <div class="sk-circle5 sk-circle"></div>
+                  <div class="sk-circle6 sk-circle"></div>
+                  <div class="sk-circle7 sk-circle"></div>
+                  <div class="sk-circle8 sk-circle"></div>
+                  <div class="sk-circle9 sk-circle"></div>
+                  <div class="sk-circle10 sk-circle"></div>
+                  <div class="sk-circle11 sk-circle"></div>
+                  <div class="sk-circle12 sk-circle"></div>
+                </div>
+              </div>
+            </div>
+            <div class="container" style="display: none;" id="content">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="ibox">
+                    <div class="ibox-content text-center">
+                      <div class="row text-center">
+                        <div class="text-right">
+                          <a class="btn btn-white btn-bitbucket">
+                            <i class="fa fa-angle-double-left"></i>
+                          </a>
+                        </div>
+                        <div class="form-group" id="data_1">
+                          <div class="input-group date">
+                            <span class="input-group-addon"
+                              ><i class="fa fa-calendar"></i></span
+                            ><input
+                              id="questionDate"
+                              type="text"
+                              class="form-control"
+                              value=""
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <a class="btn btn-white btn-bitbucket">
+                            <i class="fa fa-angle-double-right"></i>
+                          </a>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="ibox">
+                    <div class="ibox-content">
+                      <div class="jqGrid_wrapper">
+                        <table id="table_list_1"></table>
+                        <div id="pager_list_1"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="ibox">
+                    <div class="ibox-title">
+                      <h5>출석율</h5>
+                    </div>
+                    <div class="ibox-content">
                       <div>
-                        <a class="btn btn-white btn-bitbucket">
-                          <i class="fa fa-angle-double-right"></i>
-                        </a>
+                        <div id="pie_1"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-3">
+                  <div class="ibox-title">
+                    <h5>온라인 테스트 응시율</h5>
+                  </div>
+                  <div class="ibox-content">
+                    <div>
+                      <div id="pie_2"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="ibox">
+                    <div class="ibox-title">
+                      <h5>
+                        Line Chart Example
+                        <small>With custom colors.</small>
+                      </h5>
+                    </div>
+                    <div class="ibox-content">
+                      <div>
+                        <div id="lineChart"></div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="ibox">
-                  <div class="ibox-content">
-                    <div class="jqGrid_wrapper">
-                      <table id="table_list_1"></table>
-                      <div id="pager_list_1"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3">
-                <div class="ibox">
-                  <div class="ibox-title">
-                    <h5>출석율</h5>
-                  </div>
-                  <div class="ibox-content">
-                    <div>
-                      <div id="pie_1"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-              <div class="col-lg-3">
-                <div class="ibox-title">
-                  <h5>온라인 테스트 응시율</h5>
-                </div>
-                <div class="ibox-content">
-                  <div>
-                    <div id="pie_2"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
               <div class="col-lg-12">
                 <div class="ibox">
                   <div class="ibox-title">
-                    <h5>
-                      Line Chart Example
-                      <small>With custom colors.</small>
-                    </h5>
+                    <h5>3월 4주차 수업 스케줄</h5>
                   </div>
                   <div class="ibox-content">
-                    <div>
-                      <div id="lineChart"></div>
-                    </div>
+                    <div id="calendar"></div>
                   </div>
                 </div>
               </div>
+              <!-- top -->
+              <div id="footer"></div>
+              <!-- end top -->
             </div>
-
-            <div class="col-lg-12">
-              <div class="ibox">
-                <div class="ibox-title">
-                  <h5>3월 4주차 수업 스케줄</h5>
-                </div>
-                <div class="ibox-content">
-                  <div id="calendar"></div>
-                </div>
-              </div>
-            </div>
-            <!-- top -->
-            <div id="footer"></div>
-            <!-- end top -->
           </div>
         </div>
       </div>
