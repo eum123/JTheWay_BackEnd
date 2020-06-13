@@ -23,96 +23,7 @@
 
   <body>
     <div id="wrapper">
-      <nav class="navbar-default navbar-static-side" role="navigation">
-        <div class="sidebar-collapse">
-          <ul class="nav metismenu" id="side-menu">
-            <li class="nav-header">
-              <div class="dropdown profile-element">
-                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                  <span class="block m-t-xs font-bold">장덕일</span>
-                  <span class="text-muted text-xs block"
-                    >원장 <b class="caret"></b
-                  ></span>
-                </a>
-                <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                  <li>
-                    <a class="dropdown-item" href="profile.html">Profile</a>
-                  </li>
-                  <li class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="login.html">Logout</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="active">
-              <a href="template1.html"
-                ><i class="fa fa-th-large"></i>
-                <span class="nav-label">사용자관리</span>
-                <span class="fa arrow"></span
-              ></a>
-              <ul class="nav nav-second-level">
-                <li class="active">
-                  <a href="dashboard_1.html">사용자목록</a>
-                </li>
-                <li><a href="dashboard_2.html">사용자등록</a></li>
-                <li><a href="dashboard_3.html">학생선택</a></li>
-              </ul>
-            </li>
-
-            <li>
-              <a href="#"
-                ><i class="fa fa-bar-chart-o"></i>
-                <span class="nav-label">수업관리</span
-                ><span class="fa arrow"></span
-              ></a>
-              <ul class="nav nav-second-level collapse">
-                <li><a href="graph_flot.html">커리큘럼관리</a></li>
-                <li><a href="graph_morris.html">클래스관리</a></li>
-                <li><a href="graph_rickshaw.html">진도관리</a></li>
-              </ul>
-            </li>
-            <li>
-              <a href="mailbox.html"
-                ><i class="fa fa-envelope"></i>
-                <span class="nav-label">학생관리 </span></a
-              >
-              <ul class="nav nav-second-level collapse">
-                <li><a href="mailbox.html">학생목록</a></li>
-                <li><a href="mail_detail.html">학생정보</a></li>
-                <li><a href="mail_compose.html">온라인테스트</a></li>
-                <li><a href="email_template.html">월간리포트</a></li>
-                <li><a href="email_template.html">커리큘럼별 교사의견</a></li>
-                <li><a href="email_template.html">시험점수</a></li>
-              </ul>
-            </li>
-            <li>
-              <a href="metrics.html"
-                ><i class="fa fa-pie-chart"></i>
-                <span class="nav-label">문제관리</span>
-              </a>
-              <ul class="nav nav-second-level collapse">
-                <li><a href="mailbox.html">문제은행관리</a></li>
-                <li><a href="mail_detail.html">문제출제관리</a></li>
-              </ul>
-            </li>
-
-            <li>
-              <a href="#"
-                ><i class="fa fa-edit"></i>
-                <span class="nav-label">시스템관리</span
-                ><span class="fa arrow"></span
-              ></a>
-              <ul class="nav nav-second-level collapse">
-                <li><a href="form_basic.html">메뉴목록</a></li>
-                <li><a href="form_advanced.html">메뉴등록</a></li>
-                <li><a href="form_wizard.html">코드목록</a></li>
-                <li><a href="form_file_upload.html">코드등록</a></li>
-                <li><a href="form_editors.html">공지사항목록</a></li>
-                <li><a href="form_autocomplete.html">공지사항등록</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <div id="leftMenu"></div>
 
       <div id="page-wrapper" class="gray-bg dashbard-1">
         <div class="row border-bottom">
@@ -170,7 +81,9 @@
     <script src="./theme/js/plugins/jquery-ui/jquery-ui.min.js"></script>
 
     <script>
-      $(document).ready(function () {});
+      $(document).ready(function () {
+        $("#leftMenu").load("./common/leftMenu.html");
+      });
     </script>
   </body>
 </html>
