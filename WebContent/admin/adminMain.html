@@ -1,27 +1,29 @@
+<!--
+*
+*  INSPINIA - Responsive Admin Theme
+*  version 2.9.2
+*
+-->
+
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <title>haami admin</title>
+    <title>haami</title>
 
     <link href="../theme/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../theme/font-awesome/css/font-awesome.css" rel="stylesheet" />
 
-    <!-- c3 Charts -->
-    <link href="../theme/css/plugins/c3/c3.min.css" rel="stylesheet" />
-
-    <!-- FooTable -->
-    <link
-      href="../theme/css/plugins/footable/footable.core.css"
-      rel="stylesheet"
-    />
-
     <link href="../theme/css/animate.css" rel="stylesheet" />
     <link href="../theme/css/style.css" rel="stylesheet" />
-    <link href="../theme/css/plugins/slick/slick.css" rel="stylesheet" />
-    <link href="../theme/css/plugins/slick/slick-theme.css" rel="stylesheet" />
-
+    <link
+      href="../theme/css/plugins/datapicker/datepicker3.css"
+      rel="stylesheet"
+    />
+    <link href="../theme/css/plugins/jqGrid/ui.jqgrid.css" rel="stylesheet" />
     <link
       href="../theme/css/plugins/fullcalendar/fullcalendar.css"
       rel="stylesheet"
@@ -32,123 +34,179 @@
       media="print"
     />
 
-    <link
-      href="../theme/css/plugins/jQueryUI/jquery-ui-1.10.4.custom.min.css"
-      rel="stylesheet"
-    />
-    <link href="../theme/css/plugins/jqGrid/ui.jqgrid.css" rel="stylesheet" />
+    <!-- c3 Charts -->
+    <link href="../theme/css/plugins/c3/c3.min.css" rel="stylesheet" />
   </head>
+
   <body>
-    <div id="wrapper">
-      <div id="leftMenu"></div>
+    <div id="app">
+      <div id="wrapper">
+        <!-- leftmenu -->
+        <div id="leftMenu"></div>
+        <!-- end leftmenu -->
 
-      <div id="page-wrapper" class="gray-bg">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="ibox">
-              <div class="ibox-content">
-                <h5 align="center">A 2020.05.27(Firday) B</h5>
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+          <!-- top -->
+          <div class="row border-bottom">
+            <nav
+              class="navbar navbar-static-top"
+              role="navigation"
+              style="margin-bottom: 0;"
+            >
+              <div class="navbar-header">
+                <a
+                  class="navbar-minimalize minimalize-styl-2 btn btn-primary"
+                  href="#"
+                  ><i class="fa fa-bars"></i>
+                </a>
               </div>
-            </div>
+              <ul class="nav navbar-top-links navbar-right">
+                <li style="padding: 20px;">
+                  <span class="m-r-sm text-muted welcome-message"
+                    >haami Admin</span
+                  >
+                </li>
+
+                <li>
+                  <a href="login.html">
+                    <i class="fa fa-sign-out"></i> Log out
+                  </a>
+                </li>
+              </ul>
+            </nav>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="ibox">
-              <div class="ibox-title">
-                <h5>FooTable with row toggler, sorting and pagination</h5>
-              </div>
-              <div class="ibox-content">
-                <div class="jqGrid_wrapper">
-                  <table id="table_list_1"></table>
-                  <div id="pager_list_1"></div>
+          <!-- end top -->
+          <div class="row border-bottom white-bg dashboard-header">
+            navigation
+          </div>
+          <div class="wrapper wrapper-content">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="ibox">
+                  <div class="ibox-content text-center">
+                    <div class="row text-center">
+                      <div class="text-right">
+                        <a class="btn btn-white btn-bitbucket">
+                          <i class="fa fa-angle-double-left"></i>
+                        </a>
+                      </div>
+                      <div class="form-group" id="data_1">
+                        <div class="input-group date">
+                          <span class="input-group-addon"
+                            ><i class="fa fa-calendar"></i></span
+                          ><input
+                            id="questionDate"
+                            type="text"
+                            class="form-control"
+                            value=""
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <a class="btn btn-white btn-bitbucket">
+                          <i class="fa fa-angle-double-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="ibox">
-              <div class="ibox-title">
-                <h5>출석율</h5>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="ibox">
+                  <div class="ibox-content">
+                    <div class="jqGrid_wrapper">
+                      <table id="table_list_1"></table>
+                      <div id="pager_list_1"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="ibox-content">
-                <div>
-                  <div id="pie_1"></div>
+              <div class="col-lg-3">
+                <div class="ibox">
+                  <div class="ibox-title">
+                    <h5>출석율</h5>
+                  </div>
+                  <div class="ibox-content">
+                    <div>
+                      <div id="pie_1"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-3">
+                <div class="ibox-title">
+                  <h5>온라인 테스트 응시율</h5>
+                </div>
+                <div class="ibox-content">
+                  <div>
+                    <div id="pie_2"></div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-
-          <div class="col-lg-3">
-            <div class="ibox-title">
-              <h5>온라인 테스트 응시율</h5>
-            </div>
-            <div class="ibox-content">
-              <div>
-                <div id="pie_2"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="ibox">
-              <div class="ibox-content">
-                <h5 align="center">3월 4주차 온라인 텍스트 결과</h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="ibox">
-              <div class="ibox-title">
-                <h5>
-                  Line Chart Example
-                  <small>With custom colors.</small>
-                </h5>
-              </div>
-              <div class="ibox-content">
-                <div>
-                  <div id="lineChart"></div>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="ibox">
+                  <div class="ibox-title">
+                    <h5>
+                      Line Chart Example
+                      <small>With custom colors.</small>
+                    </h5>
+                  </div>
+                  <div class="ibox-content">
+                    <div>
+                      <div id="lineChart"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div class="col-lg-12">
-          <div class="ibox">
-            <div class="ibox-title">
-              <h5>3월 4주차 수업 스케줄</h5>
+            <div class="col-lg-12">
+              <div class="ibox">
+                <div class="ibox-title">
+                  <h5>3월 4주차 수업 스케줄</h5>
+                </div>
+                <div class="ibox-content">
+                  <div id="calendar"></div>
+                </div>
+              </div>
             </div>
-            <div class="ibox-content">
-              <div id="calendar"></div>
-            </div>
+            <!-- top -->
+            <div id="footer"></div>
+            <!-- end top -->
           </div>
-        </div>
-
-        <div class="footer">
-          <div class="float-right">10GB of <strong>250GB</strong> Free.</div>
-          <div><strong>Copyright</strong> Example Company &copy; 2014-2018</div>
         </div>
       </div>
     </div>
 
-    <!-- Mainly scripts -->
+    <script src="../resources/js/api.js"></script>
+    <script src="../resources/js/common.js"></script>
+
     <script src="../theme/js/plugins/fullcalendar/moment.min.js"></script>
+    <!-- Mainly scripts -->
     <script src="../theme/js/jquery-3.1.1.min.js"></script>
     <script src="../theme/js/popper.min.js"></script>
     <script src="../theme/js/bootstrap.js"></script>
     <script src="../theme/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="../theme/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-    <!-- FooTable -->
-    <script src="../theme/js/plugins/footable/footable.all.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="../theme/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- Data picker -->
+    <script src="../theme/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="../theme/js/plugins/datapicker/bootstrap-datepicker.ko.js"></script>
 
     <!-- Custom and plugin javascript -->
     <script src="../theme/js/inspinia.js"></script>
     <script src="../theme/js/plugins/pace/pace.min.js"></script>
+
+    <!-- Full Calendar -->
+    <script src="../theme/js/plugins/fullcalendar/fullcalendar.min.js"></script>
 
     <!-- ChartJS-->
     <script src="../theme/js/plugins/d3/d3.min.js"></script>
@@ -158,218 +216,240 @@
     <script src="../theme/js/plugins/jqGrid/i18n/grid.locale-en.js"></script>
     <script src="../theme/js/plugins/jqGrid/jquery.jqGrid.min.js"></script>
 
-    <!-- slick carousel-->
-    <script src="../theme/js/plugins/slick/slick.min.js"></script>
-
-    <!-- iCheck -->
-    <script src="../theme/js/plugins/iCheck/icheck.min.js"></script>
-
-    <!-- Full Calendar -->
-    <script src="../theme/js/plugins/fullcalendar/fullcalendar.min.js"></script>
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
 
     <script>
       $(document).ready(function () {
-        $("#leftMenu").load("../common/leftMenu.html");
+        $("#leftMenu").load("./common/leftMenu.html");
+        $("#footer").load("./common/footer.html");
+      });
 
-        //목록
-        var mydata = [
+      var data = new Object();
+      //init();
+
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return data;
+        },
+        mounted: function () {
+          //로딩 화면 제거하고 화면 표시
+          $("#empty").css("display", "none");
+          $("#content").css("display", "");
+
+          var mem = $("#data_1 .input-group.date").datepicker({
+            format: "yyyymmdd",
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true,
+            language: "ko",
+            todayHighlight: true,
+          });
+          $("#questionDate").val(new Date().format("yyyyMMdd"));
+        },
+      });
+
+      //목록
+      var mydata = [
+        {
+          id: "1",
+          class: "중3 심화반",
+          participation: "6/6",
+          examination: "6/6",
+          pass: "90%",
+          average: "82",
+        },
+        {
+          id: "2",
+          class: "중3 상위권반",
+          participation: "5/6",
+          examination: "6/6",
+          pass: "87%",
+          average: "90",
+        },
+      ];
+      $("#table_list_1").jqGrid({
+        data: mydata,
+        datatype: "local",
+        height: 250,
+        autowidth: true,
+        shrinkToFit: true,
+        rowNum: 14,
+        rowList: [10, 20, 30],
+        colNames: [
+          "No",
+          "클래스",
+          "출석",
+          "온라인테스트",
+          "Pass비율",
+          "평균점수",
+        ],
+        colModel: [
           {
-            id: "1",
-            class: "중3 심화반",
-            participation: "6/6",
-            examination: "6/6",
-            pass: "90%",
-            average: "82",
+            name: "id",
+            index: "id",
+            width: 20,
+            sorttype: "int",
+            align: "center",
           },
           {
-            id: "2",
-            class: "중3 상위권반",
-            participation: "5/6",
-            examination: "6/6",
-            pass: "87%",
-            average: "90",
+            name: "class",
+            index: "class",
+            width: 45,
+            align: "center",
           },
-        ];
-        $("#table_list_1").jqGrid({
-          data: mydata,
-          datatype: "local",
-          height: 250,
-          autowidth: true,
-          shrinkToFit: true,
-          rowNum: 14,
-          rowList: [10, 20, 30],
-          colNames: [
-            "No",
-            "클래스",
-            "출석",
-            "온라인테스트",
-            "Pass비율",
-            "평균점수",
+          {
+            name: "participation",
+            index: "participation",
+            width: 20,
+            align: "center",
+          },
+          {
+            name: "examination",
+            index: "examination",
+            width: 20,
+            align: "center",
+          },
+          {
+            name: "pass",
+            index: "pass",
+            width: 30,
+            align: "center",
+          },
+          {
+            name: "average",
+            index: "average",
+            width: 30,
+            align: "right",
+            sorttype: "float",
+            align: "center",
+          },
+        ],
+        pager: "#pager_list_1",
+        viewrecords: true,
+        caption: "",
+        hidegrid: false,
+      });
+
+      //출석률
+      c3.generate({
+        bindto: "#pie_1",
+        data: {
+          columns: [
+            ["출석", 30],
+            ["결석", 120],
           ],
-          colModel: [
-            {
-              name: "id",
-              index: "id",
-              width: 20,
-              sorttype: "int",
-              align: "center",
-            },
-            {
-              name: "class",
-              index: "class",
-              width: 45,
-              align: "center",
-            },
-            {
-              name: "participation",
-              index: "participation",
-              width: 20,
-              align: "center",
-            },
-            {
-              name: "examination",
-              index: "examination",
-              width: 20,
-              align: "center",
-            },
-            {
-              name: "pass",
-              index: "pass",
-              width: 30,
-              align: "center",
-            },
-            {
-              name: "average",
-              index: "average",
-              width: 30,
-              align: "right",
-              sorttype: "float",
-              align: "center",
-            },
+          colors: {
+            출석: "#1ab394",
+            결석: "#BABABA",
+          },
+          type: "pie",
+        },
+      });
+
+      //시험응시율
+      c3.generate({
+        bindto: "#pie_2",
+        data: {
+          columns: [
+            ["응시", 30],
+            ["미응시", 120],
           ],
-          pager: "#pager_list_1",
-          viewrecords: true,
-          caption: "",
-          hidegrid: false,
-        });
-
-        //출석률
-        c3.generate({
-          bindto: "#pie_1",
-          data: {
-            columns: [
-              ["출석", 30],
-              ["결석", 120],
-            ],
-            colors: {
-              출석: "#1ab394",
-              결석: "#BABABA",
-            },
-            type: "pie",
+          colors: {
+            응시: "#1ab394",
+            미응시: "#BABABA",
           },
-        });
+          type: "pie",
+        },
+      });
 
-        //시험응시율
-        c3.generate({
-          bindto: "#pie_2",
-          data: {
-            columns: [
-              ["응시", 30],
-              ["미응시", 120],
-            ],
-            colors: {
-              응시: "#1ab394",
-              미응시: "#BABABA",
-            },
-            type: "pie",
+      //온라인 테스트 결과
+      c3.generate({
+        bindto: "#lineChart",
+        data: {
+          columns: [
+            ["data1", 30, 200, 100, 400, 150, 250],
+            ["data2", 50, 20, 10, 40, 15, 25],
+          ],
+          colors: {
+            data1: "#1ab394",
+            data2: "#BABABA",
           },
-        });
+        },
+      });
 
-        //온라인 테스트 결과
-        c3.generate({
-          bindto: "#lineChart",
-          data: {
-            columns: [
-              ["data1", 30, 200, 100, 400, 150, 250],
-              ["data2", 50, 20, 10, 40, 15, 25],
-            ],
-            colors: {
-              data1: "#1ab394",
-              data2: "#BABABA",
-            },
-          },
-        });
-
-        //schedule
-        /* initialize the calendar
+      //schedule
+      /* initialize the calendar
          -----------------------------------------------------------------*/
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
+      var date = new Date();
+      var d = date.getDate();
+      var m = date.getMonth();
+      var y = date.getFullYear();
 
-        $("#calendar").fullCalendar({
-          header: {
-            left: "prev,next today",
-            center: "title",
-            right: "month,agendaWeek,agendaDay",
+      $("#calendar").fullCalendar({
+        header: {
+          left: "prev,next today",
+          center: "title",
+          right: "month,agendaWeek,agendaDay",
+        },
+        editable: true,
+        droppable: true, // this allows things to be dropped onto the calendar
+        drop: function () {
+          // is the "remove after drop" checkbox checked?
+          if ($("#drop-remove").is(":checked")) {
+            // if so, remove the element from the "Draggable Events" list
+            $(this).remove();
+          }
+        },
+        events: [
+          {
+            title: "All Day Event",
+            start: new Date(y, m, 1),
           },
-          editable: true,
-          droppable: true, // this allows things to be dropped onto the calendar
-          drop: function () {
-            // is the "remove after drop" checkbox checked?
-            if ($("#drop-remove").is(":checked")) {
-              // if so, remove the element from the "Draggable Events" list
-              $(this).remove();
-            }
+          {
+            title: "Long Event",
+            start: new Date(y, m, d - 5),
+            end: new Date(y, m, d - 2),
           },
-          events: [
-            {
-              title: "All Day Event",
-              start: new Date(y, m, 1),
-            },
-            {
-              title: "Long Event",
-              start: new Date(y, m, d - 5),
-              end: new Date(y, m, d - 2),
-            },
-            {
-              id: 999,
-              title: "Repeating Event",
-              start: new Date(y, m, d - 3, 16, 0),
-              allDay: false,
-            },
-            {
-              id: 999,
-              title: "Repeating Event",
-              start: new Date(y, m, d + 4, 16, 0),
-              allDay: false,
-            },
-            {
-              title: "Meeting",
-              start: new Date(y, m, d, 10, 30),
-              allDay: false,
-            },
-            {
-              title: "Lunch",
-              start: new Date(y, m, d, 12, 0),
-              end: new Date(y, m, d, 14, 0),
-              allDay: false,
-            },
-            {
-              title: "Birthday Party",
-              start: new Date(y, m, d + 1, 19, 0),
-              end: new Date(y, m, d + 1, 22, 30),
-              allDay: false,
-            },
-            {
-              title: "Click for Google",
-              start: new Date(y, m, 28),
-              end: new Date(y, m, 29),
-              url: "http://google.com/",
-            },
-          ],
-        });
+          {
+            id: 999,
+            title: "Repeating Event",
+            start: new Date(y, m, d - 3, 16, 0),
+            allDay: false,
+          },
+          {
+            id: 999,
+            title: "Repeating Event",
+            start: new Date(y, m, d + 4, 16, 0),
+            allDay: false,
+          },
+          {
+            title: "Meeting",
+            start: new Date(y, m, d, 10, 30),
+            allDay: false,
+          },
+          {
+            title: "Lunch",
+            start: new Date(y, m, d, 12, 0),
+            end: new Date(y, m, d, 14, 0),
+            allDay: false,
+          },
+          {
+            title: "Birthday Party",
+            start: new Date(y, m, d + 1, 19, 0),
+            end: new Date(y, m, d + 1, 22, 30),
+            allDay: false,
+          },
+          {
+            title: "Click for Google",
+            start: new Date(y, m, 28),
+            end: new Date(y, m, 29),
+            url: "http://google.com/",
+          },
+        ],
       });
     </script>
   </body>
