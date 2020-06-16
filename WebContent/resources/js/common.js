@@ -59,3 +59,53 @@ String.prototype.zf = function (len) {
 Number.prototype.zf = function (len) {
   return this.toString().zf(len);
 };
+
+/**
+ * page 번호 목록 생성
+ */
+function getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, totalCount, currentPage) {
+  var totalPage = totalCount / LIST_COUNT;
+
+  if (totalCount % LIST_COUNT > 0) {
+    totalPage++;
+  }
+
+  //currentPage = 현재 보고있는 페이지
+  if (totalPage < currentPage) {
+    currentPage = totalPage;
+  }
+
+  var startPage = ((currentPage - 1) / PAGENUMBER_COUNT) * PAGENUMBER_COUNT + 1;
+  //현재 페이지가 pageCount와 같을 때를 유의하며 (page-1)을 하고
+  // +1은 첫페이지가 0이나 10이 아니라 1이나 11로 하기 위함임
+  var endPage = startPage + PAGENUMBER_COUNT - 1;
+  // -1은 첫페이지가 1이나 11 등과 같을때 1~10, 11~20으로 지정하기 위함임
+
+  if (endPage > totalPage) {
+    endPage = totalPage;
+  }
+
+  var pageNumbers = new Array();
+
+  for (var i = startPage; i <= endPage; i++) {
+    pageNumbers.push(i);
+  }
+
+  //pre page
+  var prePageNumber = 1;
+  if (startPage > 1) {
+    prePageNumber = startPage - 1;
+  }
+  //next page
+  var nextPageNumber = totalPage;
+  if (totalPage > endPage) {
+    nextPageNumber = endPage + 1;
+  }
+
+  var pageInfo = new Object();
+  pageInfo.pageNumbers = pageNumbers;
+  pageInfo.prePageNumber = prePageNumber;
+  pageInfo.nextPageNumber = nextPageNumber;
+
+  return pageInfo;
+}

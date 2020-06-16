@@ -63,3 +63,30 @@
          ]
        }
       ```
+## 사용자 목록
+ 1. 목록
+    - 요청
+       http://....
+    - 응답
+      ```json
+      [{ 
+         "no": "2",               //번호
+         "userKindCode": "0",     //사용자구분
+         "userKindName": "관리자",
+         "userName": "장덕일",      //사용자명
+         "id": "jdi",             //아이디
+         "mobile": "010-1111-1111",      //휴대폰번호
+         "email": "jdi@mail.com",         //이메일
+         "usage": "1"             //사용여부
+        },      
+        { 
+         "no": "1",             //번호
+         "userKindCode": "1",   //사용자구분
+         "userKindName": "교사",
+         "userName": "김교사",    //사용자명
+         "id": "jdi",           //아이디
+         "mobile": "010-1111-2222",      //휴대폰번호
+         "email": "jdi@mail.com",         //이메일
+         "usage": "1"           //사용여부
+        }
+      ]

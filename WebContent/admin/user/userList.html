@@ -1,153 +1,246 @@
+<!--
+*
+*  INSPINIA - Responsive Admin Theme
+*  version 2.9.2
+*
+-->
+
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-        <title>사용자</title>
-    
-        <link href="../../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../../font-awesome/css/font-awesome.css" rel="stylesheet">
-    
-        <link href="../../css/animate.css" rel="stylesheet">
-        <link href="../../css/style.css" rel="stylesheet">
-    </head>
-    <body >
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>haami</title>
+
+    <link href="../../theme/css/bootstrap.min.css" rel="stylesheet" />
+    <link
+      href="../../theme/font-awesome/css/font-awesome.css"
+      rel="stylesheet"
+    />
+
+    <link href="../../theme/css/animate.css" rel="stylesheet" />
+    <link href="../../theme/css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div id="app">
       <div id="wrapper">
-        <nav class="navbar-default navbar-static-side" role="navigation">
-          <div class="sidebar-collapse">
-            <ul class="nav metismenu" id="side-menu">
-              <li class="nav-header">
-                <div class="dropdown profile-element">
-                  <img
-                    alt="image"
-                    class="rounded-circle"
-                    src="../../img/profile_small.jpg"
-                  />
-                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                    <span class="block m-t-xs font-bold">David Williams</span>
-                    <span class="text-muted text-xs block"
-                      >Art Director <b class="caret"></b
-                    ></span>
+        <!-- leftmenu -->
+        <div id="leftMenu"></div>
+        <!-- end leftmenu -->
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+          <!-- top -->
+          <div class="row border-bottom">
+            <nav
+              class="navbar navbar-static-top"
+              role="navigation"
+              style="margin-bottom: 0;"
+            >
+              <div class="navbar-header">
+                <a
+                  class="navbar-minimalize minimalize-styl-2 btn btn-primary"
+                  href="#"
+                  ><i class="fa fa-bars"></i>
+                </a>
+              </div>
+              <ul class="nav navbar-top-links navbar-right">
+                <li style="padding: 20px;">
+                  <span class="m-r-sm text-muted welcome-message"
+                    >haami Admin</span
+                  >
+                </li>
+
+                <li>
+                  <a href="login.html">
+                    <i class="fa fa-sign-out"></i> Log out
                   </a>
-                  <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                    <li>
-                      <a class="dropdown-item" href="profile.html">Profile</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="contacts.html">Contacts</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="mailbox.html">Mailbox</a>
-                    </li>
-                    <li class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="login.html">Logout</a></li>
-                  </ul>
-                </div>
-                <div class="logo-element">
-                  IN+
-                </div>
-              </li>
-            </ul>
+                </li>
+              </ul>
+            </nav>
           </div>
-        </nav>
-        <div id="page-wrapper" class="gray-bg">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="ibox">
-                <div class="ibox-title">
-                  <h5>사용자 목록</h5>
+          <!-- end top -->
+
+          <div class="row border-bottom white-bg dashboard-header">
+            navigation
+          </div>
+          <div class="wrapper wrapper-content">
+            <div>
+              <div class="row col-lg-12" id="empty">
+                <div class="sk-spinner sk-spinner-fading-circle">
+                  <div class="sk-circle1 sk-circle"></div>
+                  <div class="sk-circle2 sk-circle"></div>
+                  <div class="sk-circle3 sk-circle"></div>
+                  <div class="sk-circle4 sk-circle"></div>
+                  <div class="sk-circle5 sk-circle"></div>
+                  <div class="sk-circle6 sk-circle"></div>
+                  <div class="sk-circle7 sk-circle"></div>
+                  <div class="sk-circle8 sk-circle"></div>
+                  <div class="sk-circle9 sk-circle"></div>
+                  <div class="sk-circle10 sk-circle"></div>
+                  <div class="sk-circle11 sk-circle"></div>
+                  <div class="sk-circle12 sk-circle"></div>
                 </div>
-                <div class="ibox-content">
-                  <div class="form-group row">
-                    <div class="col-lg-2">
-                      <select class="form-control m-b" name="account">
-                        <option>option 1</option>
-                        <option>option 2</option>
-                        <option>option 3</option>
-                        <option>option 4</option>
-                      </select>
+              </div>
+            </div>
+            <div class="container" style="display: none;" id="content">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="ibox">
+                    <div class="ibox-title">
+                      <h5>사용자 목록</h5>
                     </div>
-                    <div class="col-lg-2">
-                      <select class="form-control m-b" name="account">
-                        <option>option 1</option>
-                        <option>option 2</option>
-                        <option>option 3</option>
-                        <option>option 4</option>
-                      </select>
+                    <div class="ibox-content">
+                      <div class="row">
+                        <div class="col-sm-8">
+                          <form role="form" class="form-inline">
+                            <div class="form-group">
+                              <select class="form-control" name="account">
+                                <option>option 1</option>
+                                <option>option 2</option>
+                                <option>option 3</option>
+                                <option>option 4</option>
+                              </select>
+                            </div>
+                            <div class="form-group" id="data_1">
+                              <select class="form-control" name="account">
+                                <option>option 1</option>
+                                <option>option 2</option>
+                                <option>option 3</option>
+                                <option>option 4</option>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <input type="text" class="form_control" />
+                            </div>
+                            <div class="form-group">
+                              <button
+                                class="btn btn-sm btn-primary float-right"
+                                type="submit"
+                              >
+                                <strong>검색</strong>
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="text-right">
+                            전체 5,000건
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="table-responsive">
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th>NO</th>
+                                <th>사용자구분</th>
+                                <th>사용자명</th>
+                                <th>아이디</th>
+                                <th>휴대폰번호</th>
+                                <th>이메일</th>
+                                <th>사용여부</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td></td>
+                                <td>
+                                  Project<small
+                                    >This is example of project</small
+                                  >
+                                </td>
+                                <td><span class="pie">0.52/1.561</span></td>
+                                <td>20%</td>
+                                <td>Jul 14, 2013</td>
+                                <td>
+                                  <a href="#"
+                                    ><i class="fa fa-check text-navy"></i
+                                  ></a>
+                                </td>
+                              </tr>
+                            </tbody>
+                            <tfoot>
+                              <tr>
+                                <td colspan="7">
+                                  <ul class="pagination float-right"></ul>
+                                </td>
+                              </tr>
+                            </tfoot>
+                          </table>
+                        </div>
+                      </div>
                     </div>
-                    <div class="col-lg-2">
-                      <input type="text" class="form_control">
-                    </div>
-                    <div class="col-lg-2">
-                      <button class="btn btn-sm btn-primary float-right m-t-n-xs" type="submit"><strong>검색</strong></button>
-                    </div>
-                    <div class="col-lg-3">
-                      
-                    </div>
-                    <div class="col-lg-1ß">
-                      전체 5,000건
-                    </div>
-                  </div>
-                </div>
-                  <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th>Project </th>
-                            <th>Completed </th>
-                            <th>Task</th>
-                            <th>Date</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td><input type="checkbox"  checked class="i-checks" name="input[]"></td>
-                            <td>Project<small>This is example of project</small></td>
-                            <td><span class="pie">0.52/1.561</span></td>
-                            <td>20%</td>
-                            <td>Jul 14, 2013</td>
-                            <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" class="i-checks" name="input[]"></td>
-                            <td>Alpha project</td>
-                            <td><span class="pie">6,9</span></td>
-                            <td>40%</td>
-                            <td>Jul 16, 2013</td>
-                            <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" class="i-checks" name="input[]"></td>
-                            <td>Betha project</td>
-                            <td><span class="pie">3,1</span></td>
-                            <td>75%</td>
-                            <td>Jul 18, 2013</td>
-                            <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" class="i-checks" name="input[]"></td>
-                            <td>Gamma project</td>
-                            <td><span class="pie">4,9</span></td>
-                            <td>18%</td>
-                            <td>Jul 22, 2013</td>
-                            <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                        </tr>
-                        </tbody>
-                    </table>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+          <!-- footer -->
+          <div id="footer"></div>
+          <!-- end footer -->
         </div>
-      
-        <!-- Mainly scripts -->
-        <script src="../../js/jquery-3.1.1.min.js"></script>
-        <script src="../../js/popper.min.js"></script>
-        <script src="../../js/bootstrap.js"></script>
-    
-    </body>
-    </body>
+      </div>
+    </div>
+    <!-- Mainly scripts -->
+    <script src="../../theme/js/jquery-3.1.1.min.js"></script>
+    <script src="../../theme/js/popper.min.js"></script>
+    <script src="../../theme/js/bootstrap.js"></script>
+    <script src="../../theme/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../../theme/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="../../theme/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+
+    <script>
+      var LIST_COUNT = 10; //페이지당 출력 건수
+      var PAGENUMBER_COUNT = 10; //페이지 번호 출력 개수
+
+      $(document).ready(function () {
+        $("#leftMenu").load("../../admin/common/leftMenu.html");
+        $("#footer").load("../../admin/common/footer.html");
+      });
+
+      var data = new Object();
+      init();
+
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return data;
+        },
+        mounted: function () {
+          //로딩 화면 제거하고 화면 표시
+          $("#empty").css("display", "none");
+          $("#content").css("display", "");
+        },
+      });
+
+      function init() {
+        //전체 조회
+        syncGet(
+          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
+          "",
+          search,
+          null
+        );
+      }
+
+      function search() {
+        if (res != null) {
+          //test
+          data.list = JSON.parse(
+            '[{"no":"2","userKindCode":"0","userKindName":"관리자","userName":"장덕일","id":"jdi","mobile":"010-1111-1111","email":"jdi@mail.com","usage":"1"},{"no":"1","userKindCode":"1","userKindName":"교사","userName":"김교사","id":"jdi","mobile":"010-1111-2222","email":"jdi@mail.com","usage":"1"}]'
+          );
+        }
+      }
+    </script>
+  </body>
 </html>
