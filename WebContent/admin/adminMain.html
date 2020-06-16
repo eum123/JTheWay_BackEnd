@@ -23,7 +23,7 @@
       href="../theme/css/plugins/datapicker/datepicker3.css"
       rel="stylesheet"
     />
-    <link href="../theme/css/plugins/jqGrid/ui.jqgrid.css" rel="stylesheet" />
+
     <link
       href="../theme/css/plugins/fullcalendar/fullcalendar.css"
       rel="stylesheet"
@@ -36,6 +36,18 @@
 
     <!-- c3 Charts -->
     <link href="../theme/css/plugins/c3/c3.min.css" rel="stylesheet" />
+
+    <!-- FooTable -->
+    <link
+      href="../theme/css/plugins/footable/footable.core.css"
+      rel="stylesheet"
+    />
+    <style>
+      .fixedlabel {
+        min-width: 130px !important;
+        display: inline-block !important;
+      }
+    </style>
   </head>
 
   <body>
@@ -103,8 +115,8 @@
                 <div class="col-lg-12">
                   <div class="ibox">
                     <div class="ibox-content text-center">
-                      <div class="row text-center">
-                        <div class="text-right">
+                      <form role="form" class="form-inline">
+                        <div class="form-group">
                           <a class="btn btn-white btn-bitbucket">
                             <i class="fa fa-angle-double-left"></i>
                           </a>
@@ -121,12 +133,12 @@
                             />
                           </div>
                         </div>
-                        <div>
+                        <div class="form-group">
                           <a class="btn btn-white btn-bitbucket">
                             <i class="fa fa-angle-double-right"></i>
                           </a>
                         </div>
-                      </div>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -135,10 +147,44 @@
                 <div class="col-lg-6">
                   <div class="ibox">
                     <div class="ibox-content">
-                      <div class="jqGrid_wrapper">
-                        <table id="table_list_1"></table>
-                        <div id="pager_list_1"></div>
-                      </div>
+                      <input
+                        type="text"
+                        class="form-control form-control-sm m-b-xs"
+                        id="filter"
+                        placeholder="Search in table"
+                      />
+                      <table
+                        class="footable table table-stripped"
+                        data-page-size="5"
+                        data-filter="#filter"
+                      >
+                        <thead>
+                          <tr>
+                            <th class="text-center">클래스</th>
+                            <th class="text-center">출석</th>
+                            <th class="text-center">온라인<br />테스트</th>
+                            <th class="text-center">Pass<br />비율</th>
+                            <th class="text-center">평균</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr class="gradeA" v-for="clazz in classInfo">
+                            <td class="text-center">{{clazz.class}}</td>
+                            <td class="text-center">{{clazz.appearance}}</td>
+                            <td class="text-center">{{clazz.examination}}</td>
+                            <td class="text-center">{{clazz.pass}}</td>
+                            <td class="text-center">{{clazz.average}}</td>
+                          </tr>
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <td colspan="5">
+                              <ul class="pagination float-right"></ul>
+                            </td>
+                          </tr>
+                        </tfoot>
+                      </table>
                     </div>
                   </div>
                 </div>
@@ -170,10 +216,37 @@
                 <div class="col-lg-12">
                   <div class="ibox">
                     <div class="ibox-title">
-                      <h5>
-                        Line Chart Example
-                        <small>With custom colors.</small>
-                      </h5>
+                      <div class="row">
+                        <div class="col-sm text-left">
+                          3월 4주차 온라인 테스트
+                        </div>
+                        <div class="col-sm text-right">
+                          <form role="form" class="form-inline">
+                            <div class="form-group">
+                              <a class="btn btn-white btn-bitbucket">
+                                <i class="fa fa-angle-double-left"></i>
+                              </a>
+                            </div>
+                            <div class="form-group" id="data_1">
+                              <div class="input-group date">
+                                <span class="input-group-addon"
+                                  ><i class="fa fa-calendar"></i></span
+                                ><input
+                                  id="questionDate"
+                                  type="text"
+                                  class="form-control"
+                                  value=""
+                                />
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <a class="btn btn-white btn-bitbucket">
+                                <i class="fa fa-angle-double-right"></i>
+                              </a>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
                     </div>
                     <div class="ibox-content">
                       <div>
@@ -183,17 +256,67 @@
                   </div>
                 </div>
               </div>
-
-              <div class="col-lg-12">
-                <div class="ibox">
-                  <div class="ibox-title">
-                    <h5>3월 4주차 수업 스케줄</h5>
-                  </div>
-                  <div class="ibox-content">
-                    <div id="calendar"></div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="ibox">
+                    <div class="ibox-title">
+                      <div class="row">
+                        <div class="col-sm-10 text-left">
+                          3월 4주차 수업 스케줄
+                        </div>
+                        <div class="col-sm-2 text-right">
+                          <form role="form" class="form-inline">
+                            <div class="form-group">
+                              <a class="btn btn-white btn-bitbucket">
+                                <i class="fa fa-angle-double-left"></i>
+                              </a>
+                            </div>
+                            <div class="form-group">
+                              <a class="btn btn-white btn-bitbucket">
+                                <i class="fa fa-angle-double-right"></i>
+                              </a>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ibox-content">
+                      <table class="table table-bordered">
+                        <thead>
+                          <th class="text-center">1</th>
+                          <th>2</th>
+                          <th>3</th>
+                          <th>4</th>
+                          <th>5</th>
+                          <th>6</th>
+                          <th>7</th>
+                        </thead>
+                        <tbody>
+                          <tr style="height: 200px;">
+                            <td class="fc-event-container">
+                              <div class="fc-content">12</div>
+                            </td>
+                            <td style="width: 14.25%;">
+                              <div
+                                class="badge badge-primary fixedlabel text-left"
+                              >
+                                <div>10:00 ~ 11:00</div>
+                                <div>gdkkskekf</div>
+                              </div>
+                            </td>
+                            <td style="width: 14.25%;">11</td>
+                            <td>11</td>
+                            <td>11</td>
+                            <td>11</td>
+                            <td>11</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
+
               <!-- top -->
               <div id="footer"></div>
               <!-- end top -->
@@ -225,28 +348,23 @@
     <script src="../theme/js/inspinia.js"></script>
     <script src="../theme/js/plugins/pace/pace.min.js"></script>
 
-    <!-- Full Calendar -->
-    <script src="../theme/js/plugins/fullcalendar/fullcalendar.min.js"></script>
+    <!-- FooTable -->
+    <script src="../theme/js/plugins/footable/footable.all.min.js"></script>
 
     <!-- ChartJS-->
     <script src="../theme/js/plugins/d3/d3.min.js"></script>
     <script src="../theme/js/plugins/c3/c3.min.js"></script>
 
-    <!-- jqGrid -->
-    <script src="../theme/js/plugins/jqGrid/i18n/grid.locale-en.js"></script>
-    <script src="../theme/js/plugins/jqGrid/jquery.jqGrid.min.js"></script>
-
     <!-- vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
 
     <script>
-      $(document).ready(function () {
-        $("#leftMenu").load("./common/leftMenu.html");
-        $("#footer").load("./common/footer.html");
-      });
+      $("#leftMenu").load("./common/leftMenu.html");
+      $("#footer").load("./common/footer.html");
+      $(".footable").footable();
 
       var data = new Object();
-      //init();
+      init();
 
       var vm = new Vue({
         el: "#app",
@@ -268,94 +386,13 @@
             language: "ko",
             todayHighlight: true,
           });
+
           $("#questionDate").val(new Date().format("yyyyMMdd"));
         },
       });
 
-      //목록
-      var mydata = [
-        {
-          id: "1",
-          class: "중3 심화반",
-          participation: "6/6",
-          examination: "6/6",
-          pass: "90%",
-          average: "82",
-        },
-        {
-          id: "2",
-          class: "중3 상위권반",
-          participation: "5/6",
-          examination: "6/6",
-          pass: "87%",
-          average: "90",
-        },
-      ];
-      $("#table_list_1").jqGrid({
-        data: mydata,
-        datatype: "local",
-        height: 250,
-        autowidth: true,
-        shrinkToFit: true,
-        rowNum: 14,
-        rowList: [10, 20, 30],
-        colNames: [
-          "No",
-          "클래스",
-          "출석",
-          "온라인테스트",
-          "Pass비율",
-          "평균점수",
-        ],
-        colModel: [
-          {
-            name: "id",
-            index: "id",
-            width: 20,
-            sorttype: "int",
-            align: "center",
-          },
-          {
-            name: "class",
-            index: "class",
-            width: 45,
-            align: "center",
-          },
-          {
-            name: "participation",
-            index: "participation",
-            width: 20,
-            align: "center",
-          },
-          {
-            name: "examination",
-            index: "examination",
-            width: 20,
-            align: "center",
-          },
-          {
-            name: "pass",
-            index: "pass",
-            width: 30,
-            align: "center",
-          },
-          {
-            name: "average",
-            index: "average",
-            width: 30,
-            align: "right",
-            sorttype: "float",
-            align: "center",
-          },
-        ],
-        pager: "#pager_list_1",
-        viewrecords: true,
-        caption: "",
-        hidegrid: false,
-      });
-
       //출석률
-      c3.generate({
+      var appChart = c3.generate({
         bindto: "#pie_1",
         data: {
           columns: [
@@ -371,7 +408,7 @@
       });
 
       //시험응시율
-      c3.generate({
+      var examChart = c3.generate({
         bindto: "#pie_2",
         data: {
           columns: [
@@ -387,90 +424,113 @@
       });
 
       //온라인 테스트 결과
-      c3.generate({
+      var scoreChart = c3.generate({
         bindto: "#lineChart",
         data: {
           columns: [
             ["data1", 30, 200, 100, 400, 150, 250],
             ["data2", 50, 20, 10, 40, 15, 25],
           ],
-          colors: {
-            data1: "#1ab394",
-            data2: "#BABABA",
-          },
         },
       });
 
-      //schedule
-      /* initialize the calendar
-         -----------------------------------------------------------------*/
-      var date = new Date();
-      var d = date.getDate();
-      var m = date.getMonth();
-      var y = date.getFullYear();
+      //클래스 정보 수신 데이터 처리
+      function classInfo(res) {
+        if (res != null) {
+          //test
+          data.classInfo = JSON.parse(
+            '[{"class":"클래스1","appearance":"5/6","examination":"6/6","pass":"90%","average":"82"},{"class":"클래스2","appearance":"5/6","examination":"6/6","pass":"90%","average":"82"}]'
+          );
+        }
+      }
+      //출석률/응시률
+      function rate(res) {
+        if (res != null) {
+          //test
+          data.rate = JSON.parse('{"appearance":30,"examination":80}');
 
-      $("#calendar").fullCalendar({
-        header: {
-          left: "prev,next today",
-          center: "title",
-          right: "month,agendaWeek,agendaDay",
-        },
-        editable: true,
-        droppable: true, // this allows things to be dropped onto the calendar
-        drop: function () {
-          // is the "remove after drop" checkbox checked?
-          if ($("#drop-remove").is(":checked")) {
-            // if so, remove the element from the "Draggable Events" list
-            $(this).remove();
-          }
-        },
-        events: [
-          {
-            title: "All Day Event",
-            start: new Date(y, m, 1),
-          },
-          {
-            title: "Long Event",
-            start: new Date(y, m, d - 5),
-            end: new Date(y, m, d - 2),
-          },
-          {
-            id: 999,
-            title: "Repeating Event",
-            start: new Date(y, m, d - 3, 16, 0),
-            allDay: false,
-          },
-          {
-            id: 999,
-            title: "Repeating Event",
-            start: new Date(y, m, d + 4, 16, 0),
-            allDay: false,
-          },
-          {
-            title: "Meeting",
-            start: new Date(y, m, d, 10, 30),
-            allDay: false,
-          },
-          {
-            title: "Lunch",
-            start: new Date(y, m, d, 12, 0),
-            end: new Date(y, m, d, 14, 0),
-            allDay: false,
-          },
-          {
-            title: "Birthday Party",
-            start: new Date(y, m, d + 1, 19, 0),
-            end: new Date(y, m, d + 1, 22, 30),
-            allDay: false,
-          },
-          {
-            title: "Click for Google",
-            start: new Date(y, m, 28),
-            end: new Date(y, m, 29),
-            url: "http://google.com/",
-          },
-        ],
-      });
+          //출석율 그래프 변경
+          setTimeout(function () {
+            var updateData = [
+              ["출석", data.rate.examination],
+              ["결석", 100 - data.rate.examination],
+            ];
+
+            appChart.load({
+              columns: updateData,
+            });
+          });
+          //응시률 그래프 변경
+          setTimeout(function () {
+            var updateData = [
+              ["응시", data.rate.appearance],
+              ["미응시", 100 - data.rate.appearance],
+            ];
+
+            examChart.load({
+              columns: updateData,
+            });
+          });
+        }
+      }
+      //주별 시험 그래프
+      function weeklyExam(res) {
+        if (res != null) {
+          //test
+          data.weeklyExam = JSON.parse(
+            '[["data1",30,200,100,400,150,250],["data2",50,20,10,40,15,25],["data3",10,20,30,40,15,25]]'
+          );
+
+          setTimeout(function () {
+            scoreChart.load({
+              columns: data.weeklyExam,
+            });
+          });
+        }
+      }
+      //주별일정
+      function weeklySchedule(res) {
+        if (res != null) {
+          //test
+          data.weeklySchedule = JSON.parse(
+            '{"date":[3,4,5,6,7,8,9],"list":[{"startTime":"2020","endTime":"class","class":"01 소인수분해","level":["A","B"]},{"startTime":"2020","endTime":"class","class":"01 소인수분해","level":["A","B"]}]}'
+          );
+        }
+      }
+
+      function init() {
+        //클래스 정보
+        syncGet(
+          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
+          "",
+          classInfo,
+          null
+        );
+
+        //출석률/응시률
+        syncGet(
+          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
+          "",
+          rate,
+          null
+        );
+
+        //주별 시험 그래프
+        syncGet(
+          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
+          "",
+          weeklyExam,
+          null
+        );
+
+        //주별일정
+        syncGet(
+          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
+          "",
+          weeklySchedule,
+          null
+        );
+      }
     </script>
   </body>
 </html>
