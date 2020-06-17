@@ -283,32 +283,31 @@
                     <div class="ibox-content">
                       <table class="table table-bordered">
                         <thead>
-                          <th class="text-center">1</th>
-                          <th>2</th>
-                          <th>3</th>
-                          <th>4</th>
-                          <th>5</th>
-                          <th>6</th>
-                          <th>7</th>
+                          <th
+                            class="text-center"
+                            v-for="schedule in weeklySchedule"
+                          >
+                            {{schedule.day}}
+                          </th>
                         </thead>
                         <tbody>
                           <tr style="height: 200px;">
-                            <td class="fc-event-container">
-                              <div class="fc-content">12</div>
-                            </td>
-                            <td style="width: 14.25%;">
+                            <td
+                              style="width: 14.25%;"
+                              v-for="schedule in weeklySchedule"
+                            >
                               <div
                                 class="badge badge-primary fixedlabel text-left"
+                                v-for="classInfo in schedule.list"
                               >
-                                <div>10:00 ~ 11:00</div>
-                                <div>gdkkskekf</div>
+                                <div>
+                                  {{classInfo.startTime}} ~
+                                  {{classInfo.endTime}}
+                                </div>
+                                <div>{{classInfo.class}}</div>
+                                <div>{{classInfo.level}}</div>
                               </div>
                             </td>
-                            <td style="width: 14.25%;">11</td>
-                            <td>11</td>
-                            <td>11</td>
-                            <td>11</td>
-                            <td>11</td>
                           </tr>
                         </tbody>
                       </table>
@@ -359,8 +358,11 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
 
     <script>
-      $("#leftMenu").load("./common/leftMenu.html");
-      $("#footer").load("./common/footer.html");
+      $(document).ready(function () {
+        $("#leftMenu").load("./common/leftMenu.html");
+        $("#footer").load("./common/footer.html");
+      });
+
       $(".footable").footable();
 
       var data = new Object();
@@ -493,7 +495,7 @@
         if (res != null) {
           //test
           data.weeklySchedule = JSON.parse(
-            '{"date":[3,4,5,6,7,8,9],"list":[{"startTime":"2020","endTime":"class","class":"01 소인수분해","level":["A","B"]},{"startTime":"2020","endTime":"class","class":"01 소인수분해","level":["A","B"]}]}'
+            '[{"day":"1","list":[{"startTime":"2020","endTime":"class","class":"01 소인수분해","level":["A","B"]},{"startTime":"2020","endTime":"class","class":"01 소인수분해","level":["A","B"]}]},{"day":"2","list":[]},{"day":"3","list":[{"startTime":"2020","endTime":"class","class":"01 소인수분해","level":["A","B"]},{"startTime":"2020","endTime":"class","class":"01 소인수분해","level":["A","B"]}]},{"day":"4","list":[]},{"day":"5","list":[]},{"day":"6","list":[]},{"day":"7","list":[]}]'
           );
         }
       }

@@ -45,23 +45,64 @@
         * 전체 : http://....
      - 응답
       ```json
-       {  "date" : [3,4,5,6,7,8,9],
-         "list" : [
-           {
+         
+         [
+          {
+            "day" : "1",
+            "list": [
+              {
              "startTime":"2020",
              "endTime": "class",
              "class": "01 소인수분해",
              "level": ["A", "B"]  //난이도
-           },
-           {
+              },
+              {
+                "startTime":"2020",
+                "endTime": "class",
+                "class": "01 소인수분해",
+                "level": ["A", "B"]  //난이도
+              }
+            ]
+          },
+          {
+            "day": "2",
+            "list": []
+          },
+          {
+            "day" : "3",
+            "list": [
+              {
              "startTime":"2020",
              "endTime": "class",
              "class": "01 소인수분해",
              "level": ["A", "B"]  //난이도
-           }
-           
+              },
+              {
+                "startTime":"2020",
+                "endTime": "class",
+                "class": "01 소인수분해",
+                "level": ["A", "B"]  //난이도
+              }
+            ]
+          },
+          {
+            "day": "4",
+            "list": []
+          },
+          {
+            "day": "5",
+            "list": []
+          },
+          {
+            "day": "6",
+            "list": []
+          },
+          {
+            "day": "7",
+            "list": []
+          },
          ]
-       }
+       
       ```
 ## 사용자 목록
  1. 목록
