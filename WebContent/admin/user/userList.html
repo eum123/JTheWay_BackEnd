@@ -127,7 +127,7 @@
                         </div>
                         <div class="col-sm-4">
                           <div class="text-right">
-                            전체 5,000건
+                            전체 {{total}}건
                           </div>
                         </div>
                       </div>
@@ -146,20 +146,19 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td></td>
+                              <tr v-for="content in list">
+                                <td>{{content.no}}</td>
                                 <td>
-                                  Project<small
-                                    >This is example of project</small
-                                  >
+                                  {{content.userKindName}}
                                 </td>
-                                <td><span class="pie">0.52/1.561</span></td>
-                                <td>20%</td>
-                                <td>Jul 14, 2013</td>
+                                <td>{{content.userName}}</td>
+                                <td>{{content.id}}</td>
+                                <td>{{content.mobile}}</td>
                                 <td>
-                                  <a href="#"
-                                    ><i class="fa fa-check text-navy"></i
-                                  ></a>
+                                  {{content.eamil}}
+                                </td>
+                                <td>
+                                  {{content.usage}}
                                 </td>
                               </tr>
                             </tbody>
@@ -186,6 +185,9 @@
         </div>
       </div>
     </div>
+
+    <script src="../../resources/js/api.js"></script>
+    <script src="../../resources/js/common.js"></script>
     <!-- Mainly scripts -->
     <script src="../../theme/js/jquery-3.1.1.min.js"></script>
     <script src="../../theme/js/popper.min.js"></script>
@@ -233,11 +235,11 @@
         );
       }
 
-      function search() {
+      function search(res) {
         if (res != null) {
           //test
-          data.list = JSON.parse(
-            '[{"no":"2","userKindCode":"0","userKindName":"관리자","userName":"장덕일","id":"jdi","mobile":"010-1111-1111","email":"jdi@mail.com","usage":"1"},{"no":"1","userKindCode":"1","userKindName":"교사","userName":"김교사","id":"jdi","mobile":"010-1111-2222","email":"jdi@mail.com","usage":"1"}]'
+          data = JSON.parse(
+            '{"total":400,"list":[{"no":"2","userKindCode":"0","userKindName":"관리자","userName":"장덕일","id":"jdi","mobile":"010-1111-1111","email":"jdi@mail.com","usage":"1"},{"no":"1","userKindCode":"1","userKindName":"교사","userName":"김교사","id":"jdi","mobile":"010-1111-2222","email":"jdi@mail.com","usage":"1"}]}'
           );
         }
       }
