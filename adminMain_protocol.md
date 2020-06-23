@@ -173,3 +173,38 @@
          } 
       }
       ```
+3. 메뉴 목록 조회
+    - 요청
+       http://....
+    - 응답
+      ```json
+      {
+        
+        "list": [
+          {
+            "no": "1",
+            "1depth1": {
+              "code": "222",
+              "name": "그룹코드명"
+            },
+            "depth2": {
+              "code": "222",
+              "name": "그룹코드명"
+            },
+            "depth3": {
+              "code": "222",
+              "name": "그룹코드명"
+            },
+            "isManager": "0",
+            "isPartTime": "0",
+            "isTeacher": "1",
+            "isStudent": "0",
+            "usage": "1",
+          }
+        ],
+        "pagination": {
+            "total": 10,
+            "countPerPage": 10  
+         } 
+      }
+      ```
