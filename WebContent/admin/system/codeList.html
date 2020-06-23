@@ -111,9 +111,9 @@
                           <div class="form-group">
                             <button
                               type="button"
-                              class="btn btn-w-m btn-default"
+                              class="btn btn-w-m btn-success"
                             >
-                              취소
+                              검색
                             </button>
                             <button
                               type="button"
@@ -144,28 +144,28 @@
                       <table class="table table-bordered footalbe-loaded">
                         <thead>
                           <tr>
-                            <th>NO</th>
-                            <th colspan="2">코드그룹</th>
-                            <th colspan="2">코드명</th>
-                            <th>사용여부</th>
+                            <th class="text-center">NO</th>
+                            <th class="text-center" colspan="2">코드그룹</th>
+                            <th class="text-center" colspan="2">코드명</th>
+                            <th class="text-center">사용여부</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>001</td>
-                            <td>사용자구분</td>
-                            <td>001</td>
-                            <td>관리자/원장</td>
-                            <td>사용</td>
-                          </tr>
-                          <tr>
-                            <td>2</td>
-                            <td>001</td>
-                            <td>사용자구분</td>
-                            <td>001</td>
-                            <td>관리자/원장</td>
-                            <td>사용</td>
+                          <tr v-for="codeElement in code.list">
+                            <td class="text-center">{{codeElement.no}}</td>
+                            <td class="text-center">
+                              {{codeElement.groupCode.code}}
+                            </td>
+                            <td class="text-center">
+                              {{codeElement.groupCode.name}}
+                            </td>
+                            <td class="text-center">
+                              {{codeElement.code.code}}
+                            </td>
+                            <td class="text-center">
+                              {{codeElement.code.name}}
+                            </td>
+                            <td class="text-center">{{codeElement.usage}}</td>
                           </tr>
                         </tbody>
                         <tfoot>
@@ -247,8 +247,6 @@
             //start loading
             toggleLoading();
 
-            console.log("move page : " + page);
-
             //데이터 조회
             syncGet(
               "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
@@ -283,7 +281,7 @@
         );
       }
 
-      codeList = function () {
+      function codeList(res) {
         if (res != null) {
           //test
           data.code = JSON.parse(
@@ -295,10 +293,8 @@
           var totalCount = data.code.pagination.total;
 
           data.code.pagination.pageInfo = getPageInfo(totalCount, currentPage);
-
-          console.log(data.code.pagination);
         }
-      };
+      }
 
       /**
        * 검색 조건으로 parameter 생성
