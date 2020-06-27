@@ -334,3 +334,73 @@
          } 
       }
       ```
+7. 진도 목록
+    - 요청
+       http://....
+    - 응답
+      ```json
+      {
+        
+        "list": [
+          {
+            "no": "1",
+            "date":"2020.01.01",
+             "class": "class",
+             "startTime": "10:00",
+             "endTime": "11:00",
+             "teacher": "나선생",
+             "progress": [
+               {"order": 
+                {
+                 "name" : "A",
+                 "status": "1"
+                }
+               },
+               {"order": 
+                {
+                 "name" : "B",
+                 "status": "1"
+                }
+               },
+               {"order": 
+                {
+                 "name" : "C",
+                 "status": "1"
+                }
+               },
+               {"order": 
+                {
+                 "name" : "D",
+                 "status": "0"
+                }
+               },
+               {"order": 
+                {
+                 "name" : "E",
+                 "status": "0"
+                }
+               },
+               {"order": 
+                {
+                 "name" : "F",
+                 "status": "0"
+                }
+               },
+               {"order": 
+                {
+                 "name" : "G",
+                 "status": "0"
+                }
+               },
+               
+             ],
+          }
+        ],
+        "pagination": {
+            "total": 10,
+            "countPerPage": 10  
+         } 
+      }
+      ```
+
+    
