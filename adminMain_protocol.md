@@ -183,7 +183,7 @@
         "list": [
           {
             "no": "1",
-            "1depth1": {
+            "depth1": {
               "code": "222",
               "name": "그룹코드명"
             },
@@ -311,4 +311,26 @@
          } 
       }
       ```
-
+7. curriculum 목록
+    - 요청
+       http://....
+    - 응답
+      ```json
+      {
+        
+        "list": [
+          {
+            "no": "1",
+            "year":"2020",
+             "grade": "class",
+             "curriculum": "중1 > 1학기 > 소인수분해 > 01 소인수분해",
+             "depth1": "10",
+             "depth2":"2020",
+          }
+        ],
+        "pagination": {
+            "total": 10,
+            "countPerPage": 10  
+         } 
+      }
+      ```
