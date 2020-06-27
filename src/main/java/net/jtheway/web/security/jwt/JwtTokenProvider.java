@@ -7,6 +7,8 @@ import java.util.Date;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
@@ -30,13 +32,14 @@ import net.jtheway.web.security.JwtConfiguration;
 @RequiredArgsConstructor
 @Component
 public class JwtTokenProvider {
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
     private JwtConfiguration jwtConfiguration;
 	
  
     @Autowired
-    private final SignService userDetailsService;
+    private  SignService userDetailsService;
  
 //    @PostConstruct
 //    protected void init() {
@@ -118,15 +121,15 @@ public class JwtTokenProvider {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(authToken);
             return true;
         } catch (SignatureException ex) {
-            log.error("Invalid JWT signature");
+        	logger.error("Invalid JWT signature");
         } catch (MalformedJwtException ex) {
-        	log.error("Invalid JWT token");
+        	logger.error("Invalid JWT token");
         } catch (ExpiredJwtException ex) {
-        	log.error("Expired JWT token");
+        	logger.error("Expired JWT token");
         } catch (UnsupportedJwtException ex) {
-        	log.error("Unsupported JWT token");
+        	logger.error("Unsupported JWT token");
         } catch (IllegalArgumentException ex) {
-        	log.error("JWT claims string is empty.");
+        	logger.error("JWT claims string is empty.");
         }
         return false;
     }

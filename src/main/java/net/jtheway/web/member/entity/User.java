@@ -45,7 +45,16 @@ public class User implements UserDetails {
     @Builder.Default
     private List<String> roles = new ArrayList<>();
  
-    @Override
+    public User(int i, String userName, String string, String string2, List<String> of) {
+		// TODO Auto-generated constructor stub
+    	this.msrl = i;
+    	this.uid = userName;
+    	this.password = string;
+    	this.name = string2;
+    	this.roles = of;
+	}
+
+	@Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
@@ -79,4 +88,10 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

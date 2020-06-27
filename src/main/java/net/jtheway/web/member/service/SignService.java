@@ -11,6 +11,8 @@ import net.jtheway.web.member.entity.User;
 
 @Service
 public class SignService implements UserDetailsService {
+	
+	
 	public boolean signIn(String userName, String password) {
 		return true;
 	}

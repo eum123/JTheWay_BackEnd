@@ -1,161 +1,335 @@
+<!--
+*
+*  INSPINIA - Responsive Admin Theme
+*  version 2.9.2
+*
+-->
+
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <title>학생 목록</title>
+    <title>haami</title>
 
-    <link href="../../css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../../font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="../../theme/css/bootstrap.min.css" rel="stylesheet" />
+    <link
+      href="../../theme/font-awesome/css/font-awesome.css"
+      rel="stylesheet"
+    />
 
-    <link href="../../css/animate.css" rel="stylesheet" />
-    <link href="../../css/style.css" rel="stylesheet" />
+    <link href="../../theme/css/animate.css" rel="stylesheet" />
+    <link href="../../theme/css/style.css" rel="stylesheet" />
   </head>
+
   <body>
-    <div id="wrapper">
-      <nav class="navbar-default navbar-static-side" role="navigation">
-        <div class="sidebar-collapse">
-          <ul class="nav metismenu" id="side-menu">
-            <li class="nav-header">
-              <div class="dropdown profile-element">
-                <img
-                  alt="image"
-                  class="rounded-circle"
-                  src="../../img/profile_small.jpg"
-                />
-                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                  <span class="block m-t-xs font-bold">David Williams</span>
-                  <span class="text-muted text-xs block"
-                    >Art Director <b class="caret"></b
-                  ></span>
+    <div id="app">
+      <div id="wrapper">
+        <!-- leftmenu -->
+        <div id="leftMenu"></div>
+        <!-- end leftmenu -->
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+          <!-- top -->
+          <div class="row border-bottom">
+            <nav
+              class="navbar navbar-static-top"
+              role="navigation"
+              style="margin-bottom: 0;"
+            >
+              <div class="navbar-header">
+                <a
+                  class="navbar-minimalize minimalize-styl-2 btn btn-primary"
+                  href="#"
+                  ><i class="fa fa-bars"></i>
                 </a>
-                <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                  <li>
-                    <a class="dropdown-item" href="profile.html">Profile</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="contacts.html">Contacts</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="mailbox.html">Mailbox</a>
-                  </li>
-                  <li class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="login.html">Logout</a></li>
-                </ul>
               </div>
-              <div class="logo-element">
-                IN+
-              </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <div id="page-wrapper" class="gray-bg">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="ibox">
-              <div class="ibox-title">
-                <h5>학생 목록</h5>
-              </div>
-              <div class="ibox-content">
-                <div class="form-group row">
-                  <div class="col-md-2">
-                    <select class="form-control" name="account">
-                      <option>2020</option>
-                      <option>2019</option>
-                      <option>2018</option>
-                    </select>
-                  </div>
+              <ul class="nav navbar-top-links navbar-right">
+                <li style="padding: 20px;">
+                  <span class="m-r-sm text-muted welcome-message"
+                    >haami Admin</span
+                  >
+                </li>
 
-                  <div class="col-md-1">
-                    <select class="form-control" name="account">
-                      <option>클래스1</option>
-                      <option>클래서2</option>
-                    </select>
-                  </div>
-                  <div class="col-md-2">
-                    <input
-                      type="text"
-                      placeholder="이름이나 전화번호"
-                      class="form-control"
-                    />
-                  </div>
+                <li>
+                  <a href="login.html">
+                    <i class="fa fa-sign-out"></i> Log out
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <!-- end top -->
 
-                  <div class="col-md-1">
-                    <button
-                      class="btn btn-sm btn-primary float-right m-t-n-xs"
-                      type="submit"
-                    >
-                      <strong>조회</strong>
-                    </button>
-                  </div>
-                  <div class="col-md-1">
-                    <button
-                      class="btn btn-sm btn-primary float-right m-t-n-xs"
-                      type="submit"
-                    >
-                      <strong>등록</strong>
-                    </button>
+          <div class="row border-bottom white-bg dashboard-header">
+            navigation
+          </div>
+          <div class="wrapper wrapper-content">
+            <div>
+              <div class="row col-lg-12" id="empty">
+                <div class="sk-spinner sk-spinner-fading-circle">
+                  <div class="sk-circle1 sk-circle"></div>
+                  <div class="sk-circle2 sk-circle"></div>
+                  <div class="sk-circle3 sk-circle"></div>
+                  <div class="sk-circle4 sk-circle"></div>
+                  <div class="sk-circle5 sk-circle"></div>
+                  <div class="sk-circle6 sk-circle"></div>
+                  <div class="sk-circle7 sk-circle"></div>
+                  <div class="sk-circle8 sk-circle"></div>
+                  <div class="sk-circle9 sk-circle"></div>
+                  <div class="sk-circle10 sk-circle"></div>
+                  <div class="sk-circle11 sk-circle"></div>
+                  <div class="sk-circle12 sk-circle"></div>
+                </div>
+              </div>
+            </div>
+            <div class="container" style="display: none;" id="content">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="ibox">
+                    <div class="ibox-title">
+                      <h5>학생 목록</h5>
+                    </div>
+                    <div class="ibox-content">
+                      <div class="row">
+                        <form role="form" class="form-inline">
+                          <div class="form-group">
+                            <select class="form-control" name="account">
+                              <option>2020</option>
+                              <option>2019</option>
+                              <option>2018</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <select class="form-control" name="account">
+                              <option>클래스1</option>
+                              <option>클래서2</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <input
+                              type="text"
+                              placeholder="이름이나 전화번호"
+                              class="form-control"
+                            />
+                          </div>
+                          <div class="form-group">
+                            <button
+                              type="button"
+                              class="btn btn-w-m btn-success"
+                            >
+                              검색
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-w-m btn-primary"
+                            >
+                              등록
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="ibox-content">
+                      <div class="sk-spinner sk-spinner-fading-circle">
+                        <div class="sk-circle1 sk-circle"></div>
+                        <div class="sk-circle2 sk-circle"></div>
+                        <div class="sk-circle3 sk-circle"></div>
+                        <div class="sk-circle4 sk-circle"></div>
+                        <div class="sk-circle5 sk-circle"></div>
+                        <div class="sk-circle6 sk-circle"></div>
+                        <div class="sk-circle7 sk-circle"></div>
+                        <div class="sk-circle8 sk-circle"></div>
+                        <div class="sk-circle9 sk-circle"></div>
+                        <div class="sk-circle10 sk-circle"></div>
+                        <div class="sk-circle11 sk-circle"></div>
+                        <div class="sk-circle12 sk-circle"></div>
+                      </div>
+
+                      <table class="table table-bordered footalbe-loaded">
+                        <thead>
+                          <tr>
+                            <th>NO</th>
+                            <th>학교/학년</th>
+                            <th>클래스</th>
+                            <th>학생명</th>
+                            <th>학생 휴대폰</th>
+                            <th>부모님 휴대폰</th>
+                            <th>등록일자</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr v-for="element in code.list">
+                            <td class="text-center">{{element.no}}</td>
+                            <td class="text-center">
+                              {{element.groupCode.code}}
+                            </td>
+                            <td class="text-center">
+                              {{element.groupCode.name}}
+                            </td>
+                            <td class="text-center">
+                              {{element.code.code}}
+                            </td>
+                            <td class="text-center">
+                              {{element.code.name}}
+                            </td>
+                            <td class="text-center">{{element.usage}}</td>
+                          </tr>
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <td colspan="7" class="text-right">
+                              <div class="btn-group">
+                                <button
+                                  type="button"
+                                  class="btn btn-white"
+                                  @click="movePage(student.pagination.pageInfo.prePageNumber)"
+                                >
+                                  <i class="fa fa-chevron-left"></i>
+                                </button>
+                                <button
+                                  v-for="page in student.pagination.pageInfo.pageNumbers"
+                                  v-bind:class="pageClassObject(page)"
+                                  @click="movePage(page)"
+                                >
+                                  {{page}}
+                                </button>
+                                <button
+                                  type="button"
+                                  class="btn btn-white"
+                                  @click="movePage(student.pagination.pageInfo.nextPageNumber)"
+                                >
+                                  <i class="fa fa-chevron-right"></i>
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="ibox">
-              <div class="ibox-content">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>NO</th>
-                      <th>학교/학년</th>
-                      <th>클래스</th>
-                      <th>학생명</th>
-                      <th>학생 휴대폰</th>
-                      <th>부모님 휴대폰</th>
-                      <th>등록일자</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>나학교 3학년</td>
-                      <td>중3 심화반</td>
-                      <td>이름1</td>
-                      <td>010-0000-0000</td>
-                      <td>010-0000-1000</td>
-                      <td>2020.01.02</td>
-                    </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>너학교 2학년</td>
-                      <td>중2 심화반</td>
-                      <td>이름2</td>
-                      <td>010-0000-0001</td>
-                      <td>010-0000-1001</td>
-                      <td>2020.03.02</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-white">
-                    <i class="fa fa-chevron-left"></i>
-                  </button>
-                  <button class="btn btn-white">1</button>
-                  <button class="btn btn-white active">2</button>
-                  <button class="btn btn-white">3</button>
-                  <button class="btn btn-white">4</button>
-                  <button type="button" class="btn btn-white">
-                    <i class="fa fa-chevron-right"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+
+          <!-- footer -->
+          <div id="footer"></div>
+          <!-- end footer -->
         </div>
       </div>
     </div>
+
+    <script src="../../resources/js/api.js"></script>
+    <script src="../../resources/js/common.js"></script>
+
+    <!-- Mainly scripts -->
+    <script src="../../theme/js/jquery-3.1.1.min.js"></script>
+    <script src="../../theme/js/popper.min.js"></script>
+    <script src="../../theme/js/bootstrap.js"></script>
+    <script src="../../theme/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../../theme/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="../../theme/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        $("#leftMenu").load("../../admin/common/leftMenu.html");
+        $("#footer").load("../../admin/common/footer.html");
+      });
+
+      var data = new Object();
+      init();
+
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return data;
+        },
+        methods: {
+          movePage: function (page) {
+            //start loading
+            toggleLoading();
+
+            //데이터 조회
+            syncGet(
+              "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
+              getSearchParameter(),
+              questions,
+              null
+            );
+            //현재 페이지 설정
+            this.student.pagination.currentPage = page;
+
+            //end loading
+            toggleLoading();
+          },
+        },
+
+        mounted: function () {
+          //로딩 화면 제거하고 화면 표시
+          $("#empty").css("display", "none");
+          $("#content").css("display", "");
+        },
+      });
+
+      function init() {
+        data.student = "";
+
+        //code 조회
+        syncGet(
+          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
+          "",
+          codeList,
+          null
+        );
+      }
+
+      function codeList(res) {
+        if (res != null) {
+          //test
+          data.student = JSON.parse(
+            '{"list":[{"no":"1","groupCode":{"code":"222","name":"그룹코드명"},"code":{"code":"111","name":"코드명"},"usage":"1"}],"pagination":{"total":10,"countPerPage":10}}'
+          );
+
+          //현재페이지
+          var currentPage = data.student.pagination.currentPage;
+          var totalCount = data.student.pagination.total;
+
+          data.student.pagination.pageInfo = getPageInfo(
+            totalCount,
+            currentPage
+          );
+        }
+      }
+
+      /**
+       * 검색 조건으로 parameter 생성
+       */
+      function getSearchParameter() {
+        var questionDate = $("#questionDate").val(); //출제일자
+        var isTakeExam = $("#isTakeExam option:selected").val(); //응시 여부
+
+        var param = "";
+        if (isTakeExam != "") {
+          param = "isTakeExam=" + isTakeExam;
+        }
+        if (questionDate != "") {
+          param = "questionDate=" + questionDate + "," + param;
+        }
+
+        return param;
+      }
+
+      function toggleLoading() {
+        $("#questionList").children(".ibox-content").toggleClass("sk-loading");
+      }
+    </script>
   </body>
 </html>

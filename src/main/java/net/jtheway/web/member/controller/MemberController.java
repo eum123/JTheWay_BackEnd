@@ -3,6 +3,8 @@ package net.jtheway.web.member.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,6 +32,7 @@ import net.jtheway.web.security.jwt.JwtTokenProvider;
 @RequiredArgsConstructor
 @RequestMapping("/member")
 public class MemberController {
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private SignService service;
@@ -62,11 +65,11 @@ public class MemberController {
 			    
 			    return ApiResponse.getSuccessResponse("");
 			} else {
-				log.error("not member");
+				logger.error("not member");
 				return ApiResponse.getSuccessResponse("Not Found User");
 			}
 		} catch (Exception e) {
-			log.error("error", e);
+			logger.error("error", e);
 			return ApiResponse.getErrorResponse(e);
 		}
 
