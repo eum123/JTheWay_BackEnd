@@ -286,3 +286,29 @@
          } 
       }
       ```
+6. class 목록
+    - 요청
+       http://....
+    - 응답
+      ```json
+      {
+        
+        "list": [
+          {
+            "no": "1",
+            "year":"2020",
+             "class": "class",
+             "curriculum": "중1 > 1학기 > 소인수분해 > 01 소인수분해",
+             "number": "10",
+             "startTime":"2020",
+             "endTime": "class",
+             "teacher": "김선생",
+          }
+        ],
+        "pagination": {
+            "total": 10,
+            "countPerPage": 10  
+         } 
+      }
+      ```
+

@@ -274,7 +274,7 @@
             syncGet(
               "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
               getSearchParameter(),
-              questions,
+              examList,
               null
             );
             //현재 페이지 설정
@@ -299,12 +299,12 @@
         syncGet(
           "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
           "",
-          codeList,
+          examList,
           null
         );
       }
 
-      function codeList(res) {
+      function examList(res) {
         if (res != null) {
           //test
           data.exam = JSON.parse(
