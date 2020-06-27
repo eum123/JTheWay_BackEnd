@@ -270,17 +270,14 @@
         "list": [
           {
             "no": "1",
-            "year":"2020",
+            "school":"2020",
+            "grade": "2",
              "class": "class",
-             "curriculum": "중1 > 1학기 > 소인수분해 > 01 소인수분해",
-             "exam": {
-               "count": 10, //문항수
-               "questionsDate": "2020.02.09", //출제일자
-               "doDate": "2020.02.10", //응시일자
-               "status": "fail", 
-               "score": 10, //점수
-               "isTakeExam": "1" //응시여부 (1-응시, 0-미응시)
-             }
+             "name": "홍길동",
+             "studentMobile": "01001112222",
+             "parentMobile": "01001113333",
+             "regDate": "2020.05.01",
+             
           }
         ],
         "pagination": {

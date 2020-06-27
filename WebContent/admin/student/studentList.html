@@ -161,21 +161,22 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="element in code.list">
+                          <tr v-for="element in student.list">
                             <td class="text-center">{{element.no}}</td>
                             <td class="text-center">
-                              {{element.groupCode.code}}
+                              {{element.school}}/{{element.grade}}
                             </td>
                             <td class="text-center">
-                              {{element.groupCode.name}}
+                              {{element.class}}
                             </td>
                             <td class="text-center">
-                              {{element.code.code}}
+                              {{element.name}}
                             </td>
                             <td class="text-center">
-                              {{element.code.name}}
+                              {{element.studentMobile}}
                             </td>
-                            <td class="text-center">{{element.usage}}</td>
+                            <td class="text-center">{{element.prentMobile}}</td>
+                            <td class="text-center">{{element.regDate}}</td>
                           </tr>
                         </tbody>
                         <tfoot>
@@ -295,7 +296,7 @@
         if (res != null) {
           //test
           data.student = JSON.parse(
-            '{"list":[{"no":"1","groupCode":{"code":"222","name":"그룹코드명"},"code":{"code":"111","name":"코드명"},"usage":"1"}],"pagination":{"total":10,"countPerPage":10}}'
+            '{"list":[{"no":"1","school":"2020","grade":"2","class":"class","name":"홍길동","studentMobile":"01001112222","parentMobile":"01001113333","regDate":"2020.05.01"}],"pagination":{"total":10,"countPerPage":10}}'
           );
 
           //현재페이지
