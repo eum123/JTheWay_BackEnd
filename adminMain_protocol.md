@@ -428,3 +428,29 @@
          } 
       }
       ```
+10. 문제 출제 목록
+    - 요청
+       http://....
+    - 응답
+      ```json
+      {
+        
+        "list": [
+          {
+            "no": "1",
+            "class":"2020",
+            "curriculum": "중3 > 1학기 > Ⅰ 소인수분해 > 01 소인수분해",
+             "questionDate": "2020.01.02",
+             "questionCount": "10",
+             "passBaseScore": "10",
+             "doMember": "0",
+             "avgScore": "10",
+             "makeDate": "2020.01.01"
+          }
+        ],
+        "pagination": {
+            "total": 10,
+            "countPerPage": 10  
+         } 
+      }
+      ```
