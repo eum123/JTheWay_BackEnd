@@ -1,190 +1,267 @@
+<!--
+*
+*  INSPINIA - Responsive Admin Theme
+*  version 2.9.2
+*
+-->
+
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <title>월간 리포트</title>
+    <title>haami</title>
 
-    <link href="../../css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../../font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="../../css/plugins/iCheck/custom.css" rel="stylesheet" />
-    <link href="../../css/animate.css" rel="stylesheet" />
-    <link href="../../css/style.css" rel="stylesheet" />
+    <link href="../../theme/css/bootstrap.min.css" rel="stylesheet" />
+    <link
+      href="../../theme/font-awesome/css/font-awesome.css"
+      rel="stylesheet"
+    />
+
+    <link href="../../theme/css/animate.css" rel="stylesheet" />
+    <link href="../../theme/css/style.css" rel="stylesheet" />
   </head>
 
   <body>
-    <div id="wrapper">
-      <nav class="navbar-default navbar-static-side" role="navigation">
-        <div class="sidebar-collapse">
-          <ul class="nav metismenu" id="side-menu">
-            <li class="nav-header">
-              <div class="dropdown profile-element">
-                <img
-                  alt="image"
-                  class="rounded-circle"
-                  src="../../img/profile_small.jpg"
-                />
-                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                  <span class="block m-t-xs font-bold">David Williams</span>
-                  <span class="text-muted text-xs block"
-                    >Art Director <b class="caret"></b
-                  ></span>
+    <div id="app">
+      <div id="wrapper">
+        <!-- leftmenu -->
+        <div id="leftMenu"></div>
+        <!-- end leftmenu -->
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+          <!-- top -->
+          <div class="row border-bottom">
+            <nav
+              class="navbar navbar-static-top"
+              role="navigation"
+              style="margin-bottom: 0;"
+            >
+              <div class="navbar-header">
+                <a
+                  class="navbar-minimalize minimalize-styl-2 btn btn-primary"
+                  href="#"
+                  ><i class="fa fa-bars"></i>
                 </a>
-                <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                  <li>
-                    <a class="dropdown-item" href="profile.html">Profile</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="contacts.html">Contacts</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="mailbox.html">Mailbox</a>
-                  </li>
-                  <li class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="login.html">Logout</a></li>
-                </ul>
               </div>
-              <div class="logo-element">
-                IN+
+              <ul class="nav navbar-top-links navbar-right">
+                <li style="padding: 20px;">
+                  <span class="m-r-sm text-muted welcome-message"
+                    >haami Admin</span
+                  >
+                </li>
+
+                <li>
+                  <a href="login.html">
+                    <i class="fa fa-sign-out"></i> Log out
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <!-- end top -->
+
+          <div class="row border-bottom white-bg dashboard-header">
+            navigation
+          </div>
+          <div class="wrapper wrapper-content">
+            <div>
+              <div class="row col-lg-12" id="empty">
+                <div class="sk-spinner sk-spinner-fading-circle">
+                  <div class="sk-circle1 sk-circle"></div>
+                  <div class="sk-circle2 sk-circle"></div>
+                  <div class="sk-circle3 sk-circle"></div>
+                  <div class="sk-circle4 sk-circle"></div>
+                  <div class="sk-circle5 sk-circle"></div>
+                  <div class="sk-circle6 sk-circle"></div>
+                  <div class="sk-circle7 sk-circle"></div>
+                  <div class="sk-circle8 sk-circle"></div>
+                  <div class="sk-circle9 sk-circle"></div>
+                  <div class="sk-circle10 sk-circle"></div>
+                  <div class="sk-circle11 sk-circle"></div>
+                  <div class="sk-circle12 sk-circle"></div>
+                </div>
               </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <div id="page-wrapper" class="gray-bg">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="ibox">
-              <div class="ibox-title">월간 리포트</div>
-              <div class="ibox-content">
-                <table class="table table-bordered">
-                  <thead></thead>
-                  <tbody>
-                    <tr>
-                      <td>학교/학년</td>
-                      <td>나혼자고 2학년</td>
-                      <td>이름</td>
-                      <td>나이름</td>
-                    </tr>
-                  </tbody>
-                </table>
+            </div>
+            <div class="container" style="display: none;" id="content">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="ibox">
+                    <div class="ibox-title">
+                      <h5>월간 리포트</h5>
+                    </div>
+                    <div class="ibox-content">
+                      <table class="table table-bordered">
+                        <thead></thead>
+                        <tbody>
+                          <tr>
+                            <td>학교/학년</td>
+                            <td>{{monthly.school}} {{monthly.grade}}</td>
+                            <td>이름</td>
+                            <td>{{monthly.studentName}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="ibox-content">
+                      <div class="sk-spinner sk-spinner-fading-circle">
+                        <div class="sk-circle1 sk-circle"></div>
+                        <div class="sk-circle2 sk-circle"></div>
+                        <div class="sk-circle3 sk-circle"></div>
+                        <div class="sk-circle4 sk-circle"></div>
+                        <div class="sk-circle5 sk-circle"></div>
+                        <div class="sk-circle6 sk-circle"></div>
+                        <div class="sk-circle7 sk-circle"></div>
+                        <div class="sk-circle8 sk-circle"></div>
+                        <div class="sk-circle9 sk-circle"></div>
+                        <div class="sk-circle10 sk-circle"></div>
+                        <div class="sk-circle11 sk-circle"></div>
+                        <div class="sk-circle12 sk-circle"></div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="ibox">
+                            <div
+                              class="ibox-content"
+                              v-for="element in monthly.report"
+                            >
+                              {{element.grade}} {{element.schoolTerm}}
+                              <table
+                                class="table table-bordered footalbe-loaded"
+                              >
+                                <tbody>
+                                  <tr>
+                                    <td>1월</td>
+                                    <td>{{element.m1.status}}</td>
+                                    <td>2월</td>
+                                    <td>{{element.m2.status}}</td>
+                                    <td>3월</td>
+                                    <td>{{element.m3.status}}</td>
+                                    <td>4월</td>
+                                    <td>{{element.m4.status}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>5월</td>
+                                    <td>{{element.m5.status}}</td>
+                                    <td>6월</td>
+                                    <td>{{element.m6.status}}</td>
+                                    <td>7월</td>
+                                    <td>{{element.m7.status}}</td>
+                                    <td>8월</td>
+                                    <td>{{element.m8.status}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>9월</td>
+                                    <td>{{element.m9.status}}</td>
+                                    <td>10월</td>
+                                    <td>{{element.m10.status}}</td>
+                                    <td>11월</td>
+                                    <td>{{element.m11.status}}</td>
+                                    <td>12월</td>
+                                    <td>{{element.m12.status}}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="ibox">
-              <div class="ibox-title">중3 1학기</div>
-              <div class="ibox-content">
-                <table class="table table-bordered">
-                  <thead></thead>
-                  <tbody>
-                    <tr>
-                      <td>1월</td>
-                      <td>중1 1학기</td>
-                      <td>2월</td>
-                      <td>중1 1학기</td>
-                      <td>3월</td>
-                      <td>중1 1학기</td>
-                      <td>4월</td>
-                      <td>중1 1학기</td>
-                    </tr>
-                    <tr>
-                      <td>5월</td>
-                      <td>중1 1학기</td>
-                      <td>6월</td>
-                      <td>중1 1학기</td>
-                      <td>7월</td>
-                      <td>중1 1학기</td>
-                      <td>8월</td>
-                      <td>중1 1학기</td>
-                    </tr>
-                    <tr>
-                      <td>9월</td>
-                      <td>중1 1학기</td>
-                      <td>10월</td>
-                      <td>중1 1학기</td>
-                      <td>11월</td>
-                      <td>중1 1학기</td>
-                      <td>12월</td>
-                      <td>중1 1학기</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="ibox">
-              <div class="ibox-title">중3 심화반</div>
-              <div class="ibox-content">
-                <table class="table table-bordered">
-                  <thead></thead>
-                  <tbody>
-                    <tr>
-                      <td>1월</td>
-                      <td>중1 1학기</td>
-                      <td>2월</td>
-                      <td>중1 1학기</td>
-                      <td>3월</td>
-                      <td>중1 1학기</td>
-                      <td>4월</td>
-                      <td>중1 1학기</td>
-                    </tr>
-                    <tr>
-                      <td>5월</td>
-                      <td>중1 1학기</td>
-                      <td>6월</td>
-                      <td>중1 1학기</td>
-                      <td>7월</td>
-                      <td>중1 1학기</td>
-                      <td>8월</td>
-                      <td>중1 1학기</td>
-                    </tr>
-                    <tr>
-                      <td>9월</td>
-                      <td>중1 1학기</td>
-                      <td>10월</td>
-                      <td>중1 1학기</td>
-                      <td>11월</td>
-                      <td>중1 1학기</td>
-                      <td>12월</td>
-                      <td>중1 1학기</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+
+          <!-- footer -->
+          <div id="footer"></div>
+          <!-- end footer -->
         </div>
       </div>
     </div>
 
+    <script src="../../resources/js/api.js"></script>
+    <script src="../../resources/js/common.js"></script>
+
     <!-- Mainly scripts -->
-    <script src="../../js/jquery-3.1.1.min.js"></script>
-    <script src="../../js/popper.min.js"></script>
-    <script src="../../js/bootstrap.js"></script>
-    <script src="../../js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="../../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="../../theme/js/jquery-3.1.1.min.js"></script>
+    <script src="../../theme/js/popper.min.js"></script>
+    <script src="../../theme/js/bootstrap.js"></script>
+    <script src="../../theme/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../../theme/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-    <!-- Peity -->
-    <script src="../../js/plugins/peity/jquery.peity.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="../../theme/js/plugins/jquery-ui/jquery-ui.min.js"></script>
 
-    <!-- Custom and plugin javascript -->
-    <script src="../../js/inspinia.js"></script>
-    <script src="../../js/plugins/pace/pace.min.js"></script>
-
-    <!-- iCheck -->
-    <script src="../../js/plugins/iCheck/icheck.min.js"></script>
-
-    <!-- Peity -->
-    <script src="../../js/demo/peity-demo.js"></script>
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
 
     <script>
-      $(document).ready(function () {});
+      $(document).ready(function () {
+        $("#leftMenu").load("../../admin/common/leftMenu.html");
+        $("#footer").load("../../admin/common/footer.html");
+      });
+
+      var data = new Object();
+      init();
+
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return data;
+        },
+        methods: {
+          movePage: function (page) {
+            //start loading
+            toggleLoading();
+
+            //데이터 조회
+            syncGet(
+              "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
+              getSearchParameter(),
+              getList,
+              null
+            );
+
+            //end loading
+            toggleLoading();
+          },
+        },
+
+        mounted: function () {
+          //로딩 화면 제거하고 화면 표시
+          $("#empty").css("display", "none");
+          $("#content").css("display", "");
+        },
+      });
+
+      function init() {
+        data.monthly = "";
+
+        //code 조회
+        syncGet(
+          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
+          "",
+          getList,
+          null
+        );
+      }
+
+      function getList(res) {
+        if (res != null) {
+          //test
+          data.monthly = JSON.parse(
+            '{"school":"학교","studentName":"나학생","grade":"1","report":[{"grade":"중3","schoolTerm":"1학기","m1":{"status":"0","key":""},"m2":{"status":"0","key":""},"m3":{"status":"0","key":""},"m4":{"status":"0","key":""},"m5":{"status":"0","key":""},"m6":{"status":"0","key":""},"m7":{"status":"1","key":"111"},"m8":{"status":"0","key":""},"m9":{"status":"0","key":""},"m10":{"status":"0","key":""},"m11":{"status":"0","key":""},"m12":{"status":"0","key":""}},{"grade":"중2","schoolTerm":"1학기","m1":{"status":"0","key":""},"m2":{"status":"0","key":""},"m3":{"status":"0","key":""},"m4":{"status":"0","key":""},"m5":{"status":"0","key":""},"m6":{"status":"0","key":""},"m7":{"status":"1","key":"111"},"m8":{"status":"0","key":""},"m9":{"status":"0","key":""},"m10":{"status":"0","key":""},"m11":{"status":"0","key":""},"m12":{"status":"0","key":""}}]}'
+          );
+        }
+      }
+
+      function toggleLoading() {
+        $("#questionList").children(".ibox-content").toggleClass("sk-loading");
+      }
     </script>
   </body>
 </html>
