@@ -1,175 +1,264 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>haami 시험</title>
+    <title>haami student</title>
 
-    <link href="../css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="../css/plugins/iCheck/custom.css" rel="stylesheet" />
-    <link href="../css/animate.css" rel="stylesheet" />
-    <link href="../css/style.css" rel="stylesheet" />
+    <link href="../../theme/css/bootstrap.min.css" rel="stylesheet" />
+    <link
+      href="../../theme/font-awesome/css/font-awesome.css"
+      rel="stylesheet"
+    />
+    <link href="../../theme/css/animate.css" rel="stylesheet" />
+    <link href="../../theme/css/style.css" rel="stylesheet" />
+    <!-- Toastr style -->
+    <link
+      href="../../theme/css/plugins/toastr/toastr.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../../theme/css/plugins/datapicker/datepicker3.css"
+      rel="stylesheet"
+    />
   </head>
 
-  <body>
-    <div id="wrapper">
-      <nav class="navbar-default navbar-static-side" role="navigation">
-        <div class="sidebar-collapse">
-          <ul class="nav metismenu" id="side-menu">
-            <li class="nav-header">
-              <div class="dropdown profile-element">
-                <img
-                  alt="image"
-                  class="rounded-circle"
-                  src="../img/profile_small.jpg"
-                />
-                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                  <span class="block m-t-xs font-bold">David Williams</span>
-                  <span class="text-muted text-xs block"
-                    >Art Director <b class="caret"></b
-                  ></span>
-                </a>
-                <ul class="dropdown-menu animated fadeInRight m-t-xs">
+  <body class="top-navigation">
+    <div id="app">
+      <div id="wrapper">
+        <div id="page-wrapper" class="gray-bg">
+          <div class="row border-bottom white-bg">
+            <nav
+              class="navbar navbar-expand-lg navbar-static-top"
+              role="navigation"
+            >
+              <a href="#" class="navbar-brand">haami</a>
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <i class="fa fa-reorder"></i>
+              </button>
+
+              <div class="navbar-collapse collapse" id="navbar">
+                <ul class="nav navbar-nav mr-auto"></ul>
+                <ul class="nav navbar-top-links navbar-right">
                   <li>
-                    <a class="dropdown-item" href="profile.html">Profile</a>
+                    <a href="login.html">
+                      <i class="fa fa-sign-out"></i> Log out
+                    </a>
                   </li>
-                  <li>
-                    <a class="dropdown-item" href="contacts.html">Contacts</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="mailbox.html">Mailbox</a>
-                  </li>
-                  <li class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="login.html">Logout</a></li>
                 </ul>
               </div>
-              <div class="logo-element">
-                IN+
+            </nav>
+          </div>
+          <div class="wrapper wrapper-content">
+            <div>
+              <div class="row col-lg-12" id="empty">
+                <div class="sk-spinner sk-spinner-fading-circle">
+                  <div class="sk-circle1 sk-circle"></div>
+                  <div class="sk-circle2 sk-circle"></div>
+                  <div class="sk-circle3 sk-circle"></div>
+                  <div class="sk-circle4 sk-circle"></div>
+                  <div class="sk-circle5 sk-circle"></div>
+                  <div class="sk-circle6 sk-circle"></div>
+                  <div class="sk-circle7 sk-circle"></div>
+                  <div class="sk-circle8 sk-circle"></div>
+                  <div class="sk-circle9 sk-circle"></div>
+                  <div class="sk-circle10 sk-circle"></div>
+                  <div class="sk-circle11 sk-circle"></div>
+                  <div class="sk-circle12 sk-circle"></div>
+                </div>
               </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <div id="page-wrapper" class="gray-bg">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="ibox">
-              <div class="ibox-content">
-                <table class="table table-bordered">
-                  <thead></thead>
-                  <tbody>
-                    <tr>
-                      <td>클래스</td>
-                      <td>중1 1학기</td>
-                    </tr>
-                    <tr>
-                      <td>커리큘럼</td>
-                      <td>중1 > 1학기 > 소인수분해 > 01 소인수분해</td>
-                    </tr>
-                    <tr>
-                      <td>출제일자</td>
-                      <td>2020.03.08</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+            </div>
+            <div class="container" style="display: none;" id="content">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="ibox">
+                    <div class="ibox-content">
+                      <table class="table table-bordered">
+                        <thead></thead>
+                        <tbody>
+                          <tr>
+                            <td>클래스</td>
+                            <td>중1 1학기</td>
+                          </tr>
+                          <tr>
+                            <td>커리큘럼</td>
+                            <td>중1 > 1학기 > 소인수분해 > 01 소인수분해</td>
+                          </tr>
+                          <tr>
+                            <td>출제일자</td>
+                            <td>2020.03.08</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
 
-              <div class="ibox-content">
-                <table class="table table-bordered">
-                  <thead></thead>
-                  <tbody>
-                    <tr>
-                      <td>문제1</td>
-                      <td>
-                        <div>
-                          중1 1학기<input type="text" class="form-control" />
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>문제2</td>
-                      <td>
-                        <div>
-                          중1 1학기<input type="text" class="form-control" />
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>문제3</td>
-                      <td>
-                        <div>
-                          중1 1학기<input type="text" class="form-control" />
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="ibox-content">
-                <table class="table table-bordered">
-                  <thead></thead>
-                  <tbody>
-                    <tr>
-                      <td>학생 의견</td>
-                      <td>
-                        <div>오늘의 온라인 테스트는 어땠나요?</div>
-                        <div>
-                          <textarea
-                            class="form-control"
-                            cols="50"
-                            rows="5"
-                          ></textarea>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="ibox-content">
-                <button class="btn btn-white btn-sm" type="submit">
-                  Cancel
-                </button>
-                <button class="btn btn-primary btn-sm" type="submit">
-                  Save changes
-                </button>
+                    <div class="ibox-content">
+                      <table class="table table-bordered">
+                        <thead></thead>
+                        <tbody>
+                          <tr>
+                            <td>문제1</td>
+                            <td>
+                              <div>
+                                중1 1학기<input
+                                  type="text"
+                                  class="form-control"
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>문제2</td>
+                            <td>
+                              <div>
+                                중1 1학기<input
+                                  type="text"
+                                  class="form-control"
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>문제3</td>
+                            <td>
+                              <div>
+                                중1 1학기<input
+                                  type="text"
+                                  class="form-control"
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="ibox-content">
+                      <table class="table table-bordered">
+                        <thead></thead>
+                        <tbody>
+                          <tr>
+                            <td>학생 의견</td>
+                            <td>
+                              <div>오늘의 온라인 테스트는 어땠나요?</div>
+                              <div>
+                                <textarea
+                                  class="form-control"
+                                  cols="50"
+                                  rows="5"
+                                ></textarea>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="ibox-content">
+                      <div class="row">
+                        <form role="form" class="form-inline">
+                          <div class="form-group">
+                            <button
+                              type="button"
+                              class="btn btn-w-m btn-default"
+                            >
+                              취소
+                            </button>
+                          </div>
+                          <div class="form-group">
+                            <button
+                              type="button"
+                              class="btn btn-w-m btn-success"
+                            >
+                              저장
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+          <!-- footer -->
+          <div id="footer"></div>
+          <!-- end footer -->
         </div>
       </div>
     </div>
 
-    <!-- Mainly scripts -->
-    <script src="../js/jquery-3.1.1.min.js"></script>
-    <script src="../js/popper.min.js"></script>
-    <script src="../js/bootstrap.js"></script>
-    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="../../resources/js/api.js"></script>
+    <script src="../../resources/js/common.js"></script>
 
-    <!-- Peity -->
-    <script src="../js/plugins/peity/jquery.peity.min.js"></script>
+    <!-- Mainly scripts -->
+    <script src="../theme/js/jquery-3.1.1.min.js"></script>
+    <script src="../../theme/js/popper.min.js"></script>
+    <script src="../../theme/js/bootstrap.js"></script>
+    <script src="../../theme/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../../theme/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
     <!-- Custom and plugin javascript -->
-    <script src="../js/inspinia.js"></script>
-    <script src="../js/plugins/pace/pace.min.js"></script>
+    <script src="../../theme/js/inspinia.js"></script>
+    <script src="../../theme/js/plugins/pace/pace.min.js"></script>
 
-    <!-- iCheck -->
-    <script src="../js/plugins/iCheck/icheck.min.js"></script>
+    <!-- Flot -->
+    <script src="../../theme/js/plugins/flot/jquery.flot.js"></script>
+    <script src="../../theme/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="../../theme/js/plugins/flot/jquery.flot.resize.js"></script>
+
+    <!-- ChartJS-->
+    <script src="../../theme/js/plugins/chartJs/Chart.min.js"></script>
 
     <!-- Peity -->
-    <script src="../js/demo/peity-demo.js"></script>
+    <script src="../../theme/js/plugins/peity/jquery.peity.min.js"></script>
+    <!-- Peity demo -->
+    <script src="../../theme/js/demo/peity-demo.js"></script>
 
+    <!-- Data picker -->
+    <script src="../../theme/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="../../theme/js/plugins/datapicker/bootstrap-datepicker.ko.js"></script>
+
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-      $(document).ready(function () {
-        $(".footable").footable();
+      var LIST_COUNT = 10;
+      var PAGENUMBER_COUNT = 10;
 
-        $(".select2_demo_1").select2();
-        $(".select2_demo_2").select2({
-          placeholder: "응시여부 선택",
-          allowClear: true,
-        });
+      $(document).ready(function () {
+        $("#footer").load("../../admin/common/footer.html");
       });
+
+      var data = new Object();
+      init();
+
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return data;
+        },
+        methods: {},
+        mounted: function () {
+          //로딩 화면 제거하고 화면 표시
+          $("#empty").css("display", "none");
+          $("#content").css("display", "");
+
+          $("#questionDate").val(new Date().format("yyyyMMdd"));
+        },
+      });
+
+      function init() {}
+
+      function toggleLoading() {
+        $("#questionList").children(".ibox-content").toggleClass("sk-loading");
+      }
     </script>
   </body>
 </html>
