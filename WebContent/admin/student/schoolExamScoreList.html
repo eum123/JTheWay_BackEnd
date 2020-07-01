@@ -1,3 +1,10 @@
+<!--
+*
+*  INSPINIA - Responsive Admin Theme
+*  version 2.9.2
+*
+-->
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -60,13 +67,48 @@
             navigation
           </div>
           <div class="wrapper wrapper-content">
-            <div class="container">
+            <div>
+              <div class="row col-lg-12" id="empty">
+                <div class="sk-spinner sk-spinner-fading-circle">
+                  <div class="sk-circle1 sk-circle"></div>
+                  <div class="sk-circle2 sk-circle"></div>
+                  <div class="sk-circle3 sk-circle"></div>
+                  <div class="sk-circle4 sk-circle"></div>
+                  <div class="sk-circle5 sk-circle"></div>
+                  <div class="sk-circle6 sk-circle"></div>
+                  <div class="sk-circle7 sk-circle"></div>
+                  <div class="sk-circle8 sk-circle"></div>
+                  <div class="sk-circle9 sk-circle"></div>
+                  <div class="sk-circle10 sk-circle"></div>
+                  <div class="sk-circle11 sk-circle"></div>
+                  <div class="sk-circle12 sk-circle"></div>
+                </div>
+              </div>
+            </div>
+            <div class="container" style="display: none;" id="content">
               <div class="row">
                 <div class="col-lg-12">
                   <div class="ibox">
-                    <div class="ibox-title">시험점수</div>
+                    <div class="ibox-title">
+                      <h5>시험 점수</h5>
+                    </div>
+
                     <div class="ibox-content">
-                      <!-- 내용 부분 시작 -->
+                      <div class="sk-spinner sk-spinner-fading-circle">
+                        <div class="sk-circle1 sk-circle"></div>
+                        <div class="sk-circle2 sk-circle"></div>
+                        <div class="sk-circle3 sk-circle"></div>
+                        <div class="sk-circle4 sk-circle"></div>
+                        <div class="sk-circle5 sk-circle"></div>
+                        <div class="sk-circle6 sk-circle"></div>
+                        <div class="sk-circle7 sk-circle"></div>
+                        <div class="sk-circle8 sk-circle"></div>
+                        <div class="sk-circle9 sk-circle"></div>
+                        <div class="sk-circle10 sk-circle"></div>
+                        <div class="sk-circle11 sk-circle"></div>
+                        <div class="sk-circle12 sk-circle"></div>
+                      </div>
+
                       <div class="row">
                         <table class="table table-bordered">
                           <thead></thead>
@@ -85,41 +127,18 @@
                           <thead></thead>
                           <tbody>
                             <tr>
-                              <td>시험명</td>
-                              <td>시험 점수</td>
-                              <td>비고</td>
+                              <td class="text-center">시험명</td>
+                              <td class="text-center">시험 점수</td>
+                              <td class="text-center">비고</td>
                             </tr>
-                            <tr>
-                              <td>3월 모의고사</td>
-                              <td>17/20</td>
-                              <td>비고</td>
-                            </tr>
-                            <tr>
-                              <td>3월 모의고사</td>
-                              <td>17/20</td>
-                              <td>비고</td>
+
+                            <tr v-for="element in exam.list">
+                              <td>{{element.examName}}</td>
+                              <td>{{element.score}}/{{element.maxScore}}</td>
+                              <td>{{element.remark}}</td>
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                      <!-- 내용 부분 끝 -->
-                      <div class="row">
-                        <form role="form" class="form-inline">
-                          <div class="form-group">
-                            <button
-                              type="button"
-                              class="btn btn-w-m btn-default"
-                            >
-                              취소
-                            </button>
-                            <button
-                              type="button"
-                              class="btn btn-w-m btn-success"
-                            >
-                              등록
-                            </button>
-                          </div>
-                        </form>
                       </div>
                     </div>
                   </div>
@@ -165,18 +184,56 @@
         data() {
           return data;
         },
-        mounted: function () {},
+        methods: {},
+
+        mounted: function () {
+          //로딩 화면 제거하고 화면 표시
+          $("#empty").css("display", "none");
+          $("#content").css("display", "");
+        },
       });
 
       function init() {
-        //잘못 입력시 input 의 style변경 및 메시지 표시용
-        data = {
-          //사용자 구분
-          userKind: {
-            status: "0",
-            statusMessage: "",
-          },
-        };
+        data.exam = "";
+
+        //code 조회
+        syncGet(
+          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
+          "",
+          getList,
+          null
+        );
+      }
+
+      function getList(res) {
+        if (res != null) {
+          //test
+          data.exam = JSON.parse(
+            '{"list":[{"examName":"3월 모의고사","score":"8","maxScore":"10","remark":"중3 > 1학기 > Ⅰ 소인수분해 > 01 소인수분해"}]}'
+          );
+        }
+      }
+
+      /**
+       * 검색 조건으로 parameter 생성
+       */
+      function getSearchParameter() {
+        var questionDate = $("#questionDate").val(); //출제일자
+        var isTakeExam = $("#isTakeExam option:selected").val(); //응시 여부
+
+        var param = "";
+        if (isTakeExam != "") {
+          param = "isTakeExam=" + isTakeExam;
+        }
+        if (questionDate != "") {
+          param = "questionDate=" + questionDate + "," + param;
+        }
+
+        return param;
+      }
+
+      function toggleLoading() {
+        $("#questionList").children(".ibox-content").toggleClass("sk-loading");
       }
     </script>
   </body>
