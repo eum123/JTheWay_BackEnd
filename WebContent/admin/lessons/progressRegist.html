@@ -1,245 +1,305 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <title>클래스 등록</title>
+    <title>haami</title>
 
-    <link href="../../css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../../font-awesome/css/font-awesome.css" rel="stylesheet" />
-
-    <link href="../../css/animate.css" rel="stylesheet" />
-    <link href="../../css/style.css" rel="stylesheet" />
+    <link href="../../theme/css/bootstrap.min.css" rel="stylesheet" />
     <link
-      href="../../css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"
+      href="../../theme/font-awesome/css/font-awesome.css"
+      rel="stylesheet"
+    />
+
+    <link href="../../theme/css/animate.css" rel="stylesheet" />
+    <link href="../../theme/css/style.css" rel="stylesheet" />
+    <link
+      href="../../theme/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"
       rel="stylesheet"
     />
   </head>
-  <body>
-    <div id="wrapper">
-      <nav class="navbar-default navbar-static-side" role="navigation">
-        <div class="sidebar-collapse">
-          <ul class="nav metismenu" id="side-menu">
-            <li class="nav-header">
-              <div class="dropdown profile-element">
-                <img
-                  alt="image"
-                  class="rounded-circle"
-                  src="../../img/profile_small.jpg"
-                />
-                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                  <span class="block m-t-xs font-bold">David Williams</span>
-                  <span class="text-muted text-xs block"
-                    >Art Director <b class="caret"></b
-                  ></span>
-                </a>
-                <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                  <li>
-                    <a class="dropdown-item" href="profile.html">Profile</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="contacts.html">Contacts</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="mailbox.html">Mailbox</a>
-                  </li>
-                  <li class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="login.html">Logout</a></li>
-                </ul>
-              </div>
-              <div class="logo-element">
-                IN+
-              </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <div id="page-wrapper" class="gray-bg">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="ibox">
-              <div class="ibox-title">
-                <h5>클래스 등록</h5>
-              </div>
-              <div class="ibox-content">
-                <div class="form-group row">
-                  <table class="table table-bordered">
-                    <thead></thead>
-                    <tbody>
-                      <tr>
-                        <td>년도</td>
-                        <td>
-                          <select class="form-control" name="account">
-                            <option>2020</option>
-                            <option>2019</option>
-                            <option>2018</option>
-                            <option>2017</option>
-                          </select>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>클래스</td>
-                        <td>
-                          <input
-                            type="text"
-                            placeholder="클래스명"
-                            class="form-control"
-                          />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>담당교사</td>
-                        <td>김교사</td>
-                      </tr>
-                      <tr>
-                        <td>일자</td>
-                        <td>
-                          <div class="row">
-                            <div class="col-md-4">
-                              <input
-                                type="text"
-                                placeholder="2020.03.02"
-                                class="form-control"
-                              />
-                            </div>
-                            <div class="col-md-4">
-                              <select class="form-control" name="account">
-                                <option>요일 및 시간</option>
-                                <option>요일 및 시간</option>
-                                <option>요일 및 시간</option>
-                                <option>요일 및 시간</option>
-                              </select>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
 
-                      <tr>
-                        <td>진도</td>
-                        <td>
-                          <div class="row">
-                            <div class="col-md-1">
-                              <input
-                                id="checkbox1"
-                                type="checkbox"
-                                checked=""
-                              />
-                              <label for="checkbox1">A</label>
-                            </div>
-                            <div class="col-md-1">
-                              <input
-                                id="checkbox2"
-                                type="checkbox"
-                                checked=""
-                              />
-                              <label for="checkbox2">B</label>
-                            </div>
-                            <div class="col-md-1">
-                              <input
-                                id="checkbox3"
-                                type="checkbox"
-                                checked=""
-                              />
-                              <label for="checkbox3">C</label>
-                            </div>
-                            <div class="col-md-1">
-                              <input
-                                id="checkbox4"
-                                type="checkbox"
-                                checked=""
-                              />
-                              <label for="checkbox4">D</label>
-                            </div>
-                            <div class="col-md-1">
-                              <input
-                                id="checkbox5"
-                                type="checkbox"
-                                checked=""
-                              />
-                              <label for="checkbox5">E</label>
-                            </div>
-                            <div class="col-md-1">
-                              <input
-                                id="checkbox6"
-                                type="checkbox"
-                                checked=""
-                              />
-                              <label for="checkbox6">F</label>
-                            </div>
-                            <div class="col-md-1">
-                              <input
-                                id="checkbox7"
-                                type="checkbox"
-                                checked=""
-                              />
-                              <label for="checkbox7">G</label>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>학생출석</td>
-                        <td>
-                          <div class="row">
-                            <div class="col-md-2">
-                              <input
-                                id="checkbox10"
-                                type="checkbox"
-                                checked=""
-                              />
-                              <label for="checkbox10">홍길동</label>
-                            </div>
-                            <div class="col-md-2"></div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-2">
-                              <input
-                                id="checkbox10"
-                                type="checkbox"
-                                checked=""
-                              />
-                              <label for="checkbox10">김길동</label>
-                            </div>
-                            <div class="col-md-2"></div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>의견</td>
-                        <td>
-                          <textarea> </textarea>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <button
-                    class="btn btn-sm btn-primary float-right m-t-n-xs"
-                    type="submit"
+  <body>
+    <div id="app">
+      <div id="wrapper">
+        <!-- leftmenu -->
+        <div id="leftMenu"></div>
+        <!-- end leftmenu -->
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+          <!-- top -->
+          <div class="row border-bottom">
+            <nav
+              class="navbar navbar-static-top"
+              role="navigation"
+              style="margin-bottom: 0;"
+            >
+              <div class="navbar-header">
+                <a
+                  class="navbar-minimalize minimalize-styl-2 btn btn-primary"
+                  href="#"
+                  ><i class="fa fa-bars"></i>
+                </a>
+              </div>
+              <ul class="nav navbar-top-links navbar-right">
+                <li style="padding: 20px;">
+                  <span class="m-r-sm text-muted welcome-message"
+                    >haami Admin</span
                   >
-                    <strong>취소</strong>
-                  </button>
-                  <button
-                    class="btn btn-sm btn-primary float-right m-t-n-xs"
-                    type="submit"
-                  >
-                    <strong>등록</strong>
-                  </button>
+                </li>
+
+                <li>
+                  <a href="login.html">
+                    <i class="fa fa-sign-out"></i> Log out
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <!-- end top -->
+
+          <div class="row border-bottom white-bg dashboard-header">
+            navigation
+          </div>
+          <div class="wrapper wrapper-content">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="ibox">
+                    <div class="ibox-title">진도 등록</div>
+                    <div class="ibox-content">
+                      <!-- 내용 부분 시작 -->
+                      <div class="row">
+                        <table class="table table-bordered">
+                          <thead></thead>
+                          <tbody>
+                            <tr>
+                              <td>년도</td>
+                              <td>
+                                <select class="form-control" name="account">
+                                  <option>2020</option>
+                                  <option>2019</option>
+                                  <option>2018</option>
+                                  <option>2017</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>클래스</td>
+                              <td>
+                                <input
+                                  type="text"
+                                  placeholder="클래스명"
+                                  class="form-control"
+                                />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>담당교사</td>
+                              <td>김교사</td>
+                            </tr>
+                            <tr>
+                              <td>일자</td>
+                              <td>
+                                <div class="row">
+                                  <div class="col-md-4">
+                                    <input
+                                      type="text"
+                                      placeholder="2020.03.02"
+                                      class="form-control"
+                                    />
+                                  </div>
+                                  <div class="col-md-4">
+                                    <select class="form-control" name="account">
+                                      <option>요일 및 시간</option>
+                                      <option>요일 및 시간</option>
+                                      <option>요일 및 시간</option>
+                                      <option>요일 및 시간</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td>진도</td>
+                              <td>
+                                <div class="row">
+                                  <div class="col-md-1">
+                                    <input
+                                      id="checkbox1"
+                                      type="checkbox"
+                                      checked=""
+                                    />
+                                    <label for="checkbox1">A</label>
+                                  </div>
+                                  <div class="col-md-1">
+                                    <input
+                                      id="checkbox2"
+                                      type="checkbox"
+                                      checked=""
+                                    />
+                                    <label for="checkbox2">B</label>
+                                  </div>
+                                  <div class="col-md-1">
+                                    <input
+                                      id="checkbox3"
+                                      type="checkbox"
+                                      checked=""
+                                    />
+                                    <label for="checkbox3">C</label>
+                                  </div>
+                                  <div class="col-md-1">
+                                    <input
+                                      id="checkbox4"
+                                      type="checkbox"
+                                      checked=""
+                                    />
+                                    <label for="checkbox4">D</label>
+                                  </div>
+                                  <div class="col-md-1">
+                                    <input
+                                      id="checkbox5"
+                                      type="checkbox"
+                                      checked=""
+                                    />
+                                    <label for="checkbox5">E</label>
+                                  </div>
+                                  <div class="col-md-1">
+                                    <input
+                                      id="checkbox6"
+                                      type="checkbox"
+                                      checked=""
+                                    />
+                                    <label for="checkbox6">F</label>
+                                  </div>
+                                  <div class="col-md-1">
+                                    <input
+                                      id="checkbox7"
+                                      type="checkbox"
+                                      checked=""
+                                    />
+                                    <label for="checkbox7">G</label>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>학생출석</td>
+                              <td>
+                                <div class="row">
+                                  <div class="col-md-2">
+                                    <input
+                                      id="checkbox10"
+                                      type="checkbox"
+                                      checked=""
+                                    />
+                                    <label for="checkbox10">홍길동</label>
+                                  </div>
+                                  <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-2">
+                                    <input
+                                      id="checkbox10"
+                                      type="checkbox"
+                                      checked=""
+                                    />
+                                    <label for="checkbox10">김길동</label>
+                                  </div>
+                                  <div class="col-md-2"></div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>의견</td>
+                              <td>
+                                <textarea> </textarea>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!-- 내용 부분 끝 -->
+                      <div class="row">
+                        <form role="form" class="form-inline">
+                          <div class="form-group">
+                            <button
+                              type="button"
+                              class="btn btn-w-m btn-default"
+                            >
+                              취소
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-w-m btn-success"
+                            >
+                              등록
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
+          <!-- footer -->
+          <div id="footer"></div>
+          <!-- end footer -->
         </div>
       </div>
     </div>
+
+    <script src="../../resources/js/api.js"></script>
+    <script src="../../resources/js/common.js"></script>
+
     <!-- Mainly scripts -->
-    <script src="../../js/jquery-3.1.1.min.js"></script>
-    <script src="../../js/popper.min.js"></script>
-    <script src="../../js/bootstrap.js"></script>
+    <script src="../../theme/js/jquery-3.1.1.min.js"></script>
+    <script src="../../theme/js/popper.min.js"></script>
+    <script src="../../theme/js/bootstrap.js"></script>
+    <script src="../../theme/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../../theme/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <!-- iCheck -->
-    <script src="../../js/plugins/iCheck/icheck.min.js"></script>
+    <script src="../../theme/js/plugins/iCheck/icheck.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="../../theme/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
 
     <script>
-      $(document).ready(function () {});
+      $(document).ready(function () {
+        $("#leftMenu").load("../../admin/common/leftMenu.html");
+        $("#footer").load("../../admin/common/footer.html");
+      });
+
+      var data = new Object();
+      init();
+
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return data;
+        },
+        mounted: function () {},
+      });
+
+      function init() {
+        //잘못 입력시 input 의 style변경 및 메시지 표시용
+        data = {
+          //사용자 구분
+          userKind: {
+            status: "0",
+            statusMessage: "",
+          },
+        };
+      }
     </script>
   </body>
 </html>
