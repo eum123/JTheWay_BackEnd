@@ -24,8 +24,8 @@ import io.jsonwebtoken.security.SignatureException;
 import lombok.RequiredArgsConstructor;
 import lombok.var;
 import lombok.extern.slf4j.Slf4j;
-import net.jtheway.web.member.service.SignService;
-import net.jtheway.web.security.JwtConfiguration;
+import net.haaim.web.member.service.SignService;
+import net.haaim.web.security.JwtConfiguration;
 
 @Slf4j
 @Configuration

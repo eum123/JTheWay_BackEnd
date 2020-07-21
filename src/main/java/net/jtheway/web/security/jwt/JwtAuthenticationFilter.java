@@ -16,8 +16,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import lombok.extern.slf4j.Slf4j;
-import net.jtheway.web.member.service.SignService;
-import net.jtheway.web.security.JwtConfiguration;
+import net.haaim.web.member.service.SignService;
+import net.haaim.web.security.JwtConfiguration;
 
 @Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {

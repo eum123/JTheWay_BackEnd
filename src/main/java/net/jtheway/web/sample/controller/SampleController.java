@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.jtheway.web.common.response.ApiResponse;
+import net.haaim.web.common.response.ApiResponse;
 import net.jtheway.web.sample.entity.SampleEntity;
 import net.jtheway.web.sample.service.SampleService;
 
