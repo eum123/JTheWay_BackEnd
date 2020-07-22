@@ -5,7 +5,7 @@
 - SpringBoot 1.5.1
 - MySQL 5.X
 - jpa
-
+- api doc 참고(https://www.popit.kr/spring-rest-docs/)
 
 # web
 - http-server 설치
@@ -32,3 +32,9 @@
   ex) student_protocol.md
   ```
 - 약간의 vue.js
+
+# ERROR
+- 테스트 시 java.sql.SQLException: Unable to load authentication plugin 'caching_sha2_password'. mysql 오류 처리 방법
+```
+ ALTER USER 'haaim'@'localhost' IDENTIFIED WITH mysql_native_password BY 'haaim01';
+```

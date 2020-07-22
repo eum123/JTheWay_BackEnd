@@ -4,8 +4,8 @@ spring:
     profiles: local
     
     datasource:
-        driver-class-name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/hammi_db?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&charaterEncoding=utf-8&serverTimezone=UTC
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/haaim_db?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&charaterEncoding=utf-8&serverTimezone=UTC
         username: haaim
         password: haaim01
         
