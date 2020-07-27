@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.haaim.web.common.request.CustomPageRequest;
 import net.haaim.web.common.response.ApiResponse;
 import net.haaim.web.notice.service.NoticeService;
 
@@ -27,7 +28,7 @@ public class NoticeController {
 
 		try {
 			
-			PageRequest pageRequest = new PageRequest(page, size, Sort.Direction.DESC, "no");
+			PageRequest pageRequest = CustomPageRequest.of(1, 10, "no");
 			
 			Page result = service.list(pageRequest);
 			

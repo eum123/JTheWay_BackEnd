@@ -1,21 +1,16 @@
 package net.haaim.web.sample.repository;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import net.jtheway.web.sample.entity.SampleEntity;
 import net.jtheway.web.sample.repository.SampleRepository;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("local")
 public class SampleRepositoryTest {
@@ -34,9 +29,9 @@ public class SampleRepositoryTest {
 		entity.setName("hong");
 		repo.saveAndFlush(entity);
 		
-		assertEquals(1, repo.count());
+		Assertions.assertEquals(1, repo.count());
 		
-		assertTrue(repo.exists("hong"));
+		Assertions.assertTrue(repo.existsById("hong"));
 		
 		
 		repo.deleteAll();

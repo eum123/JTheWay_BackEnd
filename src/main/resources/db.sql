@@ -1,13 +1,14 @@
 -- root/djaakswls
+-- root/djaakswls1!
 
 -- create database
-CREATE DATABASE jtheway_db;
+CREATE DATABASE haaim_db;
 
 -- create user
-CREATE USER 'jtheway'@'localhost' IDENTIFIED BY 'jtheway01';
+CREATE USER 'haaim'@'localhost' IDENTIFIED BY 'haaim01';
 
 -- insert , update, delete etc
-GRANT ALL PRIVILEGES on jtheway_db.* TO 'jtheway'@'localhost';
+GRANT ALL PRIVILEGES on haaim_db.* TO 'haaim'@'localhost';
 FLUSH PRIVILEGES;
 
 -- sample table

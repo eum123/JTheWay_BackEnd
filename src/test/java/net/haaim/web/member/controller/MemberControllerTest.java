@@ -4,19 +4,16 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import lombok.extern.slf4j.Slf4j;
 import net.haaim.web.HaaimWebApplication;
 import net.haaim.web.common.AbstractControllerTest;
 
-@RunWith(SpringRunner.class)
+
 @SpringBootTest(classes = HaaimWebApplication.class)
 @ActiveProfiles("local")
 @Slf4j

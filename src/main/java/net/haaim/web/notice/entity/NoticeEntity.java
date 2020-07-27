@@ -31,9 +31,9 @@ public class NoticeEntity {
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String title;
 	
-	@Column(name="content", nullable = true, unique = false, length = 1024)
+	@Column(name="contents", nullable = true, unique = false, length = 1024)
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	private String content;
+	private String contents;
 	
 	/** 상태(0:HIDDEN/1:VIEW) */
 	@Column(name="state", nullable = true, unique = false)

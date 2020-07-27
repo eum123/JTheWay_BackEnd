@@ -1,6 +1,7 @@
 package net.jtheway.web.sample.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,8 @@ public class SampleService {
 	@Autowired
 	private SampleRepository repo;
 	
-	public SampleEntity search(String name) {
-		return repo.findOne(name);
+	public Optional<SampleEntity> search(String name) {
+		return repo.findById(name);
 	}
 	
 	public List<SampleEntity> searchAll() {

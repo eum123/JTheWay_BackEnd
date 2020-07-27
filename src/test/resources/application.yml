@@ -11,6 +11,7 @@ spring:
         
     jpa:
         hibernate.ddl-auto: validate
+        database-platform: org.hibernate.dialect.MySQL5Dialect
         generate-ddl: true
         show-sql: true
         
@@ -32,7 +33,7 @@ spring:
     profiles: prod
     
     datasource:
-        jndi-name: jndi/jtheways
+        jndi-name: jndi/haaim
     jpa:
         hibernate.ddl-auto: none
         show-sql: true

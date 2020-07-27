@@ -1,16 +1,16 @@
 package net.haaim.web.notice.service;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ActiveProfiles;
 
-import junit.framework.Assert;
+import net.haaim.web.common.request.CustomPageRequest;
 import net.haaim.web.notice.entity.NoticeEntity;
 import net.haaim.web.notice.repository.NoticeRepository;
 
@@ -24,7 +24,7 @@ public class NoticeServiceTest {
 	@Autowired
 	private NoticeService service;
 	
-	@Before
+	@BeforeEach
 	public void init() {
 		repo.deleteAll();
 
@@ -35,13 +35,14 @@ public class NoticeServiceTest {
 	
 	@Test
 	public void testPage() {
-		PageRequest pageRequest = new PageRequest(1, 10, Sort.Direction.DESC, "no");
+		
+		PageRequest pageRequest = CustomPageRequest.of(1, 10, "no");
 		Page<NoticeEntity> page = service.list(pageRequest);
 		System.out.println("hi");
-		Assert.assertEquals(true, true);
+		Assertions.assertEquals(true, true);
 	}
 	
-	@After
+	@AfterEach
 	public void destory() {
 		repo.deleteAll();
 	}
