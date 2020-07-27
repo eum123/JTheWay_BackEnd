@@ -5,12 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
 @SpringBootApplication
-public class JTheWayWebApplication {
+public class HaaimWebApplication {
 	public static void main(String ...args) {
-		SpringApplication.run(JTheWayWebApplication.class, args);
+		SpringApplication.run(HaaimWebApplication.class, args);
 	}
 	
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(JTheWayWebApplication.class);
+		return builder.sources(HaaimWebApplication.class);
 	}
 }

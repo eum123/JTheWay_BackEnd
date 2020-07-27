@@ -20,10 +20,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import lombok.extern.slf4j.Slf4j;
-import net.haaim.web.JTheWayWebApplication;
+import net.haaim.web.HaaimWebApplication;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = JTheWayWebApplication.class)
+@SpringBootTest(classes = HaaimWebApplication.class)
 @ActiveProfiles("local")
 @Slf4j
 public class SampleControllerTest {

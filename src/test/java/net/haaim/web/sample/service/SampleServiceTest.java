@@ -1,22 +1,20 @@
 package net.haaim.web.sample.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import net.jtheway.web.sample.entity.SampleEntity;
 import net.jtheway.web.sample.repository.SampleRepository;
 import net.jtheway.web.sample.service.SampleService;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 @ActiveProfiles("local")
 public class SampleServiceTest {
@@ -27,8 +25,9 @@ public class SampleServiceTest {
 	@Autowired
 	private SampleService service;
 
-	@Before
+	@BeforeEach
 	public void init() {
+		System.out.println(repo);
 		repo.deleteAll();
 
 		SampleEntity entity = new SampleEntity();
@@ -38,20 +37,22 @@ public class SampleServiceTest {
 	}
 
 	@Test
-	public void search() {
+	public void testSearch() {
 		SampleEntity entity = service.search("hong");
+		System.out.println("dkdkd");
+		Assertions.assertNotEquals(null, entity);
+		Assertions.assertEquals("hong", entity.getName());
+		Assertions.assertEquals(10, entity.getAge());
 		
-		assertNotEquals(null, entity);
-		assertEquals("hong", entity.getName());
-		assertEquals(10, entity.getAge());
 	}
 	
 	@Test
 	public void searchAll() {
-		assertEquals(1, service.searchAll().size());
+		Assertions.assertEquals(1, service.searchAll().size());
+		
 	}
 	
-	@After
+	@AfterEach
 	public void destory() {
 		repo.deleteAll();
 	}

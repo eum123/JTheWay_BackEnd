@@ -13,11 +13,11 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import lombok.extern.slf4j.Slf4j;
-import net.haaim.web.JTheWayWebApplication;
+import net.haaim.web.HaaimWebApplication;
 import net.haaim.web.common.AbstractControllerTest;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = JTheWayWebApplication.class)
+@SpringBootTest(classes = HaaimWebApplication.class)
 @ActiveProfiles("local")
 @Slf4j
 public class MemberControllerTest extends AbstractControllerTest{
