@@ -42,6 +42,8 @@ public class NoticeServiceTest {
 		Assertions.assertEquals(true, true);
 	}
 	
+	
+	
 	@AfterEach
 	public void destory() {
 		repo.deleteAll();

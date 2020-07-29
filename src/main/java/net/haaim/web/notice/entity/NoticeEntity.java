@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import net.jtheway.web.sample.entity.SampleEntity;
+
 
 @Entity
 @Table(name="notice")

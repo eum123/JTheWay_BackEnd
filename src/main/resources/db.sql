@@ -339,14 +339,13 @@ ENGINE = InnoDB
 COMMENT = '코드';
 
 CREATE TABLE IF NOT EXISTS `haaim`.`notice` (
-  `no` INT NOT NULL,
+  `no` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `title` VARCHAR(100) NULL COMMENT '제목',
   `contents` VARCHAR(1024) NULL COMMENT '내용',
   `state` INT(1) NULL COMMENT '상태(0:HIDDEN/1:VIEW)',
   `input_id` VARCHAR(45) NULL,
   `input_date` DATETIME NULL,
   `update_id` VARCHAR(45) NULL,
-  `update_date` DATETIME NULL,
-  PRIMARY KEY (`no`))
+  `update_date` DATETIME NULL)
 ENGINE = InnoDB
 COMMENT = '공지사항';
