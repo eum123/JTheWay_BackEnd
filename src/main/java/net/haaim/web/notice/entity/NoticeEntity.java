@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="notice")
-@NoArgsConstructor // 인자없는 생성자를 자동으로 생성합니다.
+@NoArgsConstructor()
 @Data 
 public class NoticeEntity {
 	@Id // pk
@@ -55,4 +55,9 @@ public class NoticeEntity {
 	@Column(name="update_date", nullable = true, unique = false)
 	@JsonProperty(value="update_date", access = JsonProperty.Access.WRITE_ONLY)
 	private Date updateDate;
+	
+	
+	public NoticeEntity(String title, String contents, int state) {
+		
+	}
 }
