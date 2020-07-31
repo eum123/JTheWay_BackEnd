@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service;
 import net.haaim.web.notice.entity.NoticeEntity;
 import net.haaim.web.notice.repository.NoticeRepository;
 
-@Service
-public class NoticeService {
 
-	@Autowired
-	private NoticeRepository repo;
+public abstract class NoticeService {
 	
-	public Page<NoticeEntity> list(Pageable pageable) {
-		return repo.findAll(pageable);
+	@Autowired
+	protected NoticeRepository repo;
+	
+	public Page<NoticeEntity> searchAll(Pageable pageable) {
+		return repo.findByState(NoticeEntity.VIEW, pageable);
 	}
+	
 }

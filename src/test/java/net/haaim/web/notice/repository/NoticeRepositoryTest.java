@@ -22,18 +22,14 @@ public class NoticeRepositoryTest {
 	@BeforeEach
 	public void init() {
 		repo.deleteAll();
-
-		insert("title", "contents", 1);
+		
+		repo.saveAndFlush(NoticeEntity.builder().title("title")
+				.contents("contents")
+				.state(1)
+				.build());
 	}
 	
-	private void insert(String title, String contents, int state) {
-		NoticeEntity entity = new NoticeEntity();
-		entity.setTitle(title);
-		entity.setContents(contents);
-		entity.setState(state);
-		
-		repo.saveAndFlush(entity);
-	}
+	
 	
 	@Test
 	public void testSearchAll() {

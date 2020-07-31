@@ -28,9 +28,10 @@ public class NoticeServiceTest {
 	public void init() {
 		repo.deleteAll();
 
-		NoticeEntity entity = new NoticeEntity();
-		
-		repo.saveAndFlush(entity);
+		repo.saveAndFlush(NoticeEntity.builder().title("title")
+				.contents("contents")
+				.state(1)
+				.build());
 	}
 	
 	@Test
@@ -38,7 +39,7 @@ public class NoticeServiceTest {
 		
 		PageRequest pageRequest = CustomPageRequest.of(1, 10, "no");
 		Page<NoticeEntity> page = service.list(pageRequest);
-		System.out.println("hi");
+		
 		Assertions.assertEquals(true, true);
 	}
 	
