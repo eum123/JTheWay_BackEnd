@@ -2,7 +2,8 @@
 
 
 ## 공지사항
- - 목록
+1. 목록
+	 - 요청
        http://localhost/notice/serachAll?page=1&size=10
      - 응답
       ```json
@@ -49,7 +50,8 @@
       
       ``` 
 			
- - 목록 (검색 조건 포함)
+2. 목록 (검색 조건 포함)
+ 	 - 요청
        http://localhost/notice/serachAll?page=1&size=10&title=title&contenst=contents
      - 응답
       ```json
