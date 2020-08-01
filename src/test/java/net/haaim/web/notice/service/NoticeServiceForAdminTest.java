@@ -16,13 +16,13 @@ import net.haaim.web.notice.repository.NoticeRepository;
 
 @SpringBootTest
 @ActiveProfiles("local")
-public class NoticeServiceTest {
+public class NoticeServiceForAdminTest {
 
 	@Autowired
 	private NoticeRepository repo;
 
 	@Autowired
-	private NoticeService service;
+	private NoticeServiceForAdmin service;
 	
 	@BeforeEach
 	public void init() {
@@ -38,7 +38,7 @@ public class NoticeServiceTest {
 	public void testPage() {
 		
 		PageRequest pageRequest = CustomPageRequest.of(1, 10, "no");
-		Page<NoticeEntity> page = service.list(pageRequest);
+		Page<NoticeEntity> page = service.search(pageRequest);
 		
 		Assertions.assertEquals(true, true);
 	}

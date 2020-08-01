@@ -208,27 +208,7 @@
          } 
       }
       ```
-4. 공지사항 목록 조회
-    - 요청
-       http://....
-    - 응답
-      ```json
-      {
-        
-        "list": [
-          {
-            "no": "1",
-            "subject": "",
-            "content": "0",
-            "writeDate": "0",
-          }
-        ],
-        "pagination": {
-            "total": 10,
-            "countPerPage": 10  
-         } 
-      }
-      ```
+
 
 4. 테스트 목록 조회
     - 요청

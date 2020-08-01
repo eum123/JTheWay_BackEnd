@@ -13,10 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -29,7 +25,7 @@ import lombok.NoArgsConstructor;
 @Getter // user 필드값의 getter를 자동으로 생성합니다.
 @NoArgsConstructor // 인자없는 생성자를 자동으로 생성합니다.
 @AllArgsConstructor // 인자를 모두 갖춘 생성자를 자동으로 생성합니다.
-public class User implements UserDetails {
+public class User {//implements UserDetails {
 	@Id // pk
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long msrl;
@@ -54,44 +50,44 @@ public class User implements UserDetails {
     	this.roles = of;
 	}
 
-	@Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
-    }
- 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Override
-    public String getUsername() {
-        return this.uid;
-    }
- 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
- 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
- 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
- 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
-	@Override
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+//    }
+// 
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @Override
+//    public String getUsername() {
+//        return this.uid;
+//    }
+// 
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @Override
+//    public boolean isAccountNonExpired() {
+//        return true;
+//    }
+// 
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @Override
+//    public boolean isAccountNonLocked() {
+//        return true;
+//    }
+// 
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @Override
+//    public boolean isCredentialsNonExpired() {
+//        return true;
+//    }
+// 
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @Override
+//    public boolean isEnabled() {
+//        return true;
+//    }
+//
+//	@Override
+//	public String getPassword() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 }

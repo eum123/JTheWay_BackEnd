@@ -1,21 +1,16 @@
 package net.haaim.web.notice.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 import net.haaim.web.notice.entity.NoticeEntity;
-import net.haaim.web.notice.repository.NoticeRepository;
 
-
-public abstract class NoticeService {
+public interface NoticeService {
+	public Page<NoticeEntity> searchAll(Pageable pageable);
 	
-	@Autowired
-	protected NoticeRepository repo;
+	public NoticeEntity search(int no);
 	
-	public Page<NoticeEntity> searchAll(Pageable pageable) {
-		return repo.findByState(NoticeEntity.VIEW, pageable);
-	}
+	public Page<NoticeEntity> search(Pageable pageable) ;
 	
+	public Page<NoticeEntity> search(String title, String contents, Pageable pageable);
 }

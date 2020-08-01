@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import net.haaim.web.notice.entity.NoticeEntity;
 
 @Service
-public class NoticeServiceForStudent extends NoticeService {
+public class NoticeServiceForStudent extends AbstractNoticeService {
 	
 	public Page<NoticeEntity> search(Pageable pageable) {
 		return repo.findByState(NoticeEntity.VIEW, pageable);
@@ -24,7 +24,5 @@ public class NoticeServiceForStudent extends NoticeService {
 		}
 	}
 	
-	public NoticeEntity search(int no) {
-		return repo.getOne(no);
-	}
+	
 }
