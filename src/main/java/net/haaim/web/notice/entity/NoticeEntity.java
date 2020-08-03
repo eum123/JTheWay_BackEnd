@@ -17,12 +17,13 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import net.haaim.web.common.entity.CommonEntity;
 
 @Entity
 @Table(name = "notice")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class NoticeEntity {
+public class NoticeEntity extends CommonEntity {
 	public static final int VIEW = 1;
 	
 	@Id // pk
@@ -44,44 +45,35 @@ public class NoticeEntity {
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private int state;
 
-	@Column(name = "input_id", nullable = true, unique = false, length = 45)
-	@JsonProperty(value = "input_id", access = JsonProperty.Access.WRITE_ONLY)
-	private String inputId;
-
-	@Column(name = "input_date", nullable = true, unique = false)
-	@JsonProperty(value = "input_date", access = JsonProperty.Access.WRITE_ONLY)
-	private Date inputDate;
-
-	@Column(name = "update_id", nullable = true, unique = false, length = 45)
-	@JsonProperty(value = "update_id", access = JsonProperty.Access.WRITE_ONLY)
-	private String updateId;
-
-	@Column(name = "update_date", nullable = true, unique = false)
-	@JsonProperty(value = "update_date", access = JsonProperty.Access.WRITE_ONLY)
-	private Date updateDate;
+	
 
 	@Builder
 	public NoticeEntity(String title, String contents, int state) {
-		validate(title, contents);
-
-		this.title = title;
-		this.contents = contents;
-		this.state = state;
-
-	}
-
-	@Builder
-	public NoticeEntity(String title, String contents, int state, String intputId, Date inputDate, String updateId,
-			Date updateDate) {
-		validate(title, contents);
+		
+		super();
 		
 		this.title = title;
 		this.contents = contents;
 		this.state = state;
-		this.inputId = intputId;
-		this.inputDate = inputDate;
-		this.updateId = updateId;
-		this.updateDate = updateDate;
+
+		validate(title, contents);
+	}
+
+	@Builder
+	public NoticeEntity(String title, String contents, int state, String inputId, Date inputDate, String updateId,
+			Date updateDate) {
+		
+		super(inputId, inputDate, updateId, updateDate);
+		
+		
+		this.no = no;
+		this.title = title;
+		this.contents = contents;
+		this.state = state;
+		
+		validate(title, contents);
+		
+		
 	}
 	
 	private void validate(String title, String contents) {

@@ -28,7 +28,9 @@ public class NoticeServiceForAdminTest {
 	public void init() {
 		repo.deleteAll();
 
-		repo.saveAndFlush(NoticeEntity.builder().title("title")
+		repo.saveAndFlush(NoticeEntity.builder()
+				
+				.title("title")
 				.contents("contents")
 				.state(1)
 				.build());
