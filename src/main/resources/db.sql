@@ -296,9 +296,10 @@ CREATE TABLE IF NOT EXISTS `haaim`.`exam_item` (
 ENGINE = InnoDB
 COMMENT = '문제출제';
 
-CREATE TABLE IF NOT EXISTS `haaim`.`menu` (
+CREATE TABLE IF NOT EXISTS `menu` (
   `menu_code` VARCHAR(10) NOT NULL COMMENT '메뉴코드',
   `menu_name` VARCHAR(100) NOT NULL COMMENT '메뉴명',
+  `parent_menu_code` VARCHAR(10) NULL COMMENT '부모 메뉴 코드',
   `depth` INT(1) NOT NULL COMMENT '메뉴 depth',
   `url` VARCHAR(200) NULL,
   `use_yn` INT(1) NOT NULL COMMENT '사용여부',

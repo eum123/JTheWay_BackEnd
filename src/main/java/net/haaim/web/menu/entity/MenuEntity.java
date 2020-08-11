@@ -30,6 +30,10 @@ public class MenuEntity extends CommonEntity {
 	@Column(name = "menu_name")
 	@JsonProperty(value = "menu_name", access = JsonProperty.Access.WRITE_ONLY)
 	private String menuName;
+	
+	@Column(name = "parent_menu_code")
+	@JsonProperty(value = "parent_menu_code", access = JsonProperty.Access.WRITE_ONLY)
+	private String parentMenuCode;
 
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private int depth;
@@ -42,7 +46,7 @@ public class MenuEntity extends CommonEntity {
 	private int usage = 0;
 
 	@Builder
-	public MenuEntity(String menuCode, String menuName, int depth, String url, int usage, String inputId, Date inputDate, String updateId,
+	public MenuEntity(String menuCode, String menuName, String parentMenuCode, int depth, String url, int usage, String inputId, Date inputDate, String updateId,
 			Date updateDate) {
 
 		super(inputId, inputDate, updateId, updateDate);
@@ -51,6 +55,7 @@ public class MenuEntity extends CommonEntity {
 
 		this.menuCode = menuCode;
 		this.menuName = menuName;
+		this.parentMenuCode = parentMenuCode;
 		this.depth = depth;
 		this.url = url;
 		this.usage = usage;
