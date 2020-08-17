@@ -1,5 +1,7 @@
 package net.haaim.web.notice.repository;
 
+import java.util.Date;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,6 +28,8 @@ public class NoticeRepositoryTest {
 		repo.saveAndFlush(NoticeEntity.builder().title("title")
 				.contents("contents")
 				.state(1)
+				.inputId("id")
+				.inputDate(new Date())
 				.build());
 	}
 	

@@ -146,33 +146,7 @@
         "code": "400",
       }
       ```
-2. 코드 목록 조회
-   - 요청
-       http://....
-    - 응답
-      ```json
-      {
-        
-        "list": [
-          {
-            "no": "1",
-            "groupCode": {
-              "code": "222",
-              "name": "그룹코드명"
-            },
-            "code": {
-              "code": "111",
-              "name": "코드명"
-            },
-            "usage": "1",
-          }
-        ],
-        "pagination": {
-            "total": 10,
-            "countPerPage": 10  
-         } 
-      }
-      ```
+
 3. 메뉴 목록 조회
     - 요청
        http://....
