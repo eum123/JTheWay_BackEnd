@@ -29,6 +29,8 @@ public class CodeEntity extends CommonEntity implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -8113141283039879647L;
+	
+	public static final int VIEW = 1;
 
 	@Id
 	@Column(name = "group_code")

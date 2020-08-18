@@ -1,6 +1,9 @@
-1. 코드 목록 조회
-   - 요청
-       http://....
+# 코드
+## 코드 목록 조회
+	- 내용
+		group_code에 해당하는 모든 code를 조회 한다.
+   	- 요청
+       http://.../code/search?groupcode=1[&usage=1]
     - 응답
       ```json
       {
@@ -10,31 +13,14 @@
 		  "data": {
 		    "content": [
 		      {
-		        "no": "1",
-		        "title": "title",
-		        "contents": "content",
-		        "input_date": "0"
+		        "group_code": "1",
+		        "code": "title",
+		        "code_name": "content",
+		        "use_yn": "0"
 		      }
 		    ]
 		  }
 		}
-		
-      {
-        
-        "list": [
-          {
-            "no": "1",
-            "groupCode": {
-              "code": "222",
-              "name": "그룹코드명"
-            },
-            "code": {
-              "code": "111",
-              "name": "코드명"
-            },
-            "usage": "1",
-          }
-        ]
-      }
+      
       ```
       

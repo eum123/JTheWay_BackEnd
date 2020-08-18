@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.haaim.web.code.entity.CodeEntity;
 import net.haaim.web.code.service.CodeService;
 import net.haaim.web.common.response.ApiResponse;
 
@@ -15,15 +16,23 @@ import net.haaim.web.common.response.ApiResponse;
 @RequestMapping("/code")
 public class CodeController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Autowired
 	private CodeService codeService;
-	
+
 	@RequestMapping(value = "search", method = RequestMethod.GET)
-	public ApiResponse search(@RequestParam(value = "gropucode") String groupCode, @RequestParam(value = "usage") int usage) {
-		
+	public ApiResponse search(@RequestParam(value = "groupcode") String groupCode,
+			@RequestParam(required = false, value = "usage") Integer usage) {
+
 		try {
-			return ApiResponse.getSuccessResponse(codeService.search(groupCode, usage));
+			int useYn = 0;
+			if (usage == null) {
+				useYn = CodeEntity.VIEW;
+			} else {
+				useYn = usage.intValue();
+			}
+
+			return ApiResponse.getSuccessResponse(codeService.search(groupCode, useYn));
 		} catch (Exception e) {
 			logger.error("search error", e);
 
