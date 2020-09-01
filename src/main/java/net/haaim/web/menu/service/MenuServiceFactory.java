@@ -9,15 +9,15 @@ import net.haaim.web.common.User;
 @Component
 public class MenuServiceFactory {
 	@Autowired
-	private MenuServiceForStudent noticeStudent;
+	private MenuServiceForStudent menuStudent;
 	@Autowired
-	private MenuServiceForAdmin noticeAdmin;
+	private MenuServiceForAdmin menuAdmin;
 	
 	public MenuService getInstance(User user) {
 		if(user.getRole() == Role.STUDENT) {
-			return noticeStudent;
+			return menuStudent;
 		} else {
-			return noticeAdmin;
+			return menuAdmin;
 		}
 	}
 }

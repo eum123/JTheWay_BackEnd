@@ -1,16 +1,10 @@
 package net.haaim.web.menu.service;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import java.util.List;
 
-import net.haaim.web.notice.entity.NoticeEntity;
+import net.haaim.web.common.Role;
+import net.haaim.web.menu.entity.MenuEntity;
 
 public interface MenuService {
-	public Page<NoticeEntity> searchAll(Pageable pageable);
-	
-	public NoticeEntity search(int no);
-	
-	public Page<NoticeEntity> search(Pageable pageable) ;
-	
-	public Page<NoticeEntity> search(String title, String contents, Pageable pageable);
+	public List<MenuEntity> search(Role useType, int usage);
 }

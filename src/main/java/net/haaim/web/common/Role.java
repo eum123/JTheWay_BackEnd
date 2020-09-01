@@ -18,4 +18,13 @@ public enum Role {
 		this.code = code;
 		this.remark = remark;
 	}
+	
+	public static Role getRole(int type) {
+		for(Role role : Role.values()) {
+			if(type == role.getCode()) {
+				return role;
+			}
+		}
+		return null;
+	}
 }

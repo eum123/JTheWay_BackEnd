@@ -1,27 +1,18 @@
 package net.haaim.web.menu.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import java.util.List;
 
-import net.haaim.web.notice.entity.NoticeEntity;
-import net.haaim.web.notice.repository.NoticeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import net.haaim.web.common.Role;
+import net.haaim.web.menu.entity.MenuEntity;
+import net.haaim.web.menu.repository.MenuRepository;
 
 public abstract class AbstractMenuService implements MenuService {
 
 	@Autowired
-	protected NoticeRepository repo;
-
-	public Page<NoticeEntity> searchAll(Pageable pageable) {
-		return repo.findByState(NoticeEntity.VIEW, pageable);
-	}
-
-	public NoticeEntity search(int no) {
-		return repo.getOne(no);
-	}
-
-	public abstract Page<NoticeEntity> search(Pageable pageable);
-
-	public abstract Page<NoticeEntity> search(String title, String contents, Pageable pageable);
+	protected MenuRepository repo;
+	
+	public abstract List<MenuEntity> search(Role useType, int usage);
 
 }

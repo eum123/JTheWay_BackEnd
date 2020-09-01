@@ -1,7 +1,5 @@
 package net.haaim.web.notice.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.extern.slf4j.Slf4j;
 import net.haaim.web.common.User;
 import net.haaim.web.common.UserHelper;
 import net.haaim.web.common.request.CustomPageRequest;
@@ -17,11 +16,11 @@ import net.haaim.web.common.response.ApiResponse;
 import net.haaim.web.notice.service.NoticeService;
 import net.haaim.web.notice.service.NoticeServiceFactory;
 
+@Slf4j
 @RestController
 @RequestMapping("/notice")
 public class NoticeController {
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
+	
 	@Autowired
 	private NoticeServiceFactory factory;
 	
@@ -40,7 +39,7 @@ public class NoticeController {
 			return ApiResponse.getSuccessResponse(result);
 
 		} catch (Exception e) {
-			logger.error("search error", e);
+			log.error("search error", e);
 
 			return ApiResponse.getErrorResponse(e);
 
@@ -64,7 +63,7 @@ public class NoticeController {
 			return ApiResponse.getSuccessResponse(result);
 
 		} catch (Exception e) {
-			logger.error("search error", e);
+			log.error("search error", e);
 
 			return ApiResponse.getErrorResponse(e);
 
