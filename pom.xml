@@ -17,6 +17,8 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
 	</properties>
 
 	<dependencies>
@@ -106,23 +108,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!-- 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<warSourceDirectory>WebContent</warSourceDirectory>
-					<webXml>WebContent/WEB-INF/web.xml</webXml>
-
-					<webResources>
-						<resource>
-							<directory>src/main/webapp</directory>
-							<filtering>false</filtering>
-						</resource>
-					</webResources>
-				</configuration>
-			</plugin>
-			-->
 		</plugins>
 	</build>
 

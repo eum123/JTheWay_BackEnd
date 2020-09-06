@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
@@ -21,7 +23,6 @@ import net.haaim.web.common.entity.CommonEntity;
 
 @Entity
 @Table(name = "code_mngt")
-@IdClass(CodeEntityKey.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class CodeEntity extends CommonEntity implements Serializable {
@@ -31,13 +32,17 @@ public class CodeEntity extends CommonEntity implements Serializable {
 	private static final long serialVersionUID = -8113141283039879647L;
 	
 	public static final int VIEW = 1;
+	
+	@Id // pk
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "no")
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	private int no;
 
-	@Id
 	@Column(name = "group_code")
 	@JsonProperty(value = "group_code", access = JsonProperty.Access.WRITE_ONLY)
 	private String groupCode = null;
 	
-	@Id
 	@Column(name = "code")
 	@JsonProperty(value = "code", access = JsonProperty.Access.WRITE_ONLY)
 	private String code = null;
@@ -69,22 +74,3 @@ public class CodeEntity extends CommonEntity implements Serializable {
 		Assert.hasText(code, "code must not be empty");
 	}
 }
-
-/**
-
-CREATE TABLE IF NOT EXISTS `haaim`.`code_mngt` (
-`group_code` VARCHAR(20) NOT NULL COMMENT '그룹코드',
-`code` VARCHAR(20) NOT NULL COMMENT '코드',
-`code_name` VARCHAR(100) NOT NULL COMMENT '코드명',
-`use_yn` INT(1) NOT NULL COMMENT '사용여부',
-`codename2` VARCHAR(100) NULL COMMENT '코드명2',
-`codename3` VARCHAR(100) NULL COMMENT '코드명3',
-`input_id` VARCHAR(45) NOT NULL,
-`input_date` DATETIME NOT NULL,
-`update_id` VARCHAR(45) NULL,
-`update_date` DATETIME NULL,
-PRIMARY KEY (`group_code`, `code`))
-ENGINE = InnoDB
-COMMENT = '코드';
-
-*/

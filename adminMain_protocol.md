@@ -104,6 +104,27 @@
          ]
        
       ```
+   5. 메뉴
+     - 요청
+     - 응답
+      ```json
+        {
+        	"user": "장덕일",
+        	"Auth": "원장",
+        	"list": [
+	        	{
+	        		"name": "사용자관리",
+	        		"link": "/admin/user/userList.html"
+	        	},
+	        	{
+	        		"name": "시스템관리",
+	        		"link": "/admin/system/codeList.html"
+	        	}
+         
+        	]
+        }
+      ```     
+      
 ## 사용자 목록
  1. 목록
     - 요청

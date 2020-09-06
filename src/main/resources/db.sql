@@ -325,6 +325,7 @@ ENGINE = InnoDB
 COMMENT = '메뉴권한관리';
 
 CREATE TABLE IF NOT EXISTS `haaim`.`code_mngt` (
+  `no` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `group_code` VARCHAR(20) NOT NULL COMMENT '그룹코드',
   `code` VARCHAR(20) NOT NULL COMMENT '코드',
   `code_name` VARCHAR(100) NOT NULL COMMENT '코드명',
@@ -335,7 +336,7 @@ CREATE TABLE IF NOT EXISTS `haaim`.`code_mngt` (
   `input_date` DATETIME NOT NULL,
   `update_id` VARCHAR(45) NULL,
   `update_date` DATETIME NULL,
-  PRIMARY KEY (`group_code`, `code`))
+  PRIMARY KEY (`no`))
 ENGINE = InnoDB
 COMMENT = '코드';
 
