@@ -115,7 +115,7 @@
 
 					<webResources>
 						<resource>
-							<directory>src/main/webapp</directory>
+							<directory>WebContent/</directory>
 							<filtering>false</filtering>
 						</resource>
 					</webResources>
