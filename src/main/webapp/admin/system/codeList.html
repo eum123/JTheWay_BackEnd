@@ -120,7 +120,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <button type="button" class="btn btn-w-m btn-success" @click="search">검색</button>
-                                                    <button type="button" class="btn btn-w-m btn-primary">등록</button>
+                                                    <button type="button" class="btn btn-w-m btn-primary" @click="goRegist">등록</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -171,27 +171,14 @@
                                             <tfoot>
                                                 <tr>
                                                     <td colspan="6" class="text-right">
-                                                        <!--
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-white" @click="movePage(code.pagination.pageInfo.prePageNumber)">
-                                                              <i class="fa fa-chevron-left"></i>
-                                                            </button>
-                                                            <button v-for="page in code.pagination.pageInfo.pageNumbers" v-bind:class="pageClassObject(page)" @click="movePage(page)">
-                                                              {{page}}
-                                                            </button>
-                                                            <button type="button" class="btn btn-white" @click="movePage(code.pagination.pageInfo.nextPageNumber)">
-                                                              <i class="fa fa-chevron-right"></i>
-                                                            </button>
-                                                        </div>
--->
-                                                        <div class="btn-group">
-                                                            <button type="button" class="btn btn-white" @click="moveToPrePage()">
+                                                            <button type="button" class="btn btn-white" @click="moveToPrePage(code.pageInfo.prePageNumber)">
                                                               <i class="fa fa-chevron-left"></i>
                                                             </button>
                                                             <button v-for="page in code.pageInfo.pageNumbers" v-bind:class="pageClassObject(page)" @click="movePage(page)">
                                                               {{page}}
                                                             </button>
-                                                            <button type="button" class="btn btn-white" @click="moveToNextPage()">
+                                                            <button type="button" class="btn btn-white" @click="moveToNextPage(code.pageInfo.nextPageNumber)">
                                                             <i class="fa fa-chevron-right"></i>
                                                             </button>
                                                         </div>
@@ -241,7 +228,7 @@
 
         var data = new Object();
         init();
-
+        console.log(data);
         var vm = new Vue({
             el: "#app",
             data() {
@@ -249,21 +236,36 @@
             },
             methods: {
                 movePage: function(page) {
-                    callAPI();
+                    var param = getSearchParameter();
+
+                    param.page = page;
+                    param.size = LIST_COUNT;
+
+                    callAPI(param);
                 },
-                moveToPrePage: function() {
+                moveToPrePage: function(page) {
                     if (data.code.first == true) {
                         alert("처음 페이지 입니다.");
                     } else {
-                        callAPI();
+                        var param = getSearchParameter();
+
+                        param.page = page;
+                        param.size = LIST_COUNT;
+
+                        callAPI(param);
                     }
                 },
 
-                moveToNextPage: function() {
+                moveToNextPage: function(page) {
                     if (data.code.last === true) {
                         alert("마지막 페이지 입니다.");
                     } else {
-                        callAPI();
+                        var param = getSearchParameter();
+
+                        param.page = page;
+                        param.size = LIST_COUNT;
+
+                        callAPI(param);
                     }
                 },
 
@@ -276,9 +278,14 @@
                 },
                 search: function() {
                     if (validate()) {
-                        callAPI();
+                        var param = getSearchParameter();
+
+                        callAPI(param);
                     }
                 },
+                goRegist: function() {
+                    location.href = HAAIM + "/admin/system/codeRegist.html";
+                }
 
             },
 
@@ -289,14 +296,14 @@
             },
         });
 
-        function callAPI() {
+        function callAPI(parameter) {
             //start loading
             toggleLoading();
 
             //데이터 조회
             syncGet(
                 HAAIM + "/code/search",
-                getSearchParameter(),
+                parameter,
                 function(res) {
                     if (res != null) {
                         data.code = res.data;
@@ -366,6 +373,8 @@
             var param = new Object();
             if (name != "") {
                 param.name = name;
+            } else {
+                param.name = "";
             }
 
             if (use_yn != "") {
