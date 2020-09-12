@@ -92,7 +92,7 @@
                                 <div class="row">
                                   <div class="col-md-6">                                  
                                     <select id="groupCode" class="form-control" >
-                                      <option v-for="codeList in groupCode" :value="codeList.code">{{codeList.code_name}}</option>
+                                      <option v-for="codeList in groupCode" :value="codeList.code">{{ codeList.code_name }}</option>
                                     </select>
                                   </div>
                                   <div class="col-md-6"> 
@@ -217,7 +217,7 @@
             var param = new Object();
             param.code = code;
             param.code_name = name;
-       console.log(param);     
+        
             syncPost(
                 HAAIM + "/code/group/save",
                 param,

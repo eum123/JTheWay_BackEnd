@@ -36,23 +36,23 @@ public class CodeEntity extends CommonEntity implements Serializable {
 	@Id // pk
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "no")
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@JsonProperty(access = JsonProperty.Access.AUTO)
 	private int no;
 
 	@Column(name = "group_code")
-	@JsonProperty(value = "group_code", access = JsonProperty.Access.WRITE_ONLY)
+	@JsonProperty(value = "group_code", access = JsonProperty.Access.AUTO)
 	private String groupCode = null;
 	
 	@Column(name = "code")
-	@JsonProperty(value = "code", access = JsonProperty.Access.WRITE_ONLY)
+	@JsonProperty(value = "code", access = JsonProperty.Access.AUTO)
 	private String code = null;
 	
 	@Column(name = "code_name")
-	@JsonProperty(value = "code_name", access = JsonProperty.Access.WRITE_ONLY)
+	@JsonProperty(value = "code_name", access = JsonProperty.Access.AUTO)
 	private String codeName = "";
 	
 	@Column(name = "use_yn")
-	@JsonProperty(value = "use_yn", access = JsonProperty.Access.WRITE_ONLY)
+	@JsonProperty(value = "use_yn", access = JsonProperty.Access.AUTO)
 	private int usage = 0;
 	
 	@Builder

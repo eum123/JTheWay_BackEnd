@@ -21,6 +21,7 @@ public class GroupCodeService {
 	public GroupCodeEntity save(String code, String codeName) {
 		GroupCodeEntity entity = GroupCodeEntity.builder().code(code).codeName(codeName).inputDate(new Date())
 				.inputId("id").build();
-		return repo.save(entity);
+		
+		return repo.saveAndFlush(entity);
 	}
 }

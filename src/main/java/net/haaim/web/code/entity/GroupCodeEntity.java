@@ -1,6 +1,5 @@
 package net.haaim.web.code.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -18,32 +17,32 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import net.haaim.web.code.entity.CodeEntity.CodeEntityBuilder;
 import net.haaim.web.common.entity.CommonEntity;
 
 @Entity
 @Table(name = "group_code")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class GroupCodeEntity extends CommonEntity implements Serializable {
-public static final int VIEW = 1;
+public class GroupCodeEntity extends CommonEntity  {
+	
+	public static final int VIEW = 1;
 	
 	@Id // pk
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "no")
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@JsonProperty(access = JsonProperty.Access.AUTO)
 	private int no;
 	
 	@Column(name = "code")
-	@JsonProperty(value = "code", access = JsonProperty.Access.WRITE_ONLY)
+	@JsonProperty(value = "code", access = JsonProperty.Access.AUTO)
 	private String code = null;
 	
 	@Column(name = "code_name")
-	@JsonProperty(value = "code_name", access = JsonProperty.Access.WRITE_ONLY)
+	@JsonProperty(value = "code_name", access = JsonProperty.Access.AUTO)
 	private String codeName = "";
 	
 	@Column(name = "use_yn")
-	@JsonProperty(value = "use_yn", access = JsonProperty.Access.WRITE_ONLY)
+	@JsonProperty(value = "use_yn", access = JsonProperty.Access.AUTO)
 	private int usage = 0;
 	
 	@Builder

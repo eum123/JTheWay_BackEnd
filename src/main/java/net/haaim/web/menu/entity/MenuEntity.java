@@ -24,25 +24,25 @@ import net.haaim.web.common.entity.CommonEntity;
 public class MenuEntity extends CommonEntity {
 	@Id // pk
 	@Column(name = "menu_code")
-	@JsonProperty(value = "menu_code", access = JsonProperty.Access.WRITE_ONLY)
+	@JsonProperty(value = "menu_code", access = JsonProperty.Access.AUTO)
 	private String menuCode;
 
 	@Column(name = "menu_name")
-	@JsonProperty(value = "menu_name", access = JsonProperty.Access.WRITE_ONLY)
+	@JsonProperty(value = "menu_name", access = JsonProperty.Access.AUTO)
 	private String menuName;
 	
 	@Column(name = "parent_menu_code")
-	@JsonProperty(value = "parent_menu_code", access = JsonProperty.Access.WRITE_ONLY)
+	@JsonProperty(value = "parent_menu_code", access = JsonProperty.Access.AUTO)
 	private String parentMenuCode;
 
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@JsonProperty(access = JsonProperty.Access.AUTO)
 	private int depth;
 
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@JsonProperty(access = JsonProperty.Access.AUTO)
 	private String url;
 
 	@Column(name = "use_yn")
-	@JsonProperty(value = "use_yn", access = JsonProperty.Access.WRITE_ONLY)
+	@JsonProperty(value = "use_yn", access = JsonProperty.Access.AUTO)
 	private int usage = 0;
 
 	@Builder

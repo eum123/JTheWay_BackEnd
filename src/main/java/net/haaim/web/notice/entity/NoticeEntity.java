@@ -29,20 +29,20 @@ public class NoticeEntity extends CommonEntity {
 	@Id // pk
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "no")
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@JsonProperty(access = JsonProperty.Access.AUTO)
 	private int no;
 
 	@Column(name = "title", nullable = true, unique = false, length = 100)
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@JsonProperty(access = JsonProperty.Access.AUTO)
 	private String title;
 
 	@Column(name = "contents", nullable = true, unique = false, length = 1024)
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@JsonProperty(access = JsonProperty.Access.AUTO)
 	private String contents;
 
 	/** 상태(0:HIDDEN/1:VIEW) */
 	@Column(name = "state", nullable = true, unique = false)
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@JsonProperty(access = JsonProperty.Access.AUTO)
 	private int state;
 
 	
