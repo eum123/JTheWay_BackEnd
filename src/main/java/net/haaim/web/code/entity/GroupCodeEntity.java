@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 import org.springframework.util.Assert;
@@ -19,29 +18,21 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import net.haaim.web.code.entity.CodeEntity.CodeEntityBuilder;
 import net.haaim.web.common.entity.CommonEntity;
 
 @Entity
-@Table(name = "code")
+@Table(name = "group_code")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class CodeEntity extends CommonEntity implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8113141283039879647L;
-	
-	public static final int VIEW = 1;
+public class GroupCodeEntity extends CommonEntity implements Serializable {
+public static final int VIEW = 1;
 	
 	@Id // pk
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "no")
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private int no;
-
-	@Column(name = "group_code")
-	@JsonProperty(value = "group_code", access = JsonProperty.Access.WRITE_ONLY)
-	private String groupCode = null;
 	
 	@Column(name = "code")
 	@JsonProperty(value = "code", access = JsonProperty.Access.WRITE_ONLY)
@@ -56,21 +47,19 @@ public class CodeEntity extends CommonEntity implements Serializable {
 	private int usage = 0;
 	
 	@Builder
-	public CodeEntity(String groupCode, String code, String codeName, int usage, String inputId, Date inputDate, String updateId,
+	public GroupCodeEntity(String code, String codeName, int usage, String inputId, Date inputDate, String updateId,
 			Date updateDate) {
 
 		super(inputId, inputDate, updateId, updateDate);
 
-		validate(groupCode, code);
+		validate(code);
 		
-		this.groupCode = groupCode;
 		this.code = code;
 		this.codeName = codeName;
 		this.usage = usage;
 
 	}
-	private void validate(String groupCode, String code) {
-		Assert.hasText(groupCode, "groupCode must not be empty");
+	private void validate(String code) {
 		Assert.hasText(code, "code must not be empty");
 	}
 }

@@ -3,14 +3,14 @@ package net.haaim.web.code.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.haaim.web.code.entity.CodeEntity;
+import net.haaim.web.code.service.GroupCodeService;
 import net.haaim.web.code.service.CodeService;
 import net.haaim.web.common.request.CustomPageRequest;
 import net.haaim.web.common.response.ApiResponse;
@@ -22,6 +22,8 @@ public class CodeController {
 
 	@Autowired
 	private CodeService codeService;
+	@Autowired
+	private GroupCodeService codeGroupService;
 
 	@RequestMapping(value = "all", method = RequestMethod.GET)
 	public ApiResponse searchAll(@RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -58,4 +60,31 @@ public class CodeController {
 
 		}
 	}
+	
+	@RequestMapping(value = "group/all", method = RequestMethod.GET)
+	public ApiResponse searchGroupCode() {
+
+		try {
+			return ApiResponse.getSuccessResponse(codeGroupService.searchAll());
+		} catch (Exception e) {
+			logger.error("search error", e);
+
+			return ApiResponse.getErrorResponse(e);
+
+		}
+	}
+	
+	@PostMapping(value="group/save")
+	public ApiResponse saveGroupCode(@RequestParam(value="code") String code, @RequestParam(value="code_name")String codeName) {
+		
+		try {
+			return ApiResponse.getSuccessResponse(codeGroupService.save(code, codeName));
+		} catch (Exception e) {
+			logger.error("search error", e);
+
+			return ApiResponse.getErrorResponse(e);
+
+		}
+	}
+	
 }

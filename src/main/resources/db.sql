@@ -324,21 +324,32 @@ CREATE TABLE IF NOT EXISTS `haaim`.`authority` (
 ENGINE = InnoDB
 COMMENT = '메뉴권한관리';
 
-CREATE TABLE IF NOT EXISTS `haaim`.`code_mngt` (
+CREATE TABLE IF NOT EXISTS `haaim`.`code` (
   `no` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `group_code` VARCHAR(20) NOT NULL COMMENT '그룹코드',
   `code` VARCHAR(20) NOT NULL COMMENT '코드',
   `code_name` VARCHAR(100) NOT NULL COMMENT '코드명',
   `use_yn` INT(1) NOT NULL COMMENT '사용여부',
-  `codename2` VARCHAR(100) NULL COMMENT '코드명2',
-  `codename3` VARCHAR(100) NULL COMMENT '코드명3',
   `input_id` VARCHAR(45) NOT NULL,
   `input_date` DATETIME NOT NULL,
   `update_id` VARCHAR(45) NULL,
-  `update_date` DATETIME NULL,
-  PRIMARY KEY (`no`))
+  `update_date` DATETIME NULL
+  )
 ENGINE = InnoDB
 COMMENT = '코드';
+
+CREATE TABLE IF NOT EXISTS `haaim`.`code_group` (
+  `no` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `code` VARCHAR(20) NOT NULL COMMENT '코드',
+  `code_name` VARCHAR(100) NOT NULL COMMENT '코드명',
+  `use_yn` INT(1) NOT NULL COMMENT '사용여부',
+  `input_id` VARCHAR(45) NOT NULL,
+  `input_date` DATETIME NOT NULL,
+  `update_id` VARCHAR(45) NULL,
+  `update_date` DATETIME NULL
+  )
+ENGINE = InnoDB
+COMMENT = '코드 그룹';
 
 CREATE TABLE IF NOT EXISTS `haaim`.`notice` (
   `no` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

@@ -104,3 +104,27 @@
       
       ```
       
+## Group 코드 목록 조회
+	- 내용
+		group_code 전체를 구한다.
+   	- 요청(GET)
+       http://.../code/group/all
+       
+    - 응답
+      ```json
+      
+		{
+		  "success": true,
+		  "code": 0,
+		  "msg": "OK",
+		  "data": [
+		      { 
+		        "code": "title",
+		        "code_name": "content",
+		        "use_yn": "0"
+		      }
+		    ]
+		  
+		}
+      
+      ```
