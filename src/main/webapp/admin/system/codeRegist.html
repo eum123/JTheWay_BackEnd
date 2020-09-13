@@ -87,11 +87,11 @@
                           <thead></thead>
                           <tbody>
                             <tr>
-                              <td>코드선택</td>
+                              <td class="text-center">코드그룹</td>
                               <td>
                                 <div class="row">
                                   <div class="col-md-6">                                  
-                                    <select id="groupCode" class="form-control" >
+                                    <select id="group_code" class="form-control" >
                                       <option v-for="codeList in groupCode" :value="codeList.code">{{ codeList.code_name }}</option>
                                     </select>
                                   </div>
@@ -122,20 +122,20 @@
                               </td>
                             </tr>
                             <tr>
-                              <td>코드</td>
+                              <td class="text-center">코드</td>
                               <td>
                                 <input id="code" type="text" placeholder="코드" class="form-control"/>
                               </td>
                             </tr>
 
                             <tr>
-                              <td>코드명</td>
+                              <td class="text-center">코드명</td>
                               <td>
                                 <input id="code_name" type="text" placeholder="코드명" class="form-control"/>
                               </td>
                             </tr>
                             <tr>
-                              <td>사용</td>
+                              <td class="text-center">사용</td>
                               <td>
                                 <select class="form-control" id="use_yn">
                                   <option value="1" selected >사용</option>
@@ -150,12 +150,8 @@
                       <div class="row">
                         <form role="form" class="form-inline">
                           <div class="form-group">
-                            <button type="button" class="btn btn-w-m btn-default">
-                              취소
-                            </button>
-                            <button type="button" class="btn btn-w-m btn-success" @click="regist">
-                              등록
-                            </button>
+                            <button type="button" class="btn btn-w-m btn-default">취소</button>
+                            <button type="button" class="btn btn-w-m btn-success" @click="regist">등록</button>
                           </div>
                         </form>
                       </div>
@@ -209,6 +205,30 @@
         methods: {
           regist: function() {
             console.log("regist");
+            var groupCode = $("#group_code option:selected").val();
+            var code = $("#code").val(); //코드 그룹
+            var name = $("#code_name").val(); //코드 그룹
+            var use_yn = $("#use_yn option:selected").val();
+
+            var param = new Object();
+            param.group_code = groupCode;
+            param.code = code;
+            param.code_name = name;
+            param.use_yn = use_yn;
+
+            syncPost(
+                HAAIM + "/code/save",
+                param,
+                function(res) {
+                    if (res != null) {
+                      console.log(res);
+                      alert("저장 성공");
+                    }
+                },
+                function(){
+                  alert("code 저장 오류");
+                }
+            );
           },
           registGroupCode: function() {
             var code = $("#add_group_code").val(); //코드 그룹

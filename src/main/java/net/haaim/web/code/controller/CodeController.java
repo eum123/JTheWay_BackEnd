@@ -33,7 +33,7 @@ public class CodeController {
 		try {
 
 			PageRequest pageable = CustomPageRequest.of(page, size, "no");
-			
+
 			return ApiResponse.getSuccessResponse(codeService.search(pageable));
 		} catch (Exception e) {
 			logger.error("search error", e);
@@ -60,7 +60,7 @@ public class CodeController {
 
 		}
 	}
-	
+
 	@RequestMapping(value = "group/all", method = RequestMethod.GET)
 	public ApiResponse searchGroupCode() {
 
@@ -73,18 +73,34 @@ public class CodeController {
 
 		}
 	}
-	
-	@PostMapping(value="group/save")
-	public ApiResponse saveGroupCode(@RequestParam(value="code") String code, @RequestParam(value="code_name")String codeName) {
-		
+
+	@PostMapping(value = "save")
+	public ApiResponse saveCode(@RequestParam(value = "group_code") String groupCode,
+			@RequestParam(value = "code") String code, @RequestParam(value = "code_name") String codeName,
+			@RequestParam(value = "use_yn") Integer usage) {
+
 		try {
-			return ApiResponse.getSuccessResponse(codeGroupService.save(code, codeName));
+			return ApiResponse.getSuccessResponse(codeService.save(groupCode, code, codeName, usage));
 		} catch (Exception e) {
-			logger.error("search error", e);
+			logger.error("code save error", e);
 
 			return ApiResponse.getErrorResponse(e);
 
 		}
 	}
-	
+
+	@PostMapping(value = "group/save")
+	public ApiResponse saveGroupCode(@RequestParam(value = "code") String code,
+			@RequestParam(value = "code_name") String codeName) {
+
+		try {
+			return ApiResponse.getSuccessResponse(codeGroupService.save(code, codeName));
+		} catch (Exception e) {
+			logger.error("groupcode save error", e);
+
+			return ApiResponse.getErrorResponse(e);
+
+		}
+	}
+
 }

@@ -154,18 +154,18 @@
                                                 <tr v-for="codeElement in code.content">
                                                     <td class="text-center">{{codeElement.no}}</td>
                                                     <td class="text-center">
-                                                        {{codeElement.groupCode.code}}
+                                                        {{codeElement.group_code}}
                                                     </td>
                                                     <td class="text-center">
-                                                        {{codeElement.groupCode.name}}
+                                                        {{codeElement.group_code}}
                                                     </td>
                                                     <td class="text-center">
-                                                        {{codeElement.code.code}}
+                                                        {{codeElement.code}}
                                                     </td>
                                                     <td class="text-center">
-                                                        {{codeElement.code.name}}
+                                                        {{codeElement.code_name}}
                                                     </td>
-                                                    <td class="text-center">{{codeElement.usage}}</td>
+                                                    <td class="text-center">{{codeElement.use_yn}}</td>
                                                 </tr>
                                             </tbody>
                                             <tfoot>
@@ -306,8 +306,12 @@
                 parameter,
                 function(res) {
                     if (res != null) {
-                        data.code = res.data;
-                        data.code.pageInfo = getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, data.code.totalElements, data.code.pageable.pageNumber);
+                        if (res.success == true) {
+                            data.code = res.data;
+                            data.code.pageInfo = getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, data.code.totalElements, data.code.pageable.pageNumber + 1);
+                        } else {
+                            alert("error : " + res.code);
+                        }
                     } else {
                         alert("error");
                     }
@@ -336,7 +340,6 @@
 
             //code 조회
             syncGet(
-                //"https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
                 HAAIM + "/code/all",
                 "",
                 function(res) {
