@@ -16,6 +16,8 @@ import lombok.NoArgsConstructor;
 @Getter
 public class CommonEntity {
 	
+	public static final int VIEW = 1;
+	
 	@Column(name = "input_id", nullable = false, unique = false, length = 45)
 	@JsonProperty(value = "input_id", access = JsonProperty.Access.WRITE_ONLY)
 	protected String inputId;

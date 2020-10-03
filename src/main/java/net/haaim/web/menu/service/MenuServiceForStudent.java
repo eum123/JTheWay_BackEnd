@@ -12,6 +12,7 @@ import net.haaim.web.menu.entity.MenuEntity;
 public class MenuServiceForStudent extends AbstractMenuService {
 	
 	public List<MenuEntity> search(Role useType, int usage) {
+		//학생은 메뉴가 없음
 		return new ArrayList();
 	}
 }

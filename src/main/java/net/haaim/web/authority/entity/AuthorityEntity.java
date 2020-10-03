@@ -30,7 +30,6 @@ public class AuthorityEntity extends CommonEntity implements Serializable {
 	@Column(name = "user_type")
 	private Role userType;
 	
-	@Id
 	@Column(name = "use_yn")
 	private int usage = 0;
 	
@@ -49,13 +48,3 @@ public class AuthorityEntity extends CommonEntity implements Serializable {
 		
 	}
 }
-/*
-`menu_code` VARCHAR(10) NOT NULL COMMENT '메뉴코드',
-`user_type` INT(1) NOT NULL COMMENT '사용자권한',
-`use_yn` INT(1) NOT NULL,
-`input_id` VARCHAR(45) NOT NULL,
-`input_date` DATETIME NOT NULL,
-`update_id` VARCHAR(45) NULL,
-`update_date` DATETIME NULL,
-PRIMARY KEY (`menu_code`, `user_type`, `use_yn`))
-*/

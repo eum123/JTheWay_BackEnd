@@ -33,27 +33,27 @@ public class MenuServiceTest {
 
 	@BeforeEach
 	public void init() {
-		authRepo.deleteAll();
-		repo.deleteAll();
-		
-		authRepo.save(AuthorityEntity.builder().menuCode("11").inputDate(new Date()).inputId("id").usage(1).userType(1)
-				.build());
-		repo.save(MenuEntity.builder().depth(0).inputDate(new Date()).inputId("id").menuCode("11").menuName("11 name")
-				.parentMenuCode("0").url("url").usage(1).build());
-		repo.save(MenuEntity.builder().depth(0).inputDate(new Date()).inputId("id").menuCode("12").menuName("12 name")
-				.parentMenuCode("0").url("url").usage(1).build());
+//		authRepo.deleteAll();
+//		repo.deleteAll();
+//		
+//		authRepo.save(AuthorityEntity.builder().menuCode("11").inputDate(new Date()).inputId("id").usage(1).userType(1)
+//				.build());
+//		repo.save(MenuEntity.builder().depth(0).inputDate(new Date()).inputId("id").menuCode("11").menuName("11 name")
+//				.parentMenuCode("0").url("url").usage(1).build());
+//		repo.save(MenuEntity.builder().depth(0).inputDate(new Date()).inputId("id").menuCode("12").menuName("12 name")
+//				.parentMenuCode("0").url("url").usage(1).build());
 	}
 
 	@Test
 	public void testService() {
 		List<MenuEntity> list = service.search(Role.TEACHER, 1);
-		Assertions.assertEquals(0, list.size());
+		Assertions.assertEquals(18, list.size());
 		
 	}
 	@Test
 	public void testMenuSearch() {
 		List<MenuEntity> list = service.search(Role.CODY, 1);
-		Assertions.assertEquals(1, list.size());
-		Assertions.assertEquals("11", list.get(0).getMenuCode());
+		Assertions.assertEquals(18, list.size());
+
 	}
 }

@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.haaim.web.common.User;
 import net.haaim.web.common.UserHelper;
 import net.haaim.web.common.response.ApiResponse;
+import net.haaim.web.menu.entity.MenuEntity;
 import net.haaim.web.menu.service.MenuService;
 import net.haaim.web.menu.service.MenuServiceFactory;
 
@@ -20,7 +21,7 @@ public class MenuController {
 	@Autowired
 	private MenuServiceFactory factory;
 
-	@RequestMapping(value = "searchAll", method = RequestMethod.GET)
+	@RequestMapping(value = "all", method = RequestMethod.GET)
 	public ApiResponse search() {
 		//사용자의 권한을 확인
 		User user = UserHelper.getUser();
@@ -29,8 +30,7 @@ public class MenuController {
 		
 			MenuService service = factory.getInstance(user);
 			
-			return null;
-			//return ApiResponse.getSuccessResponse(service.);
+			return ApiResponse.getSuccessResponse(service.search(user.getRole(), MenuEntity.VIEW));
 
 		} catch (Exception e) {
 			log.error("search error", e);

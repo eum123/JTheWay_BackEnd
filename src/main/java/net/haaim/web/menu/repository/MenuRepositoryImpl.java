@@ -19,12 +19,12 @@ public class MenuRepositoryImpl extends QuerydslRepositorySupport implements Men
 	
 	public List<MenuEntity> findAllByUserTypeAndUsage(Role userType, int usage) {
 		return from(QMenuEntity.menuEntity)
-		.where(QMenuEntity.menuEntity.usage.eq(usage)
-				.and(QMenuEntity.menuEntity.menuCode.in(
+		.where(QMenuEntity.menuEntity.menuCode.in(
 						JPAExpressions.select(QAuthorityEntity.authorityEntity.menuCode)
 							.from(QAuthorityEntity.authorityEntity)
-							.where(QAuthorityEntity.authorityEntity.userType.eq(userType))
-						))
+							.where(QAuthorityEntity.authorityEntity.userType.eq(userType)
+									.and(QAuthorityEntity.authorityEntity.usage.eq(usage)))
+						)
 				)
 		.fetch();
 	}

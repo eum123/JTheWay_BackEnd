@@ -326,7 +326,7 @@
         function init() {
             data.code = "";
 
-            //menu
+            //menu userList.html 참고
             syncGet(
                 "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
                 "",
@@ -345,7 +345,6 @@
                 function(res) {
                     if (res != null) {
                         data.code = res.data;
-                        console.log(data.code);
 
                         data.code.pageInfo = getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, data.code.totalElements, 1);
                     } else {

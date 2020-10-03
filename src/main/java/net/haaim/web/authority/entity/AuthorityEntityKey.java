@@ -7,5 +7,4 @@ import net.haaim.web.common.Role;
 public class AuthorityEntityKey implements Serializable{
 	private String menuCode;
 	private Role userType;
-	private int usage = 0;
 }

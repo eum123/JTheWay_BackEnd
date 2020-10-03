@@ -21,7 +21,7 @@ create table sample (
 insert into sample values('hong', 30);
 
 -- ---------------
-CREATE TABLE IF NOT EXISTS `haaim`.`user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `user_id` VARCHAR(45) NOT NULL,
   `user_pw` VARCHAR(200) NOT NULL,
   `user_type` INT(1) NOT NULL COMMENT '사용자의구분/권한 ( 4:관리자/3:원장/2:교사/1:코디/0:학생)',
@@ -302,7 +302,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `parent_menu_code` VARCHAR(10) NULL COMMENT '부모 메뉴 코드',
   `depth` INT(1) NOT NULL COMMENT '메뉴 depth',
   `url` VARCHAR(200) NULL,
-  `use_yn` INT(1) NOT NULL COMMENT '사용여부',
+  `use_yn` INT(1) NOT NULL COMMENT '사용여부',  -- authority 테이블에 use_yn과 의미가 중복됨. menu에는 필요없음
   `sort` INT(2) NULL COMMENT '정렬순서',
   `input_id` VARCHAR(45) NOT NULL,
   `input_date` DATETIME NOT NULL,
@@ -312,7 +312,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
 ENGINE = InnoDB
 COMMENT = '메뉴';
 
-CREATE TABLE IF NOT EXISTS `haaim`.`authority` (
+CREATE TABLE IF NOT EXISTS `authority` (
   `menu_code` VARCHAR(10) NOT NULL COMMENT '메뉴코드',
   `user_type` INT(1) NOT NULL COMMENT '사용자권한',
   `use_yn` INT(1) NOT NULL,
@@ -320,11 +320,11 @@ CREATE TABLE IF NOT EXISTS `haaim`.`authority` (
   `input_date` DATETIME NOT NULL,
   `update_id` VARCHAR(45) NULL,
   `update_date` DATETIME NULL,
-  PRIMARY KEY (`menu_code`, `user_type`, `use_yn`))
+  PRIMARY KEY (`menu_code`, `user_type`))
 ENGINE = InnoDB
 COMMENT = '메뉴권한관리';
 
-CREATE TABLE IF NOT EXISTS `haaim`.`code` (
+CREATE TABLE IF NOT EXISTS `code` (
   `no` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `group_code` VARCHAR(20) NOT NULL COMMENT '그룹코드',
   `code` VARCHAR(20) NOT NULL COMMENT '코드',

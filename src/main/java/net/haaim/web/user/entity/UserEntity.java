@@ -1,4 +1,4 @@
-package net.haaim.web.member.entity;
+package net.haaim.web.user.entity;
 
 import java.util.Date;
 
