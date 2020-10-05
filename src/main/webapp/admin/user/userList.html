@@ -44,10 +44,17 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="active" v-for="menuItme in left.menu">
-                            <a :href="menuItme.link"><i class="fa fa-th-large"></i>
-                              <span class="nav-label">{{menuItme.menu_name}}</span>
+
+                        <li v-for="menuItem in left.menu">
+                            <a :href="menuItem.primary.url"><i class="fa fa-th-large"></i>
+                              <span class="nav-label">{{menuItem.primary.menu_name}}</span>
+                              <span v-if="menuItem.secondary.length > 1" class="fa arrow"></span>
                             </a>
+                            <ul class="nav nav-second-level collapse">
+                                <li v-for="sub in menuItem.secondary">
+                                    <a :href="sub.url">{{sub.menu_name}}</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -218,6 +225,10 @@
     <!-- vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
 
+    <!-- Custom and plugin javascript 왼쪽 메뉴용 -->
+    <script src="../../theme/js/inspinia.js"></script>
+    <script src="../../theme/js/plugins/pace/pace.min.js"></script>
+
     <script>
       var LIST_COUNT = 10; //페이지당 출력 건수
       var PAGENUMBER_COUNT = 10; //페이지 번호 출력 개수
@@ -267,6 +278,7 @@
                 function(res) {
                     if (res != null) {
                         data.left.menu = res.data;
+                        console.log(data.left.menu);
                     } else {
                       alert("menu load error");
                     }

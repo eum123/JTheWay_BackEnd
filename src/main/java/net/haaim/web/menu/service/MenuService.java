@@ -3,8 +3,8 @@ package net.haaim.web.menu.service;
 import java.util.List;
 
 import net.haaim.web.common.Role;
-import net.haaim.web.menu.entity.MenuEntity;
+import net.haaim.web.menu.entity.MenuResponse;
 
 public interface MenuService {
-	public List<MenuEntity> search(Role useType, int usage);
+	public List<MenuResponse> search(Role useType, int usage);
 }
