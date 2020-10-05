@@ -1,6 +1,5 @@
 package net.haaim.web.menu.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
@@ -11,10 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import lombok.extern.slf4j.Slf4j;
-import net.haaim.web.authority.entity.AuthorityEntity;
 import net.haaim.web.authority.repository.AuthorityRepository;
 import net.haaim.web.common.Role;
-import net.haaim.web.menu.entity.MenuEntity;
+import net.haaim.web.menu.entity.MenuResponse;
 import net.haaim.web.menu.repository.MenuRepository;
 
 @Slf4j
@@ -46,13 +44,13 @@ public class MenuServiceTest {
 
 	@Test
 	public void testService() {
-		List<MenuEntity> list = service.search(Role.TEACHER, 1);
+		List<MenuResponse> list = service.search(Role.TEACHER, 1);
 		Assertions.assertEquals(18, list.size());
 		
 	}
 	@Test
 	public void testMenuSearch() {
-		List<MenuEntity> list = service.search(Role.CODY, 1);
+		List<MenuResponse> list = service.search(Role.CODY, 1);
 		Assertions.assertEquals(18, list.size());
 
 	}

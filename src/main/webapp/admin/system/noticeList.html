@@ -297,6 +297,33 @@
         },
       });
 
+      function callAPI(parameter) {
+            //start loading
+            toggleLoading();
+
+            //데이터 조회
+            syncGet(
+                HAAIM + "/notice/search",
+                parameter,
+                function(res) {
+                    if (res != null) {
+                        if (res.success == true) {
+                            data.code = res.data;
+                            data.code.pageInfo = getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, data.code.totalElements, data.code.pageable.pageNumber + 1);
+                        } else {
+                            alert("error : " + res.code);
+                        }
+                    } else {
+                        alert("error");
+                    }
+                },
+                null
+            );
+
+            //end loading
+            toggleLoading();
+      }
+
       function init() {
         data.left = new Object();
         data.left.info = new Object();
@@ -358,22 +385,25 @@
       }
 
       /**
-       * 검색 조건으로 parameter 생성
-       */
-      function getSearchParameter() {
-        var questionDate = $("#questionDate").val(); //출제일자
-        var isTakeExam = $("#isTakeExam option:selected").val(); //응시 여부
+         * 검색 조건으로 parameter 생성
+         */
+         function getSearchParameter() {
+            var name = $("#name").val(); //코드명 또는 코드 그룹
+            var use_yn = $("#use_yn option:selected").val(); //사용여부
 
-        var param = "";
-        if (isTakeExam != "") {
-          param = "isTakeExam=" + isTakeExam;
-        }
-        if (questionDate != "") {
-          param = "questionDate=" + questionDate + "," + param;
-        }
+            var param = new Object();
+            if (name != "") {
+                param.name = name;
+            } else {
+                param.name = "";
+            }
 
-        return param;
-      }
+            if (use_yn != "") {
+                param.use_yn = use_yn;
+            }
+
+            return param;
+        }
 
       function toggleLoading() {
         $("#questionList").children(".ibox-content").toggleClass("sk-loading");
