@@ -46,11 +46,15 @@
                         </li>
 
                         <li v-for="menuItem in left.menu">
-                            <a :href="menuItem.primary.url"><i class="fa fa-th-large"></i>
+                            <a v-if="menuItem.secondary.length > 1" :href="menuItem.primary.url"><i class="fa fa-th-large"></i>
                               <span class="nav-label">{{menuItem.primary.menu_name}}</span>
-                              <span v-if="menuItem.secondary.length > 1" class="fa arrow"></span>
+                              <span  class="fa arrow"></span>
                             </a>
-                            <ul class="nav nav-second-level collapse">
+                            <a v-else :href="menuItem.primary.url"><i class="fa fa-th-large"></i>
+                              <span class="nav-label">{{menuItem.primary.menu_name}}</span>
+                            </a>
+
+                            <ul v-if="menuItem.secondary.length > 1" class="nav nav-second-level collapse">
                                 <li v-for="sub in menuItem.secondary">
                                     <a :href="sub.url">{{sub.menu_name}}</a>
                                 </li>
@@ -86,7 +90,7 @@
           <!-- end top -->
 
           <div class="row border-bottom white-bg dashboard-header">
-            navigation
+            사용자 관리
           </div>
           <div class="wrapper wrapper-content">
             <div>
