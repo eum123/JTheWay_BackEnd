@@ -43,22 +43,6 @@ public class NoticeRepositoryTest {
 		Assertions.assertEquals(1, list.getTotalElements());
 	}
 	
-	@Test
-	public void testFindByTitleContainingAndState() {
-		PageRequest pageRequest = CustomPageRequest.of(1, 10, "no");
-		Page<NoticeEntity> list = repo.findByTitleContainingAndState("title", 1, pageRequest);
-		Assertions.assertEquals(1, list.getTotalElements());
-		
-	}
-	@Test
-	public void testEmptyFindByTitleContainingAndState() {
-		PageRequest pageRequest = CustomPageRequest.of(1, 10, "no");
-		Page<NoticeEntity> list = repo.findByTitleContainingAndState("title", 0, pageRequest);
-		Assertions.assertEquals(0, list.getTotalElements());
-		
-	}
-	
-	
 	
 	@AfterEach
 	public void destory() {

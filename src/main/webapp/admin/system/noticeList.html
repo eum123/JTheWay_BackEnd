@@ -47,12 +47,12 @@
 
                         <li v-for="menuItem in left.menu">
                             <a v-if="menuItem.secondary.length > 1" :href="menuItem.primary.url"><i class="fa fa-th-large"></i>
-                    <span class="nav-label">{{menuItem.primary.menu_name}}</span>
-                    <span  class="fa arrow"></span>
-                  </a>
+                              <span class="nav-label">{{menuItem.primary.menu_name}}</span>
+                              <span  class="fa arrow"></span>
+                            </a>
                             <a v-else :href="menuItem.primary.url"><i class="fa fa-th-large"></i>
-                    <span class="nav-label">{{menuItem.primary.menu_name}}</span>
-                  </a>
+                              <span class="nav-label">{{menuItem.primary.menu_name}}</span>
+                            </a>
 
                             <ul v-if="menuItem.secondary.length > 1" class="nav nav-second-level collapse">
                                 <li v-for="sub in menuItem.secondary">
@@ -123,29 +123,19 @@
                         <form role="form" class="form-inline">
                           <div class="form-group">
                             <input
-                              type="text"
-                              placeholder="제목"
-                              class="form-control"
+                              type="text" placeholder="제목" class="form-control" id="title"
                             />
                           </div>
                           <div class="form-group">
                             <input
-                              type="text"
-                              placeholder="내용"
-                              class="form-control"
+                              type="text" placeholder="내용" class="form-control" id="contents"
                             />
                           </div>
                           <div class="form-group">
-                            <button
-                              type="button"
-                              class="btn btn-w-m btn-success"
-                            >
+                            <button type="button" class="btn btn-w-m btn-success" @click="search">
                               검색
                             </button>
-                            <button
-                              type="button"
-                              class="btn btn-w-m btn-primary"
-                            >
+                            <button type="button" class="btn btn-w-m btn-primary" @click="goRegist">
                               등록
                             </button>
                           </div>
@@ -178,46 +168,34 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="noticeElement in notice.list">
-                            <td class="text-center">{{noticeElement.no}}</td>
+                          <tr v-for="element in body.list">
+                            <td class="text-center">{{element.no}}</td>
                             <td class="text-center">
-                              {{noticeElement.subject}}
+                              {{element.subject}}
                             </td>
                             <td class="text-center">
-                              {{noticeElement.content}}
+                              {{element.content}}
                             </td>
                             <td class="text-center">
-                              {{noticeElement.writeDate}}
+                              {{element.writeDate}}
                             </td>
                           </tr>
                         </tbody>
                         <tfoot>
                           <tr>
-                            <td colspan="4" class="text-right">
-                              <div class="btn-group">
-                                <button
-                                  type="button"
-                                  class="btn btn-white"
-                                  @click="movePage(notice.pagination.pageInfo.prePageNumber)"
-                                >
-                                  <i class="fa fa-chevron-left"></i>
-                                </button>
-                                <button
-                                  v-for="page in notice.pagination.pageInfo.pageNumbers"
-                                  v-bind:class="pageClassObject(page)"
-                                  @click="movePage(page)"
-                                >
-                                  {{page}}
-                                </button>
-                                <button
-                                  type="button"
-                                  class="btn btn-white"
-                                  @click="movePage(notice.pagination.pageInfo.nextPageNumber)"
-                                >
-                                  <i class="fa fa-chevron-right"></i>
-                                </button>
-                              </div>
-                            </td>
+                              <td colspan="6" class="text-right">
+                                  <div class="btn-group">
+                                      <button type="button" class="btn btn-white" @click="moveToPrePage(body.pageInfo.prePageNumber)">
+                                        <i class="fa fa-chevron-left"></i>
+                                      </button>
+                                      <button v-for="page in body.pageInfo.pageNumbers" v-bind:class="pageClassObject(page)" @click="movePage(page)">
+                                        {{page}}
+                                      </button>
+                                      <button type="button" class="btn btn-white" @click="moveToNextPage(body.pageInfo.nextPageNumber)">
+                                      <i class="fa fa-chevron-right"></i>
+                                      </button>
+                                  </div>
+                              </td>
                           </tr>
                         </tfoot>
                       </table>
@@ -256,6 +234,8 @@
     <script src="../../theme/js/plugins/pace/pace.min.js"></script>
 
     <script>
+      var LIST_COUNT = 10;
+      var PAGENUMBER_COUNT = 10;
       var HAAIM = "http://localhost:8080";
 
       $(document).ready(function () {
@@ -271,22 +251,56 @@
           return data;
         },
         methods: {
-          movePage: function (page) {
-            //start loading
-            toggleLoading();
+          movePage: function(page) {
+              var param = getSearchParameter();
 
-            //데이터 조회
-            syncGet(
-              "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-              getSearchParameter(),
-              questions,
-              null
-            );
-            //현재 페이지 설정
-            this.notice.pagination.currentPage = page;
+              param.page = page;
+              param.size = LIST_COUNT;
 
-            //end loading
-            toggleLoading();
+              callAPI(param);
+          },
+          moveToPrePage: function(page) {
+              if (data.body.first == true) {
+                  alert("처음 페이지 입니다.");
+              } else {
+                  var param = getSearchParameter();
+
+                  param.page = page;
+                  param.size = LIST_COUNT;
+
+                  callAPI(param);
+              }
+          },
+
+          moveToNextPage: function(page) {
+              if (data.body.last === true) {
+                  alert("마지막 페이지 입니다.");
+              } else {
+                  var param = getSearchParameter();
+
+                  param.page = page;
+                  param.size = LIST_COUNT;
+
+                  callAPI(param);
+              }
+          },
+
+          pageClassObject: function(page) {
+              if (data.body.currentPage == page) {
+                  return "btn btn-white active";
+              } else {
+                  return "btn btn-white ";
+              }
+          },
+          search: function() {
+              if (validate()) {
+                  var param = getSearchParameter();
+
+                  callAPI(param);
+              }
+          },
+          goRegist: function() {
+              location.href = HAAIM + "/admin/system/noticeRegist.html";
           },
         },
 
@@ -308,10 +322,10 @@
                 function(res) {
                     if (res != null) {
                         if (res.success == true) {
-                            data.code = res.data;
-                            data.code.pageInfo = getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, data.code.totalElements, data.code.pageable.pageNumber + 1);
+                            data.body = res.data;
+                            data.body.pageInfo = getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, data.body.totalElements, data.body.pageable.pageNumber + 1);
                         } else {
-                            alert("error : " + res.code);
+                            alert("error : " + res.data);
                         }
                     } else {
                         alert("error");
@@ -328,8 +342,10 @@
         data.left = new Object();
         data.left.info = new Object();
         data.left.menu = new Object();
-        data.code = new Object();
+        data.body = new Object();
+        data.body.pageInfo = new Object();
 
+        
         //user 
         syncGet(
             "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
@@ -345,11 +361,10 @@
         //menu
         syncGet(
             HAAIM + "/menu/all",
-            "",
+             "",
             function(res) {
                 if (res != null) {
                     data.left.menu = res.data;
-                    console.log(data.left.menu);
                 } else {
                     alert("menu load error");
                 }
@@ -357,49 +372,48 @@
             null
         );
 
-        //code 조회
+        //notice 조회
         syncGet(
-          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-          "",
-          codeList,
-          null
-        );
+                HAAIM + "/notice/all",
+                "",
+                function(res) {
+                    if (res != null) {
+                        data.body = res.data;
+
+                        data.body.pageInfo = getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, data.body.totalElements, 1);
+                    } else {
+                        alert("error");
+                    }
+                },
+                null
+            );
       }
 
-      function codeList(res) {
-        if (res != null) {
-          //test
-          data.notice = JSON.parse(
-            '{"list":[{"no":"1","subject":"제목","content":"내용","writeDate":"2020.01.01"}],"pagination":{"total":10,"countPerPage":10}}'
-          );
+      function validate() {
+        var title = $("#title").val(); //제목
+        var contents = $("#contents").val(); //내용
 
-          //현재페이지
-          var currentPage = data.notice.pagination.currentPage;
-          var totalCount = data.notice.pagination.total;
-
-          data.notice.pagination.pageInfo = getPageInfo(
-            totalCount,
-            currentPage
-          );
+        if (title == "" && contents == "") {
+            alert("검색 조건을 입력하세요");
+            return false;
         }
+        return true;
       }
 
       /**
          * 검색 조건으로 parameter 생성
          */
          function getSearchParameter() {
-            var name = $("#name").val(); //코드명 또는 코드 그룹
-            var use_yn = $("#use_yn option:selected").val(); //사용여부
+            var title = $("#title").val(); //제목
+            var contents = $("#contents").val(); //내용
 
             var param = new Object();
-            if (name != "") {
-                param.name = name;
-            } else {
-                param.name = "";
+            if (title != "") {
+                param.title = title;
             }
 
-            if (use_yn != "") {
-                param.use_yn = use_yn;
+            if (contents != "") {
+                param.contents = contents;
             }
 
             return param;

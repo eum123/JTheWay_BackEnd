@@ -11,13 +11,9 @@ public abstract class AbstractNoticeService implements NoticeService {
 
 	@Autowired
 	protected NoticeRepository repo;
-
-	public Page<NoticeEntity> searchAll(Pageable pageable) {
-		return repo.findByState(NoticeEntity.VIEW, pageable);
-	}
-
+	
 	public NoticeEntity search(int no) {
-		return repo.getOne(no);
+		return repo.findById(no).orElse(null);
 	}
 
 	public abstract Page<NoticeEntity> search(Pageable pageable);

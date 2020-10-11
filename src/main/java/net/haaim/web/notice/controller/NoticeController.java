@@ -20,19 +20,20 @@ import net.haaim.web.notice.service.NoticeServiceFactory;
 @RestController
 @RequestMapping("/notice")
 public class NoticeController {
-	
+
 	@Autowired
 	private NoticeServiceFactory factory;
-	
-	@RequestMapping(value = "searchAll", method = RequestMethod.GET)
-	public ApiResponse search(@RequestParam(value = "page") Integer page, @RequestParam(value = "size") Integer size) {
-		//사용자의 권한을 확인
+
+	@RequestMapping(value = "all", method = RequestMethod.GET)
+	public ApiResponse search(@RequestParam(value = "page", defaultValue = "1") Integer page,
+			@RequestParam(value = "size", defaultValue = "10") Integer size) {
+		// 사용자의 권한을 확인
 		User user = UserHelper.getUser();
-		
+
 		try {
-			
+
 			PageRequest pageable = CustomPageRequest.of(page, size, "no");
-			
+
 			NoticeService service = factory.getInstance(user);
 			Page result = service.search(pageable);
 
@@ -47,16 +48,18 @@ public class NoticeController {
 	}
 
 	@RequestMapping(value = "search", method = RequestMethod.GET)
-	public ApiResponse search(@RequestParam(value = "page") Integer page, @RequestParam(value = "size") Integer size,
-			@RequestParam(value = "title") String title, @RequestParam(value = "contents") String contents) {
+	public ApiResponse search(@RequestParam(value = "page", defaultValue = "1") Integer page,
+			@RequestParam(value = "size", defaultValue = "10") Integer size,
+			@RequestParam(value = "title", required = false) String title,
+			@RequestParam(value = "contents", required = false) String contents) {
 
-		//사용자의 권한을 확인
+		// 사용자의 권한을 확인
 		User user = UserHelper.getUser();
-		
+
 		try {
 
-			PageRequest pageable = CustomPageRequest.of(1, 10, "no");
-			
+			PageRequest pageable = CustomPageRequest.of(page, size, "no");
+
 			NoticeService service = factory.getInstance(user);
 			Page result = service.search(title, contents, pageable);
 

@@ -10,17 +10,10 @@ import net.haaim.web.notice.entity.NoticeEntity;
 public class NoticeServiceForAdmin extends AbstractNoticeService {
 	
 	public Page<NoticeEntity> search(Pageable pageable) {
-		return repo.findAll(pageable);
+		return repo.findAllByOrderByNoDesc(pageable);
 	}
 	
 	public Page<NoticeEntity> search(String title, String contents, Pageable pageable) {
-		if((title == null || title.trim().length() == 0) && (contents == null || contents.trim().length() == 0)) {
-			
-			return repo.findAll(pageable);
-		} else if(title == null || title.trim().length() == 0) {
-			return repo.findByContentsContaining(contents, pageable);
-		} else {
-			return repo.findByTitleContaining(title, pageable);
-		}
+		return repo.findAllByTitleAndContents(title, contents, NoticeEntity.VIEW, pageable);
 	}
 }
