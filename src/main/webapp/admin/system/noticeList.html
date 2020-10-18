@@ -168,16 +168,16 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="element in body.list">
+                          <tr v-for="element in body.content">
                             <td class="text-center">{{element.no}}</td>
                             <td class="text-center">
-                              {{element.subject}}
+                              {{element.title}}
                             </td>
                             <td class="text-center">
-                              {{element.content}}
+                              {{element.contents}}
                             </td>
                             <td class="text-center">
-                              {{element.writeDate}}
+                              {{element.input_date}}
                             </td>
                           </tr>
                         </tbody>
@@ -379,7 +379,6 @@
                 function(res) {
                     if (res != null) {
                         data.body = res.data;
-
                         data.body.pageInfo = getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, data.body.totalElements, 1);
                     } else {
                         alert("error");
