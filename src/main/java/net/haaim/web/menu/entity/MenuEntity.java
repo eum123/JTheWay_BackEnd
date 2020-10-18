@@ -61,7 +61,7 @@ public class MenuEntity extends CommonEntity {
 		this.usage = usage;
 
 	}
-
+	
 	private void validate(String menuCode, String menuName) {
 		Assert.hasText(menuCode, "menuCode must not be empty");
 		Assert.hasText(menuName, "menuName must not be empty");

@@ -1,5 +1,7 @@
 package net.haaim.web.menu.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,4 +41,23 @@ public class MenuController {
 
 		}
 	} 
+	
+	@RequestMapping(value = "searchAll", method = RequestMethod.GET)
+	public ApiResponse searchAll() {
+		// 사용자의 권한을 확인
+		User user = UserHelper.getUser();
+
+		try {
+			MenuService service = factory.getInstance(user);
+			List result = service.finalAll();
+
+			return ApiResponse.getSuccessResponse(result);
+
+		} catch (Exception e) {
+			log.error("search error", e);
+
+			return ApiResponse.getErrorResponse(e);
+
+		}
+	}
 }

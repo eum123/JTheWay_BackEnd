@@ -7,7 +7,9 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import io.swagger.models.Response;
 import net.haaim.web.common.Role;
+import net.haaim.web.menu.entity.MenuContentResponse;
 import net.haaim.web.menu.entity.MenuEntity;
 import net.haaim.web.menu.entity.MenuResponse;
 
@@ -46,5 +48,31 @@ public class MenuServiceForAdmin extends AbstractMenuService {
 		
 		return response.get(menuCode);
 	}
-	
+
+	@Override
+	public List<MenuContentResponse> finalAll() {
+		
+		return getMenuContentResponse(repo.findAllMenu());
+	}
+
+	@Override
+	public List<MenuContentResponse> findAllByUsageAndMenuName(int usage, String menuName) {
+		return getMenuContentResponse(repo.findAllByUsageAndMenuName(usage, menuName));
+	}
+
+	private List<MenuContentResponse> getMenuContentResponse(List<String> data) {
+		List<MenuContentResponse> list = new ArrayList();
+		data.forEach(x -> {
+			MenuContentResponse response = new MenuContentResponse();
+			
+			String entityString = x.substring(0, x.lastIndexOf(","));
+			String userTypesString = x.substring(x.lastIndexOf(",") + 1);
+			
+			response.setMenuEntity(entityString);
+			response.setUserTypes(userTypesString);
+			
+			list.add(response);
+		});
+		return list;
+	}
 }

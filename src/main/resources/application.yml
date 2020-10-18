@@ -14,6 +14,11 @@ spring:
         hibernate.ddl-auto: validate
         generate-ddl: true
         show-sql: true
+        properties: 
+            javax.persistence.query.timeout: 20000
+            hibernate:
+              generate_statistics: true
+              format_sql: true
     jwt:
         secret: http://www.jdi.net/mathematics_educational_institution
         expiration: 3600000
@@ -43,6 +48,11 @@ spring:
         hibernate.ddl-auto: validate
         generate-ddl: true
         show-sql: true
+        properties: 
+            javax.persistence.query.timeout: 20000
+            hibernate:
+              generate_statistics: true
+              format_sql: true
     jwt:
         secret: http://www.jdi.net/mathematics_educational_institution
         expiration: 3600000
@@ -64,3 +74,8 @@ spring:
     jpa:
         hibernate.ddl-auto: none
         show-sql: true
+        properties: 
+            javax.persistence.query.timeout: 20000
+            hibernate:
+              generate_statistics: true
+              format_sql: true
