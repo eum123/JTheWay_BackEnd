@@ -72,4 +72,23 @@ public class NoticeController {
 
 		}
 	}
+	
+	@RequestMapping(value = "regist", method = RequestMethod.POST)
+	public ApiResponse regist(@RequestParam(value = "title", required = false) String title,
+			@RequestParam(value = "contents", required = false) String contents) {
+		
+		// 사용자의 권한을 확인
+		User user = UserHelper.getUser();
+		
+		try {
+			NoticeService service = factory.getInstance(user);
+			service.regist(user, title, contents);
+			
+			return ApiResponse.getSuccessResponse(null);
+		} catch (Exception e) {
+			log.error("search error", e);
+
+			return ApiResponse.getErrorResponse(e);
+		}
+	}
 }

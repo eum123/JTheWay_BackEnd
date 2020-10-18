@@ -30,7 +30,7 @@ public class NoticeEntity extends CommonEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "no")
 	@JsonProperty(access = JsonProperty.Access.AUTO)
-	private int no;
+	private Integer no;
 
 	@Column(name = "title", nullable = true, unique = false, length = 100)
 	@JsonProperty(access = JsonProperty.Access.AUTO)
@@ -43,7 +43,7 @@ public class NoticeEntity extends CommonEntity {
 	/** 상태(0:HIDDEN/1:VIEW) */
 	@Column(name = "state", nullable = true, unique = false)
 	@JsonProperty(access = JsonProperty.Access.AUTO)
-	private int state;
+	private Integer state;
 
 	
 
@@ -65,8 +65,6 @@ public class NoticeEntity extends CommonEntity {
 		
 		super(inputId, inputDate, updateId, updateDate);
 		
-		
-		this.no = no;
 		this.title = title;
 		this.contents = contents;
 		this.state = state;

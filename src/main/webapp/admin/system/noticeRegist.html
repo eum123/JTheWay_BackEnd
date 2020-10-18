@@ -99,16 +99,12 @@
                             <tr>
                               <td>제목</td>
                               <td>
-                                <input
-                                  type="text"
-                                  placeholder="제목"
-                                  class="form-control"
-                                />
+                                <input id="title" type="text" placeholder="제목" class="form-control" />
                               </td>
                             </tr>
                             <tr>
                               <td>내용</td>
-                              <td><textarea></textarea></td>
+                              <td><textarea id="contents"></textarea></td>
                             </tr>
                           </tbody>
                         </table>
@@ -122,10 +118,7 @@
                             >
                               취소
                             </button>
-                            <button
-                              type="button"
-                              class="btn btn-w-m btn-success"
-                            >
+                            <button type="button" class="btn btn-w-m btn-success" @click="regist">
                               등록
                             </button>
                           </div>
@@ -181,12 +174,44 @@
           return data;
         },
         mounted: function () {},
+        methods: {
+          regist: function() {
+            var title = $("#title").val(); //제목
+            var contents = $("#contents").val(); //내용
+
+            var param = new Object();
+            if (title != "") {
+                param.title = title;
+            }
+
+            if (contents != "") {
+                param.contents = contents;
+            }
+
+            syncPost(HAAIM + "/notice/regist"
+              , param
+              , function(res) {
+                if(res != null) {
+                  console.log(res);
+                  if(res.success == true) {
+                    alert("저장 성공 ");
+                  } else {
+                    alert("error : " + res.msg);
+                  }
+                } else {
+                  alert("unknown error");
+                }
+              }
+              , null);
+          }
+        }
       });
 
       function init() {
         data.left = new Object();
         data.left.info = new Object();
         data.left.menu = new Object();
+        data.body = new Object();
 
         //user 
         syncGet(
@@ -207,7 +232,6 @@
             function(res) {
                 if (res != null) {
                     data.left.menu = res.data;
-                    console.log(data.left.menu);
                 } else {
                     alert("menu load error");
                 }
@@ -216,13 +240,13 @@
         );
 
         //잘못 입력시 input 의 style변경 및 메시지 표시용
-        data = {
-          //사용자 구분
-          userKind: {
-            status: "0",
-            statusMessage: "",
-          },
-        };
+        // data = {
+        //   //사용자 구분
+        //   userKind: {
+        //     status: "0",
+        //     statusMessage: "",
+        //   },
+        // };
       }
     </script>
   </body>

@@ -8,8 +8,11 @@ import javax.persistence.MappedSuperclass;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import net.haaim.web.notice.entity.NoticeEntity;
+import net.haaim.web.notice.entity.NoticeEntity.NoticeEntityBuilder;
 
 @MappedSuperclass
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -19,22 +22,20 @@ public class CommonEntity {
 	public static final int VIEW = 1;
 	
 	@Column(name = "input_id", nullable = false, unique = false, length = 45)
-	@JsonProperty(value = "input_id", access = JsonProperty.Access.WRITE_ONLY)
-	protected String inputId;
+	@JsonProperty(value = "input_id", access = JsonProperty.Access.AUTO)
+	private String inputId = "";
 
 	@Column(name = "input_date", nullable = false, unique = false)
-	@JsonProperty(value = "input_date", access = JsonProperty.Access.WRITE_ONLY)
-	protected Date inputDate;
+	@JsonProperty(value = "input_date", access = JsonProperty.Access.AUTO)
+	private Date inputDate = new Date();
 
 	@Column(name = "update_id", nullable = true, unique = false, length = 45)
-	@JsonProperty(value = "update_id", access = JsonProperty.Access.WRITE_ONLY)
-	protected String updateId = "";
+	@JsonProperty(value = "update_id", access = JsonProperty.Access.AUTO)
+	private String updateId = "";
 
 	@Column(name = "update_date", nullable = true, unique = false)
-	@JsonProperty(value = "update_date", access = JsonProperty.Access.WRITE_ONLY)
-	protected Date updateDate = new Date();
-	
-	
+	@JsonProperty(value = "update_date", access = JsonProperty.Access.AUTO)
+	private Date updateDate = new Date();
 	
 	protected CommonEntity(String inputId, Date inputDate, String updateId, Date updateDate) {
 		this.inputId = inputId;
