@@ -47,6 +47,58 @@
 		}
       
       ``` 
+3. 메뉴관리 목록
+	- 요청
+	 http://localhost:8080/menu/searchAll
+	- 응답
+	 ```json
+      {
+		  "success": true,
+		  "code": 0,
+		  "msg": "OK",
+		  "data": [
+		    {
+		      "menu": {
+		        "depth": 0,
+		        "url": "/admin/user/userList.html",
+		        "input_id": null,
+		        "input_date": null,
+		        "update_id": null,
+		        "update_date": null,
+		        "menu_code": "100",
+		        "menu_name": "사용자관리",
+		        "parent_menu_code": "",
+		        "use_yn": 0
+		      },
+		      "user_types": [
+		        "1",
+		        "2",
+		        "4"
+		      ]
+		    },
+		    {
+		      "menu": {
+		        "depth": 0,
+		        "url": "/admin/lessons/curriculumList.html",
+		        "input_id": null,
+		        "input_date": null,
+		        "update_id": null,
+		        "update_date": null,
+		        "menu_code": "200",
+		        "menu_name": "수업관리",
+		        "parent_menu_code": "",
+		        "use_yn": 0
+		      },
+		      "user_types": [
+		        "1",
+		        "2",
+		        "4"
+		      ]
+		    },
+		   ]
+		  }
+      
+      ``` 
       
 3. 참고사항
  3 depth 이상 시 쿼리 변경 해야됨
