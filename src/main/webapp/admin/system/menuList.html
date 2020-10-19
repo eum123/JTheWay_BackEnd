@@ -141,10 +141,7 @@
                             >
                               검색
                             </button>
-                            <button
-                              type="button"
-                              class="btn btn-w-m btn-primary"
-                            >
+                            <button type="button" class="btn btn-w-m btn-primary" @click="goRegist">
                               등록
                             </button>
                           </div>
@@ -170,73 +167,29 @@
                       <table class="table table-bordered footalbe-loaded">
                         <thead>
                           <tr>
-                            <th>NO</th>
-                            <th>1depth</th>
-                            <th>2depth</th>
-                            <th>3depth</th>
-                            <th>관리자/원장</th>
-                            <th>교사</th>
-                            <th>알바</th>
-                            <th>학생</th>
+                            <th>상위코드</th>
+                            <th>코드</th>
+                            <th>이름</th>
+                            <th>URL</th>
+                            <th>권한</th>
+                            
                             <th>사용여부</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="menuElement in menu.content">
-                            <td class="text-center">{{menuElement.no}}</td>
+                          <tr v-for="element in body.content">
+                            <td class="text-center">{{element.menu.parent_menu_code}}</td>
+                            <td class="text-center">{{element.menu.menu_code}}</td>
+                            <td class="text-center">{{element.menu.menu_name}}</td>
+                            <td class="text-center">{{element.menu.url}}</td>
                             <td class="text-center">
-                              {{menuElement.depth1.name}}
+                              관리자4, 원장3, 교사2, 코디1, 학생0
+                              {{element.user_types}}
                             </td>
-                            <td class="text-center">
-                              {{menuElement.depth2.name}}
-                            </td>
-                            <td class="text-center">
-                              {{menuElement.depth3.name}}
-                            </td>
-                            <td class="text-center">
-                              {{menuElement.isManager}}
-                            </td>
-                            <td class="text-center">
-                              {{menuElement.isTeacher}}
-                            </td>
-                            <td class="text-center">
-                              {{menuElement.isPartTime}}
-                            </td>
-                            <td class="text-center">
-                              {{menuElement.isStudent}}
-                            </td>
-                            <td class="text-center">{{menuElement.usage}}</td>
+                            <td class="text-center">{{element.menu.use_yn}}</td>
                           </tr>
                         </tbody>
-                        <tfoot>
-                          <tr>
-                            <td colspan="9" class="text-right">
-                              <div class="btn-group">
-                                <button
-                                  type="button"
-                                  class="btn btn-white"
-                                  @click="movePage(menu.pagination.pageInfo.prePageNumber)"
-                                >
-                                  <i class="fa fa-chevron-left"></i>
-                                </button>
-                                <button
-                                  v-for="page in menu.pagination.pageInfo.pageNumbers"
-                                  v-bind:class="pageClassObject(page)"
-                                  @click="movePage(page)"
-                                >
-                                  {{page}}
-                                </button>
-                                <button
-                                  type="button"
-                                  class="btn btn-white"
-                                  @click="movePage(menu.pagination.pageInfo.nextPageNumber)"
-                                >
-                                  <i class="fa fa-chevron-right"></i>
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                        </tfoot>
+                        
                       </table>
                     </div>
                   </div>
@@ -288,22 +241,8 @@
           return data;
         },
         methods: {
-          movePage: function (page) {
-            //start loading
-            toggleLoading();
-
-            //데이터 조회
-            syncGet(
-              "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-              getSearchParameter(),
-              questions,
-              null
-            );
-            //현재 페이지 설정
-            this.menu.pagination.currentPage = page;
-
-            //end loading
-            toggleLoading();
+          goRegist: function (page) {
+            location.href = HAAIM + "/admin/system/menuRegist.html";
           },
         },
 
@@ -319,6 +258,7 @@
         data.left.info = new Object();
         data.left.menu = new Object();
         data.body = new Object();
+        data.body.content = new Object();
 
         //user 
         syncGet(
@@ -349,12 +289,11 @@
 
         //body
         syncGet(
-            HAAIM + "/menu/all",
+            HAAIM + "/menu/searchAll",
             "",
             function(res) {
                 if (res != null) {
-                    data.left.menu = res.data;
-                    console.log(data.left.menu);
+                  data.body.content = res.data;
                 } else {
                     alert("menu load error");
                 }
@@ -362,28 +301,7 @@
             null
         );
 
-        //menu 조회
-        syncGet(
-          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-          "",
-          menuList,
-          null
-        );
-      }
-
-      function menuList(res) {
-        if (res != null) {
-          //test
-          data.menu = JSON.parse(
-            '{"list":[{"no":"1","depth1":{"code":"222","name":"그룹코드명"},"depth2":{"code":"222","name":"그룹코드명"},"depth3":{"code":"222","name":"그룹코드명"},"isManager":"0","isPartTime":"0","isTeacher":"1","isStudent":"0","usage":"1"}],"pagination":{"total":10,"countPerPage":10}}'
-          );
-
-          //현재페이지
-          var currentPage = data.menu.pagination.currentPage;
-          var totalCount = data.menu.pagination.total;
-
-          data.menu.pagination.pageInfo = getPageInfo(totalCount, currentPage);
-        }
+        
       }
 
       /**
