@@ -258,10 +258,12 @@
       });
 
       function init() {
+        
         data.left = new Object();
         data.left.info = new Object();
         data.left.menu = new Object();
-        data.user = new Object();
+        data.body = new Object();
+        data.body.pageInfo = new Object();
 
         //user 
         syncGet(
@@ -297,7 +299,7 @@
                 function(res) {
                     if (res != null) {
                         data.user = res.data;
-                        data.user.pageInfo = getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, data.code.totalElements, 1);
+                        data.body.pageInfo = getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, data.body.totalElements, 1);
                     } else {
                         alert("error");
                     }
@@ -305,24 +307,7 @@
                 null
             );
       }
-
-      function search(res) {
-        if (res != null) {
-          //test
-          data = JSON.parse(
-            '{"total":400,"list":[{"no":"2","userKindCode":"0","userKindName":"관리자","userName":"장덕일","id":"jdi","mobile":"010-1111-1111","email":"jdi@mail.com","usage":"1"},{"no":"1","userKindCode":"1","userKindName":"교사","userName":"김교사","id":"jdi","mobile":"010-1111-2222","email":"jdi@mail.com","usage":"1"}]}'
-          );
-
-          //현재페이지
-          var currentPage = data.notice.pagination.currentPage;
-          var totalCount = data.notice.pagination.total;
-
-          data.notice.pagination.pageInfo = getPageInfo(
-            totalCount,
-            currentPage
-          );
-        }
-      }
+      
     </script>
   </body>
 </html>

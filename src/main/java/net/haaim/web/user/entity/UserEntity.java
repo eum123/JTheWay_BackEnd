@@ -4,8 +4,14 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -15,36 +21,59 @@ import net.haaim.web.common.Role;
 import net.haaim.web.common.entity.CommonEntity;
 
 
-@Entity // jpa entity임을 알립니다.
+@Entity 
 @Table(name = "user")
-@Getter // user 필드값의 getter를 자동으로 생성합니다.
+@Getter 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserEntity extends CommonEntity {//implements UserDetails {
+public class UserEntity extends CommonEntity {
+	//implements UserDetails {
+	
 	@Id // pk
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "no")
+	@JsonProperty(access = JsonProperty.Access.AUTO)
+	private Integer no;
+
 	@Column(name = "user_id")
+	@JsonProperty(value = "user_id", access = JsonProperty.Access.AUTO)
 	private String userId;
 	
 	@Column(name = "user_pw")
+	@JsonProperty(value = "user_pw", access = JsonProperty.Access.AUTO)
 	private String userPassword;
 	
 	@Column(name = "user_type")
+	@JsonProperty(value = "user_type", access = JsonProperty.Access.AUTO)
 	private Role userType;
 	
 	@Column(name = "use_yn")
+	@JsonProperty(value = "use_yn", access = JsonProperty.Access.AUTO)
 	private int usage;
 	
 	@Column(name = "name")
+	@JsonProperty(access = JsonProperty.Access.AUTO)
 	private String name;
 	
 	@Column(name = "mobile")
+	@JsonProperty(access = JsonProperty.Access.AUTO)
 	private String mobile;
 	
 	@Column(name = "email")
+	@JsonProperty(access = JsonProperty.Access.AUTO)
 	private String email;
+	
+	@Column(name = "student_no")
+	@JsonProperty(value = "student_no", access = JsonProperty.Access.AUTO)
+	private Long studentNo;
+	
+	@OneToOne
+	@JoinColumn(name = "student_no")	
+	private StudentInfoEntity studentInfoEntity;
+	
 	
 	@Builder
 	public UserEntity(String userId, String userPassword, int userType
-			, int usage, String name, String mobile, String email
+			, int usage, String name, String mobile, String email, long studentNo
 			, String inputId, Date inputDate, String updateId, Date updateDate) {
 		super(inputId, inputDate, updateId, updateDate);
 		
@@ -57,6 +86,7 @@ public class UserEntity extends CommonEntity {//implements UserDetails {
 		this.name = name;
 		this.mobile = mobile;
 		this.email = email;
+		this.studentNo = studentNo;
 		
 	}
 

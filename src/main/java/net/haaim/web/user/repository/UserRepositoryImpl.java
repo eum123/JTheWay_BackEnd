@@ -1,6 +1,7 @@
 package net.haaim.web.user.repository;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
@@ -31,6 +32,6 @@ public class UserRepositoryImpl extends QuerydslRepositorySupport implements Use
 				.offset(pageable.getOffset()).limit(pageable.getPageSize())
 				.orderBy(QUserEntity.userEntity.name.asc()).fetchResults();
 		
-		return null;
+		return new PageImpl<UserEntity>(result.getResults(), pageable, result.getTotal());
 	}
 }
