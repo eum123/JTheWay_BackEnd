@@ -22,7 +22,7 @@ insert into sample values('hong', 30);
 
 -- ---------------
 CREATE TABLE IF NOT EXISTS `user` (
-  `no` INT(10) NOT NULL,
+  `no` INT(10) NOT NULL  AUTO_INCREMENT primary key,
   `user_id` VARCHAR(45) NOT NULL,
   `user_pw` VARCHAR(200) NOT NULL,
   `user_type` INT(1) NOT NULL COMMENT '사용자의구분/권한 ( 4:관리자/3:원장/2:교사/1:코디/0:학생)',
@@ -31,17 +31,21 @@ CREATE TABLE IF NOT EXISTS `user` (
   `mobile` VARCHAR(15) NULL,
   `email` VARCHAR(200) NULL,
   `student_no` INT(10) NULL,
+  `state` INT(1) NULL,
   `input_id` VARCHAR(45) NOT NULL,
   `input_date` DATETIME NOT NULL,
   `update_id` VARCHAR(45) NULL,
-  `update_date` DATETIME NULL,
-  PRIMARY KEY (`no`))
+  `update_date` DATETIME  NULL,
+   INDEX (student_no),
+  FOREIGN KEY(student_no) REFERENCES student_info(student_no)
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COMMENT = '사용자';
 
-CREATE TABLE IF NOT EXISTS `student_info` (
-  `student_no` INT(10) NOT NULL,
+
+CREATE TABLE IF NOT EXISTS student_info (
+  `student_no` INT(10) NOT NULL ,
   `name` VARCHAR(20) NOT NULL,
   `birth` VARCHAR(8) NULL COMMENT '생년월일',
   `mobile` VARCHAR(15) NOT NULL COMMENT '연락처',
@@ -52,7 +56,9 @@ CREATE TABLE IF NOT EXISTS `student_info` (
   `input_date` DATETIME NOT NULL,
   `update_id` VARCHAR(45) NULL,
   `update_date` DATETIME NULL,
-  PRIMARY KEY (`student_no`))
+   PRIMARY KEY (student_no)
+  
+  )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COMMENT = '학생정보';

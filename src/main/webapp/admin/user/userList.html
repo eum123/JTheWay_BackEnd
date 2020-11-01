@@ -142,18 +142,18 @@
                               <input type="text" class="form_control" />
                             </div>
                             <div class="form-group">
-                              <button
-                                type="button"
-                                class="btn btn-w-m btn-success"
-                              >
+                              <button type="button" class="btn btn-w-m btn-success" >
                                 검색
+                              </button>
+                              <button type="button" class="btn btn-w-m btn-primary" @click="goRegist">
+                                등록
                               </button>
                             </div>
                           </form>
                         </div>
                         <div class="col-sm-4">
                           <div class="text-right">
-                            전체 {{total}}건
+                            전체 : {{body.totalElements}}건
                           </div>
                         </div>
                       </div>
@@ -172,29 +172,39 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <!--
-                              <tr v-for="content in list">
-                                <td>{{content.no}}</td>
+                              
+                              <tr v-for="element in body.content">
+                                <td>{{element.no}}</td>
                                 <td>
-                                  {{content.userKindName}}
+                                  {{element.userKindName}}
                                 </td>
-                                <td>{{content.userName}}</td>
-                                <td>{{content.id}}</td>
-                                <td>{{content.mobile}}</td>
+                                <td>{{element.userName}}</td>
+                                <td>{{element.id}}</td>
+                                <td>{{element.mobile}}</td>
                                 <td>
-                                  {{content.eamil}}
+                                  {{element.eamil}}
                                 </td>
                                 <td>
-                                  {{content.usage}}
+                                  {{element.usage}}
                                 </td>
                               </tr>
-                            -->
+                            
                             </tbody>
                             <tfoot>
                               <tr>
-                                <td colspan="7">
-                                  <ul class="pagination float-right"></ul>
-                                </td>
+                                  <td colspan="7" class="text-right">
+                                      <div class="btn-group">
+                                          <button type="button" class="btn btn-white" @click="moveToPrePage(body.pageInfo.prePageNumber)">
+                                            <i class="fa fa-chevron-left"></i>
+                                          </button>
+                                          <button v-for="page in body.pageInfo.pageNumbers" v-bind:class="pageClassObject(page)" @click="movePage(page)">
+                                            {{page}}
+                                          </button>
+                                          <button type="button" class="btn btn-white" @click="moveToNextPage(body.pageInfo.nextPageNumber)">
+                                          <i class="fa fa-chevron-right"></i>
+                                          </button>
+                                      </div>
+                                  </td>
                               </tr>
                             </tfoot>
                           </table>
@@ -250,6 +260,59 @@
         data() {
           return data;
         },
+        methods: {
+          movePage: function(page) {
+              var param = getSearchParameter();
+
+              param.page = page;
+              param.size = LIST_COUNT;
+
+              callAPI(param);
+          },
+          moveToPrePage: function(page) {
+              if (data.body.first == true) {
+                  alert("처음 페이지 입니다.");
+              } else {
+                  var param = getSearchParameter();
+
+                  param.page = page;
+                  param.size = LIST_COUNT;
+
+                  callAPI(param);
+              }
+          },
+
+          moveToNextPage: function(page) {
+              if (data.body.last === true) {
+                  alert("마지막 페이지 입니다.");
+              } else {
+                  var param = getSearchParameter();
+
+                  param.page = page;
+                  param.size = LIST_COUNT;
+
+                  callAPI(param);
+              }
+          },
+
+          pageClassObject: function(page) {
+              if (data.body.currentPage == page) {
+                  return "btn btn-white active";
+              } else {
+                  return "btn btn-white ";
+              }
+          },
+          search: function() {
+              if (validate()) {
+                  var param = getSearchParameter();
+
+                  callAPI(param);
+              }
+          },
+          goRegist: function() {
+              location.href = HAAIM + "/admin/user/userRegist.html";
+          },
+        },
         mounted: function () {
           //로딩 화면 제거하고 화면 표시
           $("#empty").css("display", "none");
@@ -264,7 +327,7 @@
         data.left.menu = new Object();
         data.body = new Object();
         data.body.pageInfo = new Object();
-
+        
         //user 
         syncGet(
                 "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
@@ -284,7 +347,6 @@
                 function(res) {
                     if (res != null) {
                         data.left.menu = res.data;
-                        console.log(data.left.menu);
                     } else {
                       alert("menu load error");
                     }
@@ -298,8 +360,10 @@
                 "",
                 function(res) {
                     if (res != null) {
-                        data.user = res.data;
+                        data.body = res.data;
                         data.body.pageInfo = getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, data.body.totalElements, 1);
+
+                        console.log(data.body.user);
                     } else {
                         alert("error");
                     }
@@ -307,7 +371,53 @@
                 null
             );
       }
-      
+      function callAPI(parameter) {
+            //start loading
+            toggleLoading();
+
+            //데이터 조회
+            syncGet(
+                HAAIM + "/user/search",
+                parameter,
+                function(res) {
+                    if (res != null) {
+                        if (res.success == true) {
+                            data.body = res.data;
+                            data.body.pageInfo = getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, data.body.totalElements, data.body.pageable.pageNumber + 1);
+                        } else {
+                            alert("error : " + res.data);
+                        }
+                    } else {
+                        alert("error");
+                    }
+                },
+                null
+            );
+
+            //end loading
+            toggleLoading();
+      }
+      /**
+        * 검색 조건으로 parameter 생성
+        */
+        function getSearchParameter() {
+          var title = $("#title").val(); //제목
+          var contents = $("#contents").val(); //내용
+
+          var param = new Object();
+          if (title != "") {
+              param.title = title;
+          }
+
+          if (contents != "") {
+              param.contents = contents;
+          }
+
+          return param;
+      }
+      function toggleLoading() {
+        $("#questionList").children(".ibox-content").toggleClass("sk-loading");
+      }
     </script>
   </body>
 </html>

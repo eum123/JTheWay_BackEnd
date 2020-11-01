@@ -64,17 +64,24 @@ public class UserEntity extends CommonEntity {
 	
 	@Column(name = "student_no")
 	@JsonProperty(value = "student_no", access = JsonProperty.Access.AUTO)
-	private Long studentNo;
+	private Integer studentNo;
+	
+	/** 상태(0:HIDDEN/1:VIEW) */
+	@Column(name = "state", nullable = true, unique = false)
+	@JsonProperty(access = JsonProperty.Access.AUTO)
+	private Integer state; 
 	
 	@OneToOne
-	@JoinColumn(name = "student_no")	
-	private StudentInfoEntity studentInfoEntity;
+	@JoinColumn(name = "student_no",
+			referencedColumnName = "student_no",
+			insertable=false, updatable=false)	
+	private StudentInfoEntity studentInfo;
 	
 	
 	@Builder
 	public UserEntity(String userId, String userPassword, int userType
-			, int usage, String name, String mobile, String email, long studentNo
-			, String inputId, Date inputDate, String updateId, Date updateDate) {
+			, int usage, String name, String mobile, String email, Integer studentNo
+			, int state, String inputId, Date inputDate, String updateId, Date updateDate) {
 		super(inputId, inputDate, updateId, updateDate);
 		
 		validate(userId);
@@ -87,6 +94,7 @@ public class UserEntity extends CommonEntity {
 		this.mobile = mobile;
 		this.email = email;
 		this.studentNo = studentNo;
+		this.state = state;
 		
 	}
 

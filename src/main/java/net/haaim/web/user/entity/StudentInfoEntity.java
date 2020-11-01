@@ -27,8 +27,8 @@ public class StudentInfoEntity extends CommonEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "student_no")
 	@JsonProperty(value = "student_no", access = JsonProperty.Access.AUTO)
-	@OneToOne(mappedBy = "studentInfoEntity")	
-	private Long studentNo;
+	//@OneToOne(mappedBy = "studentInfoEntity")	
+	private Integer studentNo;
 
 	@Column(name = "name")
 	@JsonProperty(value = "info_name", access = JsonProperty.Access.AUTO)
@@ -55,7 +55,7 @@ public class StudentInfoEntity extends CommonEntity {
 	private String motherMobile;
 
 	@Builder
-	public StudentInfoEntity(long studentNo, String name, String birth, String mobile, String email, String fatherMobile, String motherMobile, String inputId, Date inputDate, String updateId, Date updateDate) {
+	public StudentInfoEntity(Integer studentNo, String name, String birth, String mobile, String email, String fatherMobile, String motherMobile, String inputId, Date inputDate, String updateId, Date updateDate) {
 		
 		super(inputId, inputDate, updateId, updateDate);
 		
