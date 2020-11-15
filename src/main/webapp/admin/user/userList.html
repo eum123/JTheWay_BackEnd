@@ -176,13 +176,13 @@
                               <tr v-for="element in body.content">
                                 <td>{{element.no}}</td>
                                 <td>
-                                  {{element.userKindName}}
+                                  {{element.user_type}}
                                 </td>
-                                <td>{{element.userName}}</td>
-                                <td>{{element.id}}</td>
+                                <td>{{element.name}}</td>
+                                <td>{{element.user_id}}</td>
                                 <td>{{element.mobile}}</td>
                                 <td>
-                                  {{element.eamil}}
+                                  {{element.email}}
                                 </td>
                                 <td>
                                   {{element.usage}}
@@ -363,7 +363,7 @@
                         data.body = res.data;
                         data.body.pageInfo = getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, data.body.totalElements, 1);
 
-                        console.log(data.body.user);
+                        console.log(data.body.content);
                     } else {
                         alert("error");
                     }

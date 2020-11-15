@@ -54,7 +54,7 @@
 	- 내용
 		group_code에 해당하는 모든 code를 조회 한다.
    	- 요청(GET)
-       http://.../code/search?user_type=1[&use_yn=1][&key=1]
+       http://.../user/search?user_type=1[&use_yn=1][&key=1]
        page : 현재 페이지
        size : 한페이지에 보여줄 개수
        user_type: 사용가 권한 구분
@@ -106,3 +106,22 @@
       
       ```
       
+## 중복확인
+	- 내용
+		사용자 ID 중복 확인
+   	- 요청(GET)
+       http://.../user/duplicateCheck?user_id=
+       user_id: 사용자 ID
+    - 응답
+      ```json
+      
+		{
+		  "success": true,
+		  "code": 0,
+		  "msg": "OK",
+		  "data": {
+		    "duplicate": "true"
+		  }
+		}
+      
+      ```
