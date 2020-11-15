@@ -79,7 +79,7 @@ public class UserController {
 	@RequestMapping(value = "regist", method = RequestMethod.POST)
 	public ApiResponse regist(
 			@RequestParam(value = "user_type", required=true) Integer userType, 
-			@RequestParam(value = "state", required=true) Integer state,
+			@RequestParam(value = "use_yn", required=true) Integer usage,
 			@RequestParam(value = "name", required=true) String name,
 			@RequestParam(value = "user_id", required=true) String userId,
 			@RequestParam(value = "user_pw", required=true) String password) {
@@ -89,7 +89,7 @@ public class UserController {
 			
 			return ApiResponse.getSuccessResponse(service.save(UserEntity.builder()
 					.userType(userType)
-					.state(state)
+					.usage(usage)
 					.name(name)
 					.userId(userId)
 					.userPassword(password)

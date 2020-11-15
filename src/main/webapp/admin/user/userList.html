@@ -123,28 +123,25 @@
                         <div class="col-sm-8">
                           <form role="form" class="form-inline">
                             <div class="form-group">
-                              <select class="form-control" name="account">
-                                <option>option 1</option>
-                                <option>option 2</option>
-                                <option>option 3</option>
-                                <option>option 4</option>
+                              <select class="form-control" id="user_type">
+                                <option value="4">관리자</option>
+                                <option value="3">원장</option>
+                                <option value="2">교사</option>
+                                <option value="1">코디</option>
+                                <option value="0">학생</option>
                               </select>
                             </div>
                             <div class="form-group" id="data_1">
-                              <select class="form-control" name="account">
-                                <option>option 1</option>
-                                <option>option 2</option>
-                                <option>option 3</option>
-                                <option>option 4</option>
+                              <select class="form-control" id="use_yn">
+                                <option value="1">사용</option>
+                                <option value="0">미사용</option>
                               </select>
                             </div>
                             <div class="form-group">
-                              <input type="text" class="form_control" />
+                              <input type="text" class="form_control" id="key" placeholder="이름 또는 전화번호를 입력하세요"/>
                             </div>
                             <div class="form-group">
-                              <button type="button" class="btn btn-w-m btn-success" >
-                                검색
-                              </button>
+                              <button type="button" class="btn btn-w-m btn-success" @click="search">검색</button>
                               <button type="button" class="btn btn-w-m btn-primary" @click="goRegist">
                                 등록
                               </button>
@@ -181,12 +178,8 @@
                                 <td>{{element.name}}</td>
                                 <td>{{element.user_id}}</td>
                                 <td>{{element.mobile}}</td>
-                                <td>
-                                  {{element.email}}
-                                </td>
-                                <td>
-                                  {{element.usage}}
-                                </td>
+                                <td>{{element.email}}</td>
+                                <td>{{element.state}}</td>
                               </tr>
                             
                             </tbody>
@@ -303,11 +296,11 @@
               }
           },
           search: function() {
-              if (validate()) {
-                  var param = getSearchParameter();
+              
+              var param = getSearchParameter();
 
-                  callAPI(param);
-              }
+              callAPI(param);
+              
           },
           goRegist: function() {
               location.href = HAAIM + "/admin/user/userRegist.html";
@@ -384,6 +377,8 @@
                         if (res.success == true) {
                             data.body = res.data;
                             data.body.pageInfo = getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, data.body.totalElements, data.body.pageable.pageNumber + 1);
+
+                            console.log(data.body.content);
                         } else {
                             alert("error : " + res.data);
                         }
@@ -401,16 +396,21 @@
         * 검색 조건으로 parameter 생성
         */
         function getSearchParameter() {
-          var title = $("#title").val(); //제목
-          var contents = $("#contents").val(); //내용
+          var key = $("#key").val(); //이름
+          var user_type = $("#user_type option:selected").val();
+          var use_yn = $("#use_yn option:selected").val();
 
           var param = new Object();
-          if (title != "") {
-              param.title = title;
+          if (key != "") {
+              param.key = key;
           }
 
-          if (contents != "") {
-              param.contents = contents;
+          if (user_type != "") {
+              param.user_type = user_type;
+          }
+
+          if (state != "") {
+              param.use_yn = use_yn;
           }
 
           return param;

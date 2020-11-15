@@ -170,7 +170,7 @@
                             <td>사용</td>
                             <td>
                               <div class="col-sm-6">
-                                <select class="form-control" id="state">
+                                <select class="form-control" id="use_yn">
                                   <option value="1">사용</option>
                                   <option value="0">사용안함</option>
                                 </select>
@@ -358,7 +358,7 @@
       }
       function validate() {
         var user_type = $("#user_type option:selected").val();
-        var state = $("#state option:selected").val();
+        var use_yn = $("#use_yn option:selected").val();
         var name = $("#name").val();
         var userId = $("#user_id").val();
         var userPw = $("#user_pw").val();
@@ -387,7 +387,7 @@
       }
       function getParam() {
         var user_type = $("#user_type option:selected").val();
-        var state = $("#state option:selected").val();
+        var use_yn = $("#use_yn option:selected").val();
         var name = $("#name").val();
         var userId = $("#user_id").val();
         var userPw = $("#user_pw").val();
@@ -395,7 +395,7 @@
 
         var param = new Object();
         param.user_type = user_type;
-        param.state = state;
+        param.use_yn = use_yn;
         param.name = name;
         param.user_id = userId;
         param.user_pw = userPw;

@@ -46,6 +46,7 @@ public class UserEntity extends CommonEntity {
 	@JsonProperty(value = "user_type", access = JsonProperty.Access.AUTO)
 	private Role userType;
 	
+	/** 상태(0:HIDDEN/1:VIEW) */
 	@Column(name = "use_yn")
 	@JsonProperty(value = "use_yn", access = JsonProperty.Access.AUTO)
 	private int usage;
@@ -65,11 +66,6 @@ public class UserEntity extends CommonEntity {
 	@Column(name = "student_no")
 	@JsonProperty(value = "student_no", access = JsonProperty.Access.AUTO)
 	private Integer studentNo;
-	
-	/** 상태(0:HIDDEN/1:VIEW) */
-	@Column(name = "state", nullable = true, unique = false)
-	@JsonProperty(access = JsonProperty.Access.AUTO)
-	private Integer state; 
 	
 	@OneToOne
 	@JoinColumn(name = "student_no",
@@ -94,7 +90,7 @@ public class UserEntity extends CommonEntity {
 		this.mobile = mobile;
 		this.email = email;
 		this.studentNo = studentNo;
-		this.state = state;
+		
 		
 	}
 
