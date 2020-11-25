@@ -336,7 +336,18 @@
         data.left.menu = new Object();
         data.body = new Object();
 
-
+        //user 
+        syncGet(
+                "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
+                "",
+                function(res) {
+                    if (res != null) {
+                        data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
+                    }
+                },
+                null
+            );
+            
         //menu
         syncGet(
                 HAAIM + "/menu/all",
