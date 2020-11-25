@@ -221,8 +221,8 @@ CREATE TABLE IF NOT EXISTS `haaim`.`answer_sheet` (
 ENGINE = InnoDB
 COMMENT = '답안지';
 
-CREATE TABLE IF NOT EXISTS `haaim`.`exam_list` (
-  `exam_no` INT(20) NOT NULL COMMENT '출제번호',
+CREATE TABLE IF NOT EXISTS exam_list (
+  `exam_no` INT(20) NOT NULL AUTO_INCREMENT COMMENT '출제번호',
   `date` VARCHAR(8) NOT NULL COMMENT '출제일자',
   `class_no` INT(10) NOT NULL,
   `grade` INT(2) NULL COMMENT '학년',
