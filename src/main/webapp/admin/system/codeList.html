@@ -20,6 +20,9 @@
 
     <link href="../../theme/css/animate.css" rel="stylesheet" />
     <link href="../../theme/css/style.css" rel="stylesheet" />
+
+
+
 </head>
 
 <body>
@@ -162,34 +165,34 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr v-for="codeElement in code.content">
-                                                    <td class="text-center">{{codeElement.no}}</td>
+                                                <tr v-for="element in body.list.content">
+                                                    <td class="text-center">{{element.no}}</td>
                                                     <td class="text-center">
-                                                        {{codeElement.group_code}}
+                                                        {{element.group_code}}
                                                     </td>
                                                     <td class="text-center">
-                                                        {{codeElement.group_code}}
+                                                        {{element.group_code}}
                                                     </td>
                                                     <td class="text-center">
-                                                        {{codeElement.code}}
+                                                        {{element.code}}
                                                     </td>
                                                     <td class="text-center">
-                                                        {{codeElement.code_name}}
+                                                        {{element.code_name}}
                                                     </td>
-                                                    <td class="text-center">{{codeElement.use_yn}}</td>
+                                                    <td class="text-center">{{element.use_yn}}</td>
                                                 </tr>
                                             </tbody>
                                             <tfoot>
                                                 <tr>
                                                     <td colspan="6" class="text-right">
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-white" @click="moveToPrePage(code.pageInfo.prePageNumber)">
+                                                            <button type="button" class="btn btn-white" @click="moveToPrePage(body.list.pageInfo.prePageNumber)">
                                                               <i class="fa fa-chevron-left"></i>
                                                             </button>
-                                                            <button v-for="page in code.pageInfo.pageNumbers" v-bind:class="pageClassObject(page)" @click="movePage(page)">
+                                                            <button v-for="page in body.list.pageInfo.pageNumbers" v-bind:class="pageClassObject(page)" @click="movePage(page)">
                                                               {{page}}
                                                             </button>
-                                                            <button type="button" class="btn btn-white" @click="moveToNextPage(code.pageInfo.nextPageNumber)">
+                                                            <button type="button" class="btn btn-white" @click="moveToNextPage(body.list.pageInfo.nextPageNumber)">
                                                             <i class="fa fa-chevron-right"></i>
                                                             </button>
                                                         </div>
@@ -210,9 +213,8 @@
             </div>
         </div>
     </div>
-
-    <script src="../../resources/js/api.js"></script>
     <script src="../../resources/js/common.js"></script>
+    <script src="../../resources/js/api.js"></script>
 
     <!-- Mainly scripts -->
     <script src="../../theme/js/jquery-3.1.1.min.js"></script>
@@ -231,61 +233,55 @@
     <script src="../../theme/js/inspinia.js"></script>
     <script src="../../theme/js/plugins/pace/pace.min.js"></script>
 
-    <script>
-        var LIST_COUNT = 10;
-        var PAGENUMBER_COUNT = 10;
+    <script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
 
+    <script>
         $(document).ready(function() {
             $("#footer").load("../../admin/common/footer.html");
+
         });
 
-        var HAAIM = "http://localhost:8080";
+        var data = {
+            left: {
+                info: "",
+                menu: ""
+            },
+            body: {
+                list: {
+                    pageInfo: ""
+                },
+            }
+        };
 
-        var data = new Object();
-        init();
 
         var vm = new Vue({
             el: "#app",
-            data() {
+            data: function() {
                 return data;
             },
             methods: {
                 movePage: function(page) {
-                    var param = getSearchParameter();
-
-                    param.page = page;
-                    param.size = LIST_COUNT;
-
-                    callAPI(param);
+                    callAPI(page, getSearchParameter());
                 },
                 moveToPrePage: function(page) {
-                    if (data.code.first == true) {
+                    if (data.body.list.first == true) {
                         alert("처음 페이지 입니다.");
                     } else {
-                        var param = getSearchParameter();
-
-                        param.page = page;
-                        param.size = LIST_COUNT;
-
-                        callAPI(param);
+                        callAPI(page, getSearchParameter());
                     }
                 },
 
                 moveToNextPage: function(page) {
-                    if (data.code.last === true) {
+                    if (data.body.list.last === true) {
                         alert("마지막 페이지 입니다.");
                     } else {
-                        var param = getSearchParameter();
-
-                        param.page = page;
-                        param.size = LIST_COUNT;
-
-                        callAPI(param);
+                        callAPI(page, getSearchParameter());
                     }
                 },
 
                 pageClassObject: function(page) {
-                    if (data.code.currentPage == page) {
+                    if (data.body.list.currentPage == page) {
                         return "btn btn-white active";
                     } else {
                         return "btn btn-white ";
@@ -293,13 +289,11 @@
                 },
                 search: function() {
                     if (validate()) {
-                        var param = getSearchParameter();
-
-                        callAPI(param);
+                        callAPI(1, getSearchParameter());
                     }
                 },
                 goRegist: function() {
-                    location.href = HAAIM + "/admin/system/codeRegist.html";
+                    location.href = "/admin/system/codeRegist.html";
                 }
 
             },
@@ -309,83 +303,44 @@
                 $("#empty").css("display", "none");
                 $("#content").css("display", "");
             },
+
+            created: function() {
+                //user
+                data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
+
+                //menu
+                get("/menu/all", null,
+                    function(res) {
+                        data.left.menu = res.data;
+                    }
+                )
+
+                //code
+                getPage(1, "/code/all", null,
+                    function(res, pageInfo) {
+                        data.body.list = res.data;
+                        data.body.list.pageInfo = pageInfo;
+                    },
+                    null
+                )
+
+            }
+
         });
 
-        function callAPI(parameter) {
+        function callAPI(page, parameter) {
             //start loading
             toggleLoading();
 
-            //데이터 조회
-            syncGet(
-                HAAIM + "/code/search",
-                parameter,
-                function(res) {
-                    if (res != null) {
-                        if (res.success == true) {
-                            data.code = res.data;
-                            data.code.pageInfo = getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, data.code.totalElements, data.code.pageable.pageNumber + 1);
-                        } else {
-                            alert("error : " + res.code);
-                        }
-                    } else {
-                        alert("error");
-                    }
-                },
-                null
-            );
+            getPage(page, "/code/search", parameter,
+                function(res, pageInfo) {
+                    data.body.list = res.data;
+                    data.body.list.pageInfo = pageInfo;
+                }
+            )
 
             //end loading
             toggleLoading();
-        }
-
-        function init() {
-            data.left = new Object();
-            data.left.info = new Object();
-            data.left.menu = new Object();
-            data.code = "";
-
-            //user 
-            syncGet(
-                "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-                "",
-                function(res) {
-                    if (res != null) {
-                        data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
-                    }
-                },
-                null
-            );
-
-            //menu
-            syncGet(
-                HAAIM + "/menu/all",
-                "",
-                function(res) {
-                    if (res != null) {
-                        data.left.menu = res.data;
-                        console.log(data.left.menu);
-                    } else {
-                        alert("menu load error");
-                    }
-                },
-                null
-            );
-
-            //code 조회
-            syncGet(
-                HAAIM + "/code/all",
-                "",
-                function(res) {
-                    if (res != null) {
-                        data.code = res.data;
-
-                        data.code.pageInfo = getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, data.code.totalElements, 1);
-                    } else {
-                        alert("error");
-                    }
-                },
-                null
-            );
         }
 
         function validate() {
@@ -417,10 +372,6 @@
             }
 
             return param;
-        }
-
-        function toggleLoading() {
-            $("#questionList").children(".ibox-content").toggleClass("sk-loading");
         }
     </script>
 </body>

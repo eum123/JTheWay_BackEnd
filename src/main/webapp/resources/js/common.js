@@ -60,52 +60,17 @@ Number.prototype.zf = function(len) {
     return this.toString().zf(len);
 };
 
-/**
- * page 번호 목록 생성
- */
-function getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, totalCount, currentPage) {
-    var totalPage = totalCount / LIST_COUNT;
 
-    if (totalCount % LIST_COUNT > 0) {
-        totalPage++;
+
+// 넘어온 값이 빈값인지 체크합니다. !value 하면 생기는 논리적 오류를 제거하기 위해  명시적으로 value == 사용  [], {} 도 빈값으로 처리 
+function isEmpty(value) {
+    if (value == "" || value == null || value == undefined || (value != null && typeof value == "object" && !Object.keys(value).length)) {
+        return true
+    } else {
+        return false
     }
+};
 
-    //currentPage = 현재 보고있는 페이지
-    if (totalPage < currentPage) {
-        currentPage = totalPage;
-    }
-
-    var startPage = ((currentPage - 1) / PAGENUMBER_COUNT) * PAGENUMBER_COUNT + 1;
-    //현재 페이지가 pageCount와 같을 때를 유의하며 (page-1)을 하고
-    // +1은 첫페이지가 0이나 10이 아니라 1이나 11로 하기 위함임
-    var endPage = startPage + PAGENUMBER_COUNT - 1;
-    // -1은 첫페이지가 1이나 11 등과 같을때 1~10, 11~20으로 지정하기 위함임
-
-    if (endPage > totalPage) {
-        endPage = totalPage;
-    }
-
-    var pageNumbers = new Array();
-
-    for (var i = startPage; i <= endPage; i++) {
-        pageNumbers.push(i);
-    }
-
-    //pre page
-    var prePageNumber = 1;
-    if (startPage > 1) {
-        prePageNumber = startPage - 1;
-    }
-    //next page
-    var nextPageNumber = totalPage;
-    if (totalPage > endPage) {
-        nextPageNumber = endPage + 1;
-    }
-
-    var pageInfo = new Object();
-    pageInfo.pageNumbers = pageNumbers;
-    pageInfo.prePageNumber = prePageNumber;
-    pageInfo.nextPageNumber = nextPageNumber;
-
-    return pageInfo;
+function toggleLoading() {
+    $("#questionList").children(".ibox-content").toggleClass("sk-loading");
 }

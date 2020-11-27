@@ -63,121 +63,120 @@
                 <div class="row border-bottom">
                     <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0;">
                         <div class="navbar-header">
-                            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" href="#"><i class="fa fa-bars"></i>
-                </a>
+                            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" href="#"><i class="fa fa-bars"></i></a>
                         </div>
                         <ul class="nav navbar-top-links navbar-right">
                             <li style="padding: 20px;">
-                                <span class="m-r-sm text-muted welcome-message">haami Admin</span
-                  >
-                </li>
+                                <span class="m-r-sm text-muted welcome-message">haami Admin</span>
+                            </li>
 
-                <li>
-                  <a href="login.html">
-                    <i class="fa fa-sign-out"></i> Log out
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <!-- end top -->
+                            <li>
+                                <a href="login.html">
+                                    <i class="fa fa-sign-out"></i> Log out
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- end top -->
 
-          <div class="row border-bottom white-bg dashboard-header">
-            시스템관리 > 코드관리 > 등록
-          </div>
-          <div class="wrapper wrapper-content">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="ibox">
-                    <div class="ibox-title">코드 등록</div>
-                    <div class="ibox-content">
-                      <div class="row">
-                        <!-- 내용 부분 시작 -->
-                        <table class="table table-bordered">
-                          <thead></thead>
-                          <tbody>
-                            <tr>
-                              <td class="text-center">코드그룹</td>
-                              <td>
-                                <div class="row">
-                                  <div class="col-md-6">                                  
-                                    <select id="group_code" class="form-control" >
-                                      <option v-for="codeList in groupCode" :value="codeList.code">{{ codeList.code_name }}</option>
-                                    </select>
-                                  </div>
-                                  <div class="col-md-6"> 
-                                    <a data-toggle="modal" class="btn btn-primary" href="#modal-form">그룹추가</a>
-                                  </div>
-                                  <div id="modal-form" class="modal fade" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-sm-12"><h3 class="m-t-none m-b">그룹등록</h3>
-                                                        <p>코드 그룹을 등록한다.</p>
-                                                        <form role="form">
-                                                            <div class="form-group"><label>GropuCode</label> <input id="add_group_code" type="text" placeholder="group code" class="form-control"></div>
-                                                            <div class="form-group"><label>GroupCode Name</label> <input id="add_group_code_name" type="text" placeholder="group code name" class="form-control"></div>
-                                                            <div>
-                                                                <button type="button" class="btn btn-w-m btn-success float-right" @click="registGroupCode">등록</button>
+                <div class="row border-bottom white-bg dashboard-header">
+                    시스템관리 > 코드관리 > 등록
+                </div>
+                <div class="wrapper wrapper-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="ibox">
+                                    <div class="ibox-title">코드 등록</div>
+                                    <div class="ibox-content">
+                                        <div class="row">
+                                            <!-- 내용 부분 시작 -->
+                                            <table class="table table-bordered">
+                                                <thead></thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-center">코드그룹</td>
+                                                        <td>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <select id="group_code" class="form-control">
+                                                                      <option v-for="codeList in body.groupCode" :value="codeList.code">{{ codeList.code_name }}</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <a data-toggle="modal" class="btn btn-primary" href="#modal-form">그룹추가</a>
+                                                                </div>
+                                                                <div id="modal-form" class="modal fade" aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-body">
+                                                                                <div class="row">
+                                                                                    <div class="col-sm-12">
+                                                                                        <h3 class="m-t-none m-b">그룹등록</h3>
+                                                                                        <p>코드 그룹을 등록한다.</p>
+                                                                                        <form role="form">
+                                                                                            <div class="form-group"><label>GropuCode</label> <input id="add_group_code" type="text" placeholder="group code" class="form-control"></div>
+                                                                                            <div class="form-group"><label>GroupCode Name</label> <input id="add_group_code_name" type="text" placeholder="group code name" class="form-control"></div>
+                                                                                            <div>
+                                                                                                <button type="button" class="btn btn-w-m btn-success float-right" @click="registGroupCode">등록</button>
+                                                                                            </div>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </form>
-                                                    </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center">코드</td>
+                                                        <td>
+                                                            <input id="code" type="text" placeholder="코드" class="form-control" />
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-center">코드명</td>
+                                                        <td>
+                                                            <input id="code_name" type="text" placeholder="코드명" class="form-control" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center">사용</td>
+                                                        <td>
+                                                            <select class="form-control" id="use_yn">
+                                                              <option value="1" selected >사용</option>
+                                                              <option value="0">미사용</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <!-- 내용 부분 끝 -->
+                                        </div>
+                                        <div class="row">
+                                            <form role="form" class="form-inline">
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-w-m btn-default">취소</button>
+                                                    <button type="button" class="btn btn-w-m btn-success" @click="regist">등록</button>
                                                 </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
-                                  </div>
                                 </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="text-center">코드</td>
-                              <td>
-                                <input id="code" type="text" placeholder="코드" class="form-control"/>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td class="text-center">코드명</td>
-                              <td>
-                                <input id="code_name" type="text" placeholder="코드명" class="form-control"/>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="text-center">사용</td>
-                              <td>
-                                <select class="form-control" id="use_yn">
-                                  <option value="1" selected >사용</option>
-                                  <option value="0">미사용</option>
-                                </select>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <!-- 내용 부분 끝 -->
-                      </div>
-                      <div class="row">
-                        <form role="form" class="form-inline">
-                          <div class="form-group">
-                            <button type="button" class="btn btn-w-m btn-default">취소</button>
-                            <button type="button" class="btn btn-w-m btn-success" @click="regist">등록</button>
-                          </div>
-                        </form>
-                      </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
 
-          <!-- footer -->
-          <div id="footer"></div>
-          <!-- end footer -->
+                <!-- footer -->
+                <div id="footer"></div>
+                <!-- end footer -->
+            </div>
         </div>
-      </div>
     </div>
 
     <script src="../../resources/js/api.js"></script>
@@ -201,129 +200,105 @@
     <script src="../../theme/js/plugins/pace/pace.min.js"></script>
 
     <script>
-      $(document).ready(function () {
-        $("#footer").load("../../admin/common/footer.html");
-      });
+        $(document).ready(function() {
+            $("#footer").load("../../admin/common/footer.html");
+        });
 
-      var HAAIM = "http://localhost:8080";
+        var data = {
+            left: {
+                info: "",
+                menu: ""
+            },
+            body: {
+                groupCode: "",
+                user: "",
+            }
+        };
 
-      var data = new Object();
+        var vm = new Vue({
+            el: "#app",
+            data: function() {
+                return data;
+            },
+            methods: {
+                regist: function() {
 
-      init();
+                    var groupCode = $("#group_code option:selected").val();
+                    var code = $("#code").val(); //코드 그룹
+                    var name = $("#code_name").val(); //코드 그룹
+                    var use_yn = $("#use_yn option:selected").val();
 
-      var vm = new Vue({
-        el: "#app",
-        data() {
-          console.log(data);
-          return data;
-        },
-        methods: {
-          regist: function() {
-            console.log("regist");
-            var groupCode = $("#group_code option:selected").val();
-            var code = $("#code").val(); //코드 그룹
-            var name = $("#code_name").val(); //코드 그룹
-            var use_yn = $("#use_yn option:selected").val();
+                    var param = new Object();
+                    param.group_code = groupCode;
+                    param.code = code;
+                    param.code_name = name;
+                    param.use_yn = use_yn;
 
-            var param = new Object();
-            param.group_code = groupCode;
-            param.code = code;
-            param.code_name = name;
-            param.use_yn = use_yn;
-
-            syncPost(
-                HAAIM + "/code/save",
-                param,
-                function(res) {
-                    if (res != null) {
-                      console.log(res);
-                      alert("저장 성공");
-                    }
+                    post(
+                        "/code/save",
+                        param,
+                        function(res) {
+                            if (res != null) {
+                                console.log(res);
+                                alert("저장 성공");
+                            }
+                        },
+                        function() {
+                            alert("code 저장 오류");
+                        }
+                    );
                 },
-                function(){
-                  alert("code 저장 오류");
-                }
-            );
-          },
-          registGroupCode: function() {
-            var code = $("#add_group_code").val(); //코드 그룹
-            var name = $("#add_group_code_name").val(); //코드 그룹
+                registGroupCode: function() {
+                    var code = $("#add_group_code").val(); //코드 그룹
+                    var name = $("#add_group_code_name").val(); //코드 그룹
 
-            var param = new Object();
-            param.code = code;
-            param.code_name = name;
-        
-            syncPost(
-                HAAIM + "/code/group/save",
-                param,
-                function(res) {
-                    if (res != null) {
-                      console.log(res);
-                      data.groupCode.push(param);
-                    }
+                    var param = new Object();
+                    param.code = code;
+                    param.code_name = name;
+
+                    post(
+                        "/code/group/save",
+                        param,
+                        function(res) {
+                            if (res != null) {
+                                console.log(res);
+                                data.body.groupCode.push(param);
+                            }
+                        },
+                        function() {
+                            alert("group code 저장 오류");
+                        }
+                    );
                 },
-                function(){
-                  alert("group code 저장 오류");
-                }
-            );
-          },
-        },
-        
-        mounted: function () {},
-      });
+            },
 
-      function init() {
-        //잘못 입력시 input 의 style변경 및 메시지 표시용
-        
-        data.groupCode = new Object();
-        data.left = new Object();
-        data.left.info = new Object();
-        data.left.menu = new Object();
-        data.user = new Object();
+            mounted: function() {},
+            created: function() {
+                //user 
+                data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
 
-        //user 
-        syncGet(
-                "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-                "",
-                function(res) {
-                    if (res != null) {
-                        data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
-                    }
-                },
-                null
-            );
-
-            //menu
-            syncGet(
-                HAAIM + "/menu/all",
-                "",
-                function(res) {
-                    if (res != null) {
+                //menu
+                get("/menu/all", null,
+                    function(res) {
                         data.left.menu = res.data;
-                        console.log(data.left.menu);
-                    } else {
-                        alert("menu load error");
                     }
-                },
-                null
-            );
+                )
 
-          //search group code
-          syncGet(
-                  HAAIM + "/code/group/all",
-                  "",
-                  function(res) {
-                      if (res != null) {
-                        data.groupCode = res.data;
-                      }
-                  },
-                  function() {
-                    alert("error");
-                  }
-          );
-      }
-
-     
+                //search group code
+                get("/code/group/all",
+                    "",
+                    function(res) {
+                        if (res != null) {
+                            data.body.groupCode = res.data;
+                        }
+                    },
+                    function() {
+                        alert("error");
+                    }
+                );
+            }
+        });
     </script>
-  </body>
+</body>
+
 </html>
