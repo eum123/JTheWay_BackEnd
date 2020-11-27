@@ -216,14 +216,21 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
 
     <script>
-      var HAAIM = "http://localhost:8080";
-
+     
       $(document).ready(function () {
         $("#footer").load("../../admin/common/footer.html");
       });
 
-      var data = new Object();
-      init();
+      var data = {
+            left: {
+                info: "",
+                menu: ""
+            },
+            body: {
+                groupCode: "",
+                user: "",
+            }
+        };
 
       var vm = new Vue({
         el: "#app",
@@ -242,7 +249,7 @@
             var param = new Object();
             param = getParam();
             
-            syncPost(HAAIM + "/user/regist"
+            post("/user/regist"
               , param
               , function(res) {
                 if(res != null) {
@@ -272,7 +279,7 @@
                return;
             }
 
-            syncGet(HAAIM + "/user/duplicateCheck"
+            get("/user/duplicateCheck"
               , param
               , function(res) {
                 if(res != null) {
@@ -289,73 +296,20 @@
               , null);
             }
         },
+        created: function() {
+          //user
+          data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
+
+          //menu
+          get("/menu/all", null,
+              function(res) {
+                  data.left.menu = res.data;
+              }
+          )
+        }
       });
 
-      function init() {
-        data.left = new Object();
-        data.left.info = new Object();
-        data.left.menu = new Object();
-        data.body = new Object();
-        //잘못 입력시 input 의 style변경 및 메시지 표시용
-        data.body.input = {
-          //사용자 구분
-          userKind: {
-            status: "0",
-            statusMessage: "",
-          },
-          //사용자 이름
-          userName: {
-            status: "0",
-            statusMessage: "",
-          },
-          //id
-          id: {
-            status: "0",
-            statusMessage: "",
-          },
-          //password
-          password: {
-            status: "0",
-            statusMessage: "",
-          },
-          //conform-password
-          conformPassword: {
-            status: "0",
-            statusMessage: "",
-          },
-          //usage
-          usage: {
-            status: "0",
-            statusMessage: "",
-          },
-         
-        };
-        //user 
-        syncGet(
-                "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-                "",
-                function(res) {
-                    if (res != null) {
-                        data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
-                    }
-                },
-                null
-            );
-
-        //menu
-        syncGet(
-                HAAIM + "/menu/all",
-                "",
-                function(res) {
-                    if (res != null) {
-                        data.left.menu = res.data;
-                    } else {
-                      alert("menu load error");
-                    }
-                },
-                null
-        );
-      }
+      
       function validate() {
         var user_type = $("#user_type option:selected").val();
         var use_yn = $("#use_yn option:selected").val();

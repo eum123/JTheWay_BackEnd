@@ -150,7 +150,7 @@
                         </div>
                         <div class="col-sm-4">
                           <div class="text-right">
-                            전체 : {{body.totalElements}}건
+                            전체 : {{body.list.totalElements}}건
                           </div>
                         </div>
                       </div>
@@ -170,7 +170,7 @@
                             </thead>
                             <tbody>
                               
-                              <tr v-for="element in body.content">
+                              <tr v-for="element in body.list.content">
                                 <td>{{element.no}}</td>
                                 <td>
                                   {{element.user_type}}
@@ -187,13 +187,13 @@
                               <tr>
                                   <td colspan="7" class="text-right">
                                       <div class="btn-group">
-                                          <button type="button" class="btn btn-white" @click="moveToPrePage(body.pageInfo.prePageNumber)">
+                                          <button type="button" class="btn btn-white" @click="moveToPrePage(body.list.pageInfo.prePageNumber)">
                                             <i class="fa fa-chevron-left"></i>
                                           </button>
-                                          <button v-for="page in body.pageInfo.pageNumbers" v-bind:class="pageClassObject(page)" @click="movePage(page)">
+                                          <button v-for="page in body.list.pageInfo.pageNumbers" v-bind:class="pageClassObject(page)" @click="movePage(page)">
                                             {{page}}
                                           </button>
-                                          <button type="button" class="btn btn-white" @click="moveToNextPage(body.pageInfo.nextPageNumber)">
+                                          <button type="button" class="btn btn-white" @click="moveToNextPage(body.list.pageInfo.nextPageNumber)">
                                           <i class="fa fa-chevron-right"></i>
                                           </button>
                                       </div>
@@ -237,16 +237,22 @@
     <script src="../../theme/js/plugins/pace/pace.min.js"></script>
 
     <script>
-      var LIST_COUNT = 10; //페이지당 출력 건수
-      var PAGENUMBER_COUNT = 10; //페이지 번호 출력 개수
-      var HAAIM = "http://localhost:8080";
-
+     
       $(document).ready(function () {
         $("#footer").load("../../admin/common/footer.html");
       });
 
-      var data = new Object();
-      init();
+      var data = {
+          left: {
+              info: "",
+              menu: ""
+          },
+          body: {
+              list: {
+                  pageInfo: ""
+              },
+          }
+      };
 
       var vm = new Vue({
         el: "#app",
@@ -255,36 +261,21 @@
         },
         methods: {
           movePage: function(page) {
-              var param = getSearchParameter();
-
-              param.page = page;
-              param.size = LIST_COUNT;
-
-              callAPI(param);
+              callAPI(page, getSearchParameter());
           },
           moveToPrePage: function(page) {
-              if (data.body.first == true) {
+              if (data.body.list.first == true) {
                   alert("처음 페이지 입니다.");
               } else {
-                  var param = getSearchParameter();
-
-                  param.page = page;
-                  param.size = LIST_COUNT;
-
-                  callAPI(param);
+                callAPI(page, getSearchParameter());
               }
           },
 
           moveToNextPage: function(page) {
-              if (data.body.last === true) {
+              if (data.body.list.last === true) {
                   alert("마지막 페이지 입니다.");
               } else {
-                  var param = getSearchParameter();
-
-                  param.page = page;
-                  param.size = LIST_COUNT;
-
-                  callAPI(param);
+                callAPI(page, getSearchParameter());
               }
           },
 
@@ -296,14 +287,10 @@
               }
           },
           search: function() {
-              
-              var param = getSearchParameter();
-
-              callAPI(param);
-              
+            callAPI(1, getSearchParameter());
           },
           goRegist: function() {
-              location.href = HAAIM + "/admin/user/userRegist.html";
+              location.href = "/admin/user/userRegist.html";
           },
         },
         mounted: function () {
@@ -311,82 +298,41 @@
           $("#empty").css("display", "none");
           $("#content").css("display", "");
         },
+        created: function() {
+          //user
+          data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
+
+          //menu
+          get("/menu/all", null,
+              function(res) {
+                  data.left.menu = res.data;
+              }
+          );
+
+          //user all
+          getPage(1, "/user/all", null,
+              function(res, pageInfo) {
+                  data.body.list = res.data;
+                  data.body.list.pageInfo = pageInfo;
+              },
+              null
+          );
+        }
       });
 
-      function init() {
-        
-        data.left = new Object();
-        data.left.info = new Object();
-        data.left.menu = new Object();
-        data.body = new Object();
-        data.body.pageInfo = new Object();
-        
-        //user 
-        syncGet(
-                "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-                "",
-                function(res) {
-                    if (res != null) {
-                        data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
-                    }
-                },
-                null
-            );
-
-        //menu
-        syncGet(
-                HAAIM + "/menu/all",
-                "",
-                function(res) {
-                    if (res != null) {
-                        data.left.menu = res.data;
-                    } else {
-                      alert("menu load error");
-                    }
-                },
-                null
-        );
-
-        //전체 조회
-        syncGet(
-                HAAIM + "/user/all",
-                "",
-                function(res) {
-                    if (res != null) {
-                        data.body = res.data;
-                        data.body.pageInfo = getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, data.body.totalElements, 1);
-
-                        console.log(data.body.content);
-                    } else {
-                        alert("error");
-                    }
-                },
-                null
-            );
-      }
-      function callAPI(parameter) {
+     
+      function callAPI(page, parameter) {
             //start loading
             toggleLoading();
 
             //데이터 조회
-            syncGet(
-                HAAIM + "/user/search",
+            getPage(page, 
+                "/user/search",
                 parameter,
-                function(res) {
-                    if (res != null) {
-                        if (res.success == true) {
-                            data.body = res.data;
-                            data.body.pageInfo = getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, data.body.totalElements, data.body.pageable.pageNumber + 1);
-
-                            console.log(data.body.content);
-                        } else {
-                            alert("error : " + res.data);
-                        }
-                    } else {
-                        alert("error");
-                    }
-                },
-                null
+                function(res, pageInfo) {
+                    data.body.list = res.data;
+                    data.body.list.pageInfo = pageInfo;
+                }
             );
 
             //end loading
@@ -415,9 +361,7 @@
 
           return param;
       }
-      function toggleLoading() {
-        $("#questionList").children(".ibox-content").toggleClass("sk-loading");
-      }
+      
     </script>
   </body>
 </html>

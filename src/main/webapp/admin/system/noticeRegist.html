@@ -159,18 +159,23 @@
     <script src="../../theme/js/plugins/pace/pace.min.js"></script>
 
     <script>
-      var HAAIM = "http://localhost:8080";
-
       $(document).ready(function () {
         $("#footer").load("../../admin/common/footer.html");
       });
 
-      var data = new Object();
-      init();
+      var data = {
+            left: {
+                info: "",
+                menu: ""
+            },
+            body: {
+                notice: "",
+            }
+        };
 
       var vm = new Vue({
         el: "#app",
-        data() {
+        data: function() {
           return data;
         },
         mounted: function () {},
@@ -188,7 +193,7 @@
                 param.contents = contents;
             }
 
-            syncPost(HAAIM + "/notice/regist"
+            post("/notice/regist"
               , param
               , function(res) {
                 if(res != null) {
@@ -204,50 +209,25 @@
               }
               , null);
           }
-        }
+        },
+        created: function() {
+          //user
+          data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
+
+          //menu
+          get(
+            "/menu/all", 
+            null,
+            function(res) {
+              data.left.menu = res.data;
+            }
+          );
+
+          
+        },
       });
 
-      function init() {
-        data.left = new Object();
-        data.left.info = new Object();
-        data.left.menu = new Object();
-        data.body = new Object();
-
-        //user 
-        syncGet(
-            "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-            "",
-            function(res) {
-                if (res != null) {
-                    data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
-                }
-            },
-            null
-        );
-
-        //menu
-        syncGet(
-            HAAIM + "/menu/all",
-            "",
-            function(res) {
-                if (res != null) {
-                    data.left.menu = res.data;
-                } else {
-                    alert("menu load error");
-                }
-            },
-            null
-        );
-
-        //잘못 입력시 input 의 style변경 및 메시지 표시용
-        // data = {
-        //   //사용자 구분
-        //   userKind: {
-        //     status: "0",
-        //     statusMessage: "",
-        //   },
-        // };
-      }
+      
     </script>
   </body>
 </html>

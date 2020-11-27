@@ -47,12 +47,12 @@
 
                         <li v-for="menuItem in left.menu">
                             <a v-if="menuItem.secondary.length > 1" :href="menuItem.primary.url"><i class="fa fa-th-large"></i>
-                      <span class="nav-label">{{menuItem.primary.menu_name}}</span>
-                      <span  class="fa arrow"></span>
-                    </a>
+                          <span class="nav-label">{{menuItem.primary.menu_name}}</span>
+                          <span  class="fa arrow"></span>
+                        </a>
                             <a v-else :href="menuItem.primary.url"><i class="fa fa-th-large"></i>
-                      <span class="nav-label">{{menuItem.primary.menu_name}}</span>
-                    </a>
+                          <span class="nav-label">{{menuItem.primary.menu_name}}</span>
+                        </a>
 
                             <ul v-if="menuItem.secondary.length > 1" class="nav nav-second-level collapse">
                                 <li v-for="sub in menuItem.secondary">
@@ -226,14 +226,21 @@
     <script src="../../theme/js/plugins/pace/pace.min.js"></script>
 
     <script>
-      var HAAIM = "http://localhost:8080";
-
       $(document).ready(function () {
         $("#footer").load("../../admin/common/footer.html");
       });
 
-      var data = new Object();
-      init();
+      var data = {
+            left: {
+                info: "",
+                menu: ""
+            },
+            body: {
+                list: {
+                    pageInfo: ""
+                },
+            }
+        };
 
       var vm = new Vue({
         el: "#app",
@@ -242,7 +249,7 @@
         },
         methods: {
           goRegist: function (page) {
-            location.href = HAAIM + "/admin/system/menuRegist.html";
+            location.href = "/admin/system/menuRegist.html";
           },
         },
 
@@ -251,58 +258,34 @@
           $("#empty").css("display", "none");
           $("#content").css("display", "");
         },
+        created: function() {
+          //user
+          data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
+
+          //menu
+          get("/menu/all", null,
+              function(res) {
+                  data.left.menu = res.data;
+              }
+          );
+
+          //body
+          get(
+              "/menu/searchAll",
+              "",
+              function(res) {
+                  if (res != null) {
+                    data.body.content = res.data;
+                  } else {
+                      alert("content load error");
+                  }
+              },
+              null
+          );
+
+        }
       });
 
-      function init() {
-        data.left = new Object();
-        data.left.info = new Object();
-        data.left.menu = new Object();
-        data.body = new Object();
-        data.body.content = new Object();
-
-        //user 
-        syncGet(
-            "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-            "",
-            function(res) {
-                if (res != null) {
-                    data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
-                }
-            },
-            null
-        );
-
-        //menu
-        syncGet(
-            HAAIM + "/menu/all",
-            "",
-            function(res) {
-                if (res != null) {
-                    data.left.menu = res.data;
-                    console.log(data.left.menu);
-                } else {
-                    alert("menu load error");
-                }
-            },
-            null
-        );
-
-        //body
-        syncGet(
-            HAAIM + "/menu/searchAll",
-            "",
-            function(res) {
-                if (res != null) {
-                  data.body.content = res.data;
-                } else {
-                    alert("menu load error");
-                }
-            },
-            null
-        );
-
-        
-      }
 
       /**
        * 검색 조건으로 parameter 생성
@@ -322,9 +305,7 @@
         return param;
       }
 
-      function toggleLoading() {
-        $("#questionList").children(".ibox-content").toggleClass("sk-loading");
-      }
+      
     </script>
   </body>
 </html>

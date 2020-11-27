@@ -168,7 +168,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="element in body.content">
+                          <tr v-for="element in body.list.content">
                             <td class="text-center">{{element.no}}</td>
                             <td class="text-center">
                               {{element.title}}
@@ -185,13 +185,13 @@
                           <tr>
                               <td colspan="6" class="text-right">
                                   <div class="btn-group">
-                                      <button type="button" class="btn btn-white" @click="moveToPrePage(body.pageInfo.prePageNumber)">
+                                      <button type="button" class="btn btn-white" @click="moveToPrePage(body.list.pageInfo.prePageNumber)">
                                         <i class="fa fa-chevron-left"></i>
                                       </button>
-                                      <button v-for="page in body.pageInfo.pageNumbers" v-bind:class="pageClassObject(page)" @click="movePage(page)">
+                                      <button v-for="page in body.list.pageInfo.pageNumbers" v-bind:class="pageClassObject(page)" @click="movePage(page)">
                                         {{page}}
                                       </button>
-                                      <button type="button" class="btn btn-white" @click="moveToNextPage(body.pageInfo.nextPageNumber)">
+                                      <button type="button" class="btn btn-white" @click="moveToNextPage(body.list.pageInfo.nextPageNumber)">
                                       <i class="fa fa-chevron-right"></i>
                                       </button>
                                   </div>
@@ -234,16 +234,23 @@
     <script src="../../theme/js/plugins/pace/pace.min.js"></script>
 
     <script>
-      var LIST_COUNT = 10;
-      var PAGENUMBER_COUNT = 10;
-      var HAAIM = "http://localhost:8080";
-
+     
       $(document).ready(function () {
         $("#footer").load("../../admin/common/footer.html");
       });
 
-      var data = new Object();
-      init();
+      var data = {
+          left: {
+              info: "",
+              menu: ""
+          },
+          body: {
+              list: {
+                  pageInfo: ""
+              },
+          }
+      };
+     
 
       var vm = new Vue({
         el: "#app",
@@ -252,41 +259,26 @@
         },
         methods: {
           movePage: function(page) {
-              var param = getSearchParameter();
-
-              param.page = page;
-              param.size = LIST_COUNT;
-
-              callAPI(param);
+              callAPI(page, getSearchParameter());
           },
           moveToPrePage: function(page) {
-              if (data.body.first == true) {
+              if (data.body.list.first == true) {
                   alert("처음 페이지 입니다.");
               } else {
-                  var param = getSearchParameter();
-
-                  param.page = page;
-                  param.size = LIST_COUNT;
-
-                  callAPI(param);
+                callAPI(page, getSearchParameter());
               }
           },
 
           moveToNextPage: function(page) {
-              if (data.body.last === true) {
+              if (data.body.list.last === true) {
                   alert("마지막 페이지 입니다.");
               } else {
-                  var param = getSearchParameter();
-
-                  param.page = page;
-                  param.size = LIST_COUNT;
-
-                  callAPI(param);
+                callAPI(page, getSearchParameter());
               }
           },
 
           pageClassObject: function(page) {
-              if (data.body.currentPage == page) {
+              if (data.body.list.currentPage == page) {
                   return "btn btn-white active";
               } else {
                   return "btn btn-white ";
@@ -294,13 +286,11 @@
           },
           search: function() {
               if (validate()) {
-                  var param = getSearchParameter();
-
-                  callAPI(param);
+                callAPI(1, getSearchParameter());
               }
           },
           goRegist: function() {
-              location.href = HAAIM + "/admin/system/noticeRegist.html";
+              location.href = "/admin/system/noticeRegist.html";
           },
         },
 
@@ -309,84 +299,51 @@
           $("#empty").css("display", "none");
           $("#content").css("display", "");
         },
+
+        created: function() {
+          //user
+          data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
+
+          //menu
+          get(
+            "/menu/all", 
+            null,
+            function(res) {
+              data.left.menu = res.data;
+            }
+          );
+
+          //notice
+          getPage(1,
+            "/notice/all",
+            "",
+            function(res, pageInfo) {
+                    data.body.list = res.data;
+                    data.body.list.pageInfo = pageInfo;
+            },
+            null
+          );
+
+        },
       });
 
-      function callAPI(parameter) {
+      function callAPI(page, parameter) {
             //start loading
             toggleLoading();
 
             //데이터 조회
-            syncGet(
-                HAAIM + "/notice/search",
-                parameter,
-                function(res) {
-                    if (res != null) {
-                        if (res.success == true) {
-                            data.body = res.data;
-                            data.body.pageInfo = getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, data.body.totalElements, data.body.pageable.pageNumber + 1);
-                        } else {
-                            alert("error : " + res.data);
-                        }
-                    } else {
-                        alert("error");
-                    }
-                },
-                null
-            );
+            getPage(page, "/notice/search", parameter,
+                function(res, pageInfo) {
+                    data.body.list = res.data;
+                    data.body.list.pageInfo = pageInfo;
+                }
+            )
 
             //end loading
             toggleLoading();
       }
 
-      function init() {
-        data.left = new Object();
-        data.left.info = new Object();
-        data.left.menu = new Object();
-        data.body = new Object();
-        data.body.pageInfo = new Object();
-
-        
-        //user 
-        syncGet(
-            "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-            "",
-            function(res) {
-                if (res != null) {
-                    data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
-                }
-            },
-            null
-        );
-
-        //menu
-        syncGet(
-            HAAIM + "/menu/all",
-             "",
-            function(res) {
-                if (res != null) {
-                    data.left.menu = res.data;
-                } else {
-                    alert("menu load error");
-                }
-            },
-            null
-        );
-
-        //notice 조회
-        syncGet(
-                HAAIM + "/notice/all",
-                "",
-                function(res) {
-                    if (res != null) {
-                        data.body = res.data;
-                        data.body.pageInfo = getPageInfo(LIST_COUNT, PAGENUMBER_COUNT, data.body.totalElements, 1);
-                    } else {
-                        alert("error");
-                    }
-                },
-                null
-            );
-      }
+     
 
       function validate() {
         var title = $("#title").val(); //제목
@@ -400,27 +357,25 @@
       }
 
       /**
-         * 검색 조건으로 parameter 생성
-         */
-         function getSearchParameter() {
-            var title = $("#title").val(); //제목
-            var contents = $("#contents").val(); //내용
+       * 검색 조건으로 parameter 생성
+       */
+        function getSearchParameter() {
+          var title = $("#title").val(); //제목
+          var contents = $("#contents").val(); //내용
 
-            var param = new Object();
-            if (title != "") {
-                param.title = title;
-            }
+          var param = new Object();
+          if (title != "") {
+              param.title = title;
+          }
 
-            if (contents != "") {
-                param.contents = contents;
-            }
+          if (contents != "") {
+              param.contents = contents;
+          }
 
-            return param;
-        }
-
-      function toggleLoading() {
-        $("#questionList").children(".ibox-content").toggleClass("sk-loading");
+          return param;
       }
+
+     
     </script>
   </body>
 </html>
