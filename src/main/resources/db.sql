@@ -140,7 +140,8 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COMMENT = '커리큘럼';
 
-CREATE TABLE IF NOT EXISTS `haaim`.`score_mngt` (
+CREATE TABLE IF NOT EXISTS `score_mngt` (
+  `no` INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   `year` INT NOT NULL,
   `student_no` INT NOT NULL,
   `term` VARCHAR(45) NULL COMMENT '학기, 기간',
@@ -150,9 +151,8 @@ CREATE TABLE IF NOT EXISTS `haaim`.`score_mngt` (
   `input_id` VARCHAR(45) NOT NULL,
   `input_date` DATETIME NOT NULL,
   `update_id` VARCHAR(45) NULL,
-  `update_date` DATETIME NULL,
-  PRIMARY KEY (`year`, `student_no`, `exam`),
-  INDEX `fk_score_mngt_student_detail1_idx` (`year` ASC, `student_no` ASC))
+  `update_date` DATETIME NULL
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COMMENT = '시험점수관리(중간/기말/모의고사/수능점수)';

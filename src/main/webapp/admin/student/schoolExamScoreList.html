@@ -134,9 +134,9 @@
                           <tbody>
                             <tr>
                               <td>학교/학년</td>
-                              <td>나혼자고 2학년</td>
+                              <td>{{body.student.school}}</td>
                               <td>이름</td>
-                              <td>나이름</td>
+                              <td>{{body.student.name}}</td>
                             </tr>
                           </tbody>
                         </table>
@@ -204,12 +204,13 @@
               list: {
                   pageInfo: ""
               },
+              student: "",
           }
       };
 
       var vm = new Vue({
         el: "#app",
-        data() {
+        data: function() {
           return data;
         },
         methods: {},
@@ -231,39 +232,18 @@
               }
           );
 
-          //code
-          data.exam = JSON.parse(
-          '{"list":[{"examName":"3월 모의고사","score":"8","maxScore":"10","remark":"중3 > 1학기 > Ⅰ 소인수분해 > 01 소인수분해"}]}'
-          );
+          //studentInfo
+          data.body.student = JSON.parse('{"school":"홍길동학교","name":"홍길동"}');
 
+          //school exam
+          getPage(1, "/student/school/exam/all", "",
+              function(res, pageInfo) {
+                  data.body.list = res.data;
+                  data.body.list.pageInfo = pageInfo;
+              }
+          )
         },
       });
-
-      function init() {
-        
-        data.left = new Object();
-        data.left.info = new Object();
-        data.left.menu = new Object();
-        data.body = new Object();
-
-       
-        //code 조회
-        syncGet(
-          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-          "",
-          getList,
-          null
-        );
-      }
-
-      function getList(res) {
-        if (res != null) {
-          //test
-          data.exam = JSON.parse(
-            '{"list":[{"examName":"3월 모의고사","score":"8","maxScore":"10","remark":"중3 > 1학기 > Ⅰ 소인수분해 > 01 소인수분해"}]}'
-          );
-        }
-      }
 
       /**
        * 검색 조건으로 parameter 생성

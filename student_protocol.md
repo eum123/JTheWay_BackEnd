@@ -66,3 +66,58 @@
          } 
        }
       ```
+## 학교 시험
+	1. 목록
+	 - 요청
+        * 전체 : http://localhost:8080/student/school/exam/all
+     - 응답
+      ```json
+       
+       {
+		  "success": true,
+		  "code": 0,
+		  "msg": "OK",
+		  "data": {
+		    "content": [
+		      {
+		      	"no": 111,
+		      	"student_no": 11,
+		      	"year": 2020,
+		      	"term": "1111",
+		      	"exam": "1231231",
+		      	"score": "12",
+		      	"description": "12",
+		      	"input_id": "12",
+		      	"input_date": "12",
+		      	"update_id": "12",
+		      	"update_date": "12"
+		      }
+		    ],
+		    "pageable": {
+		      "sort": {
+		        "sorted": true,
+		        "unsorted": false,
+		        "empty": false
+		      },
+		      "offset": 0,
+		      "pageNumber": 0,
+		      "pageSize": 10,
+		      "paged": true,
+		      "unpaged": false
+		    },
+		    "totalElements": 0,
+		    "last": true,
+		    "totalPages": 0,
+		    "number": 0,
+		    "size": 10,
+		    "sort": {
+		      "sorted": true,
+		      "unsorted": false,
+		      "empty": false
+		    },
+		    "numberOfElements": 0,
+		    "first": true,
+		    "empty": true
+		  }
+		}
+      ```

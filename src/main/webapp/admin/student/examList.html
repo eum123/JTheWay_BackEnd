@@ -40,12 +40,12 @@
 
                         <li v-for="menuItem in left.menu">
                             <a v-if="menuItem.secondary.length > 1" :href="menuItem.primary.url"><i class="fa fa-th-large"></i>
-                        <span class="nav-label">{{menuItem.primary.menu_name}}</span>
-                        <span  class="fa arrow"></span>
-                      </a>
+                          <span class="nav-label">{{menuItem.primary.menu_name}}</span>
+                          <span  class="fa arrow"></span>
+                        </a>
                             <a v-else :href="menuItem.primary.url"><i class="fa fa-th-large"></i>
-                        <span class="nav-label">{{menuItem.primary.menu_name}}</span>
-                      </a>
+                          <span class="nav-label">{{menuItem.primary.menu_name}}</span>
+                        </a>
 
                             <ul v-if="menuItem.secondary.length > 1" class="nav nav-second-level collapse">
                                 <li v-for="sub in menuItem.secondary">
@@ -182,7 +182,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="element in body.content">
+                          <tr v-for="element in body.list.content">
                             <td class="text-center">{{element.no}}</td>
                             <td class="text-center">
                               {{element.year}}
@@ -217,12 +217,12 @@
                                 <button
                                   type="button"
                                   class="btn btn-white"
-                                  @click="movePage(exam.pagination.pageInfo.prePageNumber)"
+                                  @click="movePage(body.list.pageInfo.prePageNumber)"
                                 >
                                   <i class="fa fa-chevron-left"></i>
                                 </button>
                                 <button
-                                  v-for="page in exam.pagination.pageInfo.pageNumbers"
+                                  v-for="page in body.list.pageInfo.pageNumbers"
                                   v-bind:class="pageClassObject(page)"
                                   @click="movePage(page)"
                                 >
@@ -231,7 +231,7 @@
                                 <button
                                   type="button"
                                   class="btn btn-white"
-                                  @click="movePage(exam.pagination.pageInfo.nextPageNumber)"
+                                  @click="movePage(body.list.pageInfo.nextPageNumber)"
                                 >
                                   <i class="fa fa-chevron-right"></i>
                                 </button>
@@ -290,26 +290,12 @@
 
       var vm = new Vue({
         el: "#app",
-        data() {
+        data: function() {
           return data;
         },
         methods: {
           movePage: function (page) {
-            //start loading
-            toggleLoading();
-
-            //데이터 조회
-            syncGet(
-              "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-              getSearchParameter(),
-              examList,
-              null
-            );
-            //현재 페이지 설정
-            this.exam.pagination.currentPage = page;
-
-            //end loading
-            toggleLoading();
+            callAPI(page, getSearchParameter());
           },
         },
 
@@ -329,7 +315,7 @@
               }
           );
 
-          //test
+          
           data.body.list = JSON.parse(
           '{"list":[{"no":"1","year":"2020","class":"class","curriculum":"중1 > 1학기 > 소인수분해 > 01 소인수분해","exam":{"count":10,"questionsDate":"2020.02.09","doDate":"2020.02.10","status":"fail","score":10,"isTakeExam":"1"}}],"pagination":{"total":10,"countPerPage":10}}'
           );
@@ -337,40 +323,28 @@
         },
       });
 
+      function callAPI(page, parameter) {
+          //start loading
+          toggleLoading();
+
+          getPage(page, "/student/exam/search", parameter,
+              function(res, pageInfo) {
+                  data.body.list = res.data;
+                  data.body.list.pageInfo = pageInfo;
+              }
+          )
+
+          //end loading
+          toggleLoading();
+      }
+
       function init() {
         data.left = new Object();
         data.left.info = new Object();
         data.left.menu = new Object();
         data.body = new Object();
 
-        //user 
-        syncGet(
-                "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-                "",
-                function(res) {
-                    if (res != null) {
-                        data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
-                    }
-                },
-                null
-            );
-            
-        //menu
-        syncGet(
-                HAAIM + "/menu/all",
-                "",
-                function(res) {
-                    if (res != null) {
-                        data.left.menu = res.data;
-                        console.log(data.left.menu);
-                    } else {
-                        alert("menu load error");
-                    }
-                },
-            null
-        );
-
-
+       
         //code 조회
         syncGet(
           "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
@@ -380,20 +354,20 @@
         );
       }
 
-      function examList(res) {
-        if (res != null) {
-          //test
-          data.exam = JSON.parse(
-            '{"list":[{"no":"1","year":"2020","class":"class","curriculum":"중1 > 1학기 > 소인수분해 > 01 소인수분해","exam":{"count":10,"questionsDate":"2020.02.09","doDate":"2020.02.10","status":"fail","score":10,"isTakeExam":"1"}}],"pagination":{"total":10,"countPerPage":10}}'
-          );
+      // function examList(res) {
+      //   if (res != null) {
+      //     //test
+      //     data.exam = JSON.parse(
+      //       '{"list":[{"no":"1","year":"2020","class":"class","curriculum":"중1 > 1학기 > 소인수분해 > 01 소인수분해","exam":{"count":10,"questionsDate":"2020.02.09","doDate":"2020.02.10","status":"fail","score":10,"isTakeExam":"1"}}],"pagination":{"total":10,"countPerPage":10}}'
+      //     );
 
-          //현재페이지
-          var currentPage = data.exam.pagination.currentPage;
-          var totalCount = data.exam.pagination.total;
+      //     //현재페이지
+      //     var currentPage = data.exam.pagination.currentPage;
+      //     var totalCount = data.exam.pagination.total;
 
-          data.exam.pagination.pageInfo = getPageInfo(totalCount, currentPage);
-        }
-      }
+      //     data.exam.pagination.pageInfo = getPageInfo(totalCount, currentPage);
+      //   }
+      // }
 
       /**
        * 검색 조건으로 parameter 생성
