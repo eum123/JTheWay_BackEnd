@@ -231,11 +231,17 @@
         $("#footer").load("../../admin/common/footer.html");
       });
 
-      var LIST_COUNT = 10;
-      var PAGENUMBER_COUNT = 10;
-      var HAAIM = "http://localhost:8080";
-      var data = new Object();
-      init();
+      var data = {
+          left: {
+              info: "",
+              menu: ""
+          },
+          body: {
+              list: {
+                  pageInfo: ""
+              },
+          }
+      };
 
       var vm = new Vue({
         el: "#app",
@@ -243,50 +249,21 @@
           return data;
         },
         mounted: function () {},
+        created: function() {
+            //user
+            data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
+
+            //menu
+            get("/menu/all", null,
+                function(res) {
+                    data.left.menu = res.data;
+                }
+            );
+
+        },
       });
 
-      function init() {
-        //잘못 입력시 input 의 style변경 및 메시지 표시용
-        data = {
-          //사용자 구분
-          userKind: {
-            status: "0",
-            statusMessage: "",
-          },
-        };
-
-        data.left = new Object();
-        data.left.info = new Object();
-        data.left.menu = new Object();
-        data.body = new Object();
-
-        //user 
-        syncGet(
-            "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-            "",
-            function(res) {
-                if (res != null) {
-                    data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
-                }
-            },
-            null
-        );
-        
-        //menu
-        syncGet(
-                HAAIM + "/menu/all",
-                "",
-                function(res) {
-                    if (res != null) {
-                        data.left.menu = res.data;
-                        console.log(data.left.menu);
-                    } else {
-                        alert("menu load error");
-                    }
-                },
-            null
-        );
-      }
+      
     </script>
   </body>
 </html>

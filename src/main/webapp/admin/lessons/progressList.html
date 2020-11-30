@@ -1,10 +1,3 @@
-<!--
-*
-*  INSPINIA - Responsive Admin Theme
-*  version 2.9.2
-*
--->
-
 <!DOCTYPE html>
 <html>
 
@@ -290,11 +283,17 @@
         $("#footer").load("../../admin/common/footer.html");
       });
 
-      var LIST_COUNT = 10;
-      var PAGENUMBER_COUNT = 10;
-      var HAAIM = "http://localhost:8080";
-      var data = new Object();
-      init();
+      var data = {
+          left: {
+              info: "",
+              menu: ""
+          },
+          body: {
+              list: {
+                  pageInfo: ""
+              },
+          }
+      };
 
       var vm = new Vue({
         el: "#app",
@@ -325,6 +324,23 @@
           //로딩 화면 제거하고 화면 표시
           $("#empty").css("display", "none");
           $("#content").css("display", "");
+        },
+        created: function() {
+          //user
+          data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
+
+          //menu
+          get("/menu/all", null,
+              function(res) {
+                  data.left.menu = res.data;
+              }
+          );
+
+          //test
+          data.progress = JSON.parse(
+            '{"list":[{"no":"1","date":"2020.01.01","class":"class","startTime":"10:00","endTime":"11:00","teacher":"나선생","progress":[{"order":{"name":"A","status":"1"}},{"order":{"name":"B","status":"1"}},{"order":{"name":"C","status":"1"}},{"order":{"name":"D","status":"0"}},{"order":{"name":"E","status":"0"}},{"order":{"name":"F","status":"0"}},{"order":{"name":"G","status":"0"}}]}],"pagination":{"total":10,"countPerPage":10}}'
+          );
+
         },
       });
 
@@ -409,9 +425,7 @@
         return param;
       }
 
-      function toggleLoading() {
-        $("#questionList").children(".ibox-content").toggleClass("sk-loading");
-      }
+     
     </script>
   </body>
 </html>

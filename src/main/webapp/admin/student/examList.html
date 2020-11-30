@@ -1,10 +1,3 @@
-<!--
-*
-*  INSPINIA - Responsive Admin Theme
-*  version 2.9.2
-*
--->
-
 <!DOCTYPE html>
 <html>
 
@@ -278,16 +271,22 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
 
     <script>
-      var LIST_COUNT = 10; //페이지당 출력 건수
-      var PAGENUMBER_COUNT = 10; //페이지 번호 출력 개수
-      var HAAIM = "http://localhost:8080";
-
       $(document).ready(function () {
         $("#footer").load("../../admin/common/footer.html");
       });
 
-      var data = new Object();
-      init();
+      var data = {
+          left: {
+              info: "",
+              menu: ""
+          },
+          body: {
+              list: {
+                  pageInfo: ""
+              },
+          }
+      };
+
 
       var vm = new Vue({
         el: "#app",
@@ -318,6 +317,23 @@
           //로딩 화면 제거하고 화면 표시
           $("#empty").css("display", "none");
           $("#content").css("display", "");
+        },
+        created: function() {
+          //user
+          data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
+
+          //menu
+          get("/menu/all", null,
+              function(res) {
+                  data.left.menu = res.data;
+              }
+          );
+
+          //test
+          data.body.list = JSON.parse(
+          '{"list":[{"no":"1","year":"2020","class":"class","curriculum":"중1 > 1학기 > 소인수분해 > 01 소인수분해","exam":{"count":10,"questionsDate":"2020.02.09","doDate":"2020.02.10","status":"fail","score":10,"isTakeExam":"1"}}],"pagination":{"total":10,"countPerPage":10}}'
+          );
+
         },
       });
 
@@ -397,9 +413,6 @@
         return param;
       }
 
-      function toggleLoading() {
-        $("#questionList").children(".ibox-content").toggleClass("sk-loading");
-      }
     </script>
   </body>
 </html>
