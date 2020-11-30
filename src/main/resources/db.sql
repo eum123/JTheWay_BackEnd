@@ -45,7 +45,7 @@ COMMENT = '사용자';
 
 
 CREATE TABLE IF NOT EXISTS student_info (
-  `student_no` INT(10) NOT NULL ,
+  `student_no` INT(10) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(20) NOT NULL,
   `birth` VARCHAR(8) NULL COMMENT '생년월일',
   `mobile` VARCHAR(15) NOT NULL COMMENT '연락처',

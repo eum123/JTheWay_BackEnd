@@ -40,12 +40,12 @@
 
                         <li v-for="menuItem in left.menu">
                             <a v-if="menuItem.secondary.length > 1" :href="menuItem.primary.url"><i class="fa fa-th-large"></i>
-                            <span class="nav-label">{{menuItem.primary.menu_name}}</span>
-                            <span  class="fa arrow"></span>
-                          </a>
+                          <span class="nav-label">{{menuItem.primary.menu_name}}</span>
+                          <span  class="fa arrow"></span>
+                        </a>
                             <a v-else :href="menuItem.primary.url"><i class="fa fa-th-large"></i>
-                            <span class="nav-label">{{menuItem.primary.menu_name}}</span>
-                          </a>
+                          <span class="nav-label">{{menuItem.primary.menu_name}}</span>
+                        </a>
 
                             <ul v-if="menuItem.secondary.length > 1" class="nav nav-second-level collapse">
                                 <li v-for="sub in menuItem.secondary">
@@ -180,7 +180,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="element in body.content">
+                          <tr v-for="element in body.list.content">
                             <td class="text-center">{{element.no}}</td>
                             <td class="text-center">
                               {{element.school}}/{{element.grade}}
@@ -205,12 +205,12 @@
                                 <button
                                   type="button"
                                   class="btn btn-white"
-                                  @click="movePage(student.pagination.pageInfo.prePageNumber)"
+                                  @click="movePage(body.list.pageInfo.prePageNumber)"
                                 >
                                   <i class="fa fa-chevron-left"></i>
                                 </button>
                                 <button
-                                  v-for="page in student.pagination.pageInfo.pageNumbers"
+                                  v-for="page in body.list.pageInfo.pageNumbers"
                                   v-bind:class="pageClassObject(page)"
                                   @click="movePage(page)"
                                 >
@@ -219,7 +219,7 @@
                                 <button
                                   type="button"
                                   class="btn btn-white"
-                                  @click="movePage(student.pagination.pageInfo.nextPageNumber)"
+                                  @click="movePage(body.list.pageInfo.nextPageNumber)"
                                 >
                                   <i class="fa fa-chevron-right"></i>
                                 </button>
@@ -278,26 +278,42 @@
 
       var vm = new Vue({
         el: "#app",
-        data() {
+        data: function() {
           return data;
         },
         methods: {
           movePage: function (page) {
-            //start loading
-            toggleLoading();
+            callAPI(page, getSearchParameter());
+          },
+          moveToPrePage: function(page) {
+              if (data.body.list.first == true) {
+                  alert("처음 페이지 입니다.");
+              } else {
+                  callAPI(page, getSearchParameter());
+              }
+          },
 
-            //데이터 조회
-            syncGet(
-              "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-              getSearchParameter(),
-              codeList,
-              null
-            );
-            //현재 페이지 설정
-            this.student.pagination.currentPage = page;
-
-            //end loading
-            toggleLoading();
+          moveToNextPage: function(page) {
+              if (data.body.list.last === true) {
+                  alert("마지막 페이지 입니다.");
+              } else {
+                  callAPI(page, getSearchParameter());
+              }
+          },
+          pageClassObject: function(page) {
+              if (data.body.list.currentPage == page) {
+                  return "btn btn-white active";
+              } else {
+                  return "btn btn-white ";
+              }
+          },
+          search: function() {
+              if (validate()) {
+                  callAPI(1, getSearchParameter());
+              }
+          },
+          goRegist: function() {
+              location.href = "/admin/student/studentRegist.html";
           },
         },
 
@@ -319,46 +335,34 @@
           );
 
           //code
-          data.student = JSON.parse(
-          '{"list":[{"no":"1","school":"2020","grade":"2","class":"class","name":"홍길동","studentMobile":"01001112222","parentMobile":"01001113333","regDate":"2020.05.01"}],"pagination":{"total":10,"countPerPage":10}}'
+          // data.student = JSON.parse(
+          // '{"list":[{"no":"1","school":"2020","grade":"2","class":"class","name":"홍길동","studentMobile":"01001112222","parentMobile":"01001113333","regDate":"2020.05.01"}],"pagination":{"total":10,"countPerPage":10}}'
+          // );
+          getPage(1, "/student/all", null,
+              function(res, pageInfo) {
+                  data.body.list = res.data;
+                  data.body.list.pageInfo = pageInfo;
+              },
+              null
           );
 
         },
 
       });
 
-      function init() {
-        data.left = new Object();
-        data.left.info = new Object();
-        data.left.menu = new Object();
-        data.body = new Object();
+      function callAPI(page, parameter) {
+          //start loading
+          toggleLoading();
 
-        
-        //code 조회
-        syncGet(
-          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-          "",
-          codeList,
-          null
-        );
-      }
+          getPage(page, "/student/search", parameter,
+              function(res, pageInfo) {
+                  data.body.list = res.data;
+                  data.body.list.pageInfo = pageInfo;
+              }
+          )
 
-      function codeList(res) {
-        if (res != null) {
-          //test
-          data.student = JSON.parse(
-            '{"list":[{"no":"1","school":"2020","grade":"2","class":"class","name":"홍길동","studentMobile":"01001112222","parentMobile":"01001113333","regDate":"2020.05.01"}],"pagination":{"total":10,"countPerPage":10}}'
-          );
-
-          //현재페이지
-          var currentPage = data.student.pagination.currentPage;
-          var totalCount = data.student.pagination.total;
-
-          data.student.pagination.pageInfo = getPageInfo(
-            totalCount,
-            currentPage
-          );
-        }
+          //end loading
+          toggleLoading();
       }
 
       /**

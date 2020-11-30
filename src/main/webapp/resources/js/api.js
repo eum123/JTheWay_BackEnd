@@ -64,9 +64,11 @@ function callPage(httpMethod, page, url, param, successFunc, failFunc) {
         success: function(res) {
 
             if (res != null) {
-                console.log(res);
 
                 var totalCount = res.data.totalElements;
+                if (isEmpty(totalCount)) {
+                    totalCount = 0;
+                }
                 var currentPage = res.data.pageable.pageNumbers;
 
                 if (isEmpty(currentPage)) {
