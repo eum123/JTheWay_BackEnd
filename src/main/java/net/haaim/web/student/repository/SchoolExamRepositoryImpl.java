@@ -14,7 +14,7 @@ import net.haaim.web.student.entity.SchoolExamEntity;
 public class SchoolExamRepositoryImpl extends QuerydslRepositorySupport implements SchoolExamRepositoryCustom {
 
 	public SchoolExamRepositoryImpl() {
-		super(NoticeEntity.class);
+		super(SchoolExamEntity.class);
 	}
 	
 	/**

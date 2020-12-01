@@ -83,7 +83,7 @@
           <!-- end top -->
 
           <div class="row border-bottom white-bg dashboard-header">
-            navigation
+            학생관리 > 시험점수 > 등록
           </div>
           <div class="wrapper wrapper-content">
             <div class="container">
@@ -99,9 +99,9 @@
                           <tbody>
                             <tr>
                               <td>학교/학년</td>
-                              <td>나혼자고 2학년</td>
+                              <td>{{body.student.school}}</td>
                               <td>이름</td>
-                              <td>나이름</td>
+                              <td>{{body.student.name}}</td>
                             </tr>
                           </tbody>
                         </table>
@@ -113,17 +113,37 @@
                           <tbody>
                             <tr>
                               <td>학생명</td>
-                              <td>나이름</td>
+                              <td>{{body.student.name}}</td>
                             </tr>
                             <tr>
                               <td>클래스</td>
                               <td>중3 > 1학기</td>
                             </tr>
                             <tr>
+                              <td>년도</td>
+                              <td>
+                                <input
+                                  type="text" id="year"
+                                  placeholder="년도"
+                                  class="form-control"
+                                />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>학기/기간</td>
+                              <td>
+                                <input
+                                  type="text" id="term"
+                                  placeholder="학기 / 기간"
+                                  class="form-control"
+                                />
+                              </td>
+                            </tr>
+                            <tr>
                               <td>시험명</td>
                               <td>
                                 <input
-                                  type="text"
+                                  type="text" id="exam"
                                   placeholder="시험명"
                                   class="form-control"
                                 />
@@ -135,14 +155,14 @@
                                 <form role="form" class="form-inline">
                                   <div class="form-group">
                                     <input
-                                      type="text"
+                                      type="text" id="score1"
                                       placeholder="점수"
                                       class="form-control"
                                     />점 /
                                   </div>
                                   <div class="form-group">
                                     <input
-                                      type="text"
+                                      type="text" id="score2"
                                       placeholder="만점"
                                       class="form-control"
                                     />
@@ -153,7 +173,7 @@
                             </tr>
                             <tr>
                               <td>비고</td>
-                              <td><textarea></textarea></td>
+                              <td><textarea id="description"></textarea></td>
                             </tr>
                           </tbody>
                         </table>
@@ -170,7 +190,7 @@
                             </button>
                             <button
                               type="button"
-                              class="btn btn-w-m btn-success"
+                              class="btn btn-w-m btn-success" @click="regist"
                             >
                               등록
                             </button>
@@ -231,21 +251,51 @@
 
       var vm = new Vue({
         el: "#app",
-        data() {
+        data: function() {
           return data;
         },
         mounted: function () {},
+        methods: {
+          regist: function() {
+
+            var param = new Object();
+            param.year = $("#year").val();
+            param.exam = $("#exam").val();
+            param.term = $("#term").val();
+            param.score = $("#score1").val() + "/" + $("#score2").val();
+            param.description = $("#description").val();
+            
+            post(
+                "/student/school/exam/save",
+                param,
+                function(res) {
+                    if (res != null) {
+                        console.log(res);
+                        alert("저장 성공");
+                    }
+                },
+                function() {
+                    alert("code 저장 오류");
+                }
+            )
+          },
+        },
 
         created: function() {
-            //user
-            data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
+          //user
+          data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
 
-            //menu
-            get("/menu/all", null,
-                function(res) {
-                    data.left.menu = res.data;
-                }
-            );
+          //menu
+          get("/menu/all", null,
+              function(res) {
+                  data.left.menu = res.data;
+              }
+          );
+
+          //studentInfo
+          data.body.student = JSON.parse('{"school":"홍길동학교","name":"홍길동"}');
+
+          //class Info
 
         },
       });

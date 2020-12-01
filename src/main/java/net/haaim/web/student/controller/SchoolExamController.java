@@ -44,19 +44,18 @@ public class SchoolExamController {
 	
 	
 	
-	@RequestMapping(value = "regist", method = RequestMethod.POST)
+	@RequestMapping(value = "save", method = RequestMethod.POST)
 	public ApiResponse regist(
 			@RequestParam(value = "year", required=true) Integer year, 
 			@RequestParam(value = "student_no", required=true) Integer studentNo,
 			@RequestParam(value = "term", required=true) String term,
 			@RequestParam(value = "exam", required=true) String exam,
 			@RequestParam(value = "score", required=true) String score,
-			@RequestParam(value = "descrition", required=false) String description) {
+			@RequestParam(value = "descrition", required=false, defaultValue = "") String description) {
 		
 		try {
 			// 사용자의 권한을 확인
 			User user = UserHelper.getUser();
-			
 			
 			return ApiResponse.getSuccessResponse(service.save(SchoolExamEntity.builder()
 					.year(year)

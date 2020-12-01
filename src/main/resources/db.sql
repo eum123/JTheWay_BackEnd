@@ -63,16 +63,16 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COMMENT = '학생정보';
 
-CREATE TABLE IF NOT EXISTS `haaim`.`class_student` (
+CREATE TABLE IF NOT EXISTS class_student (
+  `no` INT(10) NOT NULL AUTO_INCREMENT primary key,
   `class_no` INT(10) NOT NULL,
   `student_no` INT(10) NOT NULL,
   `status` INT(1) NOT NULL COMMENT 'drop 여부',
   `input_id` VARCHAR(45) NOT NULL,
   `input_date` DATETIME NOT NULL,
   `update_id` VARCHAR(45) NULL,
-  `update_date` DATETIME NULL,
-  PRIMARY KEY (`class_no`, `student_no`, `status`),
-  INDEX `fk1_idx` (`student_no` ASC))
+  `update_date` DATETIME NULL
+  )
 ENGINE = InnoDB
 COMMENT = '클래스&학생 매핑정보';
 
@@ -91,8 +91,8 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COMMENT = '출석/테스트/과제/ 학업상태 레포트.';
 
-CREATE TABLE IF NOT EXISTS `haaim`.`class` (
-  `class_no` INT(10) NOT NULL COMMENT 'PK',
+CREATE TABLE IF NOT EXISTS class (
+  `class_no` INT(10) NOT NULL AUTO_INCREMENT primary key COMMENT '클래스 번호',
   `year` INT(4) NOT NULL COMMENT '기간',
   `class_name` VARCHAR(100) NULL COMMENT '클래스명',
   `teacher_id` VARCHAR(45) NULL COMMENT '교사id',
@@ -105,8 +105,8 @@ CREATE TABLE IF NOT EXISTS `haaim`.`class` (
   `input_id` VARCHAR(45) NULL,
   `input_date` DATETIME NULL,
   `update_id` VARCHAR(45) NULL,
-  `update_date` DATETIME NULL,
-  PRIMARY KEY (`class_no`))
+  `update_date` DATETIME NULL
+  )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COMMENT = '수업관리';

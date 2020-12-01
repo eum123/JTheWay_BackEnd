@@ -15,7 +15,7 @@ import net.haaim.web.user.entity.UserEntity;
 public class StudentRepositoryImpl extends QuerydslRepositorySupport implements StudentRepositoryCustom {
 
 	public StudentRepositoryImpl() {
-		super(NoticeEntity.class);
+		super(UserEntity.class);
 	}
 	//TODO:
 	public Page<UserEntity> findAllByTitleAndContents(String title, String contents, int usage, Pageable pageable) {
