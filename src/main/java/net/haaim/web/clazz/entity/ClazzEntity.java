@@ -15,10 +15,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import net.haaim.web.common.Role;
 import net.haaim.web.common.entity.CommonEntity;
-import net.haaim.web.user.entity.UserEntity;
-import net.haaim.web.user.entity.UserEntity.UserEntityBuilder;
 
 @Entity 
 @Table(name = "class")

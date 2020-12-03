@@ -83,7 +83,7 @@
           <!-- end top -->
 
           <div class="row border-bottom white-bg dashboard-header">
-            navigation
+            학생관리 > 월간리포트 > 목록
           </div>
           <div class="wrapper wrapper-content">
             <div>
@@ -117,9 +117,9 @@
                         <tbody>
                           <tr>
                             <td>학교/학년</td>
-                            <td>{{monthly.school}} {{monthly.grade}}</td>
+                            <td>{{body.student.school}}</td>
                             <td>이름</td>
-                            <td>{{monthly.studentName}}</td>
+                            <td>{{body.student.name}}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -145,7 +145,7 @@
                           <div class="ibox">
                             <div
                               class="ibox-content"
-                              v-for="element in body.content"
+                              v-for="element in body.list.content"
                             >
                               {{element.grade}} {{element.schoolTerm}}
                               <table
@@ -278,6 +278,9 @@
                   data.left.menu = res.data;
               }
           );
+
+          //studentInfo
+          data.body.student = JSON.parse('{"school":"홍길동학교","name":"홍길동"}');
 
           //test
           data.body.monthly = JSON.parse(

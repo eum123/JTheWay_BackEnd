@@ -123,19 +123,18 @@ CREATE TABLE IF NOT EXISTS `haaim`.`class_curriculum` (
 ENGINE = InnoDB
 COMMENT = '클래스&커리큘럼 매핑';
 
-CREATE TABLE IF NOT EXISTS `haaim`.`curriculum` (
-  `cur_id` INT(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS curriculum (
+  `no` INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   `year` INT(4) NOT NULL,
   `grade` INT(2) NOT NULL COMMENT '학년',
   `course` INT(4) NOT NULL COMMENT '학기/과정',
-  `largeCategory` VARCHAR(10) NULL COMMENT '대분류',
-  `mediumCategory` VARCHAR(10) NULL COMMENT '중분류',
-  `smallCategory` VARCHAR(10) NULL COMMENT '소분류',
+  `large_category` VARCHAR(10) NULL COMMENT '대분류',
+  `medium_category` VARCHAR(10) NULL COMMENT '중분류',
   `input_id` VARCHAR(45) NOT NULL,
   `input_date` DATETIME NOT NULL,
   `update_id` VARCHAR(45) NULL,
-  `update_date` DATETIME NULL,
-  PRIMARY KEY (`cur_id`))
+  `update_date` DATETIME NULL
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COMMENT = '커리큘럼';
@@ -185,23 +184,25 @@ CREATE TABLE IF NOT EXISTS `haaim`.`student_detail` (
 ENGINE = InnoDB
 COMMENT = '년도별 학생정보';
 
-CREATE TABLE IF NOT EXISTS `haaim`.`monthly_report` (
+CREATE TABLE IF NOT EXISTS monthly_report (
+  `no` INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `class_no` INT(10) NOT NULL,
   `student_no` INT(10) NOT NULL,
-  `month` INT(6) NOT NULL COMMENT '년월',
+  `year` INT(4) NOT NULL COMMENT '년',
+  `month` INT(2) NOT NULL COMMENT '월',
   `title` VARCHAR(200) NULL COMMENT '월간리포트 타이틀',
   `start_date` VARCHAR(8) NULL COMMENT '기간 시작일',
   `end_date` VARCHAR(8) NULL COMMENT '기간 종료일',
   `homework` INT(3) NULL COMMENT '과제이행 회수',
   `homework_total` INT(3) NULL COMMENT '과제 총 횟수',
-  `excellence` VARCHAR(300) NULL,
-  `goal` VARCHAR(300) NULL,
-  `notice` VARCHAR(500) NULL,
+  `excellence` VARCHAR(300) NULL COMMENT '장점',
+  `goal` VARCHAR(300) NULL  COMMENT '목표',
+  `notice` VARCHAR(500) NULL  COMMENT '전달사항',
   `input_id` VARCHAR(45) NOT NULL,
   `input_date` DATETIME NOT NULL,
   `update_id` VARCHAR(45) NULL,
-  `update_date` DATETIME NULL,
-  PRIMARY KEY (`class_no`, `student_no`, `month`))
+  `update_date` DATETIME NULL
+  )
 ENGINE = InnoDB
 COMMENT = '월간리포트';
 

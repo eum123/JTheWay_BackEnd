@@ -65,20 +65,27 @@ function callPage(httpMethod, page, url, param, successFunc, failFunc) {
 
             if (res != null) {
 
-                var totalCount = res.data.totalElements;
-                if (isEmpty(totalCount)) {
-                    totalCount = 0;
-                }
-                var currentPage = res.data.pageable.pageNumbers;
+                //TODO:success : false 처리
 
-                if (isEmpty(currentPage)) {
-                    currentPage = 1;
+                if (res.success === true) {
+
+                    var totalCount = res.data.totalElements;
+                    if (isEmpty(totalCount)) {
+                        totalCount = 0;
+                    }
+                    var currentPage = res.data.pageable.pageNumbers;
+
+                    if (isEmpty(currentPage)) {
+                        currentPage = 1;
+                    } else {
+                        currentPage = currentPage + 1;
+                    }
+
+                    if (successFunc != null) {
+                        successFunc(res, getPageInfo(totalCount, currentPage));
+                    }
                 } else {
-                    currentPage = currentPage + 1;
-                }
-
-                if (successFunc != null) {
-                    successFunc(res, getPageInfo(totalCount, currentPage));
+                    if (failFunc != null) failFunc(param, res.code, res.code);
                 }
             }
         },

@@ -83,7 +83,7 @@
           <!-- end top -->
 
           <div class="row border-bottom white-bg dashboard-header">
-            navigation
+            수업관리 > 커리큘럼 > 목록
           </div>
           <div class="wrapper wrapper-content">
             <div>
@@ -115,7 +115,7 @@
                       <div class="row">
                         <form role="form" class="form-inline">
                           <div class="form-group">
-                            <select class="form-control" name="account">
+                            <select class="form-control" name="year">
                               <option>2020</option>
                               <option>2019</option>
                               <option>2018</option>
@@ -123,7 +123,7 @@
                             </select>
                           </div>
                           <div class="form-group">
-                            <select class="form-control" name="account">
+                            <select class="form-control" name="grade">
                               <option>학년전체</option>
                               <option>중1</option>
                               <option>중2</option>
@@ -131,13 +131,13 @@
                             </select>
                           </div>
                           <div class="form-group">
-                            <select class="form-control" name="account">
+                            <select class="form-control" name="course">
                               <option>1학기</option>
                               <option>2학기</option>
                             </select>
                           </div>
                           <div class="form-group">
-                            <select class="form-control" name="account">
+                            <select class="form-control" name="large_category">
                               <option>대분류1</option>
                               <option>대분류2</option>
                               <option>대분류3</option>
@@ -148,13 +148,13 @@
                           <div class="form-group">
                             <button
                               type="button"
-                              class="btn btn-w-m btn-success"
+                              class="btn btn-w-m btn-success" @click="search"
                             >
                               검색
                             </button>
                             <button
                               type="button"
-                              class="btn btn-w-m btn-primary"
+                              class="btn btn-w-m btn-primary" @click="goRegist"
                             >
                               등록
                             </button>
@@ -190,7 +190,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="element in curriculum.list">
+                          <tr v-for="element in body.list.content">
                             <td class="text-center">{{element.no}}</td>
                             <td class="text-center">
                               {{element.year}}
@@ -199,40 +199,28 @@
                               {{element.grade}}
                             </td>
                             <td class="text-center">
-                              {{element.curriculum}}
+                              {{element.course}}
                             </td>
                             <td class="text-center">
-                              {{element.depth1}}
+                              {{element.large_category}}
                             </td>
-                            <td class="text-center">{{element.depth2}}</td>
+                            <td class="text-center">{{element.medium_category}}</td>
                           </tr>
                         </tbody>
                         <tfoot>
                           <tr>
                             <td colspan="6" class="text-right">
                               <div class="btn-group">
-                                <button
-                                  type="button"
-                                  class="btn btn-white"
-                                  @click="movePage(curriculum.pagination.pageInfo.prePageNumber)"
-                                >
+                                <button type="button" class="btn btn-white" @click="moveToPrePage(body.list.pageInfo.prePageNumber)">
                                   <i class="fa fa-chevron-left"></i>
                                 </button>
-                                <button
-                                  v-for="page in curriculum.pagination.pageInfo.pageNumbers"
-                                  v-bind:class="pageClassObject(page)"
-                                  @click="movePage(page)"
-                                >
+                                <button v-for="page in body.list.pageInfo.pageNumbers" v-bind:class="pageClassObject(page)" @click="movePage(page)">
                                   {{page}}
                                 </button>
-                                <button
-                                  type="button"
-                                  class="btn btn-white"
-                                  @click="movePage(curriculum.pagination.pageInfo.nextPageNumber)"
-                                >
-                                  <i class="fa fa-chevron-right"></i>
+                                <button type="button" class="btn btn-white" @click="moveToNextPage(body.list.pageInfo.nextPageNumber)">
+                                <i class="fa fa-chevron-right"></i>
                                 </button>
-                              </div>
+                            </div>
                             </td>
                           </tr>
                         </tfoot>
@@ -285,6 +273,7 @@
               list: {
                   pageInfo: ""
               },
+              content: ""
           }
       };
 
@@ -294,23 +283,38 @@
           return data;
         },
         methods: {
-          movePage: function (page) {
-            //start loading
-            toggleLoading();
-
-            //데이터 조회
-            syncGet(
-              "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-              getSearchParameter(),
-              getList,
-              null
-            );
-            //현재 페이지 설정
-            this.curriculum.pagination.currentPage = page;
-
-            //end loading
-            toggleLoading();
+          movePage: function(page) {
+              callAPI(page, null);
           },
+          moveToPrePage: function(page) {
+              if (data.body.list.first == true) {
+                  alert("처음 페이지 입니다.");
+              } else {
+                  callAPI(page, null);
+              }
+          },
+
+          moveToNextPage: function(page) {
+              if (data.body.list.last === true) {
+                  alert("마지막 페이지 입니다.");
+              } else {
+                  callAPI(page, null);
+              }
+          },
+
+          pageClassObject: function(page) {
+              if (data.body.list.currentPage == page) {
+                  return "btn btn-white active";
+              } else {
+                  return "btn btn-white ";
+              }
+          },
+          search: function() {
+              callAPI(1, null);
+          },
+          goRegist: function() {
+              location.href = "/admin/student/schoolExamScoreRegist.html";
+          }
         },
 
         mounted: function () {
@@ -329,92 +333,58 @@
               }
           );
 
-          //test
-          data.curriculum = JSON.parse(
-            '{"list":[{"no":"1","year":"2020","grade":"class","curriculum":"중1 > 1학기 > 소인수분해 > 01 소인수분해","depth1":"10","depth2":"2020"}],"pagination":{"total":10,"countPerPage":10}}'
-          );
-
+          //curriculum
+          getPage(1, "/lessons/curriculum/all", null,
+              function(res, pageInfo) {
+                  data.body.list = res.data;
+                  data.body.list.pageInfo = pageInfo;
+              }
+          )
+          
         },
       });
 
-      function init() {
-        data.class = "";
+      function callAPI(page, parameter) {
+          //start loading
+          toggleLoading();
 
-        data.left = new Object();
-        data.left.info = new Object();
-        data.left.menu = new Object();
-        data.body = new Object();
+          getPage(page, "/lessons/curriculum/search", parameter,
+              function(res, pageInfo) {
+                  data.body.list = res.data;
+                  data.body.list.pageInfo = pageInfo;
+              }, 
+              function(req, status, error) {
+                alert(error);
+              }
+          )
 
-        //user 
-        syncGet(
-                "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-                "",
-                function(res) {
-                    if (res != null) {
-                        data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
-                    }
-                },
-                null
-            );
-            
-        //menu
-        syncGet(
-                HAAIM + "/menu/all",
-                "",
-                function(res) {
-                    if (res != null) {
-                        data.left.menu = res.data;
-                        console.log(data.left.menu);
-                    } else {
-                        alert("menu load error");
-                    }
-                },
-            null
-        );
-
-
-        //code 조회
-        syncGet(
-          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-          "",
-          getList,
-          null
-        );
+          //end loading
+          toggleLoading();
       }
 
-      function getList(res) {
-        if (res != null) {
-          //test
-          data.curriculum = JSON.parse(
-            '{"list":[{"no":"1","year":"2020","grade":"class","curriculum":"중1 > 1학기 > 소인수분해 > 01 소인수분해","depth1":"10","depth2":"2020"}],"pagination":{"total":10,"countPerPage":10}}'
-          );
-
-          //현재페이지
-          var currentPage = data.curriculum.pagination.currentPage;
-          var totalCount = data.curriculum.pagination.total;
-
-          data.curriculum.pagination.pageInfo = getPageInfo(
-            totalCount,
-            currentPage
-          );
-        }
-      }
-
+     
       /**
        * 검색 조건으로 parameter 생성
        */
       function getSearchParameter() {
-        var questionDate = $("#questionDate").val(); //출제일자
-        var isTakeExam = $("#isTakeExam option:selected").val(); //응시 여부
+        var year = $("#year option:selected").val(); //year
+        var grade = $("#grade option:selected").val(); //grade
+        var course = $("#course option:selected").val(); //course
+        var largeCategory = $("#largeCategory option:selected").val(); //largeCategory
 
         var param = "";
-        if (isTakeExam != "") {
-          param = "isTakeExam=" + isTakeExam;
+        if (year != "") {
+          param = "year=" + year;
         }
-        if (questionDate != "") {
-          param = "questionDate=" + questionDate + "," + param;
+        if (grade != "") {
+          param = "grade=" + grade;
         }
-
+        if (course != "") {
+          param = "course=" + course;
+        }
+        if (largeCategory != "") {
+          param = "large_category=" + largeCategory;
+        }
         return param;
       }
 
