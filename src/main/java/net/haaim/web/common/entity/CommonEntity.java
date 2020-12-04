@@ -8,11 +8,8 @@ import javax.persistence.MappedSuperclass;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import net.haaim.web.notice.entity.NoticeEntity;
-import net.haaim.web.notice.entity.NoticeEntity.NoticeEntityBuilder;
 
 @MappedSuperclass
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

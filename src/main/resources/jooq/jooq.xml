@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- JDBC connection parameters -->
+    <jdbc>
+        <driver>com.mysql.cj.jdbc.Driver</driver>
+        <url>jdbc:mysql://localhost:3306/haaim_db?serverTimezone=Asia/Seoul</url>
+        <user>haaim</user>
+        <password>haaim01</password>
+    </jdbc>
+
+    <!-- Generator parameters -->
+    <generator>
+        <name>org.jooq.codegen.JavaGenerator</name>
+        <strategy>
+            <name>org.jooq.codegen.example.JPrefixGeneratorStrategy</name>
+        </strategy>
+        <database>
+            <name>org.jooq.meta.mysql.MySQLDatabase</name>
+            <includes>.*</includes>
+            <excludes></excludes>
+            <!-- In case your database supports catalogs, e.g. SQL Server:
+            <inputCatalog>public</inputCatalog>
+              -->
+            <schemata>
+                <schema>
+                    <inputSchema>haaim_db</inputSchema>
+                </schema>
+            </schemata>
+            <unsignedTypes>false</unsignedTypes>
+        </database>
+        <target>
+            <packageName>net.haaim.web.jooq.entity</packageName>
+            <directory>src/main/java</directory>
+        </target>
+        <generate>
+            <indexes>true</indexes>
+            <relations>true</relations>
+            <javaTimeTypes>true</javaTimeTypes>
+            <springAnnotations>true</springAnnotations>
+            <!--<deprecated>true</deprecated>-->
+            <!--<instanceFields>true</instanceFields>-->
+            <!--<generatedAnnotation>true</generatedAnnotation>-->
+            <!--<records>true</records>-->
+            <!--<pojos>true</pojos>-->
+            <!--<immutablePojos>false</immutablePojos>-->
+            <!--<interfaces>false</interfaces>-->
+            <!--<daos>true</daos>-->
+            <!--<jpaAnnotations>true</jpaAnnotations>-->
+            <!--<validationAnnotations>false</validationAnnotations>-->
+            <!--<globalObjectReferences>true</globalObjectReferences>-->
+            <!--<fluentSetters>true</fluentSetters>-->
+        </generate>
+    </generator>
+</configuration>

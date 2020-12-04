@@ -9,7 +9,8 @@ spring:
     output:
         ansi:
             enabled: always
-           
+    jooq:
+        sql-dialect: mysql     
     jpa:
         hibernate.ddl-auto: validate
         generate-ddl: true
@@ -30,6 +31,7 @@ logging:
         org.springframework.web: DEBUG
         org.hibernate: DEBUG
         net: DEBUG
+        org.jooq.tools.LoggerListener: debug
         
 ---
 spring:
@@ -43,7 +45,8 @@ spring:
     output:
         ansi:
             enabled: always
-           
+    jooq:
+        sql-dialect: mysql       
     jpa:
         hibernate.ddl-auto: validate
         generate-ddl: true
@@ -64,6 +67,7 @@ logging:
         org.springframework.web: DEBUG
         org.hibernate: DEBUG
         net: DEBUG
+        org.jooq.tools.LoggerListener: debug
             
 ---
 spring:

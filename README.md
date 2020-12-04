@@ -1,4 +1,8 @@
 # HAAIM
+
+# 개발환경
+ jooq 을 사용하기 위해 mvn -DskipTests clean install 실해하여 소스를 생성해야 됨
+ 
  
 # was
 - JDK 1.8 (open JDK 포함)
