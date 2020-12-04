@@ -83,7 +83,7 @@
           <!-- end top -->
 
           <div class="row border-bottom white-bg dashboard-header">
-            navigation
+            수업관리 > 커리큘럼 > 등록
           </div>
           <div class="wrapper wrapper-content">
             <div class="container">
@@ -100,11 +100,12 @@
                             <tr>
                               <td>년도</td>
                               <td>
-                                <select class="form-control" name="account">
-                                  <option>2020</option>
-                                  <option>2019</option>
-                                  <option>2018</option>
-                                  <option>2017</option>
+                                <select class="form-control" id="year">
+                                  <option value="2021">2020</option>
+                                  <option value="2020" selected>2020</option>
+                                  <option value="2019">2019</option>
+                                  <option value="2018">2018</option>
+                                  <option value="2017">2017</option>
                                 </select>
                               </td>
                             </tr>
@@ -112,20 +113,23 @@
                             <tr>
                               <td>학년</td>
                               <td>
-                                <select class="form-control" name="account">
-                                  <option>중3</option>
-                                  <option>중2</option>
-                                  <option>중1</option>
-                                  <option>고1</option>
+                                <select class="form-control" id="grade">
+                                  <option value="33" selected>고3</option>
+                                  <option value="32">고2</option>
+                                  <option value="31">고1</option>
+                                  <option value="23">중3</option>
+                                  <option value="22">중2</option>
+                                  <option value="21">중1</option>
+                                  
                                 </select>
                               </td>
                             </tr>
                             <tr>
                               <td>학기/과정</td>
                               <td>
-                                <select class="form-control" name="account">
-                                  <option>1학기</option>
-                                  <option>2학기</option>
+                                <select class="form-control" id="course">
+                                  <option value="1" selected>1학기</option>
+                                  <option value="2">2학기</option>
                                 </select>
                               </td>
                             </tr>
@@ -134,18 +138,7 @@
                               <td>
                                 <div class="row">
                                   <div class="col-md-6">
-                                    <select class="form-control" name="account">
-                                      <option>대분류1</option>
-                                      <option>대분류2</option>
-                                      <option>대분류3</option>
-                                    </select>
-                                  </div>
-                                  <div class="col-md-6">
-                                    <input
-                                      type="text"
-                                      placeholder="중분류"
-                                      class="form-control"
-                                    />
+                                    <input type="text" placeholder="대분류" class="form-control" id="large_category" />
                                   </div>
                                 </div>
                               </td>
@@ -153,11 +146,7 @@
                             <tr>
                               <td>중분류</td>
                               <td>
-                                <input
-                                  type="text"
-                                  placeholder="중분류"
-                                  class="form-control"
-                                />
+                                <input type="text" placeholder="중분류" class="form-control" id="medium_category" />
                               </td>
                             </tr>
                           </tbody>
@@ -175,7 +164,7 @@
                             </button>
                             <button
                               type="button"
-                              class="btn btn-w-m btn-success"
+                              class="btn btn-w-m btn-success" @click="regist"
                             >
                               등록
                             </button>
@@ -235,10 +224,43 @@
 
       var vm = new Vue({
         el: "#app",
-        data() {
+        data: function() {
           return data;
         },
-        mounted: function () {},
+        mounted: function () {
+          
+        },
+        methods: {
+          regist: function() {
+
+            var year = $("#year option:selected").val();
+            var grade = $("#grade option:selected").val();
+            var course = $("#course option:selected").val();
+            var largeCategory = $("#large_category").val(); 
+            var mediumCategory = $("#medium_category").val(); 
+           
+            var param = new Object();
+            param.year = year;
+            param.grade = grade;
+            param.course = course;
+            param.large_category = largeCategory;
+            param.medium_category = mediumCategory;
+
+            post(
+                "/lessons/curriculum/regist",
+                param,
+                function(res) {
+                    if (res != null) {
+                        console.log(res);
+                        alert("저장 성공");
+                    }
+                },
+                function() {
+                    alert("code 저장 오류");
+                }
+            );
+          },
+        },
         created: function() {
             //user
             data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
