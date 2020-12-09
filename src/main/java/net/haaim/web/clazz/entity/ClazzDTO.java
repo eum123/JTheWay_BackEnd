@@ -16,9 +16,8 @@ import net.haaim.web.common.entity.CommonEntity;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ClazzDTO extends CommonEntity {
 
-
 	@Column(name = "class_no")
-	@JsonProperty(access = JsonProperty.Access.AUTO)
+	@JsonProperty(value = "class_no",access = JsonProperty.Access.AUTO)
 	private Integer classNo;
 	
 	@Column(name = "year")
@@ -28,10 +27,6 @@ public class ClazzDTO extends CommonEntity {
 	@Column(name = "class_name")
 	@JsonProperty(value = "class_name", access = JsonProperty.Access.AUTO)
 	private String className;
-	
-	@Column(name = "teacher_id")
-	@JsonProperty(value = "teacher_id", access = JsonProperty.Access.AUTO)
-	private String tearchId;
 	
 	@Column(name = "start_date")
 	@JsonProperty(value = "start_date", access = JsonProperty.Access.AUTO)
@@ -71,17 +66,20 @@ public class ClazzDTO extends CommonEntity {
 
 	@Column(name = "name")
 	@JsonProperty(value = "name", access = JsonProperty.Access.AUTO)
-	private String name;	
+	private String name;
+	
+	@Column(name = "student_cnt")
+	@JsonProperty(value = "student_cnt", access = JsonProperty.Access.AUTO)
+	private Integer studentCnt;	
 	
 	@Builder
 	public ClazzDTO(String inputId, Date inputDate, String updateId, Date updateDate, Integer classNo, Integer year,
-			String className, String tearchId, String startDate, String endDate, String dayTime, String textBook,
-			Integer passScore, String description, Integer curriclumNo, Integer course, Integer teacherNo, String name) {
+			String className, String startDate, String endDate, String dayTime, String textBook,
+			Integer passScore, String description, Integer curriclumNo, Integer course, Integer teacherNo, String name, Integer studentCnt) {
 		super(inputId, inputDate, updateId, updateDate);
 		this.classNo = classNo;
 		this.year = year;
 		this.className = className;
-		this.tearchId = tearchId;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.dayTime = dayTime;
@@ -92,12 +90,17 @@ public class ClazzDTO extends CommonEntity {
 		this.course = course;
 		this.teacherNo = teacherNo;
 		this.name = name;
+		this.studentCnt = studentCnt;
 	}
 	
 
 	
 	private void validate(String userId) {
 		
+	}
+	
+	public String toString() {
+		return "classNo:" + classNo + ",studentCnt:"+studentCnt; 
 	}
 }
 

@@ -83,7 +83,7 @@
           <!-- end top -->
 
           <div class="row border-bottom white-bg dashboard-header">
-            navigation
+            수업관리 > 클래스관리 > 목록
           </div>
           <div class="wrapper wrapper-content">
             <div>
@@ -115,7 +115,7 @@
                       <div class="row">
                         <form role="form" class="form-inline">
                           <div class="form-group">
-                            <select class="form-control" name="account">
+                            <select class="form-control" id="year">
                               <option>2020</option>
                               <option>2019</option>
                               <option>2018</option>
@@ -123,7 +123,7 @@
                             </select>
                           </div>
                           <div class="form-group">
-                            <select class="form-control" name="account">
+                            <select class="form-control" id="grade">
                               <option>학년전체</option>
                               <option>중1</option>
                               <option>중2</option>
@@ -131,24 +131,26 @@
                             </select>
                           </div>
                           <div class="form-group">
-                            <select class="form-control" name="account">
+                            <select class="form-control" id="course">
                               <option>1학기</option>
                               <option>2학기</option>
                             </select>
                           </div>
                           <div class="form-group">
-                            <select class="form-control" name="account">
-                              <option>대분류1</option>
-                              <option>대분류2</option>
-                              <option>대분류3</option>
-                              <option>대분류4</option>
-                            </select>
+                            <input
+                              type="text"
+                              placeholder="대분류를 입력하세요"
+                              class="form-control"
+                              id="large_category"
+                            />
+                            
                           </div>
                           <div class="form-group">
                             <input
                               type="text"
                               placeholder="교사명 입력하세요"
                               class="form-control"
+                              id="name"
                             />
                           </div>
                           <div class="form-group">
@@ -160,7 +162,7 @@
                             </button>
                             <button
                               type="button"
-                              class="btn btn-w-m btn-primary"
+                              class="btn btn-w-m btn-primary" @click="goRegist"
                             >
                               등록
                             </button>
@@ -197,51 +199,39 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="element in clazz.list">
-                            <td class="text-center">{{element.no}}</td>
+                          <tr v-for="element in body.list.content">
+                            <td class="text-center">{{element.class_no}}</td>
                             <td class="text-center">
                               {{element.year}}
                             </td>
                             <td class="text-center">
-                              {{element.class}}
+                              {{element.class_name}}
                             </td>
                             <td class="text-center">
-                              {{element.curriculum}}
+                              {{element.course}}
                             </td>
                             <td class="text-center">
-                              {{element.number}}
+                              {{element.student_cnt}}
                             </td>
                             <td class="text-center">
-                              {{element.startime}} ~ {{element.endTime}}
+                              {{element.start_date}} ~ {{element.end_date}}
                             </td>
-                            <td class="text-center">{{element.teacher}}</td>
+                            <td class="text-center">{{element.name}}</td>
                           </tr>
                         </tbody>
                         <tfoot>
                           <tr>
                             <td colspan="7" class="text-right">
                               <div class="btn-group">
-                                <button
-                                  type="button"
-                                  class="btn btn-white"
-                                  @click="movePage(clazz.pagination.pageInfo.prePageNumber)"
-                                >
-                                  <i class="fa fa-chevron-left"></i>
-                                </button>
-                                <button
-                                  v-for="page in clazz.pagination.pageInfo.pageNumbers"
-                                  v-bind:class="pageClassObject(page)"
-                                  @click="movePage(page)"
-                                >
-                                  {{page}}
-                                </button>
-                                <button
-                                  type="button"
-                                  class="btn btn-white"
-                                  @click="movePage(clazz.pagination.pageInfo.nextPageNumber)"
-                                >
+                                  <button type="button" class="btn btn-white" @click="moveToPrePage(body.list.pageInfo.prePageNumber)">
+                                    <i class="fa fa-chevron-left"></i>
+                                  </button>
+                                  <button v-for="page in body.list.pageInfo.pageNumbers" v-bind:class="pageClassObject(page)" @click="movePage(page)">
+                                    {{page}}
+                                  </button>
+                                  <button type="button" class="btn btn-white" @click="moveToNextPage(body.list.pageInfo.nextPageNumber)">
                                   <i class="fa fa-chevron-right"></i>
-                                </button>
+                                  </button>
                               </div>
                             </td>
                           </tr>
@@ -304,23 +294,40 @@
           return data;
         },
         methods: {
-          movePage: function (page) {
-            //start loading
-            toggleLoading();
-
-            //데이터 조회
-            syncGet(
-              "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-              getSearchParameter(),
-              classList,
-              null
-            );
-            //현재 페이지 설정
-            this.clazz.pagination.currentPage = page;
-
-            //end loading
-            toggleLoading();
+          movePage: function(page) {
+            callAPI(page, getSearchParameter());
           },
+          moveToPrePage: function(page) {
+              if (data.body.list.first == true) {
+                  alert("처음 페이지 입니다.");
+              } else {
+                  callAPI(page, getSearchParameter());
+              }
+          },
+
+          moveToNextPage: function(page) {
+              if (data.body.list.last === true) {
+                  alert("마지막 페이지 입니다.");
+              } else {
+                  callAPI(page, getSearchParameter());
+              }
+          },
+
+          pageClassObject: function(page) {
+              if (data.body.list.currentPage == page) {
+                  return "btn btn-white active";
+              } else {
+                  return "btn btn-white ";
+              }
+          },
+          search: function() {
+              if (validate()) {
+                  callAPI(1, getSearchParameter());
+              }
+          },
+          goRegist: function() {
+              location.href = "/admin/lessons/classRegist.html";
+          }
         },
 
         mounted: function () {
@@ -339,74 +346,35 @@
                 }
             );
 
-            //code
-            //test
-            data.clazz = JSON.parse(
-              '{"list":[{"no":"1","year":"2020","class":"class","curriculum":"중1 > 1학기 > 소인수분해 > 01 소인수분해","number":"10","startTime":"2020","endTime":"class","teacher":"김선생"}],"pagination":{"total":10,"countPerPage":10}}'
-            );
+            //class
+            // data.clazz = JSON.parse(
+            //   '{"list":[{"no":"1","year":"2020","class":"class","curriculum":"중1 > 1학기 > 소인수분해 > 01 소인수분해","number":"10","startTime":"2020","endTime":"class","teacher":"김선생"}],"pagination":{"total":10,"countPerPage":10}}'
+            // );
+            getPage(1, "/lessons/class/all", null,
+              function(res, pageInfo) {
+                  data.body.list = res.data;
+                  data.body.list.pageInfo = pageInfo;
+              }
+          )
 
         },
       });
 
-      function init() {
-        data.class = "";
+      function callAPI(page, parameter) {
+          //start loading
+          toggleLoading();
 
-        data.left = new Object();
-        data.left.info = new Object();
-        data.left.menu = new Object();
-        data.body = new Object();
+          getPage(page, "/lessons/class/seach", parameter,
+              function(res, pageInfo) {
+                  data.body.list = res.data;
+                  data.body.list.pageInfo = pageInfo;
+              }
+          )
 
-        //user 
-        syncGet(
-            "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-            "",
-            function(res) {
-                if (res != null) {
-                    data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
-                }
-            },
-            null
-        );
-
-        //menu
-        syncGet(
-                HAAIM + "/menu/all",
-                "",
-                function(res) {
-                    if (res != null) {
-                        data.left.menu = res.data;
-                        console.log(data.left.menu);
-                    } else {
-                        alert("menu load error");
-                    }
-                },
-            null
-        );
-
-
-        //code 조회
-        syncGet(
-          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-          "",
-          classList,
-          null
-        );
+          //end loading
+          toggleLoading();
       }
 
-      function classList(res) {
-        if (res != null) {
-          //test
-          data.clazz = JSON.parse(
-            '{"list":[{"no":"1","year":"2020","class":"class","curriculum":"중1 > 1학기 > 소인수분해 > 01 소인수분해","number":"10","startTime":"2020","endTime":"class","teacher":"김선생"}],"pagination":{"total":10,"countPerPage":10}}'
-          );
-
-          //현재페이지
-          var currentPage = data.clazz.pagination.currentPage;
-          var totalCount = data.clazz.pagination.total;
-
-          data.clazz.pagination.pageInfo = getPageInfo(totalCount, currentPage);
-        }
-      }
 
       /**
        * 검색 조건으로 parameter 생성
