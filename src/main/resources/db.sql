@@ -112,19 +112,18 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COMMENT = '수업관리';
 
-/* 필요없음
-CREATE TABLE IF NOT EXISTS `haaim`.`class_curriculum` (
+
+CREATE TABLE IF NOT EXISTS class_curriculum (
+  `no` INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `class_no` INT(10) NOT NULL COMMENT '클래스번호',
   `cur_id` INT(10) NOT NULL COMMENT '컬리큘럼ID',
   `input_id` VARCHAR(45) NULL,
   `input_date` DATETIME NULL,
   `update_id` VARCHAR(45) NULL,
-  `update_date` DATETIME NULL,
-  PRIMARY KEY (`class_no`, `cur_id`),
-  INDEX `fk2_idx` (`cur_id` ASC))
+  `update_date` DATETIME NULL)
 ENGINE = InnoDB
 COMMENT = '클래스&커리큘럼 매핑';
-*/
+
 
 CREATE TABLE IF NOT EXISTS curriculum (
   `no` INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY ,

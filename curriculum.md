@@ -132,3 +132,29 @@
 		}
       
       ``` 
+4. 전체 조회
+	 - 요청
+       http://localhost/lessons/curriculum/list
+     - 응답
+      ```json
+      {
+		  "success": true,
+		  "code": 0,
+		  "msg": "OK",
+		  "data": [
+		      {
+		        "no": "1",
+		        "year": "title",
+		        "grade": "content",
+		        "course": "content",
+		        "large_category": "content",
+		        "medium_category": "content",
+		        "input_date": "0",
+		        "input_id": "0",
+		        "update e_date": "0",
+		        "update_id": "0",
+		      }
+		   ]
+		}
+      
+      ``` 

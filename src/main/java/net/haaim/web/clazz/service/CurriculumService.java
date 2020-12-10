@@ -1,10 +1,12 @@
 package net.haaim.web.clazz.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import net.haaim.web.clazz.entity.CurriculumEntity;
@@ -36,5 +38,9 @@ public class CurriculumService {
 			.inputId(user.getId())
 			.build();
 		return repo.save(entity);
+	}
+	
+	public List<CurriculumEntity> list() {
+		return repo.findAll(Sort.by("year").descending().and(Sort.by("grade").descending().and(Sort.by("course").descending())));
 	}
 }

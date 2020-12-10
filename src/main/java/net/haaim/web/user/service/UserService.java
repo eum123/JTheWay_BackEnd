@@ -51,6 +51,7 @@ public class UserService {
 	}
 	
 	public List<UserEntity> seachByUserType(Role userType, Integer usage) {
+		
 		return repo.findAllByUserTypeAndUsageOrderByName(userType, usage);
 	}
 }

@@ -30,6 +30,7 @@ logging:
     level:
         org.springframework.web: DEBUG
         org.hibernate: DEBUG
+        org.hibernate.type: trace
         net: DEBUG
         org.jooq.tools.LoggerListener: debug
         
@@ -66,6 +67,7 @@ logging:
     level:
         org.springframework.web: DEBUG
         org.hibernate: DEBUG
+        org.hibernate.type: trace
         net: DEBUG
         org.jooq.tools.LoggerListener: debug
             

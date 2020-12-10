@@ -104,7 +104,7 @@
                             <tr>
                               <td>년도</td>
                               <td>
-                                <select class="form-control" name="account">
+                                <select class="form-control" id="year">
                                   <option>2020</option>
                                   <option>2019</option>
                                   <option>2018</option>
@@ -115,11 +115,7 @@
                             <tr>
                               <td>클래스명</td>
                               <td>
-                                <input
-                                  type="text"
-                                  placeholder="클래스명"
-                                  class="form-control"
-                                />
+                                <input type="text" placeholder="클래스명" class="form-control" id="class_name" />
                               </td>
                             </tr>
                             <tr>
@@ -127,7 +123,7 @@
                               <td>
                                 <div class="row">
                                   <div class="col-md-4">
-                                    <select class="form-control" name="account">
+                                    <select class="form-control" id="grade">
                                       <option>중3</option>
                                       <option>중2</option>
                                       <option>중1</option>
@@ -135,7 +131,7 @@
                                     </select>
                                   </div>
                                   <div class="col-md-4">
-                                    <select class="form-control" name="account">
+                                    <select class="form-control" id="course">
                                       <option>1학기</option>
                                       <option>2학기</option>
                                     </select>
@@ -327,9 +323,7 @@
                                 <div class="row">
                                   <div class="col-md-6">
                                     <select class="form-control" name="account">
-                                      <option>나교사</option>
-                                      <option>박교사</option>
-                                      <option>김교사</option>
+                                      <option v-for="teacher in body.teacher" v-bind:value="teacher.no">{{teacher.name}} ({{teacher.user_id}})</option>
                                     </select>
                                   </div>
                                 </div>
@@ -339,20 +333,17 @@
                               <td>학생</td>
                               <td>
                                 <div class="row">
-                                  <div class="col-md-2">총 1명</div>
+                                  <div class="col-md-2">총 {{body.student_count}}명</div>
                                   <div class="col-md-10">
-                                    <select
-                                      data-placeholder="Choose a Country..."
+                                    <select id="student_list" 
+                                      data-placeholder="학생 선택"
                                       class="chosen-select"
                                       multiple
                                       style="width: 350px;"
                                       tabindex="4"
                                     >
-                                      <option value="United States">학생1</option>
-                                      <option value="United Kingdom">학생2</option>
-                                      <option value="Afghanistan">학생3</option>
-                                      <option value="United Kingdom">학생4</option>
-                                      <option value="Afghanistan">학생5</option>
+                                      <option v-for="student in body.student" v-bind:value="student.no">{{student.name}} ({{student.user_id}})</option>
+                                     
                                     </select>
                                 </div>
                               </td>
@@ -370,7 +361,7 @@
                             <tr>
                               <td>기타정보</td>
                               <td>
-                                <textarea></textarea>
+                                <textarea id="description"></textarea>
                               </td>
                             </tr>
                           </tbody>
@@ -388,7 +379,7 @@
                             </button>
                             <button
                               type="button"
-                              class="btn btn-w-m btn-success"
+                              class="btn btn-w-m btn-success" @click="regist"
                             >
                               등록
                             </button>
@@ -438,6 +429,19 @@
     <script src="../../theme/js/plugins/pace/pace.min.js"></script>
 
     <script>
+      var data = {
+          left: {
+              info: "",
+              menu: ""
+          },
+          body: {
+              student: "",
+              student_count: "0",
+              teacher: "",
+              curriculum: ""
+          }
+      };
+
       $(document).ready(function () {
         $("#footer").load("../../admin/common/footer.html");
 
@@ -445,20 +449,12 @@
           tagClass: "label label-primary",
         });
 
-        $(".chosen-select").chosen({ width: "100%" });
-      });
-
-      var data = {
-          left: {
-              info: "",
-              menu: ""
-          },
-          body: {
-              list: {
-                  pageInfo: ""
-              },
+        $("#student_list").chosen({ width: "100%" }).change(
+          function(){
+              data.body.student_count = $('#student_list option:selected').length;
           }
-      };
+        );
+      });
 
       var vm = new Vue({
         el: "#app",
@@ -477,7 +473,58 @@
                 }
             );
 
+            //student
+            get("/user/student/all", null,
+                function(res) {
+                    data.body.student = res.data;
+                    console.log(res);
+                }
+            );
+
+            //teacher
+            get("/user/teacher/all", null,
+                function(res) {
+                    data.body.teacher = res.data;
+                }
+            );
+
+            //curriculm
+            get("/lessons/curriculum/list", null,
+                function(res) {
+                    data.body.curriculum = res.data;
+                }
+            );
         },
+        methods: {
+          regist: function() {
+
+            // var groupCode = $("#group_code option:selected").val();
+            // var code = $("#code").val(); //코드 그룹
+            // var name = $("#code_name").val(); //코드 그룹
+            // var use_yn = $("#use_yn option:selected").val();
+
+            // var param = new Object();
+            // param.group_code = groupCode;
+            // param.code = code;
+            // param.code_name = name;
+            // param.use_yn = use_yn;
+
+            // post(
+            //     "/code/save",
+            //     param,
+            //     function(res) {
+            //         if (res != null) {
+            //             console.log(res);
+            //             alert("저장 성공");
+            //         }
+            //     },
+            //     function() {
+            //         alert("code 저장 오류");
+            //     }
+            // );
+          },
+          
+        }
       });
 
     </script>

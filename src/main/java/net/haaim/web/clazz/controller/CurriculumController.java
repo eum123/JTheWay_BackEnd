@@ -88,4 +88,18 @@ public class CurriculumController {
 
 		}
 	}
+	
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public ApiResponse list() {
+
+		try {
+
+			return ApiResponse.getSuccessResponse(service.list());
+		} catch (Exception e) {
+			log.error("search error", e);
+
+			return ApiResponse.getErrorResponse(e);
+
+		}
+	}
 }
