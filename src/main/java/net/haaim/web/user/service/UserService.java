@@ -1,5 +1,7 @@
 package net.haaim.web.user.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -46,5 +48,9 @@ public class UserService {
 	
 	public UserEntity save(UserEntity entity) {
 		return repo.save(entity);
+	}
+	
+	public List<UserEntity> seachByUserType(Role userType, Integer usage) {
+		return repo.findAllByUserTypeAndUsageOrderByName(userType, usage);
 	}
 }

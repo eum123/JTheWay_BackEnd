@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
+import net.haaim.web.common.Role;
 import net.haaim.web.common.User;
 import net.haaim.web.common.UserHelper;
 import net.haaim.web.common.request.CustomPageRequest;
@@ -98,6 +99,38 @@ public class UserController {
 					));
 		} catch (Exception e) {
 			log.error("search error", e);
+			return ApiResponse.getErrorResponse(e);
+
+		}
+	}
+	
+	@RequestMapping(value = "student/all", method = RequestMethod.GET)
+	public ApiResponse searchStudent() {
+
+		try {
+			
+			User user = UserHelper.getUser();
+
+			return ApiResponse.getSuccessResponse(service.seachByUserType(Role.STUDENT, UserEntity.VIEW));
+		} catch (Exception e) {
+			log.error("search error", e);
+
+			return ApiResponse.getErrorResponse(e);
+
+		}
+	}
+	
+	@RequestMapping(value = "teacher/all", method = RequestMethod.GET)
+	public ApiResponse searchTeacher() {
+
+		try {
+			
+			User user = UserHelper.getUser();
+
+			return ApiResponse.getSuccessResponse(service.seachByUserType(Role.TEACHER, UserEntity.VIEW));
+		} catch (Exception e) {
+			log.error("search error", e);
+
 			return ApiResponse.getErrorResponse(e);
 
 		}

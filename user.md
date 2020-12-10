@@ -125,3 +125,65 @@
 		}
       
       ```
+## 학생 전체 검색
+	- 내용
+		학생 전체 검색
+   	- 요청(GET)
+       http://.../user/student/all
+    - 응답
+      ```json
+      
+		{
+		  "success": true,
+		  "code": 0,
+		  "msg": "OK",
+		  "data": [{
+		    "no": 2,
+		      "name": "name",
+		      "mobile": "mobile",
+		      "email": "email",
+		      "studentInfo": null,
+		      "input_id": "id",
+		      "input_date": "2020-12-04T07:51:51.000+00:00",
+		      "update_id": null,
+		      "update_date": null,
+		      "user_id": "userId",
+		      "user_pw": "userPassword",
+		      "user_type": "TEACHER",
+		      "use_yn": 1,
+		      "student_no": null
+		  }]
+		}
+      
+      ```
+## 선생 전체 검색
+	- 내용
+		학생 전체 검색
+   	- 요청(GET)
+       http://.../user/teacher/all
+    - 응답
+      ```json
+      
+		{
+		  "success": true,
+		  "code": 0,
+		  "msg": "OK",
+		  "data": [{
+		    "no": 2,
+		      "name": "name",
+		      "mobile": "mobile",
+		      "email": "email",
+		      "studentInfo": null,
+		      "input_id": "id",
+		      "input_date": "2020-12-04T07:51:51.000+00:00",
+		      "update_id": null,
+		      "update_date": null,
+		      "user_id": "userId",
+		      "user_pw": "userPassword",
+		      "user_type": "TEACHER",
+		      "use_yn": 1,
+		      "student_no": null
+		  }]
+		}
+      
+      ```
