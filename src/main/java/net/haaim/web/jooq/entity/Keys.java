@@ -6,6 +6,7 @@ package net.haaim.web.jooq.entity;
 
 import net.haaim.web.jooq.entity.tables.JAuthority;
 import net.haaim.web.jooq.entity.tables.JClass;
+import net.haaim.web.jooq.entity.tables.JClassCurriculum;
 import net.haaim.web.jooq.entity.tables.JClassStudent;
 import net.haaim.web.jooq.entity.tables.JCode;
 import net.haaim.web.jooq.entity.tables.JCurriculum;
@@ -18,6 +19,7 @@ import net.haaim.web.jooq.entity.tables.JScoreMngt;
 import net.haaim.web.jooq.entity.tables.JStudentInfo;
 import net.haaim.web.jooq.entity.tables.JUser;
 import net.haaim.web.jooq.entity.tables.records.JAuthorityRecord;
+import net.haaim.web.jooq.entity.tables.records.JClassCurriculumRecord;
 import net.haaim.web.jooq.entity.tables.records.JClassRecord;
 import net.haaim.web.jooq.entity.tables.records.JClassStudentRecord;
 import net.haaim.web.jooq.entity.tables.records.JCodeRecord;
@@ -50,6 +52,7 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final Identity<JClassRecord, Integer> IDENTITY_CLASS = Identities0.IDENTITY_CLASS;
+    public static final Identity<JClassCurriculumRecord, Integer> IDENTITY_CLASS_CURRICULUM = Identities0.IDENTITY_CLASS_CURRICULUM;
     public static final Identity<JClassStudentRecord, Integer> IDENTITY_CLASS_STUDENT = Identities0.IDENTITY_CLASS_STUDENT;
     public static final Identity<JCodeRecord, Integer> IDENTITY_CODE = Identities0.IDENTITY_CODE;
     public static final Identity<JCurriculumRecord, Integer> IDENTITY_CURRICULUM = Identities0.IDENTITY_CURRICULUM;
@@ -66,6 +69,7 @@ public class Keys {
 
     public static final UniqueKey<JAuthorityRecord> KEY_AUTHORITY_PRIMARY = UniqueKeys0.KEY_AUTHORITY_PRIMARY;
     public static final UniqueKey<JClassRecord> KEY_CLASS_PRIMARY = UniqueKeys0.KEY_CLASS_PRIMARY;
+    public static final UniqueKey<JClassCurriculumRecord> KEY_CLASS_CURRICULUM_PRIMARY = UniqueKeys0.KEY_CLASS_CURRICULUM_PRIMARY;
     public static final UniqueKey<JClassStudentRecord> KEY_CLASS_STUDENT_PRIMARY = UniqueKeys0.KEY_CLASS_STUDENT_PRIMARY;
     public static final UniqueKey<JCodeRecord> KEY_CODE_PRIMARY = UniqueKeys0.KEY_CODE_PRIMARY;
     public static final UniqueKey<JCurriculumRecord> KEY_CURRICULUM_PRIMARY = UniqueKeys0.KEY_CURRICULUM_PRIMARY;
@@ -90,6 +94,7 @@ public class Keys {
 
     private static class Identities0 {
         public static Identity<JClassRecord, Integer> IDENTITY_CLASS = Internal.createIdentity(JClass.CLASS, JClass.CLASS.CLASS_NO);
+        public static Identity<JClassCurriculumRecord, Integer> IDENTITY_CLASS_CURRICULUM = Internal.createIdentity(JClassCurriculum.CLASS_CURRICULUM, JClassCurriculum.CLASS_CURRICULUM.NO);
         public static Identity<JClassStudentRecord, Integer> IDENTITY_CLASS_STUDENT = Internal.createIdentity(JClassStudent.CLASS_STUDENT, JClassStudent.CLASS_STUDENT.NO);
         public static Identity<JCodeRecord, Integer> IDENTITY_CODE = Internal.createIdentity(JCode.CODE, JCode.CODE.NO);
         public static Identity<JCurriculumRecord, Integer> IDENTITY_CURRICULUM = Internal.createIdentity(JCurriculum.CURRICULUM, JCurriculum.CURRICULUM.NO);
@@ -104,6 +109,7 @@ public class Keys {
     private static class UniqueKeys0 {
         public static final UniqueKey<JAuthorityRecord> KEY_AUTHORITY_PRIMARY = Internal.createUniqueKey(JAuthority.AUTHORITY, "KEY_authority_PRIMARY", new TableField[] { JAuthority.AUTHORITY.MENU_CODE, JAuthority.AUTHORITY.USER_TYPE }, true);
         public static final UniqueKey<JClassRecord> KEY_CLASS_PRIMARY = Internal.createUniqueKey(JClass.CLASS, "KEY_class_PRIMARY", new TableField[] { JClass.CLASS.CLASS_NO }, true);
+        public static final UniqueKey<JClassCurriculumRecord> KEY_CLASS_CURRICULUM_PRIMARY = Internal.createUniqueKey(JClassCurriculum.CLASS_CURRICULUM, "KEY_class_curriculum_PRIMARY", new TableField[] { JClassCurriculum.CLASS_CURRICULUM.NO }, true);
         public static final UniqueKey<JClassStudentRecord> KEY_CLASS_STUDENT_PRIMARY = Internal.createUniqueKey(JClassStudent.CLASS_STUDENT, "KEY_class_student_PRIMARY", new TableField[] { JClassStudent.CLASS_STUDENT.NO }, true);
         public static final UniqueKey<JCodeRecord> KEY_CODE_PRIMARY = Internal.createUniqueKey(JCode.CODE, "KEY_code_PRIMARY", new TableField[] { JCode.CODE.NO }, true);
         public static final UniqueKey<JCurriculumRecord> KEY_CURRICULUM_PRIMARY = Internal.createUniqueKey(JCurriculum.CURRICULUM, "KEY_curriculum_PRIMARY", new TableField[] { JCurriculum.CURRICULUM.NO }, true);

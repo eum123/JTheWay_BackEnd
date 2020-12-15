@@ -21,7 +21,7 @@ import net.haaim.web.common.entity.CommonEntity;
 @Table(name = "class")
 @Getter 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ClazzEntity extends CommonEntity {
+public class ClassEntity extends CommonEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,20 +60,16 @@ public class ClazzEntity extends CommonEntity {
 	@Column(name = "description")
 	@JsonProperty(value = "description", access = JsonProperty.Access.AUTO)
 	private String description;
-	
-	@Column(name = "curriculum_no")
-	@JsonProperty(value = "curriculum_no", access = JsonProperty.Access.AUTO)
-	private Integer curriclumNo;
-	
+
 	@Column(name = "teacher_no")
 	@JsonProperty(value = "teacher_no", access = JsonProperty.Access.AUTO)
 	private Integer teacherNo;
 
 	
 	@Builder
-	public ClazzEntity(String inputId, Date inputDate, String updateId, Date updateDate, Integer year,
+	public ClassEntity(String inputId, Date inputDate, String updateId, Date updateDate, Integer year,
 			String className, String startDate, String endDate, String dayTime, String textBook,
-			Integer passScore, String description, Integer curriclumNo, Integer course, Integer teacherNo, String name) {
+			Integer passScore, String description, Integer course, Integer teacherNo, String name) {
 		
 		super(inputId, inputDate, updateId, updateDate);
 
@@ -85,7 +81,6 @@ public class ClazzEntity extends CommonEntity {
 		this.textBook = textBook;
 		this.passScore = passScore;
 		this.description = description;
-		this.curriclumNo = curriclumNo;
 		this.teacherNo = teacherNo;
 	}
 	

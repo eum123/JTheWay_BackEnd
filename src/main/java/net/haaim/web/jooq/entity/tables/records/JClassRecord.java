@@ -10,8 +10,8 @@ import net.haaim.web.jooq.entity.tables.JClass;
 
 import org.jooq.Field;
 import org.jooq.Record1;
-import org.jooq.Record15;
-import org.jooq.Row15;
+import org.jooq.Record14;
+import org.jooq.Row14;
 import org.jooq.impl.UpdatableRecordImpl;
 
 
@@ -19,9 +19,9 @@ import org.jooq.impl.UpdatableRecordImpl;
  * 수업관리
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
-public class JClassRecord extends UpdatableRecordImpl<JClassRecord> implements Record15<Integer, Integer, Integer, String, Integer, String, String, String, String, Integer, String, String, LocalDateTime, String, LocalDateTime> {
+public class JClassRecord extends UpdatableRecordImpl<JClassRecord> implements Record14<Integer, Integer, String, Integer, String, String, String, String, Integer, String, String, LocalDateTime, String, LocalDateTime> {
 
-    private static final long serialVersionUID = -856435743;
+    private static final long serialVersionUID = -1087044067;
 
     /**
      * Setter for <code>haaim_db.class.class_no</code>. 클래스 번호
@@ -38,199 +38,185 @@ public class JClassRecord extends UpdatableRecordImpl<JClassRecord> implements R
     }
 
     /**
-     * Setter for <code>haaim_db.class.curriculum_no</code>. 컬리큘럼ID
-     */
-    public void setCurriculumNo(Integer value) {
-        set(1, value);
-    }
-
-    /**
-     * Getter for <code>haaim_db.class.curriculum_no</code>. 컬리큘럼ID
-     */
-    public Integer getCurriculumNo() {
-        return (Integer) get(1);
-    }
-
-    /**
      * Setter for <code>haaim_db.class.year</code>. 기간
      */
     public void setYear(Integer value) {
-        set(2, value);
+        set(1, value);
     }
 
     /**
      * Getter for <code>haaim_db.class.year</code>. 기간
      */
     public Integer getYear() {
-        return (Integer) get(2);
+        return (Integer) get(1);
     }
 
     /**
      * Setter for <code>haaim_db.class.class_name</code>. 클래스명
      */
     public void setClassName(String value) {
-        set(3, value);
+        set(2, value);
     }
 
     /**
      * Getter for <code>haaim_db.class.class_name</code>. 클래스명
      */
     public String getClassName() {
-        return (String) get(3);
+        return (String) get(2);
     }
 
     /**
      * Setter for <code>haaim_db.class.teacher_no</code>. 교사 no.
      */
     public void setTeacherNo(Integer value) {
-        set(4, value);
+        set(3, value);
     }
 
     /**
      * Getter for <code>haaim_db.class.teacher_no</code>. 교사 no.
      */
     public Integer getTeacherNo() {
-        return (Integer) get(4);
+        return (Integer) get(3);
     }
 
     /**
      * Setter for <code>haaim_db.class.start_date</code>. 클래스 시작 기간
      */
     public void setStartDate(String value) {
-        set(5, value);
+        set(4, value);
     }
 
     /**
      * Getter for <code>haaim_db.class.start_date</code>. 클래스 시작 기간
      */
     public String getStartDate() {
-        return (String) get(5);
+        return (String) get(4);
     }
 
     /**
      * Setter for <code>haaim_db.class.end_date</code>. 클래스 종료 기간
      */
     public void setEndDate(String value) {
-        set(6, value);
+        set(5, value);
     }
 
     /**
      * Getter for <code>haaim_db.class.end_date</code>. 클래스 종료 기간
      */
     public String getEndDate() {
-        return (String) get(6);
+        return (String) get(5);
     }
 
     /**
      * Setter for <code>haaim_db.class.day_time</code>. 수업 요일 &amp; 시간 
      */
     public void setDayTime(String value) {
-        set(7, value);
+        set(6, value);
     }
 
     /**
      * Getter for <code>haaim_db.class.day_time</code>. 수업 요일 &amp; 시간 
      */
     public String getDayTime() {
-        return (String) get(7);
+        return (String) get(6);
     }
 
     /**
      * Setter for <code>haaim_db.class.textbook</code>. 교재
      */
     public void setTextbook(String value) {
-        set(8, value);
+        set(7, value);
     }
 
     /**
      * Getter for <code>haaim_db.class.textbook</code>. 교재
      */
     public String getTextbook() {
-        return (String) get(8);
+        return (String) get(7);
     }
 
     /**
      * Setter for <code>haaim_db.class.pass_score</code>. PASS 기준 점수
      */
     public void setPassScore(Integer value) {
-        set(9, value);
+        set(8, value);
     }
 
     /**
      * Getter for <code>haaim_db.class.pass_score</code>. PASS 기준 점수
      */
     public Integer getPassScore() {
-        return (Integer) get(9);
+        return (Integer) get(8);
     }
 
     /**
      * Setter for <code>haaim_db.class.description</code>. 기타정보
      */
     public void setDescription(String value) {
-        set(10, value);
+        set(9, value);
     }
 
     /**
      * Getter for <code>haaim_db.class.description</code>. 기타정보
      */
     public String getDescription() {
-        return (String) get(10);
+        return (String) get(9);
     }
 
     /**
      * Setter for <code>haaim_db.class.input_id</code>.
      */
     public void setInputId(String value) {
-        set(11, value);
+        set(10, value);
     }
 
     /**
      * Getter for <code>haaim_db.class.input_id</code>.
      */
     public String getInputId() {
-        return (String) get(11);
+        return (String) get(10);
     }
 
     /**
      * Setter for <code>haaim_db.class.input_date</code>.
      */
     public void setInputDate(LocalDateTime value) {
-        set(12, value);
+        set(11, value);
     }
 
     /**
      * Getter for <code>haaim_db.class.input_date</code>.
      */
     public LocalDateTime getInputDate() {
-        return (LocalDateTime) get(12);
+        return (LocalDateTime) get(11);
     }
 
     /**
      * Setter for <code>haaim_db.class.update_id</code>.
      */
     public void setUpdateId(String value) {
-        set(13, value);
+        set(12, value);
     }
 
     /**
      * Getter for <code>haaim_db.class.update_id</code>.
      */
     public String getUpdateId() {
-        return (String) get(13);
+        return (String) get(12);
     }
 
     /**
      * Setter for <code>haaim_db.class.update_date</code>.
      */
     public void setUpdateDate(LocalDateTime value) {
-        set(14, value);
+        set(13, value);
     }
 
     /**
      * Getter for <code>haaim_db.class.update_date</code>.
      */
     public LocalDateTime getUpdateDate() {
-        return (LocalDateTime) get(14);
+        return (LocalDateTime) get(13);
     }
 
     // -------------------------------------------------------------------------
@@ -243,17 +229,17 @@ public class JClassRecord extends UpdatableRecordImpl<JClassRecord> implements R
     }
 
     // -------------------------------------------------------------------------
-    // Record15 type implementation
+    // Record14 type implementation
     // -------------------------------------------------------------------------
 
     @Override
-    public Row15<Integer, Integer, Integer, String, Integer, String, String, String, String, Integer, String, String, LocalDateTime, String, LocalDateTime> fieldsRow() {
-        return (Row15) super.fieldsRow();
+    public Row14<Integer, Integer, String, Integer, String, String, String, String, Integer, String, String, LocalDateTime, String, LocalDateTime> fieldsRow() {
+        return (Row14) super.fieldsRow();
     }
 
     @Override
-    public Row15<Integer, Integer, Integer, String, Integer, String, String, String, String, Integer, String, String, LocalDateTime, String, LocalDateTime> valuesRow() {
-        return (Row15) super.valuesRow();
+    public Row14<Integer, Integer, String, Integer, String, String, String, String, Integer, String, String, LocalDateTime, String, LocalDateTime> valuesRow() {
+        return (Row14) super.valuesRow();
     }
 
     @Override
@@ -263,71 +249,66 @@ public class JClassRecord extends UpdatableRecordImpl<JClassRecord> implements R
 
     @Override
     public Field<Integer> field2() {
-        return JClass.CLASS.CURRICULUM_NO;
-    }
-
-    @Override
-    public Field<Integer> field3() {
         return JClass.CLASS.YEAR;
     }
 
     @Override
-    public Field<String> field4() {
+    public Field<String> field3() {
         return JClass.CLASS.CLASS_NAME;
     }
 
     @Override
-    public Field<Integer> field5() {
+    public Field<Integer> field4() {
         return JClass.CLASS.TEACHER_NO;
     }
 
     @Override
-    public Field<String> field6() {
+    public Field<String> field5() {
         return JClass.CLASS.START_DATE;
     }
 
     @Override
-    public Field<String> field7() {
+    public Field<String> field6() {
         return JClass.CLASS.END_DATE;
     }
 
     @Override
-    public Field<String> field8() {
+    public Field<String> field7() {
         return JClass.CLASS.DAY_TIME;
     }
 
     @Override
-    public Field<String> field9() {
+    public Field<String> field8() {
         return JClass.CLASS.TEXTBOOK;
     }
 
     @Override
-    public Field<Integer> field10() {
+    public Field<Integer> field9() {
         return JClass.CLASS.PASS_SCORE;
     }
 
     @Override
-    public Field<String> field11() {
+    public Field<String> field10() {
         return JClass.CLASS.DESCRIPTION;
     }
 
     @Override
-    public Field<String> field12() {
+    public Field<String> field11() {
         return JClass.CLASS.INPUT_ID;
     }
 
     @Override
-    public Field<LocalDateTime> field13() {
+    public Field<LocalDateTime> field12() {
         return JClass.CLASS.INPUT_DATE;
     }
 
     @Override
-    public Field<String> field14() {
+    public Field<String> field13() {
         return JClass.CLASS.UPDATE_ID;
     }
 
     @Override
-    public Field<LocalDateTime> field15() {
+    public Field<LocalDateTime> field14() {
         return JClass.CLASS.UPDATE_DATE;
     }
 
@@ -338,71 +319,66 @@ public class JClassRecord extends UpdatableRecordImpl<JClassRecord> implements R
 
     @Override
     public Integer component2() {
-        return getCurriculumNo();
-    }
-
-    @Override
-    public Integer component3() {
         return getYear();
     }
 
     @Override
-    public String component4() {
+    public String component3() {
         return getClassName();
     }
 
     @Override
-    public Integer component5() {
+    public Integer component4() {
         return getTeacherNo();
     }
 
     @Override
-    public String component6() {
+    public String component5() {
         return getStartDate();
     }
 
     @Override
-    public String component7() {
+    public String component6() {
         return getEndDate();
     }
 
     @Override
-    public String component8() {
+    public String component7() {
         return getDayTime();
     }
 
     @Override
-    public String component9() {
+    public String component8() {
         return getTextbook();
     }
 
     @Override
-    public Integer component10() {
+    public Integer component9() {
         return getPassScore();
     }
 
     @Override
-    public String component11() {
+    public String component10() {
         return getDescription();
     }
 
     @Override
-    public String component12() {
+    public String component11() {
         return getInputId();
     }
 
     @Override
-    public LocalDateTime component13() {
+    public LocalDateTime component12() {
         return getInputDate();
     }
 
     @Override
-    public String component14() {
+    public String component13() {
         return getUpdateId();
     }
 
     @Override
-    public LocalDateTime component15() {
+    public LocalDateTime component14() {
         return getUpdateDate();
     }
 
@@ -413,71 +389,66 @@ public class JClassRecord extends UpdatableRecordImpl<JClassRecord> implements R
 
     @Override
     public Integer value2() {
-        return getCurriculumNo();
-    }
-
-    @Override
-    public Integer value3() {
         return getYear();
     }
 
     @Override
-    public String value4() {
+    public String value3() {
         return getClassName();
     }
 
     @Override
-    public Integer value5() {
+    public Integer value4() {
         return getTeacherNo();
     }
 
     @Override
-    public String value6() {
+    public String value5() {
         return getStartDate();
     }
 
     @Override
-    public String value7() {
+    public String value6() {
         return getEndDate();
     }
 
     @Override
-    public String value8() {
+    public String value7() {
         return getDayTime();
     }
 
     @Override
-    public String value9() {
+    public String value8() {
         return getTextbook();
     }
 
     @Override
-    public Integer value10() {
+    public Integer value9() {
         return getPassScore();
     }
 
     @Override
-    public String value11() {
+    public String value10() {
         return getDescription();
     }
 
     @Override
-    public String value12() {
+    public String value11() {
         return getInputId();
     }
 
     @Override
-    public LocalDateTime value13() {
+    public LocalDateTime value12() {
         return getInputDate();
     }
 
     @Override
-    public String value14() {
+    public String value13() {
         return getUpdateId();
     }
 
     @Override
-    public LocalDateTime value15() {
+    public LocalDateTime value14() {
         return getUpdateDate();
     }
 
@@ -489,90 +460,84 @@ public class JClassRecord extends UpdatableRecordImpl<JClassRecord> implements R
 
     @Override
     public JClassRecord value2(Integer value) {
-        setCurriculumNo(value);
-        return this;
-    }
-
-    @Override
-    public JClassRecord value3(Integer value) {
         setYear(value);
         return this;
     }
 
     @Override
-    public JClassRecord value4(String value) {
+    public JClassRecord value3(String value) {
         setClassName(value);
         return this;
     }
 
     @Override
-    public JClassRecord value5(Integer value) {
+    public JClassRecord value4(Integer value) {
         setTeacherNo(value);
         return this;
     }
 
     @Override
-    public JClassRecord value6(String value) {
+    public JClassRecord value5(String value) {
         setStartDate(value);
         return this;
     }
 
     @Override
-    public JClassRecord value7(String value) {
+    public JClassRecord value6(String value) {
         setEndDate(value);
         return this;
     }
 
     @Override
-    public JClassRecord value8(String value) {
+    public JClassRecord value7(String value) {
         setDayTime(value);
         return this;
     }
 
     @Override
-    public JClassRecord value9(String value) {
+    public JClassRecord value8(String value) {
         setTextbook(value);
         return this;
     }
 
     @Override
-    public JClassRecord value10(Integer value) {
+    public JClassRecord value9(Integer value) {
         setPassScore(value);
         return this;
     }
 
     @Override
-    public JClassRecord value11(String value) {
+    public JClassRecord value10(String value) {
         setDescription(value);
         return this;
     }
 
     @Override
-    public JClassRecord value12(String value) {
+    public JClassRecord value11(String value) {
         setInputId(value);
         return this;
     }
 
     @Override
-    public JClassRecord value13(LocalDateTime value) {
+    public JClassRecord value12(LocalDateTime value) {
         setInputDate(value);
         return this;
     }
 
     @Override
-    public JClassRecord value14(String value) {
+    public JClassRecord value13(String value) {
         setUpdateId(value);
         return this;
     }
 
     @Override
-    public JClassRecord value15(LocalDateTime value) {
+    public JClassRecord value14(LocalDateTime value) {
         setUpdateDate(value);
         return this;
     }
 
     @Override
-    public JClassRecord values(Integer value1, Integer value2, Integer value3, String value4, Integer value5, String value6, String value7, String value8, String value9, Integer value10, String value11, String value12, LocalDateTime value13, String value14, LocalDateTime value15) {
+    public JClassRecord values(Integer value1, Integer value2, String value3, Integer value4, String value5, String value6, String value7, String value8, Integer value9, String value10, String value11, LocalDateTime value12, String value13, LocalDateTime value14) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -587,7 +552,6 @@ public class JClassRecord extends UpdatableRecordImpl<JClassRecord> implements R
         value12(value12);
         value13(value13);
         value14(value14);
-        value15(value15);
         return this;
     }
 
@@ -605,23 +569,22 @@ public class JClassRecord extends UpdatableRecordImpl<JClassRecord> implements R
     /**
      * Create a detached, initialised JClassRecord
      */
-    public JClassRecord(Integer classNo, Integer curriculumNo, Integer year, String className, Integer teacherNo, String startDate, String endDate, String dayTime, String textbook, Integer passScore, String description, String inputId, LocalDateTime inputDate, String updateId, LocalDateTime updateDate) {
+    public JClassRecord(Integer classNo, Integer year, String className, Integer teacherNo, String startDate, String endDate, String dayTime, String textbook, Integer passScore, String description, String inputId, LocalDateTime inputDate, String updateId, LocalDateTime updateDate) {
         super(JClass.CLASS);
 
         set(0, classNo);
-        set(1, curriculumNo);
-        set(2, year);
-        set(3, className);
-        set(4, teacherNo);
-        set(5, startDate);
-        set(6, endDate);
-        set(7, dayTime);
-        set(8, textbook);
-        set(9, passScore);
-        set(10, description);
-        set(11, inputId);
-        set(12, inputDate);
-        set(13, updateId);
-        set(14, updateDate);
+        set(1, year);
+        set(2, className);
+        set(3, teacherNo);
+        set(4, startDate);
+        set(5, endDate);
+        set(6, dayTime);
+        set(7, textbook);
+        set(8, passScore);
+        set(9, description);
+        set(10, inputId);
+        set(11, inputDate);
+        set(12, updateId);
+        set(13, updateDate);
     }
 }

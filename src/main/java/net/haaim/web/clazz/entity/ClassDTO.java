@@ -14,7 +14,7 @@ import net.haaim.web.common.entity.CommonEntity;
 
 @Getter 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ClazzDTO extends CommonEntity {
+public class ClassDTO extends CommonEntity {
 
 	@Column(name = "class_no")
 	@JsonProperty(value = "class_no",access = JsonProperty.Access.AUTO)
@@ -52,14 +52,6 @@ public class ClazzDTO extends CommonEntity {
 	@JsonProperty(value = "description", access = JsonProperty.Access.AUTO)
 	private String description;
 	
-	@Column(name = "curriculum_no")
-	@JsonProperty(value = "curriculum_no", access = JsonProperty.Access.AUTO)
-	private Integer curriclumNo;
-	
-	@Column(name = "course")
-	@JsonProperty(value = "course", access = JsonProperty.Access.AUTO)
-	private Integer course;
-	
 	@Column(name = "teacher_no")
 	@JsonProperty(value = "teacher_no", access = JsonProperty.Access.AUTO)
 	private Integer teacherNo;
@@ -73,9 +65,9 @@ public class ClazzDTO extends CommonEntity {
 	private Integer studentCnt;	
 	
 	@Builder
-	public ClazzDTO(String inputId, Date inputDate, String updateId, Date updateDate, Integer classNo, Integer year,
+	public ClassDTO(String inputId, Date inputDate, String updateId, Date updateDate, Integer classNo, Integer year,
 			String className, String startDate, String endDate, String dayTime, String textBook,
-			Integer passScore, String description, Integer curriclumNo, Integer course, Integer teacherNo, String name, Integer studentCnt) {
+			Integer passScore, String description, Integer teacherNo, String name, Integer studentCnt) {
 		super(inputId, inputDate, updateId, updateDate);
 		this.classNo = classNo;
 		this.year = year;
@@ -86,8 +78,6 @@ public class ClazzDTO extends CommonEntity {
 		this.textBook = textBook;
 		this.passScore = passScore;
 		this.description = description;
-		this.curriclumNo = curriclumNo;
-		this.course = course;
 		this.teacherNo = teacherNo;
 		this.name = name;
 		this.studentCnt = studentCnt;

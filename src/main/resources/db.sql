@@ -93,12 +93,11 @@ COMMENT = '출석/테스트/과제/ 학업상태 레포트.';
 
 CREATE TABLE IF NOT EXISTS class (
   `class_no` INT(10) NOT NULL AUTO_INCREMENT primary key COMMENT '클래스 번호',
-  `curriculum_no` INT(10) NOT NULL COMMENT '컬리큘럼ID',
-  `year` INT(4) NOT NULL COMMENT '기간',
+   `year` INT(4) NOT NULL COMMENT '기간',
   `class_name` VARCHAR(100) NULL COMMENT '클래스명',
   `teacher_no` INT(10) NULL COMMENT '교사 no.',
-  `start_date` VARCHAR(8) NOT NULL COMMENT '클래스 시작 기간',
-  `end_date` VARCHAR(8) NOT NULL COMMENT '클래스 종료 기간',
+  `start_date` VARCHAR(10) NOT NULL COMMENT '클래스 시작 기간',
+  `end_date` VARCHAR(10) NOT NULL COMMENT '클래스 종료 기간',
   `day_time` VARCHAR(45) NULL COMMENT '수업 요일 & 시간 ',
   `textbook` VARCHAR(500) NULL COMMENT '교재',
   `pass_score` INT(3) NULL COMMENT 'PASS 기준 점수',

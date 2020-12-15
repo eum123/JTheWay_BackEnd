@@ -17,7 +17,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row15;
+import org.jooq.Row14;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -33,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JClass extends TableImpl<JClassRecord> {
 
-    private static final long serialVersionUID = -2048714837;
+    private static final long serialVersionUID = -658239331;
 
     /**
      * The reference instance of <code>haaim_db.class</code>
@@ -52,11 +52,6 @@ public class JClass extends TableImpl<JClassRecord> {
      * The column <code>haaim_db.class.class_no</code>. 클래스 번호
      */
     public final TableField<JClassRecord, Integer> CLASS_NO = createField(DSL.name("class_no"), org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), this, "클래스 번호");
-
-    /**
-     * The column <code>haaim_db.class.curriculum_no</code>. 컬리큘럼ID
-     */
-    public final TableField<JClassRecord, Integer> CURRICULUM_NO = createField(DSL.name("curriculum_no"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "컬리큘럼ID");
 
     /**
      * The column <code>haaim_db.class.year</code>. 기간
@@ -203,11 +198,11 @@ public class JClass extends TableImpl<JClassRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row15 type methods
+    // Row14 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row15<Integer, Integer, Integer, String, Integer, String, String, String, String, Integer, String, String, LocalDateTime, String, LocalDateTime> fieldsRow() {
-        return (Row15) super.fieldsRow();
+    public Row14<Integer, Integer, String, Integer, String, String, String, String, Integer, String, String, LocalDateTime, String, LocalDateTime> fieldsRow() {
+        return (Row14) super.fieldsRow();
     }
 }

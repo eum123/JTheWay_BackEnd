@@ -13,8 +13,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
 
 import lombok.extern.slf4j.Slf4j;
-import net.haaim.web.clazz.entity.ClazzDTO;
-import net.haaim.web.clazz.entity.ClazzEntity;
+import net.haaim.web.clazz.entity.ClassDTO;
+import net.haaim.web.clazz.entity.ClassEntity;
 import net.haaim.web.clazz.entity.CurriculumEntity;
 import net.haaim.web.clazz.repository.ClazzRepository;
 import net.haaim.web.clazz.repository.ClazzRepositoryJOOQ;
@@ -27,7 +27,7 @@ import net.haaim.web.user.repository.UserRepository;
 @Slf4j
 @SpringBootTest
 @ActiveProfiles("local")
-public class ClazzServiceTest {
+public class ClassServiceTest {
 
 	@Autowired
 	private ClazzRepositoryJOOQ repo;
@@ -42,11 +42,11 @@ public class ClazzServiceTest {
 	private CurriculumRepository curriculumRepo;
 
 	@Autowired
-	private ClazzService service;
+	private ClassService service;
 
 	private UserEntity userEntity;
 	private CurriculumEntity curriculumEntity;
-	private ClazzEntity clazzEntity;
+	private ClassEntity clazzEntity;
 	
 	@BeforeEach
 	public void init() {
@@ -73,10 +73,9 @@ public class ClazzServiceTest {
 			.year(2020)
 			.build());
 		
-		clazzEntity = classRepo.save(ClazzEntity.builder()
+		clazzEntity = classRepo.save(ClassEntity.builder()
 			.className("className")
 			.course(1)
-			.curriclumNo(curriculumEntity.getNo())
 			.dayTime("dayTime")
 			.inputDate(new Date())
 			.inputId("id")
@@ -94,13 +93,13 @@ public class ClazzServiceTest {
 	public void testSecarchGroupCode() {
 		PageRequest pageable = CustomPageRequest.of(0, 10, "classNo");
 		
-		Page<ClazzDTO> list = service.search(pageable);
+		Page<ClassDTO> list = service.search(pageable);
 		
 		System.out.println(list.getContent());
 		
 		Assertions.assertNotEquals(0, list.getContent().size());
 		
-		ClazzDTO dto = list.getContent().get(0);
+		ClassDTO dto = list.getContent().get(0);
 		
 		System.out.println("---------------" + dto.getName());
 		System.out.println("total---------------" + list.getTotalElements());

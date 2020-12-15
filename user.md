@@ -187,3 +187,14 @@
 		}
       
       ```
+### 기타
+	```
+	insert into user (no, user_id, user_pw, user_type, use_yn, name, mobile, email, student_no, state, input_id, input_date) 
+	values(7, '222', '222', 1, 1, 'name_1', 'mobile', 'email', null, 1, 'id', sysdate());
+	insert into user (no, user_id, user_pw, user_type, use_yn, name, mobile, email, student_no, state, input_id, input_date) 
+	values(8, '222', '222', 3, 1, 'name_3', 'mobile', 'email', null, 1, 'id', sysdate());
+	insert into user (no, user_id, user_pw, user_type, use_yn, name, mobile, email, student_no, state, input_id, input_date) 
+	values(9, '222', '222', 0, 1, 'name_0', 'mobile', 'email', null, 1, 'id', sysdate());
+	insert into user (no, user_id, user_pw, user_type, use_yn, name, mobile, email, student_no, state, input_id, input_date) 
+	values(10, '222', '222', 0, 1, 'name_10', 'mobile', 'email', null, 1, 'id', sysdate());
+	```

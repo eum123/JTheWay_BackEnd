@@ -1,5 +1,7 @@
 package net.haaim.web.clazz.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
-import net.haaim.web.clazz.service.ClazzService;
+import net.haaim.web.clazz.entity.ClassEntity;
+import net.haaim.web.clazz.service.ClassService;
 import net.haaim.web.common.User;
 import net.haaim.web.common.UserHelper;
 import net.haaim.web.common.request.CustomPageRequest;
@@ -17,9 +20,9 @@ import net.haaim.web.common.response.ApiResponse;
 @Slf4j
 @RestController
 @RequestMapping("/lessons/class")
-public class ClazzController {
+public class ClassController {
 	@Autowired
-	private ClazzService service;
+	private ClassService service;
 	
 	@RequestMapping(value = "all", method = RequestMethod.GET)
 	public ApiResponse searchAll(@RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -64,24 +67,39 @@ public class ClazzController {
 		}
 	}
 	
+    
 	@RequestMapping(value = "regist", method = RequestMethod.POST)
 	public ApiResponse regist(
 			@RequestParam(value = "year") Integer year,
-			@RequestParam(value = "grade") Integer grade,
-			@RequestParam(value = "course") Integer course,
-			@RequestParam(value = "large_category") String largeCategory,
-			@RequestParam(value = "medium_category") String mediumCategory,
-			@RequestParam(value = "page", defaultValue = "1") Integer page,
-			@RequestParam(value = "size", defaultValue = "10") Integer size
+			@RequestParam(value = "class_name") String className,
+			@RequestParam(value = "day_time") String dayTime,
+			@RequestParam(value = "curriculum_list[]") Integer[] curriculumList,
+			@RequestParam(value = "student_list[]") Integer[] studentList,
+			@RequestParam(value = "textbook") String textBook,
+			@RequestParam(value = "teacher_no") Integer teacherNo,
+			@RequestParam(value = "start_date") String startDate,
+			@RequestParam(value = "end_date") String endDate,
+			@RequestParam(value = "description") String description
 			) {
 
 		try {
 			
 			User user = UserHelper.getUser();
+			
+			ClassEntity classEntity = ClassEntity.builder()
+					.year(year)
+					.className(className)
+					.dayTime(dayTime)
+					.textBook(textBook)
+					.teacherNo(teacherNo)
+					.description(description)
+					.startDate(startDate)
+					.endDate(endDate)
+					.inputDate(new Date())
+					.inputId(user.getId())
+					.build();
 
-			PageRequest pageable = CustomPageRequest.of(page, size, "no");
-
-			return ApiResponse.getSuccessResponse(service.regist(user, year, grade, course, largeCategory, mediumCategory));
+			return ApiResponse.getSuccessResponse(service.regist(user, classEntity, curriculumList, studentList));
 		} catch (Exception e) {
 			log.error("search error", e);
 
