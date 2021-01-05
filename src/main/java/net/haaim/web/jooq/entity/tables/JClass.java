@@ -33,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JClass extends TableImpl<JClassRecord> {
 
-    private static final long serialVersionUID = -658239331;
+    private static final long serialVersionUID = -534223751;
 
     /**
      * The reference instance of <code>haaim_db.class</code>
@@ -69,14 +69,14 @@ public class JClass extends TableImpl<JClassRecord> {
     public final TableField<JClassRecord, Integer> TEACHER_NO = createField(DSL.name("teacher_no"), org.jooq.impl.SQLDataType.INTEGER, this, "교사 no.");
 
     /**
-     * The column <code>haaim_db.class.start_date</code>. 클래스 시작 기간
+     * The column <code>haaim_db.class.start_date</code>.
      */
-    public final TableField<JClassRecord, String> START_DATE = createField(DSL.name("start_date"), org.jooq.impl.SQLDataType.VARCHAR(8).nullable(false), this, "클래스 시작 기간");
+    public final TableField<JClassRecord, String> START_DATE = createField(DSL.name("start_date"), org.jooq.impl.SQLDataType.VARCHAR(10), this, "");
 
     /**
-     * The column <code>haaim_db.class.end_date</code>. 클래스 종료 기간
+     * The column <code>haaim_db.class.end_date</code>.
      */
-    public final TableField<JClassRecord, String> END_DATE = createField(DSL.name("end_date"), org.jooq.impl.SQLDataType.VARCHAR(8).nullable(false), this, "클래스 종료 기간");
+    public final TableField<JClassRecord, String> END_DATE = createField(DSL.name("end_date"), org.jooq.impl.SQLDataType.VARCHAR(10), this, "");
 
     /**
      * The column <code>haaim_db.class.day_time</code>. 수업 요일 &amp; 시간 

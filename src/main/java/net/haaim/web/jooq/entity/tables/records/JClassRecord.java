@@ -21,7 +21,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JClassRecord extends UpdatableRecordImpl<JClassRecord> implements Record14<Integer, Integer, String, Integer, String, String, String, String, Integer, String, String, LocalDateTime, String, LocalDateTime> {
 
-    private static final long serialVersionUID = -1087044067;
+    private static final long serialVersionUID = -1527701987;
 
     /**
      * Setter for <code>haaim_db.class.class_no</code>. 클래스 번호
@@ -80,28 +80,28 @@ public class JClassRecord extends UpdatableRecordImpl<JClassRecord> implements R
     }
 
     /**
-     * Setter for <code>haaim_db.class.start_date</code>. 클래스 시작 기간
+     * Setter for <code>haaim_db.class.start_date</code>.
      */
     public void setStartDate(String value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>haaim_db.class.start_date</code>. 클래스 시작 기간
+     * Getter for <code>haaim_db.class.start_date</code>.
      */
     public String getStartDate() {
         return (String) get(4);
     }
 
     /**
-     * Setter for <code>haaim_db.class.end_date</code>. 클래스 종료 기간
+     * Setter for <code>haaim_db.class.end_date</code>.
      */
     public void setEndDate(String value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>haaim_db.class.end_date</code>. 클래스 종료 기간
+     * Getter for <code>haaim_db.class.end_date</code>.
      */
     public String getEndDate() {
         return (String) get(5);

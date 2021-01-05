@@ -245,7 +245,8 @@ CREATE TABLE IF NOT EXISTS exam_list (
 ENGINE = InnoDB
 COMMENT = '문제출제목록';
 
-CREATE TABLE IF NOT EXISTS `haaim`.`learn_plan_mngt` (
+CREATE TABLE IF NOT EXISTS learn_plan_mngt (
+  `no` INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `year` INT(4) NOT NULL COMMENT '년도',
   `class_no` INT(10) NOT NULL COMMENT '클래스NO',
   `teacher_id` VARCHAR(45) NOT NULL COMMENT '교사id',
@@ -255,8 +256,7 @@ CREATE TABLE IF NOT EXISTS `haaim`.`learn_plan_mngt` (
   `input_date` VARCHAR(45) NULL,
   `input_id` DATETIME NULL,
   `update_id` VARCHAR(45) NULL,
-  `update_date` DATETIME NULL,
-  PRIMARY KEY (`year`, `class_no`, `date`, `time`))
+  `update_date` DATETIME NULL)
 ENGINE = InnoDB
 COMMENT = '진도관리';
 

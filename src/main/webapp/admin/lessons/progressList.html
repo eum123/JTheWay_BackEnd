@@ -83,7 +83,20 @@
           <!-- end top -->
 
           <div class="row border-bottom white-bg dashboard-header">
-            navigation
+            <div class="col-lg-10">
+              <h2>목록</h2>
+              <ol class="breadcrumb">
+                  <li class="breadcrumb-item">
+                      수업관리
+                  </li>
+                  <li class="breadcrumb-item">
+                      진도관리
+                  </li>
+                  <li class="breadcrumb-item active">
+                      <strong>목록</strong>
+                  </li>
+              </ol>
+            </div>
           </div>
           <div class="wrapper wrapper-content">
             <div>
@@ -197,7 +210,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="element in progress.list">
+                          <tr v-for="element in body.list.content">
                             <td class="text-center">{{element.no}}</td>
                             <td class="text-center">
                               {{element.date}}
@@ -220,29 +233,17 @@
                         </tbody>
                         <tfoot>
                           <tr>
-                            <td colspan="6" class="text-right">
+                            <td colspan="7" class="text-right">
                               <div class="btn-group">
-                                <button
-                                  type="button"
-                                  class="btn btn-white"
-                                  @click="movePage(progress.pagination.pageInfo.prePageNumber)"
-                                >
-                                  <i class="fa fa-chevron-left"></i>
-                                </button>
-                                <button
-                                  v-for="page in progress.pagination.pageInfo.pageNumbers"
-                                  v-bind:class="pageClassObject(page)"
-                                  @click="movePage(page)"
-                                >
-                                  {{page}}
-                                </button>
-                                <button
-                                  type="button"
-                                  class="btn btn-white"
-                                  @click="movePage(progress.pagination.pageInfo.nextPageNumber)"
-                                >
+                                  <button type="button" class="btn btn-white" @click="moveToPrePage(body.list.pageInfo.prePageNumber)">
+                                    <i class="fa fa-chevron-left"></i>
+                                  </button>
+                                  <button v-for="page in body.list.pageInfo.pageNumbers" v-bind:class="pageClassObject(page)" @click="movePage(page)">
+                                    {{page}}
+                                  </button>
+                                  <button type="button" class="btn btn-white" @click="moveToNextPage(body.list.pageInfo.nextPageNumber)">
                                   <i class="fa fa-chevron-right"></i>
-                                </button>
+                                  </button>
                               </div>
                             </td>
                           </tr>
@@ -267,20 +268,22 @@
 
     <!-- Mainly scripts -->
     <script src="../../theme/js/jquery-3.1.1.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="../../theme/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
     <script src="../../theme/js/popper.min.js"></script>
     <script src="../../theme/js/bootstrap.js"></script>
     <script src="../../theme/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="../../theme/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-    <!-- jQuery UI -->
-    <script src="../../theme/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Custom and plugin javascript 왼쪽 메뉴용 -->
+    <script src="../../theme/js/inspinia.js"></script>
+    <script src="../../theme/js/plugins/pace/pace.min.js"></script>
 
     <!-- vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
 
-    <!-- Custom and plugin javascript 왼쪽 메뉴용 -->
-    <script src="../../theme/js/inspinia.js"></script>
-    <script src="../../theme/js/plugins/pace/pace.min.js"></script>
+    
 
     <script>
       $(document).ready(function () {
@@ -305,23 +308,40 @@
           return data;
         },
         methods: {
-          movePage: function (page) {
-            //start loading
-            toggleLoading();
-
-            //데이터 조회
-            syncGet(
-              "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-              getSearchParameter(),
-              getList,
-              null
-            );
-            //현재 페이지 설정
-            this.progress.pagination.currentPage = page;
-
-            //end loading
-            toggleLoading();
+          movePage: function(page) {
+            callAPI(page, getSearchParameter());
           },
+          moveToPrePage: function(page) {
+              if (data.body.list.first == true) {
+                  alert("처음 페이지 입니다.");
+              } else {
+                  callAPI(page, getSearchParameter());
+              }
+          },
+
+          moveToNextPage: function(page) {
+              if (data.body.list.last === true) {
+                  alert("마지막 페이지 입니다.");
+              } else {
+                  callAPI(page, getSearchParameter());
+              }
+          },
+
+          pageClassObject: function(page) {
+              if (data.body.list.currentPage == page) {
+                  return "btn btn-white active";
+              } else {
+                  return "btn btn-white ";
+              }
+          },
+          search: function() {
+              if (validate()) {
+                  callAPI(1, getSearchParameter());
+              }
+          },
+          goRegist: function() {
+              location.href = "/admin/lessons/classRegist.html";
+          }
         },
 
         mounted: function () {
@@ -348,67 +368,20 @@
         },
       });
 
-      function init() {
-        data.progress = "";
 
-        data.left = new Object();
-        data.left.info = new Object();
-        data.left.menu = new Object();
-        data.body = new Object();
+      function callAPI(page, parameter) {
+          //start loading
+          toggleLoading();
 
-        //user 
-        syncGet(
-                "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-                "",
-                function(res) {
-                    if (res != null) {
-                        data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
-                    }
-                },
-                null
-            );
-            
-        //menu
-        syncGet(
-                HAAIM + "/menu/all",
-                "",
-                function(res) {
-                    if (res != null) {
-                        data.left.menu = res.data;
-                        console.log(data.left.menu);
-                    } else {
-                        alert("menu load error");
-                    }
-                },
-            null
-        );
+          getPage(page, "/lessons/progress/seach", parameter,
+              function(res, pageInfo) {
+                  data.body.list = res.data;
+                  data.body.list.pageInfo = pageInfo;
+              }
+          )
 
-
-        //code 조회
-        syncGet(
-          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-          "",
-          getList,
-          null
-        );
-      }
-
-      function getList(res) {
-        if (res != null) {
-          //test
-          data.progress = JSON.parse(
-            '{"list":[{"no":"1","date":"2020.01.01","class":"class","startTime":"10:00","endTime":"11:00","teacher":"나선생","progress":[{"order":{"name":"A","status":"1"}},{"order":{"name":"B","status":"1"}},{"order":{"name":"C","status":"1"}},{"order":{"name":"D","status":"0"}},{"order":{"name":"E","status":"0"}},{"order":{"name":"F","status":"0"}},{"order":{"name":"G","status":"0"}}]}],"pagination":{"total":10,"countPerPage":10}}'
-          );
-
-          //현재페이지
-          var currentPage = data.progress.pagination.currentPage;
-          var totalCount = data.progress.pagination.total;
-
-          data.progress.pagination.pageInfo = getPageInfo(
-            totalCount,
-            currentPage
-          );
-        }
+          //end loading
+          toggleLoading();
       }
 
       /**
