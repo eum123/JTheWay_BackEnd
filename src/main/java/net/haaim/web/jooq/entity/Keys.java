@@ -12,6 +12,7 @@ import net.haaim.web.jooq.entity.tables.JCode;
 import net.haaim.web.jooq.entity.tables.JCurriculum;
 import net.haaim.web.jooq.entity.tables.JExamList;
 import net.haaim.web.jooq.entity.tables.JGroupCode;
+import net.haaim.web.jooq.entity.tables.JItemPool;
 import net.haaim.web.jooq.entity.tables.JMenu;
 import net.haaim.web.jooq.entity.tables.JMonthlyReport;
 import net.haaim.web.jooq.entity.tables.JNotice;
@@ -26,6 +27,7 @@ import net.haaim.web.jooq.entity.tables.records.JCodeRecord;
 import net.haaim.web.jooq.entity.tables.records.JCurriculumRecord;
 import net.haaim.web.jooq.entity.tables.records.JExamListRecord;
 import net.haaim.web.jooq.entity.tables.records.JGroupCodeRecord;
+import net.haaim.web.jooq.entity.tables.records.JItemPoolRecord;
 import net.haaim.web.jooq.entity.tables.records.JMenuRecord;
 import net.haaim.web.jooq.entity.tables.records.JMonthlyReportRecord;
 import net.haaim.web.jooq.entity.tables.records.JNoticeRecord;
@@ -58,6 +60,7 @@ public class Keys {
     public static final Identity<JCurriculumRecord, Integer> IDENTITY_CURRICULUM = Identities0.IDENTITY_CURRICULUM;
     public static final Identity<JExamListRecord, Integer> IDENTITY_EXAM_LIST = Identities0.IDENTITY_EXAM_LIST;
     public static final Identity<JGroupCodeRecord, Integer> IDENTITY_GROUP_CODE = Identities0.IDENTITY_GROUP_CODE;
+    public static final Identity<JItemPoolRecord, Integer> IDENTITY_ITEM_POOL = Identities0.IDENTITY_ITEM_POOL;
     public static final Identity<JMonthlyReportRecord, Integer> IDENTITY_MONTHLY_REPORT = Identities0.IDENTITY_MONTHLY_REPORT;
     public static final Identity<JNoticeRecord, Integer> IDENTITY_NOTICE = Identities0.IDENTITY_NOTICE;
     public static final Identity<JScoreMngtRecord, Integer> IDENTITY_SCORE_MNGT = Identities0.IDENTITY_SCORE_MNGT;
@@ -75,6 +78,7 @@ public class Keys {
     public static final UniqueKey<JCurriculumRecord> KEY_CURRICULUM_PRIMARY = UniqueKeys0.KEY_CURRICULUM_PRIMARY;
     public static final UniqueKey<JExamListRecord> KEY_EXAM_LIST_PRIMARY = UniqueKeys0.KEY_EXAM_LIST_PRIMARY;
     public static final UniqueKey<JGroupCodeRecord> KEY_GROUP_CODE_PRIMARY = UniqueKeys0.KEY_GROUP_CODE_PRIMARY;
+    public static final UniqueKey<JItemPoolRecord> KEY_ITEM_POOL_PRIMARY = UniqueKeys0.KEY_ITEM_POOL_PRIMARY;
     public static final UniqueKey<JMenuRecord> KEY_MENU_PRIMARY = UniqueKeys0.KEY_MENU_PRIMARY;
     public static final UniqueKey<JMonthlyReportRecord> KEY_MONTHLY_REPORT_PRIMARY = UniqueKeys0.KEY_MONTHLY_REPORT_PRIMARY;
     public static final UniqueKey<JNoticeRecord> KEY_NOTICE_PRIMARY = UniqueKeys0.KEY_NOTICE_PRIMARY;
@@ -100,6 +104,7 @@ public class Keys {
         public static Identity<JCurriculumRecord, Integer> IDENTITY_CURRICULUM = Internal.createIdentity(JCurriculum.CURRICULUM, JCurriculum.CURRICULUM.NO);
         public static Identity<JExamListRecord, Integer> IDENTITY_EXAM_LIST = Internal.createIdentity(JExamList.EXAM_LIST, JExamList.EXAM_LIST.EXAM_NO);
         public static Identity<JGroupCodeRecord, Integer> IDENTITY_GROUP_CODE = Internal.createIdentity(JGroupCode.GROUP_CODE, JGroupCode.GROUP_CODE.NO);
+        public static Identity<JItemPoolRecord, Integer> IDENTITY_ITEM_POOL = Internal.createIdentity(JItemPool.ITEM_POOL, JItemPool.ITEM_POOL.ITEM_NO);
         public static Identity<JMonthlyReportRecord, Integer> IDENTITY_MONTHLY_REPORT = Internal.createIdentity(JMonthlyReport.MONTHLY_REPORT, JMonthlyReport.MONTHLY_REPORT.NO);
         public static Identity<JNoticeRecord, Integer> IDENTITY_NOTICE = Internal.createIdentity(JNotice.NOTICE, JNotice.NOTICE.NO);
         public static Identity<JScoreMngtRecord, Integer> IDENTITY_SCORE_MNGT = Internal.createIdentity(JScoreMngt.SCORE_MNGT, JScoreMngt.SCORE_MNGT.NO);
@@ -115,6 +120,7 @@ public class Keys {
         public static final UniqueKey<JCurriculumRecord> KEY_CURRICULUM_PRIMARY = Internal.createUniqueKey(JCurriculum.CURRICULUM, "KEY_curriculum_PRIMARY", new TableField[] { JCurriculum.CURRICULUM.NO }, true);
         public static final UniqueKey<JExamListRecord> KEY_EXAM_LIST_PRIMARY = Internal.createUniqueKey(JExamList.EXAM_LIST, "KEY_exam_list_PRIMARY", new TableField[] { JExamList.EXAM_LIST.EXAM_NO }, true);
         public static final UniqueKey<JGroupCodeRecord> KEY_GROUP_CODE_PRIMARY = Internal.createUniqueKey(JGroupCode.GROUP_CODE, "KEY_group_code_PRIMARY", new TableField[] { JGroupCode.GROUP_CODE.NO }, true);
+        public static final UniqueKey<JItemPoolRecord> KEY_ITEM_POOL_PRIMARY = Internal.createUniqueKey(JItemPool.ITEM_POOL, "KEY_item_pool_PRIMARY", new TableField[] { JItemPool.ITEM_POOL.ITEM_NO }, true);
         public static final UniqueKey<JMenuRecord> KEY_MENU_PRIMARY = Internal.createUniqueKey(JMenu.MENU, "KEY_menu_PRIMARY", new TableField[] { JMenu.MENU.MENU_CODE }, true);
         public static final UniqueKey<JMonthlyReportRecord> KEY_MONTHLY_REPORT_PRIMARY = Internal.createUniqueKey(JMonthlyReport.MONTHLY_REPORT, "KEY_monthly_report_PRIMARY", new TableField[] { JMonthlyReport.MONTHLY_REPORT.NO }, true);
         public static final UniqueKey<JNoticeRecord> KEY_NOTICE_PRIMARY = Internal.createUniqueKey(JNotice.NOTICE, "KEY_notice_PRIMARY", new TableField[] { JNotice.NOTICE.NO }, true);

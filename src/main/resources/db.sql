@@ -260,8 +260,8 @@ CREATE TABLE IF NOT EXISTS learn_plan_mngt (
 ENGINE = InnoDB
 COMMENT = '진도관리';
 
-CREATE TABLE IF NOT EXISTS `haaim`.`item_pool` (
-  `item_no` INT(30) NOT NULL,
+CREATE TABLE IF NOT EXISTS item_pool (
+  `item_no` INT(30) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `year` INT(4) NOT NULL,
   `grade` INT(2) NOT NULL,
   `course` INT(4) NOT NULL,
@@ -286,8 +286,7 @@ CREATE TABLE IF NOT EXISTS `haaim`.`item_pool` (
   `input_id` VARCHAR(45) NOT NULL,
   `input_date` DATETIME NOT NULL,
   `update_id` VARCHAR(45) NULL,
-  `update_date` DATETIME NULL,
-  PRIMARY KEY (`item_no`))
+  `update_date` DATETIME NULL)
 ENGINE = InnoDB
 COMMENT = '문제은행';
 

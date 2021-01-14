@@ -15,6 +15,7 @@ import net.haaim.web.jooq.entity.tables.JCode;
 import net.haaim.web.jooq.entity.tables.JCurriculum;
 import net.haaim.web.jooq.entity.tables.JExamList;
 import net.haaim.web.jooq.entity.tables.JGroupCode;
+import net.haaim.web.jooq.entity.tables.JItemPool;
 import net.haaim.web.jooq.entity.tables.JMenu;
 import net.haaim.web.jooq.entity.tables.JMonthlyReport;
 import net.haaim.web.jooq.entity.tables.JNotice;
@@ -33,7 +34,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JHaaimDb extends SchemaImpl {
 
-    private static final long serialVersionUID = -621203960;
+    private static final long serialVersionUID = -778499588;
 
     /**
      * The reference instance of <code>haaim_db</code>
@@ -79,6 +80,11 @@ public class JHaaimDb extends SchemaImpl {
      * 코드 그룹
      */
     public final JGroupCode GROUP_CODE = JGroupCode.GROUP_CODE;
+
+    /**
+     * 문제은행
+     */
+    public final JItemPool ITEM_POOL = JItemPool.ITEM_POOL;
 
     /**
      * 메뉴
@@ -134,6 +140,7 @@ public class JHaaimDb extends SchemaImpl {
             JCurriculum.CURRICULUM,
             JExamList.EXAM_LIST,
             JGroupCode.GROUP_CODE,
+            JItemPool.ITEM_POOL,
             JMenu.MENU,
             JMonthlyReport.MONTHLY_REPORT,
             JNotice.NOTICE,

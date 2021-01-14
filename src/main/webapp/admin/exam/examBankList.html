@@ -83,7 +83,7 @@
           <!-- end top -->
 
           <div class="row border-bottom white-bg dashboard-header">
-            navigation
+            문제관리 > 문제은행 > 목록
           </div>
           <div class="wrapper wrapper-content">
             <div>
@@ -298,23 +298,40 @@
           return data;
         },
         methods: {
-          movePage: function (page) {
-            //start loading
-            toggleLoading();
-
-            //데이터 조회
-            syncGet(
-              "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-              getSearchParameter(),
-              getList,
-              null
-            );
-            //현재 페이지 설정
-            this.bank.pagination.currentPage = page;
-
-            //end loading
-            toggleLoading();
+          movePage: function(page) {
+            callAPI(page, getSearchParameter());
           },
+          moveToPrePage: function(page) {
+              if (data.body.list.first == true) {
+                  alert("처음 페이지 입니다.");
+              } else {
+                  callAPI(page, getSearchParameter());
+              }
+          },
+
+          moveToNextPage: function(page) {
+              if (data.body.list.last === true) {
+                  alert("마지막 페이지 입니다.");
+              } else {
+                  callAPI(page, getSearchParameter());
+              }
+          },
+
+          pageClassObject: function(page) {
+              if (data.body.list.currentPage == page) {
+                  return "btn btn-white active";
+              } else {
+                  return "btn btn-white ";
+              }
+          },
+          search: function() {
+              if (validate()) {
+                  callAPI(1, getSearchParameter());
+              }
+          },
+          goRegist: function() {
+              location.href = "/admin/exam/classBankRegist.html";
+          }
         },
 
         mounted: function () {
@@ -333,7 +350,7 @@
               }
           );
 
-          //code
+          
           // getPage(1, "/code/all", null,
           //     function(res, pageInfo) {
           //         data.body.list = res.data;
@@ -343,69 +360,34 @@
           // );
           data.body.list = JSON.parse(
             '{"list":[{"no":"1","year":"2020","curriculum":"중3 > 1학기 > Ⅰ 소인수분해 > 01 소인수분해","type":"A","question":"다항식 f(x)를 x-1/3로 나누었을때의 몫을 Q(x), 나머지를 R라 할 때, f(x)를 3x-1로 나누었을 때의 몫과 나머지를 순서대로 적으면?","level":"*****","usage":"0"}],"pagination":{"total":10,"countPerPage":10}}'
-          );      
+          );  
+
+           getPage(1, "/exam/bank/all", null,
+              function(res, pageInfo) {
+                  data.body.list = res.data;
+                  data.body.list.pageInfo = pageInfo;
+              }
+          )    
 
         },
       });
 
-      function init() {
-        data.bank = "";
+      function callAPI(page, parameter) {
+          //start loading
+          toggleLoading();
 
-        data.left = new Object();
-        data.left.info = new Object();
-        data.left.menu = new Object();
-        data.body = new Object();
+          getPage(page, "/exam/bank/seach", parameter,
+              function(res, pageInfo) {
+                  data.body.list = res.data;
+                  data.body.list.pageInfo = pageInfo;
+              }
+          )
 
-        //user 
-        syncGet(
-                "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-                "",
-                function(res) {
-                    if (res != null) {
-                        data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
-                    }
-                },
-                null
-            );
-        //menu
-        syncGet(
-                HAAIM + "/menu/all",
-                "",
-                function(res) {
-                    if (res != null) {
-                        data.left.menu = res.data;
-                        console.log(data.left.menu);
-                    } else {
-                        alert("menu load error");
-                    }
-                },
-            null
-        );
-
-        //code 조회
-        syncGet(
-          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-          "",
-          getList,
-          null
-        );
+          //end loading
+          toggleLoading();
       }
 
-      function getList(res) {
-        if (res != null) {
-          //test
-          data.bank = JSON.parse(
-            '{"list":[{"no":"1","year":"2020","curriculum":"중3 > 1학기 > Ⅰ 소인수분해 > 01 소인수분해","type":"A","question":"다항식 f(x)를 x-1/3로 나누었을때의 몫을 Q(x), 나머지를 R라 할 때, f(x)를 3x-1로 나누었을 때의 몫과 나머지를 순서대로 적으면?","level":"*****","usage":"0"}],"pagination":{"total":10,"countPerPage":10}}'
-          );
-
-          //현재페이지
-          var currentPage = data.bank.pagination.currentPage;
-          var totalCount = data.bank.pagination.total;
-
-          data.bank.pagination.pageInfo = getPageInfo(totalCount, currentPage);
-        }
-      }
-
+     
       /**
        * 검색 조건으로 parameter 생성
        */

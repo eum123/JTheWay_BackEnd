@@ -12,6 +12,7 @@ import net.haaim.web.jooq.entity.tables.JCode;
 import net.haaim.web.jooq.entity.tables.JCurriculum;
 import net.haaim.web.jooq.entity.tables.JExamList;
 import net.haaim.web.jooq.entity.tables.JGroupCode;
+import net.haaim.web.jooq.entity.tables.JItemPool;
 import net.haaim.web.jooq.entity.tables.JMenu;
 import net.haaim.web.jooq.entity.tables.JMonthlyReport;
 import net.haaim.web.jooq.entity.tables.JNotice;
@@ -65,6 +66,11 @@ public class Tables {
      * 코드 그룹
      */
     public static final JGroupCode GROUP_CODE = JGroupCode.GROUP_CODE;
+
+    /**
+     * 문제은행
+     */
+    public static final JItemPool ITEM_POOL = JItemPool.ITEM_POOL;
 
     /**
      * 메뉴
