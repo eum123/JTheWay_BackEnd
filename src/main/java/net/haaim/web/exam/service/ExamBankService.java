@@ -20,7 +20,7 @@ public class ExamBankService {
 	private ItemPoolRepositoryJOOQ itemPoolRepoJOOQ;
 	
 	public Page<ItemPoolEntity> search(Pageable pageable) {
-		return itemPoolRepo.findAllByOrderByItemNoDesc(pageable);
+		return itemPoolRepoJOOQ.findAll(pageable);
 	}
 	
 	//TODO: 구현 필요

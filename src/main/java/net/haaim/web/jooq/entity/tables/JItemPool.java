@@ -32,7 +32,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JItemPool extends TableImpl<JItemPoolRecord> {
 
-    private static final long serialVersionUID = 366299710;
+    private static final long serialVersionUID = 1857953035;
 
     /**
      * The reference instance of <code>haaim_db.item_pool</code>
@@ -153,9 +153,9 @@ public class JItemPool extends TableImpl<JItemPoolRecord> {
     public final TableField<JItemPoolRecord, Integer> LEVEL_DIFFICULTY = createField(DSL.name("level_difficulty"), org.jooq.impl.SQLDataType.INTEGER, this, "난이도");
 
     /**
-     * The column <code>haaim_db.item_pool.useYn</code>. 사용여부
+     * The column <code>haaim_db.item_pool.use_yn</code>. 사용여부
      */
-    public final TableField<JItemPoolRecord, Integer> USEYN = createField(DSL.name("useYn"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "사용여부");
+    public final TableField<JItemPoolRecord, Integer> USE_YN = createField(DSL.name("use_yn"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "사용여부");
 
     /**
      * The column <code>haaim_db.item_pool.input_id</code>.

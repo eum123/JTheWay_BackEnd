@@ -282,7 +282,7 @@ CREATE TABLE IF NOT EXISTS item_pool (
   `publisher` VARCHAR(200) NULL COMMENT '출판사',
   `workbook` VARCHAR(300) NULL COMMENT '문제집',
   `level_difficulty` INT(1) NULL COMMENT '난이도',
-  `useYn` INT(1) NOT NULL COMMENT '사용여부',
+  `use_yn` INT(1) NOT NULL COMMENT '사용여부',
   `input_id` VARCHAR(45) NOT NULL,
   `input_date` DATETIME NOT NULL,
   `update_id` VARCHAR(45) NULL,

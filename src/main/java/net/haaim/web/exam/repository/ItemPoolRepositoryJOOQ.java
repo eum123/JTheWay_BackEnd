@@ -8,7 +8,7 @@ import org.jooq.DSLContext;
 import org.jooq.impl.DSL;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import net.haaim.web.common.query.ConditionHelper;
@@ -24,7 +24,21 @@ public class ItemPoolRepositoryJOOQ {
 		this.dslContext = dslContext;
 	}
 	
-	public Page<ItemPoolEntity> findAllByCondition(Integer year, Integer grade, Integer course, String mediumCategory, Integer useYn, String question, PageRequest pageable) {
+	public Page<ItemPoolEntity> findAll(Pageable pageable) {
+		List<ItemPoolEntity> list = dslContext.select()
+				.from(JItemPool.ITEM_POOL)
+				.orderBy(JItemPool.ITEM_POOL.ITEM_NO.desc())
+				.offset((int)pageable.getOffset())
+				.limit(pageable.getPageSize())
+				.fetch()
+				.into(ItemPoolEntity.class);
+			
+			int totalCount = dslContext.fetchCount(JClass.CLASS);
+			
+			return new PageImpl<ItemPoolEntity>(list, pageable, totalCount);
+	}
+	
+	public Page<ItemPoolEntity> findAllByCondition(Integer year, Integer grade, Integer course, String mediumCategory, Integer useYn, String question, Pageable pageable) {
 		
 		List<Condition> conditionList = new ArrayList();
 		
@@ -32,7 +46,7 @@ public class ItemPoolRepositoryJOOQ {
 		ConditionHelper.addCondition(conditionList, JItemPool.ITEM_POOL.GRADE, grade);
 		ConditionHelper.addCondition(conditionList, JItemPool.ITEM_POOL.COURSE, course);
 		ConditionHelper.addCondition(conditionList, JItemPool.ITEM_POOL.MEDIUM_CATEGORY, mediumCategory);
-		ConditionHelper.addCondition(conditionList, JItemPool.ITEM_POOL.USEYN, useYn);
+		ConditionHelper.addCondition(conditionList, JItemPool.ITEM_POOL.USE_YN, useYn);
 		ConditionHelper.addLikeCondition(conditionList, JItemPool.ITEM_POOL.QUESTION, question);
 		
 		List<ItemPoolEntity> list = dslContext.select()

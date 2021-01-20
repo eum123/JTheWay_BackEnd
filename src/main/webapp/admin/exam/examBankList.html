@@ -118,18 +118,18 @@
                             <input
                               type="text"
                               placeholder="2020.03.02"
-                              class="form-control"
+                              class="form-control" id="year"
                             />
                           </div>
                           <div class="form-group">
                             <input
                               type="text"
                               placeholder="2020.03.03"
-                              class="form-control"
+                              class="form-control" id="grade"
                             />
                           </div>
                           <div class="form-group">
-                            <select class="form-control" name="account">
+                            <select class="form-control" id="course">
                               <option>학년전체</option>
                               <option>중1</option>
                               <option>중2</option>
@@ -137,27 +137,34 @@
                             </select>
                           </div>
                           <div class="form-group">
-                            <select class="form-control" name="account">
+                            <select class="form-control" id="medium_category">
                               <option>클래스1</option>
                               <option>클래서2</option>
                             </select>
                           </div>
                           <div class="form-group">
-                            <select class="form-control" name="account">
-                              <option>김교사</option>
-                              <option>나교사</option>
+                            <select class="form-control" id="use_yn">
+                              <option value=0>미사용</option>
+                              <option value="1">사용</option>
                             </select>
+                          </div>
+                          <div class="form-group">
+                            <input
+                              type="text"
+                              placeholder="question"
+                              class="form-control" id="question"
+                            />
                           </div>
                           <div class="form-group">
                             <button
                               type="button"
-                              class="btn btn-w-m btn-success"
+                              class="btn btn-w-m btn-success" @click="search"
                             >
                               검색
                             </button>
                             <button
                               type="button"
-                              class="btn btn-w-m btn-primary"
+                              class="btn btn-w-m btn-primary" @click="goRegist"
                             >
                               등록
                             </button>
@@ -193,8 +200,8 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="element in bank.list">
-                            <td class="text-center">{{element.no}}</td>
+                          <tr v-for="element in body.list.content">
+                            <td class="text-center">{{element.item_no}}</td>
                             <td class="text-center">
                               {{element.year}}
                             </td>
@@ -214,29 +221,17 @@
                         </tbody>
                         <tfoot>
                           <tr>
-                            <td colspan="6" class="text-right">
+                            <td colspan="7" class="text-right">
                               <div class="btn-group">
-                                <button
-                                  type="button"
-                                  class="btn btn-white"
-                                  @click="movePage(bank.pagination.pageInfo.prePageNumber)"
-                                >
-                                  <i class="fa fa-chevron-left"></i>
-                                </button>
-                                <button
-                                  v-for="page in bank.pagination.pageInfo.pageNumbers"
-                                  v-bind:class="pageClassObject(page)"
-                                  @click="movePage(page)"
-                                >
-                                  {{page}}
-                                </button>
-                                <button
-                                  type="button"
-                                  class="btn btn-white"
-                                  @click="movePage(bank.pagination.pageInfo.nextPageNumber)"
-                                >
+                                  <button type="button" class="btn btn-white" @click="moveToPrePage(body.list.pageInfo.prePageNumber)">
+                                    <i class="fa fa-chevron-left"></i>
+                                  </button>
+                                  <button v-for="page in body.list.pageInfo.pageNumbers" v-bind:class="pageClassObject(page)" @click="movePage(page)">
+                                    {{page}}
+                                  </button>
+                                  <button type="button" class="btn btn-white" @click="moveToNextPage(body.list.pageInfo.nextPageNumber)">
                                   <i class="fa fa-chevron-right"></i>
-                                </button>
+                                  </button>
                               </div>
                             </td>
                           </tr>
@@ -325,12 +320,12 @@
               }
           },
           search: function() {
-              if (validate()) {
-                  callAPI(1, getSearchParameter());
-              }
+              
+              callAPI(1, getSearchParameter());
+              
           },
           goRegist: function() {
-              location.href = "/admin/exam/classBankRegist.html";
+              location.href = "/admin/exam/examBankRegist.html";
           }
         },
 
@@ -376,7 +371,7 @@
           //start loading
           toggleLoading();
 
-          getPage(page, "/exam/bank/seach", parameter,
+          getPage(page, "/exam/bank/search", parameter,
               function(res, pageInfo) {
                   data.body.list = res.data;
                   data.body.list.pageInfo = pageInfo;
@@ -392,15 +387,31 @@
        * 검색 조건으로 parameter 생성
        */
       function getSearchParameter() {
-        var questionDate = $("#questionDate").val(); //출제일자
-        var isTakeExam = $("#isTakeExam option:selected").val(); //응시 여부
+        var year = $("#year").val(); //출제일자
+        var grade = $("#grade").val(); //출제일자
+        var course = $("#course option:selected").val(); //응시 여부
+        var medium_category = $("#medium_category option:selected").val(); //응시 여부
+        var use_yn = $("#use_yn option:selected").val(); //응시 여부
+        var question = $("#question").val(); //출제일자
 
         var param = "";
-        if (isTakeExam != "") {
-          param = "isTakeExam=" + isTakeExam;
+        if (year != "") {
+          param.year = year;
         }
-        if (questionDate != "") {
-          param = "questionDate=" + questionDate + "," + param;
+        if (grade != "") {
+          param.grade = grade;
+        }
+        if (course != "") {
+          param.course = course;
+        }
+        if (medium_category != "") {
+          param.medium_category = medium_category;
+        }
+        if (use_yn != "") {
+          param.use_yn = use_yn;
+        }
+        if (question != "") {
+          param.question = question;
         }
 
         return param;

@@ -18,7 +18,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JItemPoolRecord extends UpdatableRecordImpl<JItemPoolRecord> {
 
-    private static final long serialVersionUID = -1949357747;
+    private static final long serialVersionUID = 1377775867;
 
     /**
      * Setter for <code>haaim_db.item_pool.item_no</code>.
@@ -315,16 +315,16 @@ public class JItemPoolRecord extends UpdatableRecordImpl<JItemPoolRecord> {
     }
 
     /**
-     * Setter for <code>haaim_db.item_pool.useYn</code>. 사용여부
+     * Setter for <code>haaim_db.item_pool.use_yn</code>. 사용여부
      */
-    public void setUseyn(Integer value) {
+    public void setUseYn(Integer value) {
         set(21, value);
     }
 
     /**
-     * Getter for <code>haaim_db.item_pool.useYn</code>. 사용여부
+     * Getter for <code>haaim_db.item_pool.use_yn</code>. 사용여부
      */
-    public Integer getUseyn() {
+    public Integer getUseYn() {
         return (Integer) get(21);
     }
 
@@ -407,7 +407,7 @@ public class JItemPoolRecord extends UpdatableRecordImpl<JItemPoolRecord> {
     /**
      * Create a detached, initialised JItemPoolRecord
      */
-    public JItemPoolRecord(Integer itemNo, Integer year, Integer grade, Integer course, String mediumCategory, String typeGroup, String type, Integer questionType, String question, String choice1, String choice2, String choice3, String choice4, String choice5, String filePath, Integer markType, String answer, String answerPath, String publisher, String workbook, Integer levelDifficulty, Integer useyn, String inputId, LocalDateTime inputDate, String updateId, LocalDateTime updateDate) {
+    public JItemPoolRecord(Integer itemNo, Integer year, Integer grade, Integer course, String mediumCategory, String typeGroup, String type, Integer questionType, String question, String choice1, String choice2, String choice3, String choice4, String choice5, String filePath, Integer markType, String answer, String answerPath, String publisher, String workbook, Integer levelDifficulty, Integer useYn, String inputId, LocalDateTime inputDate, String updateId, LocalDateTime updateDate) {
         super(JItemPool.ITEM_POOL);
 
         set(0, itemNo);
@@ -431,7 +431,7 @@ public class JItemPoolRecord extends UpdatableRecordImpl<JItemPoolRecord> {
         set(18, publisher);
         set(19, workbook);
         set(20, levelDifficulty);
-        set(21, useyn);
+        set(21, useYn);
         set(22, inputId);
         set(23, inputDate);
         set(24, updateId);

@@ -13,8 +13,8 @@ import net.haaim.web.common.User;
 import net.haaim.web.common.UserHelper;
 import net.haaim.web.common.request.CustomPageRequest;
 import net.haaim.web.common.response.ApiResponse;
+import net.haaim.web.exam.entity.ItemPoolEntity;
 import net.haaim.web.exam.service.ExamBankService;
-import net.haaim.web.notice.service.NoticeService;
 
 @Slf4j
 @RestController
@@ -34,7 +34,7 @@ public class ExamController {
 
 			PageRequest pageable = CustomPageRequest.of(page, size, "no");
 			
-			Page result = examBankService.search(pageable);
+			Page<ItemPoolEntity> result = examBankService.search(pageable);
 
 			return ApiResponse.getSuccessResponse(result);
 
@@ -52,8 +52,8 @@ public class ExamController {
 			@RequestParam(value = "year", required = false) Integer year,
 			@RequestParam(value = "grade", required = false) Integer grade,
 			@RequestParam(value = "course", required = false) Integer course,
-			@RequestParam(value = "mediumCategory", required = false) String mediumCategory,
-			@RequestParam(value = "useYn", required = false) Integer useYn,
+			@RequestParam(value = "medium_category", required = false) String mediumCategory,
+			@RequestParam(value = "use_yn", required = false) Integer useYn,
 			@RequestParam(value = "question", required = false) String question) {
 
 		// 사용자의 권한을 확인

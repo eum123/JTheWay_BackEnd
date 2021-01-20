@@ -29,7 +29,7 @@ public class ItemPoolEntity extends CommonEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "item_no")
 	@JsonProperty(access = JsonProperty.Access.AUTO)
-	private Long itemNo;
+	private Integer itemNo;
 
 	@Column(name = "year", nullable = true, unique = false, length = 4)
 	@JsonProperty(access = JsonProperty.Access.AUTO)
@@ -57,7 +57,7 @@ public class ItemPoolEntity extends CommonEntity {
 	
 	@Column(name = "question_type", nullable = true, unique = false)
 	@JsonProperty(access = JsonProperty.Access.AUTO)
-	private String questionType = null;
+	private Integer questionType = null;
 	
 	@Column(name = "question", nullable = true, unique = false)
 	@JsonProperty(access = JsonProperty.Access.AUTO)
@@ -109,19 +109,19 @@ public class ItemPoolEntity extends CommonEntity {
 	
 	@Column(name = "level_difficulty", nullable = true, unique = false)
 	@JsonProperty(access = JsonProperty.Access.AUTO)
-	private String levelDifficult = null;
+	private Integer levelDifficult = null;
 	
 	/** 상태(0:HIDDEN/1:VIEW) */
-	@Column(name = "useYn", nullable = true, unique = false)
+	@Column(name = "use_yn", nullable = true, unique = false)
 	@JsonProperty(access = JsonProperty.Access.AUTO)
 	private Integer useYn;
 
 	@Builder
 	public ItemPoolEntity(String inputId, Date inputDate, String updateId, Date updateDate, Integer year,
-			Integer grade, Integer course, String mediumCategory, String typeGroup, String type, String questionType,
+			Integer grade, Integer course, String mediumCategory, String typeGroup, String type, Integer questionType,
 			String question, String choice1, String choice2, String choice3, String choice4, String choice5,
 			String filePath, Integer markType, String answer, String answerPath, String publisher, String workbook,
-			String levelDifficult, Integer useYn) {
+			Integer levelDifficult, Integer useYn) {
 		super(inputId, inputDate, updateId, updateDate);
 		this.year = year;
 		this.grade = grade;
