@@ -10,8 +10,8 @@
 - MySQL 5.X
 - jpa
 - api doc 참고(https://www.popit.kr/spring-rest-docs/)
-
 - querydsl 추가로 entity 추가 할때 마다 mvn package 실행 해야됨.
+- JOOQ 추가로 table 변경시 source-generate 실행 해야 됨
 
 # web
 - http-server 설치
