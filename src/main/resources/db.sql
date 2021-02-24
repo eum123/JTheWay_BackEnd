@@ -207,8 +207,8 @@ CREATE TABLE IF NOT EXISTS monthly_report (
 ENGINE = InnoDB
 COMMENT = '월간리포트';
 
-CREATE TABLE IF NOT EXISTS `haaim`.`answer_sheet` (
-  `exam_no` INT(20) NOT NULL COMMENT '시험지번호',
+CREATE TABLE IF NOT EXISTS answer_sheet (
+  `exam_no` INT(20) NOT NULL AUTO_INCREMENT COMMENT '시험지번호',
   `student_no` INT(10) NOT NULL COMMENT '학생번호',
   `question_no` INT(2) NOT NULL COMMENT '문제번호',
   `answer` VARCHAR(500) NULL COMMENT '답',
@@ -225,10 +225,12 @@ COMMENT = '답안지';
 
 CREATE TABLE IF NOT EXISTS exam_list (
   `exam_no` INT(20) NOT NULL AUTO_INCREMENT COMMENT '출제번호',
+  `user_id` VARCHAR(45) NOT NULL,
   `date` VARCHAR(8) NOT NULL COMMENT '출제일자',
   `class_no` INT(10) NOT NULL,
   `grade` INT(2) NULL COMMENT '학년',
   `course` VARCHAR(4) NULL COMMENT '학기/과정',
+  `large_category` VARCHAR(10) NULL COMMENT '대분류',
   `medium_category` VARCHAR(10) NULL COMMENT '중분류',
   `type_group` VARCHAR(4) NULL COMMENT '유형그룹',
   `count` INT(4) NULL COMMENT '문항수',
@@ -236,12 +238,14 @@ CREATE TABLE IF NOT EXISTS exam_list (
   `target` VARCHAR(500) NULL COMMENT '응시대상',
   `goal_score` INT(3) NULL COMMENT 'pass 기준점수',
   `state` INT(1) NULL COMMENT '출제상태(출제/미출제)',
+  `stare` INT(1) NULL COMMENT '응시여부(1-응시, 0-미응시)',
+  `stare_date` DATETIME NULL COMMENT '응시일자',
+  `stare_score` INT(3) NULL COMMENT '채점 점수',
   `input_id` VARCHAR(45) NOT NULL,
   `input_date` DATETIME NOT NULL,
   `update_id` VARCHAR(45) NULL,
   `update_date` DATETIME NULL,
-  PRIMARY KEY (`exam_no`),
-  INDEX `fk_exam_list_class1_idx` (`class_no` ASC))
+  PRIMARY KEY (`exam_no`))
 ENGINE = InnoDB
 COMMENT = '문제출제목록';
 
@@ -290,7 +294,7 @@ CREATE TABLE IF NOT EXISTS item_pool (
 ENGINE = InnoDB
 COMMENT = '문제은행';
 
-CREATE TABLE IF NOT EXISTS `haaim`.`exam_item` (
+CREATE TABLE IF NOT EXISTS exam_item (
   `exam_no` INT(20) NOT NULL,
   `no` INT(4) NOT NULL COMMENT '문제순서',
   `item_no` INT(30) NOT NULL,
@@ -298,9 +302,7 @@ CREATE TABLE IF NOT EXISTS `haaim`.`exam_item` (
   `input_date` DATETIME NOT NULL,
   `update_id` VARCHAR(45) NULL,
   `update_date` DATETIME NULL,
-  PRIMARY KEY (`exam_no`, `item_no`, `no`),
-  INDEX `fk_exam_item_exam_list1_idx` (`exam_no` ASC) ,
-  INDEX `fk_exam_item_item_pool1_idx` (`item_no` ASC))
+  PRIMARY KEY (`exam_no`, `item_no`, `no`))
 ENGINE = InnoDB
 COMMENT = '문제출제';
 

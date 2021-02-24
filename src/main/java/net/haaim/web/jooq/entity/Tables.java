@@ -10,6 +10,7 @@ import net.haaim.web.jooq.entity.tables.JClassCurriculum;
 import net.haaim.web.jooq.entity.tables.JClassStudent;
 import net.haaim.web.jooq.entity.tables.JCode;
 import net.haaim.web.jooq.entity.tables.JCurriculum;
+import net.haaim.web.jooq.entity.tables.JExamItem;
 import net.haaim.web.jooq.entity.tables.JExamList;
 import net.haaim.web.jooq.entity.tables.JGroupCode;
 import net.haaim.web.jooq.entity.tables.JItemPool;
@@ -56,6 +57,11 @@ public class Tables {
      * 커리큘럼
      */
     public static final JCurriculum CURRICULUM = JCurriculum.CURRICULUM;
+
+    /**
+     * 문제출제
+     */
+    public static final JExamItem EXAM_ITEM = JExamItem.EXAM_ITEM;
 
     /**
      * 문제출제목록

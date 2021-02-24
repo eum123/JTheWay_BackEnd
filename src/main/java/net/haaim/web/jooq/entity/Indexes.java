@@ -4,7 +4,6 @@
 package net.haaim.web.jooq.entity;
 
 
-import net.haaim.web.jooq.entity.tables.JExamList;
 import net.haaim.web.jooq.entity.tables.JUser;
 
 import org.jooq.Index;
@@ -22,7 +21,6 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
-    public static final Index EXAM_LIST_FK_EXAM_LIST_CLASS1_IDX = Indexes0.EXAM_LIST_FK_EXAM_LIST_CLASS1_IDX;
     public static final Index USER_STUDENT_NO = Indexes0.USER_STUDENT_NO;
 
     // -------------------------------------------------------------------------
@@ -30,7 +28,6 @@ public class Indexes {
     // -------------------------------------------------------------------------
 
     private static class Indexes0 {
-        public static Index EXAM_LIST_FK_EXAM_LIST_CLASS1_IDX = Internal.createIndex("fk_exam_list_class1_idx", JExamList.EXAM_LIST, new OrderField[] { JExamList.EXAM_LIST.CLASS_NO }, false);
         public static Index USER_STUDENT_NO = Internal.createIndex("student_no", JUser.USER, new OrderField[] { JUser.USER.STUDENT_NO }, false);
     }
 }

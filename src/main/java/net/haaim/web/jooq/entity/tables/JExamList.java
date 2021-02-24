@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
-import net.haaim.web.jooq.entity.Indexes;
 import net.haaim.web.jooq.entity.JHaaimDb;
 import net.haaim.web.jooq.entity.Keys;
 import net.haaim.web.jooq.entity.tables.records.JExamListRecord;
@@ -16,10 +15,9 @@ import net.haaim.web.jooq.entity.tables.records.JExamListRecord;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Identity;
-import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row16;
+import org.jooq.Row21;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -35,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JExamList extends TableImpl<JExamListRecord> {
 
-    private static final long serialVersionUID = 790041912;
+    private static final long serialVersionUID = -550315689;
 
     /**
      * The reference instance of <code>haaim_db.exam_list</code>
@@ -56,6 +54,11 @@ public class JExamList extends TableImpl<JExamListRecord> {
     public final TableField<JExamListRecord, Integer> EXAM_NO = createField(DSL.name("exam_no"), org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), this, "출제번호");
 
     /**
+     * The column <code>haaim_db.exam_list.user_id</code>.
+     */
+    public final TableField<JExamListRecord, String> USER_ID = createField(DSL.name("user_id"), org.jooq.impl.SQLDataType.VARCHAR(45).nullable(false), this, "");
+
+    /**
      * The column <code>haaim_db.exam_list.date</code>. 출제일자
      */
     public final TableField<JExamListRecord, String> DATE = createField(DSL.name("date"), org.jooq.impl.SQLDataType.VARCHAR(8).nullable(false), this, "출제일자");
@@ -74,6 +77,11 @@ public class JExamList extends TableImpl<JExamListRecord> {
      * The column <code>haaim_db.exam_list.course</code>. 학기/과정
      */
     public final TableField<JExamListRecord, String> COURSE = createField(DSL.name("course"), org.jooq.impl.SQLDataType.VARCHAR(4), this, "학기/과정");
+
+    /**
+     * The column <code>haaim_db.exam_list.large_category</code>. 대분류
+     */
+    public final TableField<JExamListRecord, String> LARGE_CATEGORY = createField(DSL.name("large_category"), org.jooq.impl.SQLDataType.VARCHAR(10), this, "대분류");
 
     /**
      * The column <code>haaim_db.exam_list.medium_category</code>. 중분류
@@ -109,6 +117,21 @@ public class JExamList extends TableImpl<JExamListRecord> {
      * The column <code>haaim_db.exam_list.state</code>. 출제상태(출제/미출제)
      */
     public final TableField<JExamListRecord, Integer> STATE = createField(DSL.name("state"), org.jooq.impl.SQLDataType.INTEGER, this, "출제상태(출제/미출제)");
+
+    /**
+     * The column <code>haaim_db.exam_list.stare</code>. 응시여부(1-응시, 0-미응시)
+     */
+    public final TableField<JExamListRecord, Integer> STARE = createField(DSL.name("stare"), org.jooq.impl.SQLDataType.INTEGER, this, "응시여부(1-응시, 0-미응시)");
+
+    /**
+     * The column <code>haaim_db.exam_list.stare_date</code>. 응시일자
+     */
+    public final TableField<JExamListRecord, LocalDateTime> STARE_DATE = createField(DSL.name("stare_date"), org.jooq.impl.SQLDataType.LOCALDATETIME, this, "응시일자");
+
+    /**
+     * The column <code>haaim_db.exam_list.stare_score</code>. 채점 점수
+     */
+    public final TableField<JExamListRecord, Integer> STARE_SCORE = createField(DSL.name("stare_score"), org.jooq.impl.SQLDataType.INTEGER, this, "채점 점수");
 
     /**
      * The column <code>haaim_db.exam_list.input_id</code>.
@@ -169,11 +192,6 @@ public class JExamList extends TableImpl<JExamListRecord> {
     }
 
     @Override
-    public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.EXAM_LIST_FK_EXAM_LIST_CLASS1_IDX);
-    }
-
-    @Override
     public Identity<JExamListRecord, Integer> getIdentity() {
         return Keys.IDENTITY_EXAM_LIST;
     }
@@ -215,11 +233,11 @@ public class JExamList extends TableImpl<JExamListRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row16 type methods
+    // Row21 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row16<Integer, String, Integer, Integer, String, String, String, Integer, Integer, String, Integer, Integer, String, LocalDateTime, String, LocalDateTime> fieldsRow() {
-        return (Row16) super.fieldsRow();
+    public Row21<Integer, String, String, Integer, Integer, String, String, String, String, Integer, Integer, String, Integer, Integer, Integer, LocalDateTime, Integer, String, LocalDateTime, String, LocalDateTime> fieldsRow() {
+        return (Row21) super.fieldsRow();
     }
 }
