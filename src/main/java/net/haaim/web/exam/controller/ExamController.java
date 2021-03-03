@@ -14,7 +14,7 @@ import net.haaim.web.common.UserHelper;
 import net.haaim.web.common.request.CustomPageRequest;
 import net.haaim.web.common.response.ApiResponse;
 import net.haaim.web.exam.entity.ItemPoolEntity;
-import net.haaim.web.exam.entity.QuestionEntity;
+import net.haaim.web.exam.entity.QuestionDTO;
 import net.haaim.web.exam.service.ExamBankService;
 import net.haaim.web.exam.service.QuestionService;
 
@@ -133,7 +133,7 @@ public class ExamController {
 
 			PageRequest pageable = CustomPageRequest.of(page, size, "no");
 			
-			Page<QuestionEntity> result = questionService.search(user.getId(), pageable);
+			Page<QuestionDTO> result = questionService.search(user.getId(), pageable);
 
 			return ApiResponse.getSuccessResponse(result);
 

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import net.haaim.web.common.query.ConditionHelper;
 import net.haaim.web.exam.entity.ItemPoolEntity;
-import net.haaim.web.exam.entity.QuestionEntity;
+import net.haaim.web.exam.entity.QuestionDTO;
 import net.haaim.web.jooq.entity.tables.JClass;
 import net.haaim.web.jooq.entity.tables.JExamList;
 import net.haaim.web.jooq.entity.tables.JItemPool;
@@ -32,13 +32,13 @@ public class QuestionRepositoryJOOQ {
 	 * @param pageable
 	 * @return
 	 */
-	public Page<QuestionEntity> findAllByUserId(String userId, Pageable pageable) {
+	public Page<QuestionDTO> findAllByUserId(String userId, Pageable pageable) {
 		
 		List<Condition> conditionList = new ArrayList();
 		ConditionHelper.addCondition(conditionList, JExamList.EXAM_LIST.USER_ID, userId);
 		ConditionHelper.addCondition(conditionList, JExamList.EXAM_LIST.STATE, 1);
 		
-		List<QuestionEntity> list = dslContext.select(
+		List<QuestionDTO> list = dslContext.select(
 					JExamList.EXAM_LIST.EXAM_NO,
 					JExamList.EXAM_LIST.CLASS_NO,
 					JClass.CLASS.YEAR,
@@ -58,10 +58,10 @@ public class QuestionRepositoryJOOQ {
 				.where(DSL.and(conditionList))
 				.limit(pageable.getPageSize())
 				.fetch()
-				.into(QuestionEntity.class);
+				.into(QuestionDTO.class);
 		int totalCount = dslContext.fetchCount(JClass.CLASS);
 		
-		return new PageImpl<QuestionEntity>(list, pageable, totalCount);
+		return new PageImpl<QuestionDTO>(list, pageable, totalCount);
 	}
 	
 }

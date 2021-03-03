@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import net.haaim.web.exam.entity.QuestionEntity;
+import net.haaim.web.exam.entity.QuestionDTO;
 import net.haaim.web.exam.repository.QuestionRepositoryJOOQ;
 
 @Service
@@ -15,7 +15,7 @@ public class QuestionService {
 	private QuestionRepositoryJOOQ repo;
 
 	
-	public Page<QuestionEntity> search(String userId, Pageable pageable) {
+	public Page<QuestionDTO> search(String userId, Pageable pageable) {
 		return repo.findAllByUserId(userId, pageable);
 	}
 }
