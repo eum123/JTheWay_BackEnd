@@ -1,5 +1,7 @@
 package net.haaim.web.exam.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,5 +33,14 @@ public class ExamBankService {
 	
 	public ItemPoolEntity save(ItemPoolEntity entity) {
 		return itemPoolRepo.save(entity);
+	}
+	
+	/**
+	 * exam_list.exam_no에 해당하면 문제 목록 조회
+	 * @param examNo
+	 * @return
+	 */
+	public List<ItemPoolEntity> findAllByExamNo(Integer examNo) {
+		return null;
 	}
 }

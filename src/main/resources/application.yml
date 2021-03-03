@@ -32,7 +32,7 @@ logging:
         org.hibernate: DEBUG
         org.hibernate.type: trace
         net: DEBUG
-        org.jooq.tools.LoggerListener: debug
+        org.jooq.tools.LoggerListener: DEBUG
         
 ---
 spring:
@@ -69,7 +69,7 @@ logging:
         org.hibernate: DEBUG
         org.hibernate.type: trace
         net: DEBUG
-        org.jooq.tools.LoggerListener: debug
+        org.jooq.tools.LoggerListener: DEBUG
             
 ---
 spring:
