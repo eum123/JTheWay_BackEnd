@@ -224,30 +224,67 @@ ENGINE = InnoDB
 COMMENT = '답안지';
 
 CREATE TABLE IF NOT EXISTS exam_list (
-  `exam_no` INT(20) NOT NULL AUTO_INCREMENT COMMENT '출제번호',
-  `user_id` VARCHAR(45) NOT NULL,
+  `exam_no` INT(20) NOT NULL COMMENT '출제번호',
   `date` VARCHAR(8) NOT NULL COMMENT '출제일자',
   `class_no` INT(10) NOT NULL,
   `grade` INT(2) NULL COMMENT '학년',
   `course` VARCHAR(4) NULL COMMENT '학기/과정',
-  `large_category` VARCHAR(10) NULL COMMENT '대분류',
   `medium_category` VARCHAR(10) NULL COMMENT '중분류',
   `type_group` VARCHAR(4) NULL COMMENT '유형그룹',
   `count` INT(4) NULL COMMENT '문항수',
   `level_difficulty` INT(1) NULL COMMENT '난이도',
-  `target` VARCHAR(500) NULL COMMENT '응시대상',
   `goal_score` INT(3) NULL COMMENT 'pass 기준점수',
   `state` INT(1) NULL COMMENT '출제상태(출제/미출제)',
-  `stare` INT(1) NULL COMMENT '응시여부(1-응시, 0-미응시)',
-  `stare_date` DATETIME NULL COMMENT '응시일자',
-  `stare_score` INT(3) NULL COMMENT '채점 점수',
+  `sDate` VARCHAR(10) NULL COMMENT '응시시작일자',
+  `eDate` VARCHAR(10) NULL COMMENT '응시마감일자',
+  `input_id` VARCHAR(45) NOT NULL,
+  `input_date` DATETIME NOT NULL,
+  `update_id` VARCHAR(45) NULL,
+  `update_date` DATETIME NULL,  
+  PRIMARY KEY (`exam_no`),
+  INDEX `fk_exam_list_class1_idx` (`class_no` ASC)   
+ENGINE = InnoDB
+COMMENT = '문제출제목록';
+
+CREATE TABLE IF NOT EXISTS exam_item (
+  `exam_no` INT(20) NOT NULL,
+  `no` INT(4) NOT NULL COMMENT '문제순서',
+  `item_no` INT(30) NOT NULL,
+  `question_type` INT(1) NOT NULL COMMENT '문제형태(객관식/주관식)',
+  `question` VARCHAR(1024) NOT NULL,
+  `choice1` VARCHAR(1024) NULL COMMENT '객관식 보기1',
+  `choice2` VARCHAR(1024) NULL COMMENT '객관식 보기2',
+  `choice3` VARCHAR(1024) NULL COMMENT '객관식 보기3',
+  `choice4` VARCHAR(1024) NULL COMMENT '객관식 보기4',
+  `choice5` VARCHAR(1024) NULL COMMENT '객관식 보기5',
+  `file_path` VARCHAR(500) NULL,
+  `mark_type` INT(1) NOT NULL COMMENT '채점 방법(자동/수동)',
+  `answer` VARCHAR(1024) NULL COMMENT '주관식 답',
+  `answer_path` VARCHAR(500) NULL COMMENT '주관식 답 image',
   `input_id` VARCHAR(45) NOT NULL,
   `input_date` DATETIME NOT NULL,
   `update_id` VARCHAR(45) NULL,
   `update_date` DATETIME NULL,
-  PRIMARY KEY (`exam_no`))
+  PRIMARY KEY (`exam_no`, `no`, `item_no`),
+  INDEX `fk_exam_item_exam_list1_idx` (`exam_no` ASC) ,
+  INDEX `fk_exam_item_item_pool1_idx` (`item_no` ASC) 
 ENGINE = InnoDB
-COMMENT = '문제출제목록';
+COMMENT = '문제출제';
+
+CREATE TABLE IF NOT EXISTS exam_user (
+  `exam_no` INT NOT NULL COMMENT '출제지번호',
+  `user_id` VARCHAR(45) NOT NULL COMMENT '대상자ID',
+  `status` INT(1) NULL COMMENT '1:미응시, 2:응시, 3:채점',
+  `score` INT(3) NULL COMMENT '시험점수',
+  `comments` VARCHAR(45) NULL COMMENT '학생의견',
+  `input_id` VARCHAR(45) NOT NULL,
+  `input_date` DATETIME NOT NULL,
+  `update_id` VARCHAR(45) NULL,
+  `update_date` DATETIME NULL,  
+  PRIMARY KEY (`exam_no`, `user_id`),
+  INDEX `fk_exam_user_exam_list1_idx` (`exam_list_exam_no` ASC) 
+ENGINE = InnoDB
+COMMENT = '시험대상 목록';
 
 CREATE TABLE IF NOT EXISTS learn_plan_mngt (
   `no` INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -293,18 +330,6 @@ CREATE TABLE IF NOT EXISTS item_pool (
   `update_date` DATETIME NULL)
 ENGINE = InnoDB
 COMMENT = '문제은행';
-
-CREATE TABLE IF NOT EXISTS exam_item (
-  `exam_no` INT(20) NOT NULL,
-  `no` INT(4) NOT NULL COMMENT '문제순서',
-  `item_no` INT(30) NOT NULL,
-  `input_id` VARCHAR(45) NOT NULL,
-  `input_date` DATETIME NOT NULL,
-  `update_id` VARCHAR(45) NULL,
-  `update_date` DATETIME NULL,
-  PRIMARY KEY (`exam_no`, `item_no`, `no`))
-ENGINE = InnoDB
-COMMENT = '문제출제';
 
 CREATE TABLE IF NOT EXISTS `menu` (
   `menu_code` VARCHAR(10) NOT NULL COMMENT '메뉴코드',
