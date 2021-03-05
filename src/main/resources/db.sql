@@ -329,7 +329,7 @@ CREATE TABLE IF NOT EXISTS item_pool (
   `update_id` VARCHAR(45) NULL,
   `update_date` DATETIME NULL)
 ENGINE = InnoDB
-COMMENT = '문제은행';
+COMMENT = '문제은행'; 
 
 CREATE TABLE IF NOT EXISTS `menu` (
   `menu_code` VARCHAR(10) NOT NULL COMMENT '메뉴코드',
