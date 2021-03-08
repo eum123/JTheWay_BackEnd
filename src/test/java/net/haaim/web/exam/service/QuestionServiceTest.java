@@ -100,7 +100,7 @@ public class QuestionServiceTest {
 	public void testService() {
 		
 		PageRequest pageable = CustomPageRequest.of(1, 10, "exam_no");
-		Page<QuestionDTO> dto = service.search("id", pageable);
+		Page<QuestionDTO> dto = service.search(1, 1, pageable);
 		
 		Assertions.assertEquals(1, dto.getContent().size());
 		
@@ -110,7 +110,7 @@ public class QuestionServiceTest {
 	public void testNullId() {
 		
 		PageRequest pageable = CustomPageRequest.of(1, 10, "exam_no");
-		Page<QuestionDTO> dto = service.search(null, pageable);
+		Page<QuestionDTO> dto = service.search(1, null, pageable);
 		
 		Assertions.assertEquals(1, dto.getContent().size());
 		

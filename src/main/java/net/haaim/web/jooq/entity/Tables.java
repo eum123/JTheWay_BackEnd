@@ -12,6 +12,7 @@ import net.haaim.web.jooq.entity.tables.JCode;
 import net.haaim.web.jooq.entity.tables.JCurriculum;
 import net.haaim.web.jooq.entity.tables.JExamItem;
 import net.haaim.web.jooq.entity.tables.JExamList;
+import net.haaim.web.jooq.entity.tables.JExamUser;
 import net.haaim.web.jooq.entity.tables.JGroupCode;
 import net.haaim.web.jooq.entity.tables.JItemPool;
 import net.haaim.web.jooq.entity.tables.JMenu;
@@ -67,6 +68,11 @@ public class Tables {
      * 문제출제목록
      */
     public static final JExamList EXAM_LIST = JExamList.EXAM_LIST;
+
+    /**
+     * 시험대상 목록
+     */
+    public static final JExamUser EXAM_USER = JExamUser.EXAM_USER;
 
     /**
      * 코드 그룹

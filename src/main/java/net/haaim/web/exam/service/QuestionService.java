@@ -33,8 +33,8 @@ public class QuestionService {
 	 * @param pageable
 	 * @return
 	 */
-	public Page<QuestionDTO> search(String userId, Pageable pageable) {
-		return repoJooq.findAllByUserId(userId, pageable);
+	public Page<QuestionDTO> search(Integer classNo, Integer studentNo, Pageable pageable) {
+		return repoJooq.findAllByUserId(classNo, studentNo, pageable);
 	}
 	
 	/**
@@ -45,7 +45,7 @@ public class QuestionService {
 	 * @param pageable
 	 * @return
 	 */
-	public Page<QuestionDTO> search(Integer year, Integer stare, String userId, Pageable pageable) {
-		return repoJooq.findAllByYearAndStareAndUserId(year, stare, userId, pageable);
+	public Page<QuestionDTO> search(Integer year, Integer stare, Integer classNo, Integer studentNo, Pageable pageable) {
+		return repoJooq.findAllByYearAndStareAndUserId(year, stare, classNo, studentNo, pageable);
 	}
 }

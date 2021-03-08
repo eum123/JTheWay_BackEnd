@@ -229,6 +229,7 @@ CREATE TABLE IF NOT EXISTS exam_list (
   `class_no` INT(10) NOT NULL,
   `grade` INT(2) NULL COMMENT '학년',
   `course` VARCHAR(4) NULL COMMENT '학기/과정',
+  `large_category` VARCHAR(10) NULL COMMENT '대분류',
   `medium_category` VARCHAR(10) NULL COMMENT '중분류',
   `type_group` VARCHAR(4) NULL COMMENT '유형그룹',
   `count` INT(4) NULL COMMENT '문항수',
@@ -243,6 +244,7 @@ CREATE TABLE IF NOT EXISTS exam_list (
   `update_date` DATETIME NULL,  
   PRIMARY KEY (`exam_no`),
   INDEX `fk_exam_list_class1_idx` (`class_no` ASC)   
+  )
 ENGINE = InnoDB
 COMMENT = '문제출제목록';
 
@@ -268,12 +270,13 @@ CREATE TABLE IF NOT EXISTS exam_item (
   PRIMARY KEY (`exam_no`, `no`, `item_no`),
   INDEX `fk_exam_item_exam_list1_idx` (`exam_no` ASC) ,
   INDEX `fk_exam_item_item_pool1_idx` (`item_no` ASC) 
+  )
 ENGINE = InnoDB
 COMMENT = '문제출제';
 
 CREATE TABLE IF NOT EXISTS exam_user (
   `exam_no` INT NOT NULL COMMENT '출제지번호',
-  `user_id` VARCHAR(45) NOT NULL COMMENT '대상자ID',
+  `student_no` INT(10) NOT NULL COMMENT '대상자ID',
   `status` INT(1) NULL COMMENT '1:미응시, 2:응시, 3:채점',
   `score` INT(3) NULL COMMENT '시험점수',
   `comments` VARCHAR(45) NULL COMMENT '학생의견',
@@ -281,8 +284,9 @@ CREATE TABLE IF NOT EXISTS exam_user (
   `input_date` DATETIME NOT NULL,
   `update_id` VARCHAR(45) NULL,
   `update_date` DATETIME NULL,  
-  PRIMARY KEY (`exam_no`, `user_id`),
-  INDEX `fk_exam_user_exam_list1_idx` (`exam_list_exam_no` ASC) 
+  PRIMARY KEY (`exam_no`, `student_no`),
+  INDEX `fk_exam_user_exam_list1_idx` (`exam_no` ASC) 
+  )
 ENGINE = InnoDB
 COMMENT = '시험대상 목록';
 

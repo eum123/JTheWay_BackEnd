@@ -10,8 +10,8 @@ import net.haaim.web.jooq.entity.tables.JExamList;
 
 import org.jooq.Field;
 import org.jooq.Record1;
-import org.jooq.Record21;
-import org.jooq.Row21;
+import org.jooq.Record18;
+import org.jooq.Row18;
 import org.jooq.impl.UpdatableRecordImpl;
 
 
@@ -19,9 +19,9 @@ import org.jooq.impl.UpdatableRecordImpl;
  * 문제출제목록
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
-public class JExamListRecord extends UpdatableRecordImpl<JExamListRecord> implements Record21<Integer, String, String, Integer, Integer, String, String, String, String, Integer, Integer, String, Integer, Integer, Integer, LocalDateTime, Integer, String, LocalDateTime, String, LocalDateTime> {
+public class JExamListRecord extends UpdatableRecordImpl<JExamListRecord> implements Record18<Integer, String, Integer, Integer, String, String, String, String, Integer, Integer, Integer, Integer, String, String, String, LocalDateTime, String, LocalDateTime> {
 
-    private static final long serialVersionUID = 1979989647;
+    private static final long serialVersionUID = 1695577816;
 
     /**
      * Setter for <code>haaim_db.exam_list.exam_no</code>. 출제번호
@@ -38,283 +38,241 @@ public class JExamListRecord extends UpdatableRecordImpl<JExamListRecord> implem
     }
 
     /**
-     * Setter for <code>haaim_db.exam_list.user_id</code>.
-     */
-    public void setUserId(String value) {
-        set(1, value);
-    }
-
-    /**
-     * Getter for <code>haaim_db.exam_list.user_id</code>.
-     */
-    public String getUserId() {
-        return (String) get(1);
-    }
-
-    /**
      * Setter for <code>haaim_db.exam_list.date</code>. 출제일자
      */
     public void setDate(String value) {
-        set(2, value);
+        set(1, value);
     }
 
     /**
      * Getter for <code>haaim_db.exam_list.date</code>. 출제일자
      */
     public String getDate() {
-        return (String) get(2);
+        return (String) get(1);
     }
 
     /**
      * Setter for <code>haaim_db.exam_list.class_no</code>.
      */
     public void setClassNo(Integer value) {
-        set(3, value);
+        set(2, value);
     }
 
     /**
      * Getter for <code>haaim_db.exam_list.class_no</code>.
      */
     public Integer getClassNo() {
-        return (Integer) get(3);
+        return (Integer) get(2);
     }
 
     /**
      * Setter for <code>haaim_db.exam_list.grade</code>. 학년
      */
     public void setGrade(Integer value) {
-        set(4, value);
+        set(3, value);
     }
 
     /**
      * Getter for <code>haaim_db.exam_list.grade</code>. 학년
      */
     public Integer getGrade() {
-        return (Integer) get(4);
+        return (Integer) get(3);
     }
 
     /**
      * Setter for <code>haaim_db.exam_list.course</code>. 학기/과정
      */
     public void setCourse(String value) {
-        set(5, value);
+        set(4, value);
     }
 
     /**
      * Getter for <code>haaim_db.exam_list.course</code>. 학기/과정
      */
     public String getCourse() {
-        return (String) get(5);
+        return (String) get(4);
     }
 
     /**
      * Setter for <code>haaim_db.exam_list.large_category</code>. 대분류
      */
     public void setLargeCategory(String value) {
-        set(6, value);
+        set(5, value);
     }
 
     /**
      * Getter for <code>haaim_db.exam_list.large_category</code>. 대분류
      */
     public String getLargeCategory() {
-        return (String) get(6);
+        return (String) get(5);
     }
 
     /**
      * Setter for <code>haaim_db.exam_list.medium_category</code>. 중분류
      */
     public void setMediumCategory(String value) {
-        set(7, value);
+        set(6, value);
     }
 
     /**
      * Getter for <code>haaim_db.exam_list.medium_category</code>. 중분류
      */
     public String getMediumCategory() {
-        return (String) get(7);
+        return (String) get(6);
     }
 
     /**
      * Setter for <code>haaim_db.exam_list.type_group</code>. 유형그룹
      */
     public void setTypeGroup(String value) {
-        set(8, value);
+        set(7, value);
     }
 
     /**
      * Getter for <code>haaim_db.exam_list.type_group</code>. 유형그룹
      */
     public String getTypeGroup() {
-        return (String) get(8);
+        return (String) get(7);
     }
 
     /**
      * Setter for <code>haaim_db.exam_list.count</code>. 문항수
      */
     public void setCount(Integer value) {
-        set(9, value);
+        set(8, value);
     }
 
     /**
      * Getter for <code>haaim_db.exam_list.count</code>. 문항수
      */
     public Integer getCount() {
-        return (Integer) get(9);
+        return (Integer) get(8);
     }
 
     /**
      * Setter for <code>haaim_db.exam_list.level_difficulty</code>. 난이도
      */
     public void setLevelDifficulty(Integer value) {
-        set(10, value);
+        set(9, value);
     }
 
     /**
      * Getter for <code>haaim_db.exam_list.level_difficulty</code>. 난이도
      */
     public Integer getLevelDifficulty() {
-        return (Integer) get(10);
-    }
-
-    /**
-     * Setter for <code>haaim_db.exam_list.target</code>. 응시대상
-     */
-    public void setTarget(String value) {
-        set(11, value);
-    }
-
-    /**
-     * Getter for <code>haaim_db.exam_list.target</code>. 응시대상
-     */
-    public String getTarget() {
-        return (String) get(11);
+        return (Integer) get(9);
     }
 
     /**
      * Setter for <code>haaim_db.exam_list.goal_score</code>. pass 기준점수
      */
     public void setGoalScore(Integer value) {
-        set(12, value);
+        set(10, value);
     }
 
     /**
      * Getter for <code>haaim_db.exam_list.goal_score</code>. pass 기준점수
      */
     public Integer getGoalScore() {
-        return (Integer) get(12);
+        return (Integer) get(10);
     }
 
     /**
      * Setter for <code>haaim_db.exam_list.state</code>. 출제상태(출제/미출제)
      */
     public void setState(Integer value) {
-        set(13, value);
+        set(11, value);
     }
 
     /**
      * Getter for <code>haaim_db.exam_list.state</code>. 출제상태(출제/미출제)
      */
     public Integer getState() {
-        return (Integer) get(13);
+        return (Integer) get(11);
     }
 
     /**
-     * Setter for <code>haaim_db.exam_list.stare</code>. 응시여부(1-응시, 0-미응시)
+     * Setter for <code>haaim_db.exam_list.sDate</code>. 응시시작일자
      */
-    public void setStare(Integer value) {
-        set(14, value);
+    public void setSdate(String value) {
+        set(12, value);
     }
 
     /**
-     * Getter for <code>haaim_db.exam_list.stare</code>. 응시여부(1-응시, 0-미응시)
+     * Getter for <code>haaim_db.exam_list.sDate</code>. 응시시작일자
      */
-    public Integer getStare() {
-        return (Integer) get(14);
+    public String getSdate() {
+        return (String) get(12);
     }
 
     /**
-     * Setter for <code>haaim_db.exam_list.stare_date</code>. 응시일자
+     * Setter for <code>haaim_db.exam_list.eDate</code>. 응시마감일자
      */
-    public void setStareDate(LocalDateTime value) {
-        set(15, value);
+    public void setEdate(String value) {
+        set(13, value);
     }
 
     /**
-     * Getter for <code>haaim_db.exam_list.stare_date</code>. 응시일자
+     * Getter for <code>haaim_db.exam_list.eDate</code>. 응시마감일자
      */
-    public LocalDateTime getStareDate() {
-        return (LocalDateTime) get(15);
-    }
-
-    /**
-     * Setter for <code>haaim_db.exam_list.stare_score</code>. 채점 점수
-     */
-    public void setStareScore(Integer value) {
-        set(16, value);
-    }
-
-    /**
-     * Getter for <code>haaim_db.exam_list.stare_score</code>. 채점 점수
-     */
-    public Integer getStareScore() {
-        return (Integer) get(16);
+    public String getEdate() {
+        return (String) get(13);
     }
 
     /**
      * Setter for <code>haaim_db.exam_list.input_id</code>.
      */
     public void setInputId(String value) {
-        set(17, value);
+        set(14, value);
     }
 
     /**
      * Getter for <code>haaim_db.exam_list.input_id</code>.
      */
     public String getInputId() {
-        return (String) get(17);
+        return (String) get(14);
     }
 
     /**
      * Setter for <code>haaim_db.exam_list.input_date</code>.
      */
     public void setInputDate(LocalDateTime value) {
-        set(18, value);
+        set(15, value);
     }
 
     /**
      * Getter for <code>haaim_db.exam_list.input_date</code>.
      */
     public LocalDateTime getInputDate() {
-        return (LocalDateTime) get(18);
+        return (LocalDateTime) get(15);
     }
 
     /**
      * Setter for <code>haaim_db.exam_list.update_id</code>.
      */
     public void setUpdateId(String value) {
-        set(19, value);
+        set(16, value);
     }
 
     /**
      * Getter for <code>haaim_db.exam_list.update_id</code>.
      */
     public String getUpdateId() {
-        return (String) get(19);
+        return (String) get(16);
     }
 
     /**
      * Setter for <code>haaim_db.exam_list.update_date</code>.
      */
     public void setUpdateDate(LocalDateTime value) {
-        set(20, value);
+        set(17, value);
     }
 
     /**
      * Getter for <code>haaim_db.exam_list.update_date</code>.
      */
     public LocalDateTime getUpdateDate() {
-        return (LocalDateTime) get(20);
+        return (LocalDateTime) get(17);
     }
 
     // -------------------------------------------------------------------------
@@ -327,17 +285,17 @@ public class JExamListRecord extends UpdatableRecordImpl<JExamListRecord> implem
     }
 
     // -------------------------------------------------------------------------
-    // Record21 type implementation
+    // Record18 type implementation
     // -------------------------------------------------------------------------
 
     @Override
-    public Row21<Integer, String, String, Integer, Integer, String, String, String, String, Integer, Integer, String, Integer, Integer, Integer, LocalDateTime, Integer, String, LocalDateTime, String, LocalDateTime> fieldsRow() {
-        return (Row21) super.fieldsRow();
+    public Row18<Integer, String, Integer, Integer, String, String, String, String, Integer, Integer, Integer, Integer, String, String, String, LocalDateTime, String, LocalDateTime> fieldsRow() {
+        return (Row18) super.fieldsRow();
     }
 
     @Override
-    public Row21<Integer, String, String, Integer, Integer, String, String, String, String, Integer, Integer, String, Integer, Integer, Integer, LocalDateTime, Integer, String, LocalDateTime, String, LocalDateTime> valuesRow() {
-        return (Row21) super.valuesRow();
+    public Row18<Integer, String, Integer, Integer, String, String, String, String, Integer, Integer, Integer, Integer, String, String, String, LocalDateTime, String, LocalDateTime> valuesRow() {
+        return (Row18) super.valuesRow();
     }
 
     @Override
@@ -347,101 +305,86 @@ public class JExamListRecord extends UpdatableRecordImpl<JExamListRecord> implem
 
     @Override
     public Field<String> field2() {
-        return JExamList.EXAM_LIST.USER_ID;
-    }
-
-    @Override
-    public Field<String> field3() {
         return JExamList.EXAM_LIST.DATE;
     }
 
     @Override
-    public Field<Integer> field4() {
+    public Field<Integer> field3() {
         return JExamList.EXAM_LIST.CLASS_NO;
     }
 
     @Override
-    public Field<Integer> field5() {
+    public Field<Integer> field4() {
         return JExamList.EXAM_LIST.GRADE;
     }
 
     @Override
-    public Field<String> field6() {
+    public Field<String> field5() {
         return JExamList.EXAM_LIST.COURSE;
     }
 
     @Override
-    public Field<String> field7() {
+    public Field<String> field6() {
         return JExamList.EXAM_LIST.LARGE_CATEGORY;
     }
 
     @Override
-    public Field<String> field8() {
+    public Field<String> field7() {
         return JExamList.EXAM_LIST.MEDIUM_CATEGORY;
     }
 
     @Override
-    public Field<String> field9() {
+    public Field<String> field8() {
         return JExamList.EXAM_LIST.TYPE_GROUP;
     }
 
     @Override
-    public Field<Integer> field10() {
+    public Field<Integer> field9() {
         return JExamList.EXAM_LIST.COUNT;
     }
 
     @Override
-    public Field<Integer> field11() {
+    public Field<Integer> field10() {
         return JExamList.EXAM_LIST.LEVEL_DIFFICULTY;
     }
 
     @Override
-    public Field<String> field12() {
-        return JExamList.EXAM_LIST.TARGET;
-    }
-
-    @Override
-    public Field<Integer> field13() {
+    public Field<Integer> field11() {
         return JExamList.EXAM_LIST.GOAL_SCORE;
     }
 
     @Override
-    public Field<Integer> field14() {
+    public Field<Integer> field12() {
         return JExamList.EXAM_LIST.STATE;
     }
 
     @Override
-    public Field<Integer> field15() {
-        return JExamList.EXAM_LIST.STARE;
+    public Field<String> field13() {
+        return JExamList.EXAM_LIST.SDATE;
     }
 
     @Override
-    public Field<LocalDateTime> field16() {
-        return JExamList.EXAM_LIST.STARE_DATE;
+    public Field<String> field14() {
+        return JExamList.EXAM_LIST.EDATE;
     }
 
     @Override
-    public Field<Integer> field17() {
-        return JExamList.EXAM_LIST.STARE_SCORE;
-    }
-
-    @Override
-    public Field<String> field18() {
+    public Field<String> field15() {
         return JExamList.EXAM_LIST.INPUT_ID;
     }
 
     @Override
-    public Field<LocalDateTime> field19() {
+    public Field<LocalDateTime> field16() {
         return JExamList.EXAM_LIST.INPUT_DATE;
     }
 
     @Override
-    public Field<String> field20() {
+    public Field<String> field17() {
         return JExamList.EXAM_LIST.UPDATE_ID;
     }
 
     @Override
-    public Field<LocalDateTime> field21() {
+    public Field<LocalDateTime> field18() {
         return JExamList.EXAM_LIST.UPDATE_DATE;
     }
 
@@ -452,101 +395,86 @@ public class JExamListRecord extends UpdatableRecordImpl<JExamListRecord> implem
 
     @Override
     public String component2() {
-        return getUserId();
-    }
-
-    @Override
-    public String component3() {
         return getDate();
     }
 
     @Override
-    public Integer component4() {
+    public Integer component3() {
         return getClassNo();
     }
 
     @Override
-    public Integer component5() {
+    public Integer component4() {
         return getGrade();
     }
 
     @Override
-    public String component6() {
+    public String component5() {
         return getCourse();
     }
 
     @Override
-    public String component7() {
+    public String component6() {
         return getLargeCategory();
     }
 
     @Override
-    public String component8() {
+    public String component7() {
         return getMediumCategory();
     }
 
     @Override
-    public String component9() {
+    public String component8() {
         return getTypeGroup();
     }
 
     @Override
-    public Integer component10() {
+    public Integer component9() {
         return getCount();
     }
 
     @Override
-    public Integer component11() {
+    public Integer component10() {
         return getLevelDifficulty();
     }
 
     @Override
-    public String component12() {
-        return getTarget();
-    }
-
-    @Override
-    public Integer component13() {
+    public Integer component11() {
         return getGoalScore();
     }
 
     @Override
-    public Integer component14() {
+    public Integer component12() {
         return getState();
     }
 
     @Override
-    public Integer component15() {
-        return getStare();
+    public String component13() {
+        return getSdate();
     }
 
     @Override
-    public LocalDateTime component16() {
-        return getStareDate();
+    public String component14() {
+        return getEdate();
     }
 
     @Override
-    public Integer component17() {
-        return getStareScore();
-    }
-
-    @Override
-    public String component18() {
+    public String component15() {
         return getInputId();
     }
 
     @Override
-    public LocalDateTime component19() {
+    public LocalDateTime component16() {
         return getInputDate();
     }
 
     @Override
-    public String component20() {
+    public String component17() {
         return getUpdateId();
     }
 
     @Override
-    public LocalDateTime component21() {
+    public LocalDateTime component18() {
         return getUpdateDate();
     }
 
@@ -557,101 +485,86 @@ public class JExamListRecord extends UpdatableRecordImpl<JExamListRecord> implem
 
     @Override
     public String value2() {
-        return getUserId();
-    }
-
-    @Override
-    public String value3() {
         return getDate();
     }
 
     @Override
-    public Integer value4() {
+    public Integer value3() {
         return getClassNo();
     }
 
     @Override
-    public Integer value5() {
+    public Integer value4() {
         return getGrade();
     }
 
     @Override
-    public String value6() {
+    public String value5() {
         return getCourse();
     }
 
     @Override
-    public String value7() {
+    public String value6() {
         return getLargeCategory();
     }
 
     @Override
-    public String value8() {
+    public String value7() {
         return getMediumCategory();
     }
 
     @Override
-    public String value9() {
+    public String value8() {
         return getTypeGroup();
     }
 
     @Override
-    public Integer value10() {
+    public Integer value9() {
         return getCount();
     }
 
     @Override
-    public Integer value11() {
+    public Integer value10() {
         return getLevelDifficulty();
     }
 
     @Override
-    public String value12() {
-        return getTarget();
-    }
-
-    @Override
-    public Integer value13() {
+    public Integer value11() {
         return getGoalScore();
     }
 
     @Override
-    public Integer value14() {
+    public Integer value12() {
         return getState();
     }
 
     @Override
-    public Integer value15() {
-        return getStare();
+    public String value13() {
+        return getSdate();
     }
 
     @Override
-    public LocalDateTime value16() {
-        return getStareDate();
+    public String value14() {
+        return getEdate();
     }
 
     @Override
-    public Integer value17() {
-        return getStareScore();
-    }
-
-    @Override
-    public String value18() {
+    public String value15() {
         return getInputId();
     }
 
     @Override
-    public LocalDateTime value19() {
+    public LocalDateTime value16() {
         return getInputDate();
     }
 
     @Override
-    public String value20() {
+    public String value17() {
         return getUpdateId();
     }
 
     @Override
-    public LocalDateTime value21() {
+    public LocalDateTime value18() {
         return getUpdateDate();
     }
 
@@ -663,126 +576,108 @@ public class JExamListRecord extends UpdatableRecordImpl<JExamListRecord> implem
 
     @Override
     public JExamListRecord value2(String value) {
-        setUserId(value);
-        return this;
-    }
-
-    @Override
-    public JExamListRecord value3(String value) {
         setDate(value);
         return this;
     }
 
     @Override
-    public JExamListRecord value4(Integer value) {
+    public JExamListRecord value3(Integer value) {
         setClassNo(value);
         return this;
     }
 
     @Override
-    public JExamListRecord value5(Integer value) {
+    public JExamListRecord value4(Integer value) {
         setGrade(value);
         return this;
     }
 
     @Override
-    public JExamListRecord value6(String value) {
+    public JExamListRecord value5(String value) {
         setCourse(value);
         return this;
     }
 
     @Override
-    public JExamListRecord value7(String value) {
+    public JExamListRecord value6(String value) {
         setLargeCategory(value);
         return this;
     }
 
     @Override
-    public JExamListRecord value8(String value) {
+    public JExamListRecord value7(String value) {
         setMediumCategory(value);
         return this;
     }
 
     @Override
-    public JExamListRecord value9(String value) {
+    public JExamListRecord value8(String value) {
         setTypeGroup(value);
         return this;
     }
 
     @Override
-    public JExamListRecord value10(Integer value) {
+    public JExamListRecord value9(Integer value) {
         setCount(value);
         return this;
     }
 
     @Override
-    public JExamListRecord value11(Integer value) {
+    public JExamListRecord value10(Integer value) {
         setLevelDifficulty(value);
         return this;
     }
 
     @Override
-    public JExamListRecord value12(String value) {
-        setTarget(value);
-        return this;
-    }
-
-    @Override
-    public JExamListRecord value13(Integer value) {
+    public JExamListRecord value11(Integer value) {
         setGoalScore(value);
         return this;
     }
 
     @Override
-    public JExamListRecord value14(Integer value) {
+    public JExamListRecord value12(Integer value) {
         setState(value);
         return this;
     }
 
     @Override
-    public JExamListRecord value15(Integer value) {
-        setStare(value);
+    public JExamListRecord value13(String value) {
+        setSdate(value);
         return this;
     }
 
     @Override
-    public JExamListRecord value16(LocalDateTime value) {
-        setStareDate(value);
+    public JExamListRecord value14(String value) {
+        setEdate(value);
         return this;
     }
 
     @Override
-    public JExamListRecord value17(Integer value) {
-        setStareScore(value);
-        return this;
-    }
-
-    @Override
-    public JExamListRecord value18(String value) {
+    public JExamListRecord value15(String value) {
         setInputId(value);
         return this;
     }
 
     @Override
-    public JExamListRecord value19(LocalDateTime value) {
+    public JExamListRecord value16(LocalDateTime value) {
         setInputDate(value);
         return this;
     }
 
     @Override
-    public JExamListRecord value20(String value) {
+    public JExamListRecord value17(String value) {
         setUpdateId(value);
         return this;
     }
 
     @Override
-    public JExamListRecord value21(LocalDateTime value) {
+    public JExamListRecord value18(LocalDateTime value) {
         setUpdateDate(value);
         return this;
     }
 
     @Override
-    public JExamListRecord values(Integer value1, String value2, String value3, Integer value4, Integer value5, String value6, String value7, String value8, String value9, Integer value10, Integer value11, String value12, Integer value13, Integer value14, Integer value15, LocalDateTime value16, Integer value17, String value18, LocalDateTime value19, String value20, LocalDateTime value21) {
+    public JExamListRecord values(Integer value1, String value2, Integer value3, Integer value4, String value5, String value6, String value7, String value8, Integer value9, Integer value10, Integer value11, Integer value12, String value13, String value14, String value15, LocalDateTime value16, String value17, LocalDateTime value18) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -801,9 +696,6 @@ public class JExamListRecord extends UpdatableRecordImpl<JExamListRecord> implem
         value16(value16);
         value17(value17);
         value18(value18);
-        value19(value19);
-        value20(value20);
-        value21(value21);
         return this;
     }
 
@@ -821,29 +713,26 @@ public class JExamListRecord extends UpdatableRecordImpl<JExamListRecord> implem
     /**
      * Create a detached, initialised JExamListRecord
      */
-    public JExamListRecord(Integer examNo, String userId, String date, Integer classNo, Integer grade, String course, String largeCategory, String mediumCategory, String typeGroup, Integer count, Integer levelDifficulty, String target, Integer goalScore, Integer state, Integer stare, LocalDateTime stareDate, Integer stareScore, String inputId, LocalDateTime inputDate, String updateId, LocalDateTime updateDate) {
+    public JExamListRecord(Integer examNo, String date, Integer classNo, Integer grade, String course, String largeCategory, String mediumCategory, String typeGroup, Integer count, Integer levelDifficulty, Integer goalScore, Integer state, String sdate, String edate, String inputId, LocalDateTime inputDate, String updateId, LocalDateTime updateDate) {
         super(JExamList.EXAM_LIST);
 
         set(0, examNo);
-        set(1, userId);
-        set(2, date);
-        set(3, classNo);
-        set(4, grade);
-        set(5, course);
-        set(6, largeCategory);
-        set(7, mediumCategory);
-        set(8, typeGroup);
-        set(9, count);
-        set(10, levelDifficulty);
-        set(11, target);
-        set(12, goalScore);
-        set(13, state);
-        set(14, stare);
-        set(15, stareDate);
-        set(16, stareScore);
-        set(17, inputId);
-        set(18, inputDate);
-        set(19, updateId);
-        set(20, updateDate);
+        set(1, date);
+        set(2, classNo);
+        set(3, grade);
+        set(4, course);
+        set(5, largeCategory);
+        set(6, mediumCategory);
+        set(7, typeGroup);
+        set(8, count);
+        set(9, levelDifficulty);
+        set(10, goalScore);
+        set(11, state);
+        set(12, sdate);
+        set(13, edate);
+        set(14, inputId);
+        set(15, inputDate);
+        set(16, updateId);
+        set(17, updateDate);
     }
 }

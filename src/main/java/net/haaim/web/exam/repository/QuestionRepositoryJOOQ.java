@@ -20,6 +20,7 @@ import net.haaim.web.common.query.ConditionHelper;
 import net.haaim.web.exam.entity.QuestionDTO;
 import net.haaim.web.jooq.entity.tables.JClass;
 import net.haaim.web.jooq.entity.tables.JExamList;
+import net.haaim.web.jooq.entity.tables.JExamUser;
 
 @Slf4j
 @Repository
@@ -48,9 +49,9 @@ public class QuestionRepositoryJOOQ {
 				JExamList.EXAM_LIST.MEDIUM_CATEGORY,
 				JExamList.EXAM_LIST.DATE,
 				JExamList.EXAM_LIST.COUNT,
-				JExamList.EXAM_LIST.STARE,
-				JExamList.EXAM_LIST.STARE_SCORE,
-				JExamList.EXAM_LIST.STARE_DATE,
+//				JExamList.EXAM_LIST.STARE,
+//				JExamList.EXAM_LIST.STARE_SCORE,
+//				JExamList.EXAM_LIST.STARE_DATE,
 				JClass.CLASS.CLASS_NAME
 			)
 			.from(JExamList.EXAM_LIST)
@@ -66,11 +67,12 @@ public class QuestionRepositoryJOOQ {
 	 * @param pageable
 	 * @return
 	 */
-	public Page<QuestionDTO> findAllByUserId(String userId, Pageable pageable) {
+	public Page<QuestionDTO> findAllByUserId(Integer classNo, Integer studentNo, Pageable pageable) {
 		
 		List<Condition> conditionList = new ArrayList();
-		ConditionHelper.addCondition(conditionList, JExamList.EXAM_LIST.USER_ID, userId);
+		ConditionHelper.addCondition(conditionList, JExamUser.EXAM_USER.STUDENT_NO, studentNo);
 		ConditionHelper.addCondition(conditionList, JExamList.EXAM_LIST.STATE, 1);
+		ConditionHelper.addCondition(conditionList, JClass.CLASS.CLASS_NO, classNo);
 		
 		
 		SelectConditionStep<?> query = dslContext.select(
@@ -83,13 +85,13 @@ public class QuestionRepositoryJOOQ {
 				JExamList.EXAM_LIST.MEDIUM_CATEGORY,
 				JExamList.EXAM_LIST.DATE,
 				JExamList.EXAM_LIST.COUNT,
-				JExamList.EXAM_LIST.STARE,
-				JExamList.EXAM_LIST.STARE_SCORE,
-				JExamList.EXAM_LIST.STARE_DATE,
+				JExamUser.EXAM_USER.STATUS,
+				JExamUser.EXAM_USER.SCORE,
 				JClass.CLASS.CLASS_NAME
 			)
 			.from(JExamList.EXAM_LIST)
 			.leftJoin(JClass.CLASS).on(JExamList.EXAM_LIST.CLASS_NO.eq(JClass.CLASS.CLASS_NO))
+			.leftJoin(JExamUser.EXAM_USER).on(JExamUser.EXAM_USER.EXAM_NO.eq(JExamList.EXAM_LIST.EXAM_NO))
 			.where(DSL.and(conditionList));
 		
 		//list
@@ -106,19 +108,20 @@ public class QuestionRepositoryJOOQ {
 	/**
 	 * 사용자별 조건 검색 
 	 * @param year 기간
-	 * @param stare	응시여부(1-응시, 0-미응시)
-	 * @param userId
+	 * @param status	응시여부(1-응시, 0-미응시)
+	 * @param classNo
+	 * @param studentNo
 	 * @param pageable
 	 * @return
 	 */
-	public Page<QuestionDTO> findAllByYearAndStareAndUserId(Integer year, Integer stare, String userId, Pageable pageable) {
+	public Page<QuestionDTO> findAllByYearAndStareAndUserId(Integer year, Integer status, Integer classNo, Integer studentNo, Pageable pageable) {
 		List<Condition> andConditionList = new ArrayList();
-		ConditionHelper.addCondition(andConditionList, JExamList.EXAM_LIST.USER_ID, userId);
+		ConditionHelper.addCondition(andConditionList, JExamUser.EXAM_USER.STUDENT_NO, studentNo);
 		ConditionHelper.addCondition(andConditionList, JExamList.EXAM_LIST.STATE, 1);
 		
 		List<Condition> orConditionList = new ArrayList();
-		ConditionHelper.addCondition(orConditionList, JClass.CLASS.YEAR, userId);
-		ConditionHelper.addCondition(orConditionList, JExamList.EXAM_LIST.STARE, stare);
+		ConditionHelper.addCondition(orConditionList, JExamList.EXAM_LIST.DATE, year);
+		ConditionHelper.addCondition(orConditionList, JExamUser.EXAM_USER.STATUS, status);
 		
 		SelectConditionStep<?> query = dslContext.select(
 				JExamList.EXAM_LIST.EXAM_NO,
@@ -130,13 +133,13 @@ public class QuestionRepositoryJOOQ {
 				JExamList.EXAM_LIST.MEDIUM_CATEGORY,
 				JExamList.EXAM_LIST.DATE,
 				JExamList.EXAM_LIST.COUNT,
-				JExamList.EXAM_LIST.STARE,
-				JExamList.EXAM_LIST.STARE_SCORE,
-				JExamList.EXAM_LIST.STARE_DATE,
+				JExamUser.EXAM_USER.STATUS,
+				JExamUser.EXAM_USER.SCORE,
 				JClass.CLASS.CLASS_NAME
 			)
 			.from(JExamList.EXAM_LIST)
 			.leftJoin(JClass.CLASS).on(JExamList.EXAM_LIST.CLASS_NO.eq(JClass.CLASS.CLASS_NO))
+			.leftJoin(JExamUser.EXAM_USER).on(JExamUser.EXAM_USER.EXAM_NO.eq(JExamList.EXAM_LIST.EXAM_NO))
 			.where(DSL.and(andConditionList).or(DSL.or(orConditionList)));
 		
 		//list

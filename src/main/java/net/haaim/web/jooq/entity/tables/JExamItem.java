@@ -8,15 +8,17 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
+import net.haaim.web.jooq.entity.Indexes;
 import net.haaim.web.jooq.entity.JHaaimDb;
 import net.haaim.web.jooq.entity.Keys;
 import net.haaim.web.jooq.entity.tables.records.JExamItemRecord;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row7;
+import org.jooq.Row18;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -32,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JExamItem extends TableImpl<JExamItemRecord> {
 
-    private static final long serialVersionUID = 95661647;
+    private static final long serialVersionUID = -840791451;
 
     /**
      * The reference instance of <code>haaim_db.exam_item</code>
@@ -61,6 +63,61 @@ public class JExamItem extends TableImpl<JExamItemRecord> {
      * The column <code>haaim_db.exam_item.item_no</code>.
      */
     public final TableField<JExamItemRecord, Integer> ITEM_NO = createField(DSL.name("item_no"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>haaim_db.exam_item.question_type</code>. 문제형태(객관식/주관식)
+     */
+    public final TableField<JExamItemRecord, Integer> QUESTION_TYPE = createField(DSL.name("question_type"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "문제형태(객관식/주관식)");
+
+    /**
+     * The column <code>haaim_db.exam_item.question</code>.
+     */
+    public final TableField<JExamItemRecord, String> QUESTION = createField(DSL.name("question"), org.jooq.impl.SQLDataType.VARCHAR(1024).nullable(false), this, "");
+
+    /**
+     * The column <code>haaim_db.exam_item.choice1</code>. 객관식 보기1
+     */
+    public final TableField<JExamItemRecord, String> CHOICE1 = createField(DSL.name("choice1"), org.jooq.impl.SQLDataType.VARCHAR(1024), this, "객관식 보기1");
+
+    /**
+     * The column <code>haaim_db.exam_item.choice2</code>. 객관식 보기2
+     */
+    public final TableField<JExamItemRecord, String> CHOICE2 = createField(DSL.name("choice2"), org.jooq.impl.SQLDataType.VARCHAR(1024), this, "객관식 보기2");
+
+    /**
+     * The column <code>haaim_db.exam_item.choice3</code>. 객관식 보기3
+     */
+    public final TableField<JExamItemRecord, String> CHOICE3 = createField(DSL.name("choice3"), org.jooq.impl.SQLDataType.VARCHAR(1024), this, "객관식 보기3");
+
+    /**
+     * The column <code>haaim_db.exam_item.choice4</code>. 객관식 보기4
+     */
+    public final TableField<JExamItemRecord, String> CHOICE4 = createField(DSL.name("choice4"), org.jooq.impl.SQLDataType.VARCHAR(1024), this, "객관식 보기4");
+
+    /**
+     * The column <code>haaim_db.exam_item.choice5</code>. 객관식 보기5
+     */
+    public final TableField<JExamItemRecord, String> CHOICE5 = createField(DSL.name("choice5"), org.jooq.impl.SQLDataType.VARCHAR(1024), this, "객관식 보기5");
+
+    /**
+     * The column <code>haaim_db.exam_item.file_path</code>.
+     */
+    public final TableField<JExamItemRecord, String> FILE_PATH = createField(DSL.name("file_path"), org.jooq.impl.SQLDataType.VARCHAR(500), this, "");
+
+    /**
+     * The column <code>haaim_db.exam_item.mark_type</code>. 채점 방법(자동/수동)
+     */
+    public final TableField<JExamItemRecord, Integer> MARK_TYPE = createField(DSL.name("mark_type"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "채점 방법(자동/수동)");
+
+    /**
+     * The column <code>haaim_db.exam_item.answer</code>. 주관식 답
+     */
+    public final TableField<JExamItemRecord, String> ANSWER = createField(DSL.name("answer"), org.jooq.impl.SQLDataType.VARCHAR(1024), this, "주관식 답");
+
+    /**
+     * The column <code>haaim_db.exam_item.answer_path</code>. 주관식 답 image
+     */
+    public final TableField<JExamItemRecord, String> ANSWER_PATH = createField(DSL.name("answer_path"), org.jooq.impl.SQLDataType.VARCHAR(500), this, "주관식 답 image");
 
     /**
      * The column <code>haaim_db.exam_item.input_id</code>.
@@ -121,6 +178,11 @@ public class JExamItem extends TableImpl<JExamItemRecord> {
     }
 
     @Override
+    public List<Index> getIndexes() {
+        return Arrays.<Index>asList(Indexes.EXAM_ITEM_FK_EXAM_ITEM_EXAM_LIST1_IDX, Indexes.EXAM_ITEM_FK_EXAM_ITEM_ITEM_POOL1_IDX);
+    }
+
+    @Override
     public UniqueKey<JExamItemRecord> getPrimaryKey() {
         return Keys.KEY_EXAM_ITEM_PRIMARY;
     }
@@ -157,11 +219,11 @@ public class JExamItem extends TableImpl<JExamItemRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row7 type methods
+    // Row18 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row7<Integer, Integer, Integer, String, LocalDateTime, String, LocalDateTime> fieldsRow() {
-        return (Row7) super.fieldsRow();
+    public Row18<Integer, Integer, Integer, Integer, String, String, String, String, String, String, String, Integer, String, String, String, LocalDateTime, String, LocalDateTime> fieldsRow() {
+        return (Row18) super.fieldsRow();
     }
 }

@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 import net.haaim.web.jooq.entity.tables.JExamItem;
 
 import org.jooq.Field;
+import org.jooq.Record18;
 import org.jooq.Record3;
-import org.jooq.Record7;
-import org.jooq.Row7;
+import org.jooq.Row18;
 import org.jooq.impl.UpdatableRecordImpl;
 
 
@@ -19,9 +19,9 @@ import org.jooq.impl.UpdatableRecordImpl;
  * 문제출제
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
-public class JExamItemRecord extends UpdatableRecordImpl<JExamItemRecord> implements Record7<Integer, Integer, Integer, String, LocalDateTime, String, LocalDateTime> {
+public class JExamItemRecord extends UpdatableRecordImpl<JExamItemRecord> implements Record18<Integer, Integer, Integer, Integer, String, String, String, String, String, String, String, Integer, String, String, String, LocalDateTime, String, LocalDateTime> {
 
-    private static final long serialVersionUID = 1905225288;
+    private static final long serialVersionUID = -581291185;
 
     /**
      * Setter for <code>haaim_db.exam_item.exam_no</code>.
@@ -66,59 +66,213 @@ public class JExamItemRecord extends UpdatableRecordImpl<JExamItemRecord> implem
     }
 
     /**
+     * Setter for <code>haaim_db.exam_item.question_type</code>. 문제형태(객관식/주관식)
+     */
+    public void setQuestionType(Integer value) {
+        set(3, value);
+    }
+
+    /**
+     * Getter for <code>haaim_db.exam_item.question_type</code>. 문제형태(객관식/주관식)
+     */
+    public Integer getQuestionType() {
+        return (Integer) get(3);
+    }
+
+    /**
+     * Setter for <code>haaim_db.exam_item.question</code>.
+     */
+    public void setQuestion(String value) {
+        set(4, value);
+    }
+
+    /**
+     * Getter for <code>haaim_db.exam_item.question</code>.
+     */
+    public String getQuestion() {
+        return (String) get(4);
+    }
+
+    /**
+     * Setter for <code>haaim_db.exam_item.choice1</code>. 객관식 보기1
+     */
+    public void setChoice1(String value) {
+        set(5, value);
+    }
+
+    /**
+     * Getter for <code>haaim_db.exam_item.choice1</code>. 객관식 보기1
+     */
+    public String getChoice1() {
+        return (String) get(5);
+    }
+
+    /**
+     * Setter for <code>haaim_db.exam_item.choice2</code>. 객관식 보기2
+     */
+    public void setChoice2(String value) {
+        set(6, value);
+    }
+
+    /**
+     * Getter for <code>haaim_db.exam_item.choice2</code>. 객관식 보기2
+     */
+    public String getChoice2() {
+        return (String) get(6);
+    }
+
+    /**
+     * Setter for <code>haaim_db.exam_item.choice3</code>. 객관식 보기3
+     */
+    public void setChoice3(String value) {
+        set(7, value);
+    }
+
+    /**
+     * Getter for <code>haaim_db.exam_item.choice3</code>. 객관식 보기3
+     */
+    public String getChoice3() {
+        return (String) get(7);
+    }
+
+    /**
+     * Setter for <code>haaim_db.exam_item.choice4</code>. 객관식 보기4
+     */
+    public void setChoice4(String value) {
+        set(8, value);
+    }
+
+    /**
+     * Getter for <code>haaim_db.exam_item.choice4</code>. 객관식 보기4
+     */
+    public String getChoice4() {
+        return (String) get(8);
+    }
+
+    /**
+     * Setter for <code>haaim_db.exam_item.choice5</code>. 객관식 보기5
+     */
+    public void setChoice5(String value) {
+        set(9, value);
+    }
+
+    /**
+     * Getter for <code>haaim_db.exam_item.choice5</code>. 객관식 보기5
+     */
+    public String getChoice5() {
+        return (String) get(9);
+    }
+
+    /**
+     * Setter for <code>haaim_db.exam_item.file_path</code>.
+     */
+    public void setFilePath(String value) {
+        set(10, value);
+    }
+
+    /**
+     * Getter for <code>haaim_db.exam_item.file_path</code>.
+     */
+    public String getFilePath() {
+        return (String) get(10);
+    }
+
+    /**
+     * Setter for <code>haaim_db.exam_item.mark_type</code>. 채점 방법(자동/수동)
+     */
+    public void setMarkType(Integer value) {
+        set(11, value);
+    }
+
+    /**
+     * Getter for <code>haaim_db.exam_item.mark_type</code>. 채점 방법(자동/수동)
+     */
+    public Integer getMarkType() {
+        return (Integer) get(11);
+    }
+
+    /**
+     * Setter for <code>haaim_db.exam_item.answer</code>. 주관식 답
+     */
+    public void setAnswer(String value) {
+        set(12, value);
+    }
+
+    /**
+     * Getter for <code>haaim_db.exam_item.answer</code>. 주관식 답
+     */
+    public String getAnswer() {
+        return (String) get(12);
+    }
+
+    /**
+     * Setter for <code>haaim_db.exam_item.answer_path</code>. 주관식 답 image
+     */
+    public void setAnswerPath(String value) {
+        set(13, value);
+    }
+
+    /**
+     * Getter for <code>haaim_db.exam_item.answer_path</code>. 주관식 답 image
+     */
+    public String getAnswerPath() {
+        return (String) get(13);
+    }
+
+    /**
      * Setter for <code>haaim_db.exam_item.input_id</code>.
      */
     public void setInputId(String value) {
-        set(3, value);
+        set(14, value);
     }
 
     /**
      * Getter for <code>haaim_db.exam_item.input_id</code>.
      */
     public String getInputId() {
-        return (String) get(3);
+        return (String) get(14);
     }
 
     /**
      * Setter for <code>haaim_db.exam_item.input_date</code>.
      */
     public void setInputDate(LocalDateTime value) {
-        set(4, value);
+        set(15, value);
     }
 
     /**
      * Getter for <code>haaim_db.exam_item.input_date</code>.
      */
     public LocalDateTime getInputDate() {
-        return (LocalDateTime) get(4);
+        return (LocalDateTime) get(15);
     }
 
     /**
      * Setter for <code>haaim_db.exam_item.update_id</code>.
      */
     public void setUpdateId(String value) {
-        set(5, value);
+        set(16, value);
     }
 
     /**
      * Getter for <code>haaim_db.exam_item.update_id</code>.
      */
     public String getUpdateId() {
-        return (String) get(5);
+        return (String) get(16);
     }
 
     /**
      * Setter for <code>haaim_db.exam_item.update_date</code>.
      */
     public void setUpdateDate(LocalDateTime value) {
-        set(6, value);
+        set(17, value);
     }
 
     /**
      * Getter for <code>haaim_db.exam_item.update_date</code>.
      */
     public LocalDateTime getUpdateDate() {
-        return (LocalDateTime) get(6);
+        return (LocalDateTime) get(17);
     }
 
     // -------------------------------------------------------------------------
@@ -131,17 +285,17 @@ public class JExamItemRecord extends UpdatableRecordImpl<JExamItemRecord> implem
     }
 
     // -------------------------------------------------------------------------
-    // Record7 type implementation
+    // Record18 type implementation
     // -------------------------------------------------------------------------
 
     @Override
-    public Row7<Integer, Integer, Integer, String, LocalDateTime, String, LocalDateTime> fieldsRow() {
-        return (Row7) super.fieldsRow();
+    public Row18<Integer, Integer, Integer, Integer, String, String, String, String, String, String, String, Integer, String, String, String, LocalDateTime, String, LocalDateTime> fieldsRow() {
+        return (Row18) super.fieldsRow();
     }
 
     @Override
-    public Row7<Integer, Integer, Integer, String, LocalDateTime, String, LocalDateTime> valuesRow() {
-        return (Row7) super.valuesRow();
+    public Row18<Integer, Integer, Integer, Integer, String, String, String, String, String, String, String, Integer, String, String, String, LocalDateTime, String, LocalDateTime> valuesRow() {
+        return (Row18) super.valuesRow();
     }
 
     @Override
@@ -160,22 +314,77 @@ public class JExamItemRecord extends UpdatableRecordImpl<JExamItemRecord> implem
     }
 
     @Override
-    public Field<String> field4() {
-        return JExamItem.EXAM_ITEM.INPUT_ID;
+    public Field<Integer> field4() {
+        return JExamItem.EXAM_ITEM.QUESTION_TYPE;
     }
 
     @Override
-    public Field<LocalDateTime> field5() {
-        return JExamItem.EXAM_ITEM.INPUT_DATE;
+    public Field<String> field5() {
+        return JExamItem.EXAM_ITEM.QUESTION;
     }
 
     @Override
     public Field<String> field6() {
+        return JExamItem.EXAM_ITEM.CHOICE1;
+    }
+
+    @Override
+    public Field<String> field7() {
+        return JExamItem.EXAM_ITEM.CHOICE2;
+    }
+
+    @Override
+    public Field<String> field8() {
+        return JExamItem.EXAM_ITEM.CHOICE3;
+    }
+
+    @Override
+    public Field<String> field9() {
+        return JExamItem.EXAM_ITEM.CHOICE4;
+    }
+
+    @Override
+    public Field<String> field10() {
+        return JExamItem.EXAM_ITEM.CHOICE5;
+    }
+
+    @Override
+    public Field<String> field11() {
+        return JExamItem.EXAM_ITEM.FILE_PATH;
+    }
+
+    @Override
+    public Field<Integer> field12() {
+        return JExamItem.EXAM_ITEM.MARK_TYPE;
+    }
+
+    @Override
+    public Field<String> field13() {
+        return JExamItem.EXAM_ITEM.ANSWER;
+    }
+
+    @Override
+    public Field<String> field14() {
+        return JExamItem.EXAM_ITEM.ANSWER_PATH;
+    }
+
+    @Override
+    public Field<String> field15() {
+        return JExamItem.EXAM_ITEM.INPUT_ID;
+    }
+
+    @Override
+    public Field<LocalDateTime> field16() {
+        return JExamItem.EXAM_ITEM.INPUT_DATE;
+    }
+
+    @Override
+    public Field<String> field17() {
         return JExamItem.EXAM_ITEM.UPDATE_ID;
     }
 
     @Override
-    public Field<LocalDateTime> field7() {
+    public Field<LocalDateTime> field18() {
         return JExamItem.EXAM_ITEM.UPDATE_DATE;
     }
 
@@ -195,22 +404,77 @@ public class JExamItemRecord extends UpdatableRecordImpl<JExamItemRecord> implem
     }
 
     @Override
-    public String component4() {
-        return getInputId();
+    public Integer component4() {
+        return getQuestionType();
     }
 
     @Override
-    public LocalDateTime component5() {
-        return getInputDate();
+    public String component5() {
+        return getQuestion();
     }
 
     @Override
     public String component6() {
+        return getChoice1();
+    }
+
+    @Override
+    public String component7() {
+        return getChoice2();
+    }
+
+    @Override
+    public String component8() {
+        return getChoice3();
+    }
+
+    @Override
+    public String component9() {
+        return getChoice4();
+    }
+
+    @Override
+    public String component10() {
+        return getChoice5();
+    }
+
+    @Override
+    public String component11() {
+        return getFilePath();
+    }
+
+    @Override
+    public Integer component12() {
+        return getMarkType();
+    }
+
+    @Override
+    public String component13() {
+        return getAnswer();
+    }
+
+    @Override
+    public String component14() {
+        return getAnswerPath();
+    }
+
+    @Override
+    public String component15() {
+        return getInputId();
+    }
+
+    @Override
+    public LocalDateTime component16() {
+        return getInputDate();
+    }
+
+    @Override
+    public String component17() {
         return getUpdateId();
     }
 
     @Override
-    public LocalDateTime component7() {
+    public LocalDateTime component18() {
         return getUpdateDate();
     }
 
@@ -230,22 +494,77 @@ public class JExamItemRecord extends UpdatableRecordImpl<JExamItemRecord> implem
     }
 
     @Override
-    public String value4() {
-        return getInputId();
+    public Integer value4() {
+        return getQuestionType();
     }
 
     @Override
-    public LocalDateTime value5() {
-        return getInputDate();
+    public String value5() {
+        return getQuestion();
     }
 
     @Override
     public String value6() {
+        return getChoice1();
+    }
+
+    @Override
+    public String value7() {
+        return getChoice2();
+    }
+
+    @Override
+    public String value8() {
+        return getChoice3();
+    }
+
+    @Override
+    public String value9() {
+        return getChoice4();
+    }
+
+    @Override
+    public String value10() {
+        return getChoice5();
+    }
+
+    @Override
+    public String value11() {
+        return getFilePath();
+    }
+
+    @Override
+    public Integer value12() {
+        return getMarkType();
+    }
+
+    @Override
+    public String value13() {
+        return getAnswer();
+    }
+
+    @Override
+    public String value14() {
+        return getAnswerPath();
+    }
+
+    @Override
+    public String value15() {
+        return getInputId();
+    }
+
+    @Override
+    public LocalDateTime value16() {
+        return getInputDate();
+    }
+
+    @Override
+    public String value17() {
         return getUpdateId();
     }
 
     @Override
-    public LocalDateTime value7() {
+    public LocalDateTime value18() {
         return getUpdateDate();
     }
 
@@ -268,31 +587,97 @@ public class JExamItemRecord extends UpdatableRecordImpl<JExamItemRecord> implem
     }
 
     @Override
-    public JExamItemRecord value4(String value) {
-        setInputId(value);
+    public JExamItemRecord value4(Integer value) {
+        setQuestionType(value);
         return this;
     }
 
     @Override
-    public JExamItemRecord value5(LocalDateTime value) {
-        setInputDate(value);
+    public JExamItemRecord value5(String value) {
+        setQuestion(value);
         return this;
     }
 
     @Override
     public JExamItemRecord value6(String value) {
+        setChoice1(value);
+        return this;
+    }
+
+    @Override
+    public JExamItemRecord value7(String value) {
+        setChoice2(value);
+        return this;
+    }
+
+    @Override
+    public JExamItemRecord value8(String value) {
+        setChoice3(value);
+        return this;
+    }
+
+    @Override
+    public JExamItemRecord value9(String value) {
+        setChoice4(value);
+        return this;
+    }
+
+    @Override
+    public JExamItemRecord value10(String value) {
+        setChoice5(value);
+        return this;
+    }
+
+    @Override
+    public JExamItemRecord value11(String value) {
+        setFilePath(value);
+        return this;
+    }
+
+    @Override
+    public JExamItemRecord value12(Integer value) {
+        setMarkType(value);
+        return this;
+    }
+
+    @Override
+    public JExamItemRecord value13(String value) {
+        setAnswer(value);
+        return this;
+    }
+
+    @Override
+    public JExamItemRecord value14(String value) {
+        setAnswerPath(value);
+        return this;
+    }
+
+    @Override
+    public JExamItemRecord value15(String value) {
+        setInputId(value);
+        return this;
+    }
+
+    @Override
+    public JExamItemRecord value16(LocalDateTime value) {
+        setInputDate(value);
+        return this;
+    }
+
+    @Override
+    public JExamItemRecord value17(String value) {
         setUpdateId(value);
         return this;
     }
 
     @Override
-    public JExamItemRecord value7(LocalDateTime value) {
+    public JExamItemRecord value18(LocalDateTime value) {
         setUpdateDate(value);
         return this;
     }
 
     @Override
-    public JExamItemRecord values(Integer value1, Integer value2, Integer value3, String value4, LocalDateTime value5, String value6, LocalDateTime value7) {
+    public JExamItemRecord values(Integer value1, Integer value2, Integer value3, Integer value4, String value5, String value6, String value7, String value8, String value9, String value10, String value11, Integer value12, String value13, String value14, String value15, LocalDateTime value16, String value17, LocalDateTime value18) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -300,6 +685,17 @@ public class JExamItemRecord extends UpdatableRecordImpl<JExamItemRecord> implem
         value5(value5);
         value6(value6);
         value7(value7);
+        value8(value8);
+        value9(value9);
+        value10(value10);
+        value11(value11);
+        value12(value12);
+        value13(value13);
+        value14(value14);
+        value15(value15);
+        value16(value16);
+        value17(value17);
+        value18(value18);
         return this;
     }
 
@@ -317,15 +713,26 @@ public class JExamItemRecord extends UpdatableRecordImpl<JExamItemRecord> implem
     /**
      * Create a detached, initialised JExamItemRecord
      */
-    public JExamItemRecord(Integer examNo, Integer no, Integer itemNo, String inputId, LocalDateTime inputDate, String updateId, LocalDateTime updateDate) {
+    public JExamItemRecord(Integer examNo, Integer no, Integer itemNo, Integer questionType, String question, String choice1, String choice2, String choice3, String choice4, String choice5, String filePath, Integer markType, String answer, String answerPath, String inputId, LocalDateTime inputDate, String updateId, LocalDateTime updateDate) {
         super(JExamItem.EXAM_ITEM);
 
         set(0, examNo);
         set(1, no);
         set(2, itemNo);
-        set(3, inputId);
-        set(4, inputDate);
-        set(5, updateId);
-        set(6, updateDate);
+        set(3, questionType);
+        set(4, question);
+        set(5, choice1);
+        set(6, choice2);
+        set(7, choice3);
+        set(8, choice4);
+        set(9, choice5);
+        set(10, filePath);
+        set(11, markType);
+        set(12, answer);
+        set(13, answerPath);
+        set(14, inputId);
+        set(15, inputDate);
+        set(16, updateId);
+        set(17, updateDate);
     }
 }

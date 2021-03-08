@@ -57,16 +57,16 @@ public class QuestionDTO extends CommonEntity {
 	private Integer count;
 
 	//응시여부(1-응시, 0-미응시)
-	@Column(name = "stare")
+	@Column(name = "status")
 	@JsonProperty(access = JsonProperty.Access.AUTO)
-	private Integer stare;
+	private Integer status;
 
 	//응시점수
-	@Column(name = "stare_score")
+	@Column(name = "score")
 	@JsonProperty(access = JsonProperty.Access.AUTO)
-	private Integer stareScore;
+	private Integer score;
 	
-	//응시 일자
+	//응시 일자 (DB 필드 없음)
 	@Column(name = "stare_date")
 	@JsonProperty(access = JsonProperty.Access.AUTO)
 	private Date stareDate;
@@ -74,7 +74,7 @@ public class QuestionDTO extends CommonEntity {
 	@Builder
 	public QuestionDTO(String inputId, Date inputDate, String updateId, Date updateDate, Integer examNo,
 			Integer classNo, Integer year, Integer grade, Integer course, String largeCategory, String mediumCategory,
-			String date, Integer count, Integer stare, Integer stareScore, Date stareDate) {
+			String date, Integer count, Integer status, Integer score, Date stareDate) {
 		super(inputId, inputDate, updateId, updateDate);
 		this.examNo = examNo;
 		this.classNo = classNo;
@@ -85,8 +85,8 @@ public class QuestionDTO extends CommonEntity {
 		this.mediumCategory = mediumCategory;
 		this.date = date;
 		this.count = count;
-		this.stare = stare;
-		this.stareScore = stareScore;
+		this.status = status;
+		this.score = score;
 		this.stareDate = stareDate;
 		
 		validate();

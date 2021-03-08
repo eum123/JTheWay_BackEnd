@@ -133,7 +133,10 @@ public class ExamController {
 
 			PageRequest pageable = CustomPageRequest.of(page, size, "no");
 			
-			Page<QuestionDTO> result = questionService.search(user.getId(), pageable);
+			//학생의 classNo를 조회
+			
+			//TODO: userID 를  student_no로 변경
+			Page<QuestionDTO> result = questionService.search(null, null, pageable);
 
 			return ApiResponse.getSuccessResponse(result);
 
