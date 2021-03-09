@@ -134,3 +134,38 @@
       ```json
       	
       ```
+      
+## 문제 출제 comment 저장
+  - 설명
+  	StudentExamController.java
+  	
+  - 요청
+    * 전체 : http://localhost:8080/student/question/comments/save
+  - 응답
+    ```json
+      	
+    ```
+    
+## 객관식 문제 답 제출 
+  - 설명
+  	StudentExamController.java
+  	
+  - 요청
+    * 전체 : http://localhost:8080/student/question/choice/save
+    * Method : POST
+  - 응답
+    ```json
+      	
+    ```
+## 주관식 문제 답 제출
+  - 설명
+  	StudentExamController.java
+  	
+  - 요청
+    * 전체 : http://localhost:8080/student/question/contents/save
+    * Method : POST
+    
+  - 응답
+    ```json
+      	
+    ```
