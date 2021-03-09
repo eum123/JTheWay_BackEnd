@@ -7,6 +7,7 @@ package net.haaim.web.jooq.entity;
 import net.haaim.web.jooq.entity.tables.JAuthority;
 import net.haaim.web.jooq.entity.tables.JClass;
 import net.haaim.web.jooq.entity.tables.JClassCurriculum;
+import net.haaim.web.jooq.entity.tables.JClassMngt;
 import net.haaim.web.jooq.entity.tables.JClassStudent;
 import net.haaim.web.jooq.entity.tables.JCode;
 import net.haaim.web.jooq.entity.tables.JCurriculum;
@@ -43,6 +44,11 @@ public class Tables {
      * 클래스&amp;커리큘럼 매핑
      */
     public static final JClassCurriculum CLASS_CURRICULUM = JClassCurriculum.CLASS_CURRICULUM;
+
+    /**
+     * 출석/테스트/과제/ 학업상태 레포트
+     */
+    public static final JClassMngt CLASS_MNGT = JClassMngt.CLASS_MNGT;
 
     /**
      * 클래스&amp;학생 매핑정보

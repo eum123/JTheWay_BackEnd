@@ -10,6 +10,7 @@ import java.util.List;
 import net.haaim.web.jooq.entity.tables.JAuthority;
 import net.haaim.web.jooq.entity.tables.JClass;
 import net.haaim.web.jooq.entity.tables.JClassCurriculum;
+import net.haaim.web.jooq.entity.tables.JClassMngt;
 import net.haaim.web.jooq.entity.tables.JClassStudent;
 import net.haaim.web.jooq.entity.tables.JCode;
 import net.haaim.web.jooq.entity.tables.JCurriculum;
@@ -36,7 +37,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JHaaimDb extends SchemaImpl {
 
-    private static final long serialVersionUID = -481097349;
+    private static final long serialVersionUID = 354657494;
 
     /**
      * The reference instance of <code>haaim_db</code>
@@ -57,6 +58,11 @@ public class JHaaimDb extends SchemaImpl {
      * 클래스&amp;커리큘럼 매핑
      */
     public final JClassCurriculum CLASS_CURRICULUM = JClassCurriculum.CLASS_CURRICULUM;
+
+    /**
+     * 출석/테스트/과제/ 학업상태 레포트
+     */
+    public final JClassMngt CLASS_MNGT = JClassMngt.CLASS_MNGT;
 
     /**
      * 클래스&amp;학생 매핑정보
@@ -147,6 +153,7 @@ public class JHaaimDb extends SchemaImpl {
             JAuthority.AUTHORITY,
             JClass.CLASS,
             JClassCurriculum.CLASS_CURRICULUM,
+            JClassMngt.CLASS_MNGT,
             JClassStudent.CLASS_STUDENT,
             JCode.CODE,
             JCurriculum.CURRICULUM,

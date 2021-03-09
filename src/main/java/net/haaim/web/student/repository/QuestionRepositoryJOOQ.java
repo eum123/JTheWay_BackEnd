@@ -1,6 +1,7 @@
 package net.haaim.web.student.repository;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.jooq.Condition;
@@ -14,13 +15,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import lombok.extern.slf4j.Slf4j;
+import net.haaim.web.common.DateHelper;
 import net.haaim.web.common.query.ConditionHelper;
 import net.haaim.web.jooq.entity.tables.JClass;
 import net.haaim.web.jooq.entity.tables.JExamItem;
 import net.haaim.web.jooq.entity.tables.JExamList;
 import net.haaim.web.jooq.entity.tables.JExamUser;
-import net.haaim.web.student.entity.QuestionDTO;
 import net.haaim.web.student.entity.ExamItemDTO;
+import net.haaim.web.student.entity.ExamNowCountDTO;
+import net.haaim.web.student.entity.QuestionDTO;
 
 @Slf4j
 @Repository
@@ -180,5 +183,27 @@ public class QuestionRepositoryJOOQ {
 		.orderBy(JExamItem.EXAM_ITEM.NO.asc())
 		.fetch()
 		.into(ExamItemDTO.class);
+	}
+	
+	/**
+	 * 현재 미 진행한 온라인 테스트 건수를 추출한다. 
+	 * @param studentNo
+	 * @return
+	 */
+	public ExamNowCountDTO findExamNowCount(Integer studentNo) {
+		String nowDateString = DateHelper.toNowString();
+		
+		int nowCount = dslContext.selectCount()
+		.from(JExamList.EXAM_LIST)
+		.leftJoin(JExamUser.EXAM_USER).on(JExamList.EXAM_LIST.EXAM_NO.eq(JExamUser.EXAM_USER.EXAM_NO))
+		.where(JExamUser.EXAM_USER.STUDENT_NO.eq(studentNo)
+				.and(JExamList.EXAM_LIST.SDATE.lessThan(nowDateString))
+				.and(JExamList.EXAM_LIST.EDATE.greaterThan(nowDateString))
+				.and(JExamUser.EXAM_USER.STATUS.eq(0)))	//TODO : 미진행 코드 확인
+		.fetchOne(0, int.class);
+		
+		return ExamNowCountDTO.builder()
+				.count(nowCount)
+				.build();
 	}
 }

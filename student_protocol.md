@@ -169,3 +169,39 @@
     ```json
       	
     ```
+## 학생 메인 출석 그래프
+  - 설명
+  	StudentController.java
+  	
+  - 요청
+    * 전체 : http://localhost:8080/student/attendance/monthly
+    * Method : POST
+    
+  - 응답
+    ```json
+      	
+    ```
+## 학생 메인 시험 그래프
+  - 설명
+  	StudentExamController.java
+  	
+  - 요청
+    * 전체 : http://localhost:8080/student/question/monthly
+    * Method : POST
+    
+  - 응답
+    ```json
+      	
+    ```
+## 온라인 테스트 미진행 건수 조회
+  - 설명
+  	StudentExamController.java
+  	
+  - 요청
+    * 전체 : http://localhost:8080/student/question/now
+    * Method : POST
+    
+  - 응답
+    ```json
+      	
+    ```

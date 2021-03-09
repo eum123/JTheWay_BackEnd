@@ -170,4 +170,51 @@ public class StudentExamController {
 
 		}
 	}
+	
+	/**
+	 * 학생 메인의 시험 그래프 출력용 데이터
+	 * @param year
+	 * @param month
+	 * @param studentNo
+	 * @param examNo
+	 * @return
+	 */
+	@RequestMapping(value = "monthly", method = RequestMethod.GET)
+	public ApiResponse examSummary(@RequestParam(value = "year") Integer year, 
+			@RequestParam(value = "month") Integer month,
+			@RequestParam(value = "student_no") Integer studentNo,
+			@RequestParam(value = "exam_no") Integer examNo) {
+		
+	    User user = UserHelper.getUser();
+
+		try {
+			return ApiResponse.getSuccessResponse(questionService.findMonthlyExam(year, month, studentNo, examNo));
+
+		} catch (Exception e) {
+			log.error("search error", e);
+
+			return ApiResponse.getErrorResponse(e);
+
+		}
+	}
+	
+	/**
+	 * 현재 온라인 테스트 건수
+	 * @param studentNo
+	 * @return
+	 */
+	@RequestMapping(value = "now", method = RequestMethod.GET)
+	public ApiResponse examNow(
+			@RequestParam(value = "student_no") Integer studentNo) {
+		User user = UserHelper.getUser();
+
+		try {
+			return ApiResponse.getSuccessResponse(questionService.findExamNowCount(studentNo));
+		} catch (Exception e) {
+			log.error("search error", e);
+
+			return ApiResponse.getErrorResponse(e);
+
+		}
+	}
 }
