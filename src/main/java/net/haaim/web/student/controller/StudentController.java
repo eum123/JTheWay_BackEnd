@@ -88,4 +88,11 @@ public class StudentController {
 
 		}
 	}
+	
+	
+	@RequestMapping(value = "attendance/monthly", method = RequestMethod.GET)
+	public ApiResponse monthlyAttendance(@RequestParam(value = "year") Integer year,
+			@RequestParam(value = "month") Integer month) {
+		return null;
+	}
 }

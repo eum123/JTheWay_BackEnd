@@ -12,11 +12,14 @@ import org.springframework.stereotype.Service;
 import net.haaim.web.student.entity.AnswerSheetEntity;
 import net.haaim.web.student.entity.ExamItemDTO;
 import net.haaim.web.student.entity.ExamItemEntity;
+import net.haaim.web.student.entity.ExamNowCountDTO;
 import net.haaim.web.student.entity.ExamUserEntity;
+import net.haaim.web.student.entity.MonthlyExamDTO;
 import net.haaim.web.student.entity.QuestionDTO;
 import net.haaim.web.student.repository.AnswerSheetRepository;
 import net.haaim.web.student.repository.ExamItemRepository;
 import net.haaim.web.student.repository.ExamUserRepository;
+import net.haaim.web.student.repository.MonthlyExamRepositoryJOOQ;
 import net.haaim.web.student.repository.QuestionItemRepositoryJOOQ;
 import net.haaim.web.student.repository.QuestionRepository;
 import net.haaim.web.student.repository.QuestionRepositoryJOOQ;
@@ -41,6 +44,9 @@ public class QuestionService {
 	
 	@Autowired
 	private AnswerSheetRepository answerSheetRepo;
+	
+	@Autowired
+	private MonthlyExamRepositoryJOOQ monthlyExamRepo;
 
 	/**
 	 * 출제번호에 맞는 온라인테스트 내용 조회
@@ -158,5 +164,26 @@ public class QuestionService {
 				.questionNo(questionNo)
 				.filePath(filePath)
 				.build());
+	}
+	
+	/**
+	 * 학생 시험 현황 그래프
+	 * @param year
+	 * @param month
+	 * @param studentNo
+	 * @param examNo
+	 * @return
+	 */
+	public MonthlyExamDTO findMonthlyExam(Integer year, Integer month, Integer studentNo, Integer examNo) {
+		return monthlyExamRepo.findMonthlyExam(year, month, studentNo, examNo);
+	}
+	
+	/**
+	 * 온라인 테스트 미진행 건수 조회
+	 * @param studentNo
+	 * @return
+	 */
+	public ExamNowCountDTO findExamNowCount(Integer studentNo) {
+		return repoJooq.findExamNowCount(studentNo);
 	}
 }
