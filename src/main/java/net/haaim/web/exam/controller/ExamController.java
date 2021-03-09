@@ -14,9 +14,7 @@ import net.haaim.web.common.UserHelper;
 import net.haaim.web.common.request.CustomPageRequest;
 import net.haaim.web.common.response.ApiResponse;
 import net.haaim.web.exam.entity.ItemPoolEntity;
-import net.haaim.web.exam.entity.QuestionDTO;
 import net.haaim.web.exam.service.ExamBankService;
-import net.haaim.web.exam.service.QuestionService;
 
 @Slf4j
 @RestController
@@ -26,9 +24,6 @@ public class ExamController {
 	@Autowired
 	private ExamBankService examBankService;
 	
-	@Autowired
-	private QuestionService questionService;
-
 	@RequestMapping(value = "bank/all", method = RequestMethod.GET)
 	public ApiResponse bankAll(@RequestParam(value = "page", defaultValue = "1") Integer page,
 			@RequestParam(value = "size", defaultValue = "10") Integer size) {
@@ -114,37 +109,6 @@ public class ExamController {
 			log.error("search error", e);
 
 			return ApiResponse.getErrorResponse(e);
-		}
-	}
-	
-	/**
-	 * 시험 출제 목록
-	 * @param page
-	 * @param size
-	 * @return
-	 */
-	@RequestMapping(value = "question/all", method = RequestMethod.GET)
-	public ApiResponse questionAll(@RequestParam(value = "page", defaultValue = "1") Integer page,
-			@RequestParam(value = "size", defaultValue = "10") Integer size) {
-		// 사용자의 권한을 확인
-		User user = UserHelper.getUser();
-
-		try {
-
-			PageRequest pageable = CustomPageRequest.of(page, size, "no");
-			
-			//학생의 classNo를 조회
-			
-			//TODO: userID 를  student_no로 변경
-			Page<QuestionDTO> result = questionService.search(null, null, pageable);
-
-			return ApiResponse.getSuccessResponse(result);
-
-		} catch (Exception e) {
-			log.error("search error", e);
-
-			return ApiResponse.getErrorResponse(e);
-
 		}
 	}
 }
