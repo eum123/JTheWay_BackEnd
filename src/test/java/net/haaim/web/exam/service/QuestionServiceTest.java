@@ -17,9 +17,10 @@ import net.haaim.web.clazz.entity.ClassEntity;
 import net.haaim.web.clazz.repository.ClazzRepository;
 import net.haaim.web.common.Role;
 import net.haaim.web.common.request.CustomPageRequest;
-import net.haaim.web.exam.entity.QuestionDTO;
-import net.haaim.web.exam.entity.QuestionEntity;
-import net.haaim.web.exam.repository.QuestionRepository;
+import net.haaim.web.student.entity.QuestionDTO;
+import net.haaim.web.student.entity.QuestionEntity;
+import net.haaim.web.student.repository.QuestionRepository;
+import net.haaim.web.student.service.QuestionService;
 import net.haaim.web.user.entity.UserEntity;
 import net.haaim.web.user.repository.UserRepository;
 

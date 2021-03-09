@@ -1,4 +1,4 @@
-package net.haaim.web.exam.entity;
+package net.haaim.web.student.entity;
 
 import java.util.Date;
 
