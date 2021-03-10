@@ -89,10 +89,26 @@ public class StudentController {
 		}
 	}
 	
-	
+	/**
+	 * 월별 출석 현황
+	 * @param year
+	 * @param month
+	 * @param studentNo
+	 * @return
+	 */
 	@RequestMapping(value = "attendance/monthly", method = RequestMethod.GET)
 	public ApiResponse monthlyAttendance(@RequestParam(value = "year") Integer year,
-			@RequestParam(value = "month") Integer month) {
-		return null;
+			@RequestParam(value = "month") Integer month,
+			@RequestParam(value = "student_no") Integer studentNo) {
+
+		try {
+			User user = UserHelper.getUser();
+			
+			return ApiResponse.getSuccessResponse(service.monthlyAttendance(year, month, studentNo));
+		} catch (Exception e) {
+			log.error("search error", e);
+			return ApiResponse.getErrorResponse(e);
+
+		}
 	}
 }
