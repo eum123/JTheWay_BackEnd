@@ -1,8 +1,14 @@
 package net.haaim.web.student.repository;
 
+import java.util.List;
+
+import javax.persistence.Column;
+
 import org.jooq.DSLContext;
 import org.jooq.conf.StatementType;
 import org.springframework.stereotype.Repository;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.extern.slf4j.Slf4j;
 import net.haaim.web.common.DateHelper;
@@ -11,16 +17,34 @@ import net.haaim.web.jooq.entity.tables.JClassMngt;
 import net.haaim.web.jooq.entity.tables.JClassStudent;
 import net.haaim.web.jooq.entity.tables.JExamList;
 import net.haaim.web.jooq.entity.tables.JExamUser;
+import net.haaim.web.student.entity.MonthlyClassDTO;
 import net.haaim.web.student.entity.MonthlyExamDTO;
 
 @Slf4j
 @Repository
-public class MonthlyExamRepositoryJOOQ {
+public class StudentRepositoryJOOQ {
 	private final DSLContext dslContext;
 
-	public MonthlyExamRepositoryJOOQ(DSLContext dslContext) {
+	public StudentRepositoryJOOQ(DSLContext dslContext) {
 		this.dslContext = dslContext;
 		this.dslContext.settings().setStatementType(StatementType.PREPARED_STATEMENT);
+		
+	}
+	
+	public List<MonthlyClassDTO> findAllMonthlyClass(Integer year, Integer month, Integer classNo, Integer studentNo) {
+		return dslContext.select(
+				JClass.CLASS.CLASS_NO,
+				JClass.CLASS.CLASS_NAME,
+				JClass.CLASS.START_DATE,
+				JClass.CLASS.END_DATE,
+				JClass.CLASS.DAY_TIME
+		)
+		.from(JClass.CLASS)
+		.join(JClassStudent.CLASS_STUDENT).on(JClass.CLASS.CLASS_NO.eq(JClassStudent.CLASS_STUDENT.CLASS_NO))
+		.where(JClassStudent.CLASS_STUDENT.STUDENT_NO.eq(studentNo)
+				.and(JClass.CLASS.CLASS_NO.eq(classNo)))
+		.fetch()
+		.into(MonthlyClassDTO.class);
 		
 	}
 	
