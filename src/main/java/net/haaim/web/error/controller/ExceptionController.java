@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import net.haaim.web.common.response.ApiResponse;
+import net.haaim.web.api.common.response.ApiResponse;
 
 @RequiredArgsConstructor
 @RestController

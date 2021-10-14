@@ -1,41 +1,4 @@
 spring:
-    profiles: default
-    
-    datasource:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/haaim_db?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&charaterEncoding=utf-8&serverTimezone=UTC
-        username: haaim
-        password: haaim01
-    output:
-        ansi:
-            enabled: always
-    jooq:
-        sql-dialect: mysql     
-    jpa:
-        hibernate.ddl-auto: validate
-        generate-ddl: true
-        show-sql: true
-        properties: 
-            javax.persistence.query.timeout: 20000
-            hibernate:
-              generate_statistics: true
-              format_sql: true
-    jwt:
-        secret: http://www.jdi.net/mathematics_educational_institution
-        expiration: 3600000
-        
-logging:
-    pattern:
-        console: "%d %-5level %logger : %msg%n"
-    level:
-        org.springframework.web: DEBUG
-        org.hibernate: DEBUG
-        org.hibernate.type: trace
-        net: DEBUG
-        org.jooq.tools.LoggerListener: DEBUG
-        
----
-spring:
     profiles: local
     
     datasource:
@@ -43,11 +6,16 @@ spring:
         url: jdbc:mysql://localhost:3306/haaim_db?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&charaterEncoding=utf-8&serverTimezone=UTC
         username: haaim
         password: haaim01
+        hikari:
+            maximum-pool-size: 10
+            connection-timeout: 5000
+            connection-init-sql: select 1
+            validation-timeout: 2000
+            minimum-idle: 10    
+            max-lifetime: 1800000
     output:
         ansi:
-            enabled: always
-    jooq:
-        sql-dialect: mysql       
+            enabled: always    
     jpa:
         hibernate.ddl-auto: validate
         generate-ddl: true
@@ -60,17 +28,28 @@ spring:
     jwt:
         secret: http://www.jdi.net/mathematics_educational_institution
         expiration: 3600000
+
+
         
 logging:
     pattern:
         console: "%d %-5level %logger : %msg%n"
     level:
+        jdbc:
+            sqlonly: DEBUG
         org.springframework.web: DEBUG
         org.hibernate: DEBUG
         org.hibernate.type: trace
         net: DEBUG
         org.jooq.tools.LoggerListener: DEBUG
+        net.haaim.web.api: TRACE
             
+
+pagehelper:
+    helper-dialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+
 ---
 spring:
     profiles: prod

@@ -17,7 +17,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.haaim.web.common.response.ApiResponse;
+import net.haaim.web.api.common.response.ApiResponse;
 import net.haaim.web.member.service.SignService;
 
 @Slf4j
