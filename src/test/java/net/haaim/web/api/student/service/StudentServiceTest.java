@@ -22,7 +22,7 @@ public class StudentServiceTest {
 	
 	@Test
 	public void monthlyAttendanceTest() {
-		List<MonthlyAttendanceStatusEntity> list = service.monthlyAttendance(1, null, null);
+		List<MonthlyAttendanceStatusEntity> list = service.monthlyAttendanceStatus(1, null, null);
 		System.out.println(list.size());
 	}
 }

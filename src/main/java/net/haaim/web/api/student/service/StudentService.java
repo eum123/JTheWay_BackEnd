@@ -23,9 +23,9 @@ public class StudentService {
 	 * @param studentNo
 	 * @return
 	 */
-	public List<MonthlyAttendanceStatusEntity> monthlyAttendance(Integer studentNo, Integer baseYear, Integer baseMonth) {
+	public List<MonthlyAttendanceStatusEntity> monthlyAttendanceStatus(Integer studentNo, Integer baseYear, Integer baseMonth) {
 
-		return studentMapper.findMonthlyAttendance(studentNo, DateHelper.getStartDate(baseYear, baseMonth),
+		return studentMapper.findMonthlyAttendanceStatus(studentNo, DateHelper.getStartDate(baseYear, baseMonth),
 				DateHelper.getEndDate(baseYear, baseMonth));
 	}
 

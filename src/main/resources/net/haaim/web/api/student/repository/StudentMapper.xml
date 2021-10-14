@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="net.haaim.web.api.student.repository.StudentMapper">
-    <select id="findMonthlyAttendance" resultType="net.haaim.web.api.student.entity.MonthlyAttendanceStatusEntity">
+    <select id="findMonthlyAttendanceStatus" resultType="net.haaim.web.api.student.entity.MonthlyAttendanceStatusEntity">
     	<![CDATA[
 	        SELECT   a.date,
 			         --  a.class_no,

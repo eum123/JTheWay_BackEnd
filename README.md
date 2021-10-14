@@ -22,13 +22,14 @@
  
  
 # was
-- JDK 1.8 (open JDK 포함)
-- SpringBoot 1.5.1
+- JDK ~~1.8~~ 11 (open JDK 포함)
+- SpringBoot ~~1.5.1~~ 2.x
 - MySQL 5.X
 - jpa
 - api doc 참고(https://www.popit.kr/spring-rest-docs/)
-- querydsl 추가로 entity 추가 할때 마다 mvn package 실행 해야됨.
-- JOOQ 추가로 table 변경시 source-generate 실행 해야 됨
+- ~~querydsl 추가로 entity 추가 할때 마다 mvn package 실행 해야됨.~~
+- ~~JOOQ 추가로 table 변경시 source-generate 실행 해야 됨~~
+- mybatis paging : https://oingdaddy.tistory.com/329
 
 # web
 - http-server 설치

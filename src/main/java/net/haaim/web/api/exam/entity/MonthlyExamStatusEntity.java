@@ -1,4 +1,4 @@
-package net.haaim.web.api.student.entity;
+package net.haaim.web.api.exam.entity;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Data 
 public class MonthlyExamStatusEntity {
-	private Integer attendance;
+	private Integer pass;
 	
-	private Integer miss;
+	private Integer fail;
 	
 	private Integer remain;
 }

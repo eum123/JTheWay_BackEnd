@@ -9,7 +9,7 @@ import net.haaim.web.api.student.entity.MonthlyAttendanceStatusEntity;
 
 @Mapper
 public interface StudentMapper {
-	List<MonthlyAttendanceStatusEntity>  findMonthlyAttendance(
+	List<MonthlyAttendanceStatusEntity>  findMonthlyAttendanceStatus(
 			@Param("studentNo") Integer studentNo
 			, @Param("startDate") String  startDate
 			, @Param("endDate") String endDate);

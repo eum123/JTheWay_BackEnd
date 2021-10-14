@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import lombok.extern.slf4j.Slf4j;
+import net.haaim.web.api.exam.service.ExamService;
 import net.haaim.web.api.student.service.StudentService;
 
 @ExtendWith(SpringExtension.class)
@@ -32,10 +33,13 @@ public class StudentControllerTest {
 
 	@MockBean
 	private StudentService studentService;
+	
+	@MockBean
+	private ExamService examService;
 
 	@BeforeEach
 	public void setUp() {
-		mvc = MockMvcBuilders.standaloneSetup(new StudentController(studentService))
+		mvc = MockMvcBuilders.standaloneSetup(new StudentController(studentService, examService))
 				.addFilters(new CharacterEncodingFilter("UTF-8", true))
 				.build();
 	}
