@@ -15,7 +15,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.haaim.web.api.common.PageConstants;
 import net.haaim.web.api.common.response.ApiResponse;
 import net.haaim.web.api.exam.entity.ExamListEntity;
 import net.haaim.web.api.exam.entity.MonthlyExamStatusEntity;
