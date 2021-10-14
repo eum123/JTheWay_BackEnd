@@ -1,7 +1,24 @@
 # HAAIM
 
+# 사전 준비
+ ## MySQL 설치 및 설정 
+  - create user haaim@'%' identified by 'haaim01';
+  - create user haaim@localhost identified by 'haaim01';
+  - create database haaim_db default character set utf8;
+  - grant all privileges on haaim_db.* to haaim@'%';
+  - grant all privileges on haaim_db.* to haaim@localhost;
+  - flush privileges;
+  - SET GLOBAL log_bin_trust_function_creators = 1;
+ 
+ ## 참고 
+  - 사용자 확인 : select host, user from user;
+  - 권한 확인 : show grants for haaim@'%';
+
 # 개발환경
- jooq 을 사용하기 위해 mvn -DskipTests clean install 실해하여 소스를 생성해야 됨
+- DB에 테이블을 생성한다.
+- mvn generate-sources 를 이용하여 테이블에 해당하는 java source를 생성한다.
+- 테이블이 변경 또는 생성 될때 마다 소스를 생성해야 한다.
+- 2021.10.12 jooq 에서 mybatis로 변경.
  
  
 # was

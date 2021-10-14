@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.haaim.web.api.student.repository.StudentMapper">
+    <select id="findMonthlyAttendance" resultType="net.haaim.web.api.student.entity.MonthlyAttendanceStatusEntity">
+    	<![CDATA[
+	        SELECT   a.date,
+			         --  a.class_no,
+			         sum(IF(a.attendance=1,1,0))  attendance,
+			         sum(IF(a.attendance!=1,1,0)) miss
+			FROM     class_mngt a
+			WHERE    a.student_no = 1
+			AND      date >= #{startDate} 
+			AND      date <= #{endDate}
+			GROUP BY a.date;
+		 ]]>
+    </select>
+</mapper>

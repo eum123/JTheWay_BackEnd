@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.haaim.web.api.exam.repository.ExamMapper">
+    <select id="findAllByStudentNo" resultType="net.haaim.web.api.exam.entity.ExamListEntity">
+    	<![CDATA[
+			SELECT   c.year,
+			         b.class_no,
+			         c.cur,
+			         b.sdate,
+			         b.input_date,
+			         b.count,
+			         b.score,
+			         b.pass,
+			         b.stare
+			FROM     (
+			                SELECT b.cc_no,
+			                       b.class_no,
+			                       b.exam_no,
+			                       a.student_no,
+			                       Date_format(b.sdate,'%Y-%m-%d')                                   sdate,
+			                       Date_format(a.input_date,'%Y-%m-%d')                              input_date,
+			                       b.count                                                           count,
+			                       a.score                                                           score,
+			                       IF(a.status != 2, If(a.score >= b.goal_score,'pass' ,'fail'),'-') pass,
+			                       IF(a.status = 1, '미응시', '응시')                           stare,
+			                       a.status
+			                FROM   exam_user a
+			                JOIN   exam_list b
+			                WHERE  a.exam_no = b.exam_no) b
+			JOIN
+			         (
+			                SELECT a.year,
+			                       c.no,
+			                       c.class_no,
+			                       a.class_name,
+			                       --  c.cur_id, m.cno,
+			                              concat(m.grade,'> ', m.course, '> ', getcurnm(m.large_category, m.medium_category)) AS cur
+			                FROM   class_curriculum c
+			                JOIN   class a
+			                JOIN   curriculum m
+			                WHERE  c.class_no = a.class_no
+			                AND    c.cur_id = m.cno) c
+			WHERE    b.cc_no = c.no
+			AND      b.student_no = #{studentNo}
+			         -- and date_format(b.출제일,'%Y%m') = date_format(sysdate(),'%Y%m')   -- 조회조건 : 년월
+			         -- and b.status = '3'              -- 조회조건 : 응시여부
+			ORDER BY year,
+			         class_no,
+			         cur
+		 ]]>
+    </select>
+</mapper>

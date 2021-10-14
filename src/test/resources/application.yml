@@ -4,36 +4,48 @@ spring:
     profiles: local
     
     datasource:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/haaim_db?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&charaterEncoding=utf-8&serverTimezone=UTC
+        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy 
+        url: jdbc:log4jdbc:mysql://localhost:3306/haaim_db?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&charaterEncoding=utf-8&serverTimezone=UTC
         username: haaim
         password: haaim01
-        
+        hikari:
+            maximum-pool-size: 10
+            connection-timeout: 5000
+            connection-init-sql: select 1
+            validation-timeout: 2000
+            minimum-idle: 10    
+            max-lifetime: 1800000
+    output:
+        ansi:
+            enabled: always    
     jpa:
         hibernate.ddl-auto: validate
-        database-platform: org.hibernate.dialect.MySQL5Dialect
         generate-ddl: true
         show-sql: true
-        
-    output.ansi.enabled: always
-    
+        properties: 
+            javax.persistence.query.timeout: 20000
+            hibernate:
+              generate_statistics: true
+              format_sql: true
     jwt:
-        secret: http://www.jdi.net/
+        secret: http://www.jdi.net/mathematics_educational_institution
         expiration: 3600000
 
 
+        
 logging:
-  level:
-    org.springframework: INFO
-    org.springframework.web: DEBUG
-    org.hibernate: DEBUG
-      
----
-spring:
-    profiles: prod
-    
-    datasource:
-        jndi-name: jndi/haaim
-    jpa:
-        hibernate.ddl-auto: none
-        show-sql: true
+    pattern:
+        console: "%d %-5level %logger : %msg%n"
+    level:
+        jdbc.sqlonly: DEBUG
+        org.springframework.web: DEBUG
+        org.hibernate: DEBUG
+        org.hibernate.type: trace
+        net: DEBUG
+        org.jooq.tools.LoggerListener: DEBUG
+        net.haaim.web.api: TRACE
+        
+pagehelper:
+    helper-dialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
