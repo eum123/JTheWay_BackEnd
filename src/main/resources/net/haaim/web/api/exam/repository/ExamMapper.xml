@@ -29,7 +29,7 @@
 			                FROM   exam_user a
 			                JOIN   exam_list b
 			                WHERE  a.exam_no = b.exam_no) b
-			JOIN
+					JOIN
 			         (
 			                SELECT a.year,
 			                       c.no,
@@ -41,9 +41,9 @@
 			                JOIN   class a
 			                JOIN   curriculum m
 			                WHERE  c.class_no = a.class_no
-			                AND    c.cur_id = m.cno) c
+			                	AND    c.cur_id = m.cno) c
 			WHERE    b.cc_no = c.no
-			AND      b.student_no = #{studentNo}
+				AND      b.student_no = #{studentNo}
 			         -- and date_format(b.출제일,'%Y%m') = date_format(sysdate(),'%Y%m')   -- 조회조건 : 년월
 			         -- and b.status = '3'              -- 조회조건 : 응시여부
 			ORDER BY year,

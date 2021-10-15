@@ -1,4 +1,4 @@
-package net.haaim.web.common;
+package net.haaim.web.api.common;
 
 import lombok.Getter;
 

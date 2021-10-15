@@ -44,6 +44,10 @@ logging:
         net: DEBUG
         org.jooq.tools.LoggerListener: DEBUG
         net.haaim.web.api: TRACE
+
+mybatis:
+    configuration:
+        map-underscore-to-camel-case: true
         
 pagehelper:
     helper-dialect: mysql
