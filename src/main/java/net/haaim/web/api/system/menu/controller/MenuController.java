@@ -36,6 +36,8 @@ public class MenuController {
 
 		try {
 			
+			//TODO:
+			
 			return ApiResponse.getSuccessResponse(null);
 		} catch (Exception e) {
 			log.error("search error", e);
@@ -54,8 +56,9 @@ public class MenuController {
 		
 		try {
 			//user 테이블에서 사용자 권한을 구한다. 
+			Integer userType = 2;
 			
-			return ApiResponse.getSuccessResponse(menuService.findAll());
+			return ApiResponse.getSuccessResponse(menuService.findAll(userType, MenuEntity.VIEW));
 		} catch (Exception e) {
 			log.error("search error", e);
 			return ApiResponse.getErrorResponse(e);

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.haaim.web.api.system.menu.repository.MenuMapper">
+    <select id="findAll" resultType="net.haaim.web.api.system.menu.entity.MenuEntity">
+    	<![CDATA[
+			WITH RECURSIVE CTE AS (
+			    SELECT 
+					menu_code, menu_name, parent_menu_code, depth, url
+		            , use_yn, sort, input_id, input_date, update_id, update_date
+				FROM menu 
+				WHERE 
+					parent_menu_code = ''
+					and use_yn = 1
+				UNION ALL
+				SELECT
+					a.menu_code, a.menu_name, a.parent_menu_code, a.depth, a.url
+		            , a.use_yn, a.sort, a.input_id, a.input_date, a.update_id, a.update_date
+				FROM menu a
+				inner JOIN CTE b ON a.parent_menu_code = b.menu_code and a.use_yn = 1
+			)
+			SELECT menu_code, menu_name, parent_menu_code, depth, url
+		            , use_yn, sort, input_id, input_date, update_id, update_date FROM MENU
+		    ORDER BY menu_code;
+		 ]]>
+    </select>
+</mapper>

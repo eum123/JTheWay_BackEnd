@@ -18,11 +18,11 @@ public class MenuEntity extends CommonEntity{
 	
 	private String parentMenuCode;
 
-	private int depth;
+	private Integer depth;
 
 	private String url;
 
-	private int useYn = 0;
+	private Integer useYn = 0;
 	
-	private int sourt;
+	private Integer sort;
 }
