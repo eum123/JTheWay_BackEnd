@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.haaim.web.api.notice.repository.NoticeMapper">
+    <select id="findAllByStateAndTitleOrContens" resultType="net.haaim.web.api.notice.entity.NoticeEntity">
+    	
+		SELECT no, title, contents, state, input_id, input_date, update_id, update_date
+		FROM NOTICE
+		WHERE
+		<choose>
+			<when test="state != null">
+				state = #{state}
+				<choose>
+					<when test="title != null">
+						AND title like '%'||#{title}||'%'
+						<if test="contents != null">
+							OR contents like '%'||#{contents}||'%'
+						</if>
+					</when>
+					<otherwise>
+						<if test="contents != null">
+							AND contents like '%'||#{contents}||'%'
+						</if>
+					</otherwise>
+				</choose>
+			</when>
+			<otherwise>
+				<choose>
+					<when test="title != null">
+						title like '%'||#{title}||'%'
+						<if test="contents != null">
+							OR contents like '%'||#{contents}||'%'
+						</if>
+					</when>
+					<otherwise>
+						<if test="contents != null">
+							contents like '%'||#{contents}||'%'
+						</if>
+					</otherwise>
+				</choose>
+			</otherwise>
+		</choose>
+		ORDER BY input_date DESC
+		
+    </select>
+</mapper>
