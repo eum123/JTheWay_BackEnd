@@ -5,11 +5,11 @@ import lombok.Getter;
 @Getter
 public enum Role {
 	//4:관리자/3:원장/2:교사/1:코디/0:학생
-	STUDENT(0, "학생"),	
-	CODY(1, "코디"),	
-	TEACHER(2, "교사"),
-	OWNER(3, "원장"),
-	MANAGER(4, "관리자");
+	STUDENT(0, "STUDENT"),	
+	CODY(1, "CODY"),	
+	TEACHER(2, "TEACHER"),
+	DIRECTOR(3, "DIRECTOR"),
+	MANAGER(4, "MANAGER");
 	
 	private int code = 0;
 	private String remark = "";

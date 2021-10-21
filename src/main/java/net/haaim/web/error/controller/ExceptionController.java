@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import net.haaim.web.api.common.response.ApiResponse;
+import net.haaim.web.api.common.response.HaaimApiResponse;
 
 @RequiredArgsConstructor
 @RestController
@@ -14,7 +14,7 @@ import net.haaim.web.api.common.response.ApiResponse;
 public class ExceptionController {
  
     @GetMapping(value = "/accessdenied")
-    public ApiResponse accessdeniedException() {
-        return ApiResponse.getErrorResponse(HttpStatus.NOT_ACCEPTABLE);
+    public HaaimApiResponse accessdeniedException() {
+        return HaaimApiResponse.getErrorResponse(HttpStatus.NOT_ACCEPTABLE);
     }
 }
