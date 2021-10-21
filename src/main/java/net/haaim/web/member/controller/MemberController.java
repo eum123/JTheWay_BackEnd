@@ -12,12 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.haaim.web.api.common.response.ApiResponse;
+import net.haaim.web.api.common.response.HaaimApiResponse;
 import net.haaim.web.member.service.SignService;
 
 @Slf4j
@@ -38,7 +35,7 @@ public class MemberController {
 	 * 로그인
 	 */
 	@RequestMapping(value = "signin", method = RequestMethod.POST)
-	public ApiResponse singin( HttpServletRequest request, @RequestParam("username") String userName, @RequestParam("password") String password,
+	public HaaimApiResponse singin( HttpServletRequest request, @RequestParam("username") String userName, @RequestParam("password") String password,
 			HttpServletResponse response) {
 		
 		try {
@@ -57,14 +54,14 @@ public class MemberController {
 //			    String token = jwtTokenProvider.generateToken(authentication);
 //			    response.setHeader("Authorization", "JDI " + token);
 			    
-			    return ApiResponse.getSuccessResponse("");
+			    return HaaimApiResponse.getSuccessResponse("");
 			} else {
 				logger.error("not member");
-				return ApiResponse.getSuccessResponse("Not Found User");
+				return HaaimApiResponse.getSuccessResponse("Not Found User");
 			}
 		} catch (Exception e) {
 			logger.error("error", e);
-			return ApiResponse.getErrorResponse(e);
+			return HaaimApiResponse.getErrorResponse(e);
 		}
 
 	}
@@ -78,9 +75,9 @@ public class MemberController {
 	}
 
 
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 access_token", required = false, dataType = "String", paramType = "header") })
-	@ApiOperation(value = "회원 단건 조회", notes = "회원번호(msrl)로 회원을 조회한다")
+//	@ApiImplicitParams({
+//			@ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 access_token", required = false, dataType = "String", paramType = "header") })
+//	@ApiOperation(value = "회원 단건 조회", notes = "회원번호(msrl)로 회원을 조회한다")
 	@RequestMapping(value = "sample", method = RequestMethod.POST)
 	public String sample() {
 

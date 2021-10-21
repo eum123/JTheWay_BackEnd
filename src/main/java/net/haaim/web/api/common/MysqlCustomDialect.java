@@ -1,4 +1,4 @@
-package net.haaim.web.common;
+package net.haaim.web.api.common;
 
 import org.hibernate.dialect.MySQL5Dialect;
 import org.hibernate.dialect.function.StandardSQLFunction;

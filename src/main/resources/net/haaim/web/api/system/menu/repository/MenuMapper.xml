@@ -7,21 +7,25 @@
     	<![CDATA[
 			WITH RECURSIVE CTE AS (
 			    SELECT 
-					menu_code, menu_name, parent_menu_code, depth, url
+					menu_code, menu_name, parent_menu_code,  depth, url
 		            , use_yn, sort, input_id, input_date, update_id, update_date
-				FROM menu 
+				FROM menu m 
 				WHERE 
 					parent_menu_code = ''
 					and use_yn = 1
 				UNION ALL
 				SELECT
 					a.menu_code, a.menu_name, a.parent_menu_code, a.depth, a.url
-		            , a.use_yn, a.sort, a.input_id, a.input_date, a.update_id, a.update_date
+		            , a.use_yn, a.sort, a.input_id, a.input_date, a.update_id, a.update_date, a.user_type
 				FROM menu a
 				inner JOIN CTE b ON a.parent_menu_code = b.menu_code and a.use_yn = 1
 			)
-			SELECT menu_code, menu_name, parent_menu_code, depth, url
-		            , use_yn, sort, input_id, input_date, update_id, update_date FROM MENU
+			SELECT m.menu_code, m.menu_name, m.parent_menu_code,m.depth, m.url
+		            , m.use_yn, m.sort, m.input_id, m.input_date, m.update_id, m.update_date, a.user_type
+			FROM MENU m 
+				JOIN authority a ON m.menu_code = a.menu_code
+			WHERE 
+				a.user_type = #{user_type}
 		    ORDER BY menu_code;
 		 ]]>
     </select>
