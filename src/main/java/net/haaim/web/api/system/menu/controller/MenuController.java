@@ -19,19 +19,14 @@ import net.haaim.web.api.user.entity.CustomUserDetails;
 @Slf4j
 @RestController
 @RequestMapping("/system/menu")
-//@Api(value="menu api")
 @RequiredArgsConstructor
 public class MenuController {
 	
 	private final MenuService menuService;
 	
-//	@ApiOperation(
-//			value="menu 저장.", 
-//			response = MenuEntity.class)
-//	@Operation(summary = "메뉴 저장.")
+
 	@PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
 	public HaaimApiResponse save(
-//			@ApiParam(value="저장할 메뉴 정보.", required = true ) 
 			@RequestBody MenuEntity entity ) {
 
 		try {
@@ -50,7 +45,7 @@ public class MenuController {
 	public HaaimApiResponse findAll() {
 		
 		try {
-			//user 테이블에서 사용자 권한을 구한다. 
+			
 			CustomUserDetails logonUser = (CustomUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			
 			String authority = logonUser.getAuthorities().get(0).getAuthority();

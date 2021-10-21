@@ -1,0 +1,100 @@
+openapi: 3.0.0
+info:
+  title: title
+  description: 공지사항.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: haaim
+
+paths:
+  /notice/list:
+    get:
+      summary: 공지사항 목록 조회.
+      security:
+        - BasicAuth: []
+      parameters:
+        - in: query
+          name: page_no
+          schema:
+            type: integer
+            required: false
+            default: 1
+          description: 페이지 번호.
+        - in: query
+          name: page_size
+          schema:
+            type: integer
+            required: false
+            default: 1
+          description: 페이지 당 표시 개수.
+        - in: query
+          name: title
+          schema:
+            type: string
+            required: false
+          description: 검색 제목.
+        - in: query
+          name: contents
+          schema:
+            type: string
+            required: false
+          description: 검색 내용.
+        
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                typs: object
+                items:
+                  $ref: '#/components/schemas/NoticeEntity'
+  /notice/save:
+    get:
+      summary: 공지사항 저장.
+      security:
+        - BasicAuth: []
+      parameters:
+        - $ref: '#/components/schemas/NoticeEntity'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                typs: object
+                items:
+                  $ref: '#/components/schemas/NoticeEntity'
+ 
+components:
+  schemas:
+    NoticeEntity:
+      type: object
+      properties:
+        no:
+          type: integer
+        title:
+          type: string
+        contents:
+          type: string
+        state:
+          type: integer
+        input_id:
+          type: string
+        input_date:
+          type: object
+        update_id:
+          type: string
+        update_date:
+          type: object
+    
+        
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      in: header
+      
+      

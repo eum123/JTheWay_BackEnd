@@ -11,23 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageHelper;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.haaim.web.api.common.response.HaaimApiResponse;
 import net.haaim.web.api.exam.service.ExamService;
-import net.haaim.web.api.student.entity.MonthlyAttendanceStatusEntity;
 import net.haaim.web.api.student.service.StudentService;
 import net.haaim.web.api.user.entity.CustomUserDetails;
 
 @Slf4j
 @RestController
 @RequestMapping("/student")
-//@Api(value="학생 관련 api")
 @RequiredArgsConstructor
 public class StudentController {
 	
@@ -51,8 +44,6 @@ public class StudentController {
 			
 			CustomUserDetails logonUser = (CustomUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			
-			//User user = UserHelper.getUser();
-			
 			return HaaimApiResponse.getSuccessResponse(studentService.monthlyAttendanceStatus(studentNo, baseYear, baseMonth));
 		} catch (Exception e) {
 			log.error("search error", e);
@@ -61,12 +52,8 @@ public class StudentController {
 		}
 	}
 	
-//	@ApiOperation(
-//			value="학생의 월별 온라인 시험 현황.", 
-//			response = MonthlyExamStatusEntity.class)
 	@GetMapping(value = "/monthly/exam/status/{student_no}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public HaaimApiResponse monthlyOnlineStatus(
-//			@ApiParam(value="학생 번호.", required = true ) 
 			@PathVariable(value = "student_no", required = true) Integer studentNo
 			) {
 		
@@ -82,14 +69,9 @@ public class StudentController {
 		}
 	}
 	
-//	@ApiOperation(
-//			value="학생의 월별 수업 일정.", 
-//			response = MonthlyExamStatusEntity.class)
 	@GetMapping(value = "/monthly/schedule/{student_no}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public HaaimApiResponse monthlySchedule(
-//			@ApiParam(value="학생 번호.", required = true ) 
 			@PathVariable(value = "student_no", required = true) Integer studentNo,
-//			@ApiParam(value="기준 월.", required = true ) 
 			@RequestParam(value = "month", required = true) Integer baseMonth
 			) {
 		
@@ -98,16 +80,10 @@ public class StudentController {
 		return HaaimApiResponse.getErrorResponse(new Exception("구현 필요."));
 	}
 	
-//	@ApiOperation(
-//			value="학생의 온라인 테스트 목록.", 
-//			response = ExamListEntity.class)
 	@GetMapping(value = "/exam/{student_no}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public HaaimApiResponse examList(
-//			@ApiParam(value="학생 번호.", required = true ) 
 			@PathVariable(value = "student_no", required = true) Integer studentNo,
-//			@ApiParam(value="페이지 번호.", defaultValue = "1" ) 
 			@RequestParam(value = "page_no", defaultValue = "1") @Nullable Integer pageNo,
-//			@ApiParam(value="페이지 당 건수.", defaultValue = "10" ) 
 			@RequestParam(value = "page_size", defaultValue = "10") @Nullable Integer pageSize
 			) {
 		
