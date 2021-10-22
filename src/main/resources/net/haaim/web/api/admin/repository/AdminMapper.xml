@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.haaim.web.api.admin.repository.AdminMapper">
+    <select id="dailyClassInfoList" resultType="net.haaim.web.api.admin.entity.DailyClassInfoEntity">
+    	<![CDATA[
+			-- 교사Main 일별 [클래스 / 출석/ 온라인테스트 / 패스비율 / 평균점수]
+			SELECT c.class_no,
+			       c.class_name,
+			       a.date,
+			       c.pass_score,
+			       Concat_ws('/',a.tot_atd,m.total)    	atd,
+			       Concat_ws('/',e.tot_test,e.tot_mem) 	test,
+			       e.pass,
+			       e.avg 								average,
+			       c.day_time,
+			       a.name -- 팝업 노출 내용
+			FROM   class c
+			       -- 클래스별 멤버정보
+			JOIN
+			       (
+			                SELECT   class_no,
+			                         Count(*) total
+			                FROM     class_members
+			                WHERE    member_type=0
+			                AND      status IS NULL
+			                GROUP BY class_no) m
+			       -- 일별 클래스별멤버 출석 정보
+			JOIN
+			       (
+			                SELECT   a.date,
+			                         a.class_no,
+			                         Count(*) tot_atd,
+			                         Group_concat(
+			                         (
+			                                SELECT NAME
+			                                FROM   student_info
+			                                WHERE  student_no = a.student_no)) AS NAME
+			                FROM     class_mngt a
+			                WHERE    a.attendance = 1
+			                         -- and date = '20210405'
+			                GROUP BY a.date,
+			                         a.class_no) a
+			       -- 클래스 멤버의 테스트 응시여부 / 패스여부 / 평균 정보
+			JOIN
+			       (
+			                SELECT   e.class_no,
+			                         e.exam_no,
+			                         sum(IF(u.status=1,0,1))                       tot_test,
+			                         count(u.status)                               tot_mem,
+			                         sum(IF(e.goal_score < u.score,0,1))           pass,
+			                         round(sum(u.score)/sum(IF(u.status=1,0,1)),2) avg
+			                FROM     exam_list e
+			                JOIN     exam_user u
+			                WHERE    e.exam_no = u.exam_no
+			                AND      e.state = 1
+			                AND      date_format(sysdate(),'%Y%m%d') >= e.sdate
+			                AND      date_format(sysdate(),'%Y%m%d') <= e.edate
+			                GROUP BY e.class_no,
+			                         e.exam_no ) e
+			WHERE  c.class_no = m.class_no
+			AND    c.class_no = a.class_no
+			AND    c.class_no = e.class_no
+			AND    c.year='2021'
+			       -- and a.date='20210402'
+			AND    c.start_date < date_format(sysdate(),'%Y%m%d')
+			AND    c.end_date > date_format(sysdate(),'%Y%m%d')
+			AND    c.status = 0 ;
+		 ]]>
+    </select>
+   
+</mapper>

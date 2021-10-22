@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import net.haaim.web.api.exam.entity.DailyTakeExamStatusEntity;
+import net.haaim.web.api.exam.entity.ExamAverageEntity;
 import net.haaim.web.api.exam.entity.ExamListEntity;
 import net.haaim.web.api.exam.entity.MonthlyExamStatusEntity;
 
@@ -23,4 +25,17 @@ public interface ExamMapper {
 	 * @return
 	 */
 	MonthlyExamStatusEntity monthlyExamStatus(@Param("studentNo") Integer studentNo);
+	
+	/**
+	 * 주별 클래스 시험 평균.
+	 * @param startDate
+	 * @return
+	 */
+	List<ExamAverageEntity> classAverageInWeekly(@Param("start_date") String startDate);
+	
+	/**
+	 * 일자별 시험 응시 현황.
+	 * @return
+	 */
+	List<DailyTakeExamStatusEntity> dailyTakeExamStatus();
 }
