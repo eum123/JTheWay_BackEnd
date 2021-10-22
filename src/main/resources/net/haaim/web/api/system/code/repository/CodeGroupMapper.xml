@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.haaim.web.api.system.code.repository.CodeGroupMapper">
+    <select id="findAllByUseYn" resultType="net.haaim.web.api.system.code.entity.CodeGroupEntity">
+    	SELECT code, code_name, use_yn, input_id, input_date, update_id, update_date
+    	FROM code_group
+    	<choose>
+			<when test="use_yn != null">
+				WHERE use_yn = #{use_yn}
+			</when>
+		</choose>
+    </select>
+</mapper>
