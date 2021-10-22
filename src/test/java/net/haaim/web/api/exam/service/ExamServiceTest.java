@@ -11,6 +11,8 @@ import org.springframework.test.context.TestConstructor;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import net.haaim.web.api.exam.entity.DailyTakeExamStatusEntity;
+import net.haaim.web.api.exam.entity.ExamAverageEntity;
 import net.haaim.web.api.exam.entity.ExamListEntity;
 import net.haaim.web.api.exam.entity.MonthlyExamStatusEntity;
 
@@ -61,5 +63,17 @@ public class ExamServiceTest {
 		System.out.println(entity);
 		
 		//조건 비교.
+	}
+	
+	@Test
+	public void classAverageInWeeklyTest() {
+		List<ExamAverageEntity> list = service.classAverageInWeekly();
+		System.out.println(list);
+	}
+	
+	@Test
+	public void dailyTakeExamStatusTest() {
+		List<DailyTakeExamStatusEntity> list = service.dailyTakeExamStatus();
+		System.out.println(list);
 	}
 }

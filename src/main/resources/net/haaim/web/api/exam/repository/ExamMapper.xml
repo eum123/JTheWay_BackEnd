@@ -74,4 +74,47 @@
 			        ) a
 		 ]]>
     </select>
+    
+    <select id="classAverageInWeekly" resultType="net.haaim.web.api.exam.entity.ExamAverageEntity">
+    	<![CDATA[
+    		SELECT av.class_no, av.eDate as date, sum(av.avg)/count(av.exam_no) average
+			FROM (
+			SELECT e.class_no , e.exam_no, e.eDate, round(sum(u.score)/sum(if(u.status=1,0,1)),2) avg
+			FROM exam_list e join exam_user u
+			where e.exam_no = u.exam_no
+			and e.state = 1
+			and date_format(eDate,'%Y-%m-%d') in ( -- 해당 일자의 주간일자 일~토
+					SELECT
+						ADDDATE( #{start_date}, - DAYOFWEEK(#{start_date}) + 1 ) AS DAY
+					UNION ALL SELECT 
+						ADDDATE( #{start_date}, - DAYOFWEEK(#{start_date}) + 2 ) AS DAY
+					UNION ALL SELECT 
+						ADDDATE( #{start_date}, - DAYOFWEEK(#{start_date}) + 3 ) AS DAY
+					UNION ALL SELECT 
+						ADDDATE( #{start_date}, - DAYOFWEEK(#{start_date}) + 4 ) AS DAY
+					UNION ALL SELECT 
+						ADDDATE( #{start_date}, - DAYOFWEEK(#{start_date}) + 5 ) AS DAY
+					UNION ALL SELECT 
+						ADDDATE( #{start_date}, - DAYOFWEEK(#{start_date}) + 6 ) AS DAY
+					UNION ALL SELECT 
+						ADDDATE( #{start_date}, - DAYOFWEEK(#{start_date}) + 7 ) AS DAY
+				)
+			group by class_no, exam_no) av
+			
+			group by av.class_no, av.eDate;
+    	]]>
+    </select>
+    <select id="dailyTakeExamStatus" resultType="net.haaim.web.api.exam.entity.DailyTakeExamStatusEntity">
+    	<![CDATA[
+    		SELECT   e.edate                                                                        end_date,
+			         round(sum(IF(u.status=1,0,1)) /count(u.status) * 100)                          total_take,
+			         round((count(u.status) - sum(IF(u.status=1,0,1)) ) / count(u.status) * 100)    total_miss
+			FROM     exam_list e
+			JOIN     exam_user u
+			WHERE    e.exam_no = u.exam_no
+				AND      state = 1
+				AND      date_format(sysdate(),'%Y%m%d') = e.edate
+			GROUP BY e.edate;
+    	]]>
+    </select>
 </mapper>

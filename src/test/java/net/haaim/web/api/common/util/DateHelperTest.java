@@ -63,4 +63,10 @@ public class DateHelperTest {
 		
 		assertEquals(returnValue.getDayOfMonth(), 30);
 	}
+	
+	@Test
+	public void getStartDateByWeekly() {
+		String startDateWeekly = DateHelper.getStartDateByWeekly();
+		System.out.println(startDateWeekly);
+	}
 }

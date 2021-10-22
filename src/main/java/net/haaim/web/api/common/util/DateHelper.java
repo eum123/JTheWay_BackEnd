@@ -44,4 +44,15 @@ public class DateHelper {
 			return LocalDate.of(baseYear, baseMonth, YearMonth.of(baseYear, baseMonth).lengthOfMonth()).format(DateTimeFormatter.ofPattern(YYYYMMDD_FORMAT));
 		}
 	}
+	
+	/**
+	 * 현재 일자에 포함되는 주(week)의 시작 일자를 구한다.
+	 * 주 시작은 일요일.
+	 * @return
+	 */
+	public static String getStartDateByWeekly() {
+		LocalDate now = LocalDate.now();
+		LocalDate changeDate = now.minusDays(now.getDayOfWeek().getValue());
+		return changeDate.format(DateTimeFormatter.ofPattern(YYYYMMDD_FORMAT));
+	}
 }
