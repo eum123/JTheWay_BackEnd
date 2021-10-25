@@ -52,6 +52,11 @@ public class StudentController {
 		}
 	}
 	
+	/**
+	 * 학생의 월별 시험 상태.
+	 * @param studentNo
+	 * @return
+	 */
 	@GetMapping(value = "/monthly/exam/status/{student_no}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public HaaimApiResponse monthlyOnlineStatus(
 			@PathVariable(value = "student_no", required = true) Integer studentNo
@@ -80,6 +85,13 @@ public class StudentController {
 		return HaaimApiResponse.getErrorResponse(new Exception("구현 필요."));
 	}
 	
+	/**
+	 * 학생의 시험 목록.
+	 * @param studentNo
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
 	@GetMapping(value = "/exam/{student_no}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public HaaimApiResponse examList(
 			@PathVariable(value = "student_no", required = true) Integer studentNo,

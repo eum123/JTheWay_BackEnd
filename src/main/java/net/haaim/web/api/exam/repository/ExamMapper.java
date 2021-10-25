@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import net.haaim.web.api.exam.entity.DailyTakeExamStatusEntity;
 import net.haaim.web.api.exam.entity.ExamAverageEntity;
-import net.haaim.web.api.exam.entity.ExamListEntity;
+import net.haaim.web.api.exam.entity.ItemPoolEntity;
 import net.haaim.web.api.exam.entity.MonthlyExamStatusEntity;
 
 @Mapper
@@ -17,7 +17,7 @@ public interface ExamMapper {
 	 * @param studentNo
 	 * @return
 	 */
-	List<ExamListEntity> findAllByStudentNo(@Param("studentNo") Integer studentNo);
+	List<ItemPoolEntity> findAllByStudentNo(@Param("studentNo") Integer studentNo);
 	
 	/**
 	 * 특정 학생의 월별 시험 상태.

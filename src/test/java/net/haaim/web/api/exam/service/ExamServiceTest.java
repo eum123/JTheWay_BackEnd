@@ -13,7 +13,7 @@ import com.github.pagehelper.PageInfo;
 
 import net.haaim.web.api.exam.entity.DailyTakeExamStatusEntity;
 import net.haaim.web.api.exam.entity.ExamAverageEntity;
-import net.haaim.web.api.exam.entity.ExamListEntity;
+import net.haaim.web.api.exam.entity.ItemPoolEntity;
 import net.haaim.web.api.exam.entity.MonthlyExamStatusEntity;
 
 @SpringBootTest
@@ -29,7 +29,7 @@ public class ExamServiceTest {
 		//데이터 저장
 		
 		//실행.
-		List<ExamListEntity> list = service.findAllByStudentNo(1);
+		List<ItemPoolEntity> list = service.findAllByStudentNo(1);
 		System.out.println(list.size());
 		System.out.println(list);
 		
@@ -43,7 +43,7 @@ public class ExamServiceTest {
 		PageHelper.startPage(1, 5);
 		
 		//실행.
-		List<ExamListEntity> list = service.findAllByStudentNo(1);
+		List<ItemPoolEntity> list = service.findAllByStudentNo(1);
 		System.out.println(list.size());
 		System.out.println(list);
 		

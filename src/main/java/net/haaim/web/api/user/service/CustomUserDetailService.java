@@ -1,6 +1,7 @@
 package net.haaim.web.api.user.service;
 
-import org.springframework.security.core.userdetails.UserDetails;
+import java.util.List;
+
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -34,5 +35,22 @@ public class CustomUserDetailService implements UserDetailsService {
 				.password(entity.getPassword())
 				.authority(Role.getRole(entity.getUType()).getRemark())
 				.build();
+	}
+	
+	/**
+	 * 전체 목록 조회.
+	 * @return
+	 */
+	public List<UserEntity> findAll() {
+		return mapper.findAll();
+	}
+	
+	/**
+	 * 사용자 저장.
+	 * @param userEntity
+	 * @return
+	 */
+	public UserEntity save(UserEntity userEntity) {
+		return mapper.save(userEntity);
 	}
 }
