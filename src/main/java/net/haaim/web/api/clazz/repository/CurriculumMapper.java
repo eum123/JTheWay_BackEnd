@@ -11,9 +11,10 @@ public interface CurriculumMapper {
 	
 	@Insert("INSERT INTO curriculum (year, grade, course, large_category "
 			+ ", medium_category, input_id , input_date) "
-			+ "VALUES (#{entity.year}, #{entity.grade}, #{entity.course}"
-			+ ", #{entity.large_category}, #{entity.medium_category}"
-			+ ", #{entity.input_id}, NOW())")
+			+ "VALUES (#{year}, #{grade}, #{course}"
+			+ ", #{largeCategory}, #{mediumCategory}"
+			+ ", #{inputId}, NOW())")
 	@Options(useGeneratedKeys = true, keyProperty = "cno")
 	Integer save(CurriculumEntity entity);
 }
+
