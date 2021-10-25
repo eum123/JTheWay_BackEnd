@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="net.haaim.web.api.exam.repository.ExamMapper">
-    <select id="findAllByStudentNo" resultType="net.haaim.web.api.exam.entity.ExamListEntity">
+    <select id="findAllByStudentNo" resultType="net.haaim.web.api.exam.entity.ExamItemEntity">
     	<![CDATA[
 			SELECT   c.year,
 			         b.class_no,

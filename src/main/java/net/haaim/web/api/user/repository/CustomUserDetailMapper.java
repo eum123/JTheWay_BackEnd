@@ -25,9 +25,9 @@ public interface CustomUserDetailMapper {
 	public List<UserEntity> findAll();
 	
 	@Insert("INSERT INTO user (id , pwd , utype, name, mobile, email, state, input_id, input_date, update_id, update_date )"
-			+ " VALUES (#{user.user_name), #{user.password} , #{user.u_type}, #{user.student_no}"
-			+ ", #{user.name}, #{user.mobile}, #{user.email}, , #{user.state}, , #{user.input_Id}"
-			+ ", #{user.input_date} )")
+			+ " VALUES (#{userName}, #{password} , #{uType}, #{studentNo}"
+			+ ", #{name}, #{mobile}, #{email}, , #{state}, , #{inputId}"
+			+ ", #{input_date} )")
 	UserEntity save(UserEntity user);
 	
 }
