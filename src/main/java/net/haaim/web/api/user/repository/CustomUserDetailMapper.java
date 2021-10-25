@@ -12,10 +12,10 @@ import net.haaim.web.api.user.entity.UserEntity;
 @Mapper
 public interface CustomUserDetailMapper {
 
-	@Select("SELECT id as user_name, pwd as password, utype as u_type "
+	@Select("SELECT id user_name, pwd as password, utype as u_type "
 			+ " , name, mobile, email, state, input_id, input_date, update_id, update_date"
-			+ "FROM user "
-			+ "WHERE use_yn = 1 AND id = #{user_name}")
+			+ " FROM user "
+			+ " WHERE use_yn = 1 AND id = #{user_name}")
 	public UserEntity findById(@Param("user_name") String userName);
 	
 	

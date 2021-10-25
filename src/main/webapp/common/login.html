@@ -13,16 +13,17 @@
   </head>
   <body class="gray-bg">
     <div class="middle-box text-center loginscreen animated fadeInDown">
-      <div>
+      <div id="app">
         <div>
-          <h1 class="logo-name">sample</h1>
+          <h1 class="logo-name">Haaim</h1>
         </div>
 
         <p>Login in. To see it in action.</p>
-        <form class="m-t" role="form" action="index.html">
+        <form class="m-t" role="form" action="/user/login" method='POST'>
           <div class="form-group">
             <input
-              type="email"
+              type="input"
+              name = "username"
               class="form-control"
               placeholder="Username"
               required=""
@@ -31,6 +32,7 @@
           <div class="form-group">
             <input
               type="password"
+              name="password"
               class="form-control"
               placeholder="Password"
               required=""
@@ -56,5 +58,26 @@
     <script src="/theme/js/jquery-3.1.1.min.js"></script>
     <script src="/theme/js/popper.min.js"></script>
     <script src="/theme/js/bootstrap.js"></script>
+    <!-- jQuery UI -->
+    <script src="/theme/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    
+    <script>
+    	var data = {};
+      
+    	var vm = new Vue({
+        el: "#app",
+        data() {
+          return data;
+        },
+        methods: {
+          login: function() {
+			
+          }
+        }
+      });
+    </script>
   </body>
 </html>
