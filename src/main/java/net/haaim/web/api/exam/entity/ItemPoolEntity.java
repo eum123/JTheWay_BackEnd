@@ -8,11 +8,12 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.haaim.web.api.common.entity.CommonEntity;
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Data
-public class ExamListEntity {
+public class ItemPoolEntity extends CommonEntity {
 	/* 일자 */
 	private Integer year;
 	

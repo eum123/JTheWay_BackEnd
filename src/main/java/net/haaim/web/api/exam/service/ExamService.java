@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import net.haaim.web.api.common.util.DateHelper;
 import net.haaim.web.api.exam.entity.DailyTakeExamStatusEntity;
 import net.haaim.web.api.exam.entity.ExamAverageEntity;
-import net.haaim.web.api.exam.entity.ExamListEntity;
+import net.haaim.web.api.exam.entity.ItemPoolEntity;
 import net.haaim.web.api.exam.entity.MonthlyExamStatusEntity;
 import net.haaim.web.api.exam.repository.ExamMapper;
 
@@ -25,7 +25,7 @@ public class ExamService {
 	 * @param pageSize
 	 * @return
 	 */
-	public List<ExamListEntity> findAllByStudentNo(Integer studentNo) {
+	public List<ItemPoolEntity> findAllByStudentNo(Integer studentNo) {
 		return examMapper.findAllByStudentNo(studentNo);
 	}
 	

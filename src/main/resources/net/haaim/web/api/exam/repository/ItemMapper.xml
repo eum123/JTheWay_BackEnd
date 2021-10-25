@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.haaim.web.api.exam.repository.ItemMapper">
+    <select id="findAllByGradeOrCourseOrMediumCategoryOrUserYnOrQuestion" resultType="net.haaim.web.api.exam.entity.ItemPoolEntity">
+    	SELECT item_no, year, grade, course, large_category
+    		, medium_category, type_group, type, question_type, question
+    		, choice1, choice2, choice3, choice4, choice5, file_path
+    		, mark_type, answer, answer_path, publisher, workbook
+    		, level_difficulty, use_yn, input_id, input_date, update_id, update_date
+    	FROM item_pool
+    	WHERE 1=1
+    		
+    	<if test="year != null">
+			OR year = #{year} 
+		</if>
+		<if test="grade != null">
+			OR grade = #{grade} 
+		</if>
+		<if test="course != null">
+			OR course = #{course} 
+		</if>
+		<if test="medium_category != null">
+			OR medium_category = #{medium_category} 
+		</if>
+		<if test="use_yn != null">
+			OR use_yn = #{use_yn} 
+		</if>
+		<if test="question != null">
+			OR question = #{question} 
+		</if>
+    </select>
+    
+</mapper>
