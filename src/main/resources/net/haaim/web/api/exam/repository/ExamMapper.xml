@@ -53,25 +53,22 @@
     </select>
     <select id="monthlyExamStatus" resultType="net.haaim.web.api.exam.entity.MonthlyExamStatusEntity">
     	<![CDATA[
-			SELECT Sum(a.pass) pass,
-			       Sum(fail)   fail
-			FROM   (
-			                SELECT   e.class_no,
-			                         e.exam_no,
-			                         sum(IF(e.goal_score <= u.score,1,0)) pass,
-			                         sum(IF(e.goal_score > u.score,1,0))  fail,
-			                         u.score,
-			                         e.goal_score
-			                FROM     exam_list e
-			                JOIN     exam_user u
-			                WHERE    e.exam_no = u.exam_no
-			                AND      e.state = 1
-			                AND      u.student_no = #{studentNo}
-			                AND      date_format(sysdate(),'%Y%m%d') >= e.sdate
-			                AND      date_format(sysdate(),'%Y%m%d') <= e.edate
-			                GROUP BY e.class_no,
-			                         e.exam_no 
-			        ) a
+			SELECT Sum(a.pass) pass, Sum(a.fail)   fail
+			FROM (
+				SELECT   e.class_no,
+						 e.exam_no,
+						 IF(e.goal_score <= u.score,1,0) pass,
+						 IF(e.goal_score > u.score,1,0) fail,
+						 u.score,
+						 e.goal_score
+				FROM     exam_list e
+					JOIN     exam_user u ON e.exam_no = u.exam_no
+				WHERE    e.state = 1
+					AND      u.student_no = #{studentNo}
+					AND      date_format(sysdate(),'%Y%m%d') >= e.sdate
+					AND      date_format(sysdate(),'%Y%m%d') <= e.edate
+			) a
+			GROUP BY a.pass, a.fail;
 		 ]]>
     </select>
     

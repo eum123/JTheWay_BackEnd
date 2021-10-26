@@ -70,7 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 					, "/swagger-ui-custom.html", "/health", "/swagger/**", "/swagger-resources/**"
 					, "/v2/api-docs", "/v3/api-docs/", "/v3/api-docs/**", "/*.yaml").permitAll()	
 			.antMatchers("/admin/**").hasAnyAuthority(Role.DIRECTOR.getRemark(), Role.CODY.getRemark(), Role.MANAGER.getRemark(), Role.TEACHER.getRemark())
-			.antMatchers("/student/**").hasAuthority(Role.STUDENT.getRemark())
+			.antMatchers("/student/**").hasAnyAuthority(Role.STUDENT.getRemark(), Role.DIRECTOR.getRemark(), Role.CODY.getRemark(), Role.MANAGER.getRemark(), Role.TEACHER.getRemark())
 //			.anyRequest().permitAll()
 			.anyRequest().authenticated()
 			;
