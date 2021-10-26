@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 
 import net.haaim.web.api.clazz.entity.ClassEntity;
+import net.haaim.web.api.clazz.entity.DailyClassAttendanceEntity;
 
 @Mapper
 public interface ClassMapper {
@@ -18,4 +19,10 @@ public interface ClassMapper {
 			+ ", #{inputId}, NOW())")
 	@Options(useGeneratedKeys = true, keyProperty = "class_no")
 	Integer save(ClassEntity entity);
+	
+	/**
+	 * 일별 출결 현황.
+	 * @return
+	 */
+	DailyClassAttendanceEntity dailyClassAttendance();
 }

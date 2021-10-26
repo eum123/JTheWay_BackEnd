@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import net.haaim.web.api.clazz.entity.ClassEntity;
+import net.haaim.web.api.clazz.entity.DailyClassAttendanceEntity;
 import net.haaim.web.api.clazz.repository.ClassMapper;
 
 @RequiredArgsConstructor
@@ -18,5 +19,9 @@ public class ClassService {
 		entity.setClassNo(classNo);
 		
 		return entity;
+	}
+	
+	public DailyClassAttendanceEntity dailyClassAttendance() {
+		return null;
 	}
 }

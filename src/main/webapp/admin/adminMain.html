@@ -8,21 +8,21 @@
 
     <title>haami</title>
 
-    <link href="../theme/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../theme/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="/theme/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/theme/font-awesome/css/font-awesome.css" rel="stylesheet" />
 
-    <link href="../theme/css/animate.css" rel="stylesheet" />
-    <link href="../theme/css/style.css" rel="stylesheet" />
-    <link href="../theme/css/plugins/datapicker/datepicker3.css" rel="stylesheet" />
+    <link href="/theme/css/animate.css" rel="stylesheet" />
+    <link href="/theme/css/style.css" rel="stylesheet" />
+    <link href="/theme/css/plugins/datapicker/datepicker3.css" rel="stylesheet" />
 
-    <link href="../theme/css/plugins/fullcalendar/fullcalendar.css" rel="stylesheet" />
-    <link href="../theme/css/plugins/fullcalendar/fullcalendar.print.css" rel="stylesheet" media="print" />
+    <link href="/theme/css/plugins/fullcalendar/fullcalendar.css" rel="stylesheet" />
+    <link href="/theme/css/plugins/fullcalendar/fullcalendar.print.css" rel="stylesheet" media="print" />
 
     <!-- c3 Charts -->
-    <link href="../theme/css/plugins/c3/c3.min.css" rel="stylesheet" />
+    <link href="/theme/css/plugins/c3/c3.min.css" rel="stylesheet" />
 
     <!-- FooTable -->
-    <link href="../theme/css/plugins/footable/footable.core.css" rel="stylesheet" />
+    <link href="/theme/css/plugins/footable/footable.core.css" rel="stylesheet" />
     <style>
         .fixedlabel {
             min-width: 130px !important;
@@ -38,29 +38,39 @@
 
             <nav class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
-                    <ul class="nav metismenu" id="side-menu">
-                        <li class="nav-header">
-                            <div class="dropdown profile-element">
-                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                    <span class="block m-t-xs font-bold">{{menu.user}}</span>
-                                    <span class="text-muted text-xs block">{{menu.auth}} <b class="caret"></b
-                    ></span>
-                                </a>
-                                <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                    <li>
-                                        <a class="dropdown-item" href="profile.html">Profile</a>
-                                    </li>
-                                    <li class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="login.html">Logout</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="active" v-for="menuItme in menu.list">
-                            <a :href="menuItme.link"><i class="fa fa-th-large"></i>
-                  <span class="nav-label">{{menuItme.name}}</span>
-                  </a>
-                        </li>
-                    </ul>
+                  <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="block m-t-xs font-bold">{{left.info.user}}</span>
+                                <span class="text-muted text-xs block">{{left.info.auth}} <b class="caret"></b></span>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li>
+                                    <a class="dropdown-item" href="profile.html">Profile</a>
+                                </li>
+                                <li class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="login.html">Logout</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li v-for="menuItem in left.menu">
+                        <a v-if="menuItem.secondary.length > 1" :href="menuItem.primary.url"><i class="fa fa-th-large"></i>
+                          <span class="nav-label">{{menuItem.primary.menu_name}}</span>
+                          <span  class="fa arrow"></span>
+                        </a>
+                        <a v-else :href="menuItem.primary.url"><i class="fa fa-th-large"></i>
+                          <span class="nav-label">{{menuItem.primary.menu_name}}</span>
+                        </a>
+
+                        <ul v-if="menuItem.secondary.length > 1" class="nav nav-second-level collapse">
+                            <li v-for="sub in menuItem.secondary">
+                                <a :href="sub.url">{{sub.menu_name}}</a>
+                            </li>
+                        </ul>
+                    </li>
+                  </ul>
                 </div>
             </nav>
 
@@ -89,9 +99,7 @@
             </nav>
           </div>
           <!-- end top -->
-          <div class="row border-bottom white-bg dashboard-header">
-            navigation
-          </div>
+          
           <div class="wrapper wrapper-content">
             <div>
               <div class="row col-lg-12" id="empty">
@@ -170,7 +178,7 @@
                         </thead>
 
                         <tbody>
-                          <tr class="gradeA" v-for="clazz in classInfo">
+                          <tr class="gradeA" v-for="clazz in body.classInfo">
                             <td class="text-center">{{clazz.class}}</td>
                             <td class="text-center">{{clazz.appearance}}</td>
                             <td class="text-center">{{clazz.examination}}</td>
@@ -326,41 +334,41 @@
       </div>
     </div>
 
-    <script src="../resources/js/api.js"></script>
-    <script src="../resources/js/common.js"></script>
+    <script src="/resources/js/api.js"></script>
+    <script src="/resources/js/common.js"></script>
 
-    <script src="../theme/js/plugins/fullcalendar/moment.min.js"></script>
+    <script src="/theme/js/plugins/fullcalendar/moment.min.js"></script>
     <!-- Mainly scripts -->
-    <script src="../theme/js/jquery-3.1.1.min.js"></script>
-    <script src="../theme/js/popper.min.js"></script>
-    <script src="../theme/js/bootstrap.js"></script>
-    <script src="../theme/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="../theme/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/theme/js/jquery-3.1.1.min.js"></script>
+    <script src="/theme/js/popper.min.js"></script>
+    <script src="/theme/js/bootstrap.js"></script>
+    <script src="/theme/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/theme/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
     <!-- jQuery UI -->
-    <script src="../theme/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/theme/js/plugins/jquery-ui/jquery-ui.min.js"></script>
 
     <!-- Data picker -->
-    <script src="../theme/js/plugins/datapicker/bootstrap-datepicker.js"></script>
-    <script src="../theme/js/plugins/datapicker/bootstrap-datepicker.ko.js"></script>
+    <script src="/theme/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="/theme/js/plugins/datapicker/bootstrap-datepicker.ko.js"></script>
 
     <!-- Custom and plugin javascript -->
-    <script src="../theme/js/inspinia.js"></script>
-    <script src="../theme/js/plugins/pace/pace.min.js"></script>
+    <script src="/theme/js/inspinia.js"></script>
+    <script src="/theme/js/plugins/pace/pace.min.js"></script>
 
     <!-- FooTable -->
-    <script src="../theme/js/plugins/footable/footable.all.min.js"></script>
+    <script src="/theme/js/plugins/footable/footable.all.min.js"></script>
 
     <!-- ChartJS-->
-    <script src="../theme/js/plugins/d3/d3.min.js"></script>
-    <script src="../theme/js/plugins/c3/c3.min.js"></script>
+    <script src="/theme/js/plugins/d3/d3.min.js"></script>
+    <script src="/theme/js/plugins/c3/c3.min.js"></script>
 
     <!-- vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
     
     <!-- Custom and plugin javascript 왼쪽 메뉴용 -->
-    <script src="../../theme/js/inspinia.js"></script>
-    <script src="../../theme/js/plugins/pace/pace.min.js"></script>
+    <script src="/theme/js/inspinia.js"></script>
+    <script src="/theme/js/plugins/pace/pace.min.js"></script>
     
     <script>
       $(document).ready(function () {
@@ -369,8 +377,23 @@
 
       $(".footable").footable();
 
-      var data = new Object();
-      init();
+      var data = {
+          left: {
+              info: "",
+              menu: ""
+          },
+          body: {
+              list: {
+                  pageInfo: ""
+              },
+              classInfo:"",
+              attendance: "",
+              exam: "",
+              weeklyAverage: "",
+              weeklySchedule: ""
+          }
+      };
+      
 
       var vm = new Vue({
         el: "#app",
@@ -401,13 +424,59 @@
             data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
 
             //menu
-            get("/menu/all", null,
+            get("/system/menu/all", null,
                 function(res) {
                     data.left.menu = res.data;
                 }
             );
 
+            //수업정보
+            get("/admin/class/info/list", null,
+                function(res) {
+                    data.left.classInfo = res.data;
+                }
+            );
+
+            //출석률.
+            // var now = new Date();	// 현재 날짜 및 시간
+            // var attendance_search = {
+            //   year: now.getFullYear(),
+            //   month: now.getMonth()
+            // }
+            get("/class//daily/attendance", null,
+                function(res) {
+                    data.left.attendance = res.data;
+                }
+            );
+
+            //온라인 테스트 응시.
+            get("/exam/class/take/status", null,
+                function(res) {
+                    data.left.exam = res.data;
+                }
+            );
+
+            //주간 시험 평균.
+            var term = "1";
+            get("/exam/class/average", term,
+                function(res) {
+                    data.left.weeklyAverage = res.data;
+                }
+            );
+
+            //주간 일정.
+            var term = "1";
+            get("/exam/class/average", term,
+                function(res) {
+                    data.left.weeklySchedule = res.data;
+                }
+            );
+
+
+            console.log(data);
             
+
+           
         },
       });
 
@@ -442,6 +511,9 @@
           type: "pie",
         },
       });
+      
+
+      
 
       //온라인 테스트 결과
       var scoreChart = c3.generate({
@@ -454,26 +526,16 @@
         },
       });
 
-      //클래스 정보 수신 데이터 처리
-      function classInfo(res) {
-        if (res != null) {
-          //test
-          data.classInfo = JSON.parse(
-            '[{"class":"클래스1","appearance":"5/6","examination":"6/6","pass":"90%","average":"82"},{"class":"클래스2","appearance":"5/6","examination":"6/6","pass":"90%","average":"82"}]'
-          );
-        }
-      }
+      
       //출석률/응시률
-      function rate(res) {
+      function rate() {
         if (res != null) {
-          //test
-          data.rate = JSON.parse('{"appearance":30,"examination":80}');
-
+          
           //출석율 그래프 변경
           setTimeout(function () {
             var updateData = [
-              ["출석", data.rate.examination],
-              ["결석", 100 - data.rate.examination],
+              ["출석", data.body.attendance.totalAttendance],
+              ["결석", 100 - data.body.attendance.totalAbsent],
             ];
 
             appChart.load({
@@ -483,8 +545,8 @@
           //응시률 그래프 변경
           setTimeout(function () {
             var updateData = [
-              ["응시", data.rate.appearance],
-              ["미응시", 100 - data.rate.appearance],
+              ["응시", data.body.exam.totalTake],
+              ["미응시", 100 - data.body.exam.totalMiss],
             ];
 
             examChart.load({
@@ -518,53 +580,7 @@
         }
       }
 
-      function menu(res){
-         if (res != null) {
-          data.menu = JSON.parse('{"user":"장덕일","Auth":"원장","list":[{"name":"사용자관리","link":"/admin/user/userList.html"},{"name":"시스템관리","link":"/admin/system/codeList.html"}]}')
-         }
-      }
-
-      function init() {
-        //menu
-        syncGet(
-          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-          "",
-          menu,
-          null
-        );
-
-        //클래스 정보
-        syncGet(
-          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-          "",
-          classInfo,
-          null
-        );
-
-        //출석률/응시률
-        syncGet(
-          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-          "",
-          rate,
-          null
-        );
-
-        //주별 시험 그래프
-        syncGet(
-          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-          "",
-          weeklyExam,
-          null
-        );
-
-        //주별일정
-        syncGet(
-          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-          "",
-          weeklySchedule,
-          null
-        );
-      }
+    
     </script>
   </body>
 </html>
