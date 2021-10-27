@@ -2,6 +2,8 @@ package net.haaim.web.api.system.code.service;
 
 import java.util.List;
 
+import javax.validation.constraints.Pattern;
+
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;

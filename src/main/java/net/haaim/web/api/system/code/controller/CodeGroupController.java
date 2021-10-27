@@ -27,7 +27,11 @@ public class CodeGroupController {
 	
 	private final CodeGroupService codeGroupService;
 
-	
+	/**
+	 * 코드 그룹 저장.
+	 * @param entity
+	 * @return
+	 */
 	@PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
 	public HaaimApiResponse save(@RequestBody CodeGroupEntity entity) {
 
@@ -46,13 +50,10 @@ public class CodeGroupController {
 	@GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
 	public HaaimApiResponse list(@RequestParam(value = "page_no", defaultValue = "1") @Nullable Integer pageNo,
 			@RequestParam(value = "page_size", defaultValue = "10") @Nullable Integer pageSize,
-			@RequestParam(value = "use_yn", required = false) @Nullable Integer userYn) {
+			@RequestParam(value = "use_yn", required = false, defaultValue = "1") @Nullable Integer userYn) {
 
 		try {
-
-			// mybatis paging
-			PageHelper.startPage(pageNo, pageSize);
-
+			
 			return HaaimApiResponse.getSuccessResponse(codeGroupService.findAllByUseYn(userYn));
 		} catch (Exception e) {
 			log.error("search error", e);

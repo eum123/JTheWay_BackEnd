@@ -27,7 +27,7 @@ public class CodeServiceTest {
 		//데이터 저장
 		
 		//실행.
-		List<CodeEntity> list = serivce.findAllByUseYn(null);
+		List<CodeEntity> list = serivce.findAllByCodeNameAndUseYn(null, null);
 		System.out.println(list.size());
 		System.out.println(list);
 		
@@ -39,7 +39,7 @@ public class CodeServiceTest {
 		//데이터 저장
 		
 		//실행.
-		List<CodeEntity> list = serivce.findAllByUseYn(1);
+		List<CodeEntity> list = serivce.findAllByCodeNameAndUseYn(null, 1);
 		System.out.println(list.size());
 		System.out.println(list);
 		
