@@ -1,5 +1,7 @@
 package net.haaim.web.api.notice.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +16,7 @@ import com.github.pagehelper.PageHelper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.haaim.web.api.common.page.SpringPageHelper;
 import net.haaim.web.api.common.response.HaaimApiResponse;
 import net.haaim.web.api.notice.entity.NoticeEntity;
 import net.haaim.web.api.notice.service.NoticeService;
@@ -31,7 +34,8 @@ public class NoticeController {
 	public HaaimApiResponse save(@RequestBody NoticeEntity entity) {
 
 		try {
-			CustomUserDetails logonUser = (CustomUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			CustomUserDetails logonUser = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
+					.getPrincipal();
 			entity.setInputId(logonUser.getUsername());
 
 			return HaaimApiResponse.getSuccessResponse(noticeService.save(entity));
@@ -53,8 +57,8 @@ public class NoticeController {
 			// mybatis paging
 			PageHelper.startPage(pageNo, pageSize);
 
-			return HaaimApiResponse.getSuccessResponse(
-					noticeService.findAllByStateAndTitleOrContens(NoticeEntity.VIEW, title, contents));
+			return HaaimApiResponse.getSuccessResponse(SpringPageHelper.convertSpringPage(
+					noticeService.findAllByStateAndTitleOrContens(NoticeEntity.VIEW, title, contents)));
 		} catch (Exception e) {
 			log.error("search error", e);
 			return HaaimApiResponse.getErrorResponse(e);

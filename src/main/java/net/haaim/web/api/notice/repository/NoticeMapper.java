@@ -1,11 +1,11 @@
 package net.haaim.web.api.notice.repository;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
+
+import com.github.pagehelper.Page;
 
 import net.haaim.web.api.notice.entity.NoticeEntity;
 
@@ -13,7 +13,7 @@ import net.haaim.web.api.notice.entity.NoticeEntity;
 public interface NoticeMapper {
 	
 	@Insert("INSERT INTO notice (title, contents, state, input_id, input_date) "
-			+ "VALUES (#{title}, #{contents}, #{state}, #{input_id}, NOW())")
+			+ "VALUES (#{title}, #{contents}, #{state}, #{inputId}, NOW())")
 	@Options(useGeneratedKeys = true, keyProperty = "no")
 	Integer save(NoticeEntity entity);
 	
@@ -24,7 +24,7 @@ public interface NoticeMapper {
 	 * @param contents
 	 * @return
 	 */
-	List<NoticeEntity> findAllByStateAndTitleOrContens(
+	Page<NoticeEntity> findAllByStateAndTitleOrContens(
 			@Param("state") Integer state
 			, @Param("title") String title
 			, @Param("contents") String contents);

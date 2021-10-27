@@ -23,6 +23,38 @@ function post(url, param, successFunc, failFunc) {
     this.call("POST", url, param, successFunc, failFunc);
 }
 
+/**
+ *
+ * @param {*} url 접속 URL
+ * @param {*} param param
+ * @param {*} successFunc 성공일때 호출할 함수 (data)
+ * @param {*} failFunc 실패일때 호출할 함수 (request, status, error)
+ */
+function postJson(url, param, successFunc, failFunc) {
+    this.callJson("POST", url, param, successFunc, failFunc);
+}
+
+function callJson(httpMethod, url, param, successFunc, failFunc) {
+    $.ajax({
+        type: httpMethod,
+        url: url,
+        data: JSON.stringify(param),
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        success: function(res) {
+            if (res != null) {
+                if (successFunc != null) {
+                    successFunc(res);
+                }
+            }
+        },
+        error: function(req, status, error) {
+            if (failFunc != null) failFunc(req, status, error);
+        },
+    });
+}
+
 function call(httpMethod, url, param, successFunc, failFunc) {
     $.ajax({
         type: httpMethod,
