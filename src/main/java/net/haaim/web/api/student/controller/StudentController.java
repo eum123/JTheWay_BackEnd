@@ -1,11 +1,13 @@
 package net.haaim.web.api.student.controller;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,10 +15,12 @@ import com.github.pagehelper.PageHelper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.haaim.web.api.common.page.SpringPageHelper;
 import net.haaim.web.api.common.response.HaaimApiResponse;
 import net.haaim.web.api.exam.service.ExamService;
 import net.haaim.web.api.student.service.StudentService;
 import net.haaim.web.api.user.entity.CustomUserDetails;
+import net.haaim.web.common.request.CustomPageRequest;
 
 @Slf4j
 @RestController
@@ -85,28 +89,30 @@ public class StudentController {
 		return HaaimApiResponse.getErrorResponse(new Exception("구현 필요."));
 	}
 	
+	
 	/**
-	 * 학생의 시험 목록.
-	 * @param studentNo
-	 * @param pageNo
-	 * @param pageSize
+	 * 학생 목록.
+	 * @param page
+	 * @param size
 	 * @return
 	 */
-	@GetMapping(value = "/exam/{student_no}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public HaaimApiResponse examList(
-			@PathVariable(value = "student_no", required = true) Integer studentNo,
-			@RequestParam(value = "page_no", defaultValue = "1") @Nullable Integer pageNo,
-			@RequestParam(value = "page_size", defaultValue = "10") @Nullable Integer pageSize
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public HaaimApiResponse findAll(@RequestParam(value = "page_no", defaultValue = "1") @Nullable Integer pageNo,
+			@RequestParam(value = "page_size", defaultValue = "10") @Nullable Integer pageSize,
+			@RequestParam(value = "year") @Nullable Integer year,
+			@RequestParam(value = "class_no") @Nullable Integer classNo,
+			@RequestParam(value = "keyword") @Nullable String keyword
 			) {
-		
+
 		try {
-			
-			//mybatis paging
+
+			// mybatis paging
 			PageHelper.startPage(pageNo, pageSize);
-			
-			return HaaimApiResponse.getSuccessResponse(examService.findAllByStudentNo(studentNo));
+
+			return HaaimApiResponse.getSuccessResponse(SpringPageHelper.convertSpringPage(studentService.findAllByYearAnyClassNoAndKeyword(year, classNo, keyword)));
 		} catch (Exception e) {
 			log.error("search error", e);
+
 			return HaaimApiResponse.getErrorResponse(e);
 
 		}

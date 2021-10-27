@@ -1,5 +1,7 @@
 package net.haaim.web.api.clazz.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -23,5 +25,9 @@ public class ClassService {
 	
 	public DailyClassAttendanceEntity dailyClassAttendance() {
 		return null;
+	}
+	
+	public List<ClassEntity> findAllStatus(Integer status) {
+		return mapper.findAllByStatus(status);
 	}
 }

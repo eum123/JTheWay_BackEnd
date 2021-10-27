@@ -3,7 +3,7 @@ package net.haaim.web.api.system.menu.controller;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +25,7 @@ public class MenuController {
 	private final MenuService menuService;
 	
 
-	@PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
 	public HaaimApiResponse save(
 			@RequestBody MenuEntity entity ) {
 
