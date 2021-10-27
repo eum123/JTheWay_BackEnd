@@ -1,8 +1,10 @@
 package net.haaim.web.api.clazz.controller;
 
 import org.springframework.http.MediaType;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
@@ -37,5 +39,20 @@ public class ClassController {
 		}
 	}
 	
-	
+	/**
+	 * class 목록 조회.
+	 * @param status
+	 * @return
+	 */
+	@GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
+	public HaaimApiResponse findAll(
+			@RequestParam(value = "status", defaultValue = "1") @Nullable Integer status) {
+		try {
+			return HaaimApiResponse.getSuccessResponse(classService.findAllStatus(status));
+		} catch (Exception e) {
+			log.error("search error", e);
+			return HaaimApiResponse.getErrorResponse(e);
+
+		}
+	}
 }

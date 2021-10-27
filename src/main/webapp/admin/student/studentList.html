@@ -115,16 +115,26 @@
                       <div class="row">
                         <form role="form" class="form-inline">
                           <div class="form-group">
-                            <select class="form-control" name="account">
-                              <option>2020</option>
-                              <option>2019</option>
-                              <option>2018</option>
+                            <select class="form-control" id="year">
+                              <option value="2030">2030</option>
+                              <option value="2029">2029</option>
+                              <option value="2028">2028</option>
+                              <option value="2027">2027</option>
+                              <option value="2026">2026</option>
+                              <option value="2025">2025</option>
+                              <option value="2024">2024</option>
+                              <option value="2023">2023</option>
+                              <option value="2022">2022</option>
+                              <option value="2021">2021</option>
+                              <option value="2020">2020</option>
+                              <option value="2019">2019</option>
+                              <option value="2018">2018</option>
                             </select>
                           </div>
                           <div class="form-group">
-                            <select class="form-control" name="account">
-                              <option>클래스1</option>
-                              <option>클래서2</option>
+                            <select class="form-control" name="class_no">
+                              <option v-for="clazz in body.class" v-bind:value=clazz.class_no >[{{clazz.year}}]{{clazz.class_name}}</option>
+                             
                             </select>
                           </div>
                           <div class="form-group">
@@ -132,18 +142,19 @@
                               type="text"
                               placeholder="이름이나 전화번호"
                               class="form-control"
+                              id="keyword"
                             />
                           </div>
                           <div class="form-group">
                             <button
                               type="button"
-                              class="btn btn-w-m btn-success"
+                              class="btn btn-w-m btn-success" @click="search"
                             >
                               검색
                             </button>
                             <button
                               type="button"
-                              class="btn btn-w-m btn-primary"
+                              class="btn btn-w-m btn-primary" @click="goRegist"
                             >
                               등록
                             </button>
@@ -186,16 +197,16 @@
                               {{element.school}}/{{element.grade}}
                             </td>
                             <td class="text-center">
-                              {{element.class}}
+                              {{element.class_name}}
                             </td>
                             <td class="text-center">
                               {{element.name}}
                             </td>
                             <td class="text-center">
-                              {{element.studentMobile}}
+                              {{element.mobile}}
                             </td>
-                            <td class="text-center">{{element.prentMobile}}</td>
-                            <td class="text-center">{{element.regDate}}</td>
+                            <td class="text-center">{{element.parent1_mobile}}/{{element.parent2_mobile}}</td>
+                            <td class="text-center">{{element.input_date}}</td>
                           </tr>
                         </tbody>
                         <tfoot>
@@ -265,7 +276,7 @@
     <script>
     
       $(document).ready(function () {
-        $("#footer").load("../../admin/common/footer.html");
+        $("#footer").load("/admin/common/footer.html");
       });
 
       var data = {
@@ -277,6 +288,7 @@
               list: {
                   pageInfo: ""
               },
+              class: ""   //class 목록
           }
       };
 
@@ -338,14 +350,20 @@
               }
           );
 
-          //code
-          // data.student = JSON.parse(
-          // '{"list":[{"no":"1","school":"2020","grade":"2","class":"class","name":"홍길동","studentMobile":"01001112222","parentMobile":"01001113333","regDate":"2020.05.01"}],"pagination":{"total":10,"countPerPage":10}}'
-          // );
-          getPage(1, "/student/all", null,
+          //class 목록.
+          get("/class/list", null,
+              function(res) {
+                  data.body.class = res.data;
+                  console.log(data.body.class);
+              }
+          );
+
+          getPage(1, "/student/list", null,
               function(res, pageInfo) {
                   data.body.list = res.data;
                   data.body.list.pageInfo = pageInfo;
+
+                  console.log(res.data);
               },
               null
           );
@@ -358,7 +376,7 @@
           //start loading
           toggleLoading();
 
-          getPage(page, "/student/search", parameter,
+          getPage(page, "/student/list", parameter,
               function(res, pageInfo) {
                   data.body.list = res.data;
                   data.body.list.pageInfo = pageInfo;
@@ -373,15 +391,21 @@
        * 검색 조건으로 parameter 생성
        */
       function getSearchParameter() {
-        var questionDate = $("#questionDate").val(); //출제일자
-        var isTakeExam = $("#isTakeExam option:selected").val(); //응시 여부
+        
+        var year = $("#year option:selected").val(); //
+        var class_no = $("#class_no").val();
+        var keyword = $("#keyword").val();
 
         var param = "";
-        if (isTakeExam != "") {
-          param = "isTakeExam=" + isTakeExam;
+        if (year != "") {
+          param.year = year;
         }
-        if (questionDate != "") {
-          param = "questionDate=" + questionDate + "," + param;
+        if (class_no != "") {
+          param.class_no = class_no;
+        }
+
+        if(keyword != "") {
+          param.keyword = keyword;
         }
 
         return param;

@@ -169,10 +169,10 @@
                       <div class="row">
                         <form role="form" class="form-inline">
                           <div class="form-group">
-                            <button type="button" class="btn btn-w-m btn-default">
+                            <button type="button" class="btn btn-w-m btn-default" @click="cancel">
                               취소
                             </button>
-                            <button type="button" class="btn btn-w-m btn-success" >
+                            <button type="button" class="btn btn-w-m btn-success" @click = "regist" >
                               등록
                             </button>
                           </div>
@@ -247,6 +247,34 @@
               }
           );
         },
+        methods: {
+          regist: function() {
+            var code = $("#add_group_code").val(); //코드 그룹
+            var name = $("#add_group_code_name").val(); //코드 그룹
+
+            var param = new Object();
+            param.code = code;
+            param.code_name = name;
+            param.use_yn = 1;
+
+            callJson(
+                "PUT",
+                "/system/menu/save",
+                param,
+                function(res) {
+                    if (res != null) {
+                      location.href = "/admin/system/menuList.html";
+                    }
+                },
+                function() {
+                    alert("group code 저장 오류");
+                }
+            );
+          }, 
+          cacel: function() {
+            location.href = "/admin/system/menuList.html";
+          }
+        }
       });
 
       

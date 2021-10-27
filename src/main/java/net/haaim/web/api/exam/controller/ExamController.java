@@ -3,9 +3,12 @@ package net.haaim.web.api.exam.controller;
 import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.github.pagehelper.PageHelper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -82,6 +85,33 @@ public class ExamController {
 				
 			return HaaimApiResponse.getSuccessResponse(itemService.findAllByGradeOrCourseOrMediumCategoryOrUserYnOrQuestion(
 					year, grade, course, mediumCategory, useYn, question));
+		} catch (Exception e) {
+			log.error("search error", e);
+			return HaaimApiResponse.getErrorResponse(e);
+
+		}
+	}
+	
+	/**
+	 * 학생의 시험 목록.
+	 * @param studentNo
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	@GetMapping(value = "/exam/{student_no}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public HaaimApiResponse examList(
+			@PathVariable(value = "student_no", required = true) Integer studentNo,
+			@RequestParam(value = "page_no", defaultValue = "1") @Nullable Integer pageNo,
+			@RequestParam(value = "page_size", defaultValue = "10") @Nullable Integer pageSize
+			) {
+		
+		try {
+			
+			//mybatis paging
+			PageHelper.startPage(pageNo, pageSize);
+			
+			return HaaimApiResponse.getSuccessResponse(examService.findAllByStudentNo(studentNo));
 		} catch (Exception e) {
 			log.error("search error", e);
 			return HaaimApiResponse.getErrorResponse(e);
