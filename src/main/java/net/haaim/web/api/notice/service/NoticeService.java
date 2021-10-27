@@ -1,13 +1,17 @@
 package net.haaim.web.api.notice.service;
 
-import java.util.List;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
+import com.github.pagehelper.Page;
 
 import lombok.RequiredArgsConstructor;
 import net.haaim.web.api.notice.entity.NoticeEntity;
 import net.haaim.web.api.notice.repository.NoticeMapper;
 
+@Validated
 @RequiredArgsConstructor
 @Service
 public class NoticeService {
@@ -15,7 +19,7 @@ public class NoticeService {
 	private final NoticeMapper mapper;
 
 	
-	public NoticeEntity save(NoticeEntity entity) {
+	public NoticeEntity save(@Valid NoticeEntity entity) {
 		Integer no = mapper.save(entity);
 		entity.setNo(no);
 		
@@ -29,7 +33,7 @@ public class NoticeService {
 	 * @param contents
 	 * @return
 	 */
-	public List<NoticeEntity> findAllByStateAndTitleOrContens(Integer state, String title, String contents) {
+	public Page<NoticeEntity> findAllByStateAndTitleOrContens(Integer state, String title, String contents) {
 		return mapper.findAllByStateAndTitleOrContens(state, title, contents);
 	}
 }

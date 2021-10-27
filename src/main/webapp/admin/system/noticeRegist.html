@@ -8,11 +8,11 @@
 
     <title>haami</title>
 
-    <link href="../../theme/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../../theme/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="/theme/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/theme/font-awesome/css/font-awesome.css" rel="stylesheet" />
 
-    <link href="../../theme/css/animate.css" rel="stylesheet" />
-    <link href="../../theme/css/style.css" rel="stylesheet" />
+    <link href="/theme/css/animate.css" rel="stylesheet" />
+    <link href="/theme/css/style.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -114,7 +114,7 @@
                           <div class="form-group">
                             <button
                               type="button"
-                              class="btn btn-w-m btn-default"
+                              class="btn btn-w-m btn-default" @click="cancel"
                             >
                               취소
                             </button>
@@ -138,25 +138,25 @@
       </div>
     </div>
 
-    <script src="../../resources/js/api.js"></script>
-    <script src="../../resources/js/common.js"></script>
+    <script src="/resources/js/api.js"></script>
+    <script src="/resources/js/common.js"></script>
 
     <!-- Mainly scripts -->
-    <script src="../../theme/js/jquery-3.1.1.min.js"></script>
-    <script src="../../theme/js/popper.min.js"></script>
-    <script src="../../theme/js/bootstrap.js"></script>
-    <script src="../../theme/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="../../theme/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/theme/js/jquery-3.1.1.min.js"></script>
+    <script src="/theme/js/popper.min.js"></script>
+    <script src="/theme/js/bootstrap.js"></script>
+    <script src="/theme/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/theme/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
     <!-- jQuery UI -->
-    <script src="../../theme/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/theme/js/plugins/jquery-ui/jquery-ui.min.js"></script>
 
     <!-- vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
 
     <!-- Custom and plugin javascript 왼쪽 메뉴용 -->
-    <script src="../../theme/js/inspinia.js"></script>
-    <script src="../../theme/js/plugins/pace/pace.min.js"></script>
+    <script src="/theme/js/inspinia.js"></script>
+    <script src="/theme/js/plugins/pace/pace.min.js"></script>
 
     <script>
       $(document).ready(function () {
@@ -185,29 +185,42 @@
             var contents = $("#contents").val(); //내용
 
             var param = new Object();
+            param.state = 1;
             if (title != "") {
                 param.title = title;
+            } else {
+              alert("제목을 입력하세요");
+              return;
             }
 
             if (contents != "") {
                 param.contents = contents;
+            } else {
+              alert("내용을 입력하세요");
+              return;
             }
 
-            post("/notice/regist"
+            postJson("/notice/save"
               , param
               , function(res) {
                 if(res != null) {
                   console.log(res);
                   if(res.success == true) {
                     alert("저장 성공 ");
+                    location.href = "/admin/system/noticeList.html";
                   } else {
                     alert("error : " + res.msg);
+                    location.href = "/common/login.html";
                   }
                 } else {
                   alert("unknown error");
+                  location.href = "/common/login.html";
                 }
               }
               , null);
+          }, 
+          cancel: function() {
+            location.href = "/admin/system/noticeList.html";
           }
         },
         created: function() {
@@ -216,7 +229,7 @@
 
           //menu
           get(
-            "/menu/all", 
+            "/system/menu/all", 
             null,
             function(res) {
               data.left.menu = res.data;
