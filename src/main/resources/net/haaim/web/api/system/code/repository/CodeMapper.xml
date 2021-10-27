@@ -3,12 +3,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="net.haaim.web.api.system.code.repository.CodeMapper">
-    <select id="findAllByUseYn" resultType="net.haaim.web.api.system.code.entity.CodeEntity">
+    <select id="findAllByCodeNameAndUseYn" resultType="net.haaim.web.api.system.code.entity.CodeEntity">
     	SELECT group_code, code, code_name, use_yn, input_id, input_date, update_id, update_date
     	FROM code
+    	WHERE use_yn = #{use_yn}
     	<choose>
-			<when test="use_yn != null">
-				WHERE use_yn = #{use_yn}
+			<when test="code_name != null">
+				AND code_name like CONCAT('%',#{code_name},'%') 
 			</when>
 		</choose>
     </select>

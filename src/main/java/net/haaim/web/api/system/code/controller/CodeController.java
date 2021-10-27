@@ -14,6 +14,7 @@ import com.github.pagehelper.PageHelper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.haaim.web.api.common.page.SpringPageHelper;
 import net.haaim.web.api.common.response.HaaimApiResponse;
 import net.haaim.web.api.system.code.entity.CodeEntity;
 import net.haaim.web.api.system.code.service.CodeService;
@@ -24,14 +25,20 @@ import net.haaim.web.api.user.entity.CustomUserDetails;
 @RequestMapping("/code")
 @RequiredArgsConstructor
 public class CodeController {
-	
+
 	private final CodeService codeService;
 
+	/**
+	 * 코드 저장.
+	 * @param entity
+	 * @return
+	 */
 	@PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
 	public HaaimApiResponse save(@RequestBody CodeEntity entity) {
 
 		try {
-			CustomUserDetails logonUser = (CustomUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			CustomUserDetails logonUser = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
+					.getPrincipal();
 			entity.setInputId(logonUser.getUsername());
 
 			return HaaimApiResponse.getSuccessResponse(codeService.save(entity));
@@ -41,24 +48,32 @@ public class CodeController {
 
 		}
 	}
-	
+
+	/** 
+	 * 코드 목록 전체 조회.
+	 * @param pageNo
+	 * @param pageSize
+	 * @param userYn
+	 * @return
+	 */
 	@GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
 	public HaaimApiResponse list(@RequestParam(value = "page_no", defaultValue = "1") @Nullable Integer pageNo,
 			@RequestParam(value = "page_size", defaultValue = "10") @Nullable Integer pageSize,
-			@RequestParam(value = "use_yn", required = false) @Nullable Integer userYn) {
+			@RequestParam(value = "code_name") @Nullable String codeName,
+			@RequestParam(value = "use_yn", required = false, defaultValue = "1") @Nullable Integer userYn) {
 
 		try {
 
 			// mybatis paging
 			PageHelper.startPage(pageNo, pageSize);
 
-			return HaaimApiResponse.getSuccessResponse(codeService.findAllByUseYn(userYn));
+			return HaaimApiResponse
+					.getSuccessResponse(SpringPageHelper.convertSpringPage(codeService.findAllByCodeNameAndUseYn(codeName, userYn)));
 		} catch (Exception e) {
 			log.error("search error", e);
 			return HaaimApiResponse.getErrorResponse(e);
 
 		}
 	}
-	
-	
+
 }

@@ -160,7 +160,7 @@
                                         <div class="row">
                                             <form role="form" class="form-inline">
                                                 <div class="form-group">
-                                                    <button type="button" class="btn btn-w-m btn-default">취소</button>
+                                                    <button type="button" class="btn btn-w-m btn-default" @click="cancel">취소</button>
                                                     <button type="button" class="btn btn-w-m btn-success" @click="regist">등록</button>
                                                 </div>
                                             </form>
@@ -234,13 +234,13 @@
                     param.code_name = name;
                     param.use_yn = use_yn;
 
-                    post(
+                    postJson(
                         "/code/save",
                         param,
                         function(res) {
                             if (res != null) {
-                                console.log(res);
-                                alert("저장 성공");
+                                
+                                location.href = "/admin/system/codeList.html";
                             }
                         },
                         function() {
@@ -255,14 +255,15 @@
                     var param = new Object();
                     param.code = code;
                     param.code_name = name;
+                    param.use_yn = 1;
 
-                    post(
+                    postJson(
                         "/code/group/save",
                         param,
                         function(res) {
                             if (res != null) {
-                                console.log(res);
                                 data.body.groupCode.push(param);
+                                
                             }
                         },
                         function() {
@@ -270,6 +271,9 @@
                         }
                     );
                 },
+                cancel: function() {
+                    location.href = "/admin/system/codeList.html";
+                }
             },
 
             mounted: function() {},
@@ -285,7 +289,7 @@
                 )
 
                 //search group code
-                get("/code/group/all",
+                get("/code/group/list",
                     "",
                     function(res) {
                         if (res != null) {

@@ -306,7 +306,7 @@
                 );
 
                 //code
-                getPage(1, "/code/all", null,
+                getPage(1, "/code/list", null,
                     function(res, pageInfo) {
                         data.body.list = res.data;
                         data.body.list.pageInfo = pageInfo;
@@ -322,7 +322,7 @@
             //start loading
             toggleLoading();
 
-            getPage(page, "/code/search", parameter,
+            getPage(page, "/code/list", parameter,
                 function(res, pageInfo) {
                     data.body.list = res.data;
                     data.body.list.pageInfo = pageInfo;

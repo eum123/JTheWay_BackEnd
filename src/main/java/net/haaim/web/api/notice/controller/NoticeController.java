@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageHelper;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.haaim.web.api.common.page.SpringPageHelper;
@@ -30,6 +31,11 @@ public class NoticeController {
 
 	private final NoticeService noticeService;
 
+	/**
+	 * 공지사항 저장.
+	 * @param entity
+	 * @return
+	 */
 	@PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
 	public HaaimApiResponse save(@RequestBody NoticeEntity entity) {
 
@@ -46,6 +52,14 @@ public class NoticeController {
 		}
 	}
 
+	/**
+	 * 공지사항 조회.
+	 * @param pageNo
+	 * @param pageSize
+	 * @param title
+	 * @param contents
+	 * @return
+	 */
 	@GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
 	public HaaimApiResponse list(@RequestParam(value = "page_no", defaultValue = "1") @Nullable Integer pageNo,
 			@RequestParam(value = "page_size", defaultValue = "10") @Nullable Integer pageSize,
