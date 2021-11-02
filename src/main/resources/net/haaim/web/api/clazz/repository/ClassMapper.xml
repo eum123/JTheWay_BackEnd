@@ -6,13 +6,13 @@
     <select id="dailyClassAttendance" resultType="net.haaim.web.api.clazz.entity.DailyClassAttendanceEntity">
     	<![CDATA[
 			SELECT a.DATE,
-			       Round(SUM(IF(a.attendance = 1, 1, 0)) / (SELECT Count(members)
+			       Round(SUM(IF(a.attendance = 1, 1, 0)) / (SELECT Count(member_no)
 			                                                FROM   class_members
 			                                                WHERE  member_type = 0
 			                                                       AND status IS NULL) * 100
 			       )
 			       total_attendance,
-			       Round(SUM(IF(a.attendance != 1, 1, 0)) / (SELECT Count(members)
+			       Round(SUM(IF(a.attendance != 1, 1, 0)) / (SELECT Count(member_no)
 			                                                 FROM   class_members
 			                                                 WHERE  member_type = 0
 			                                                        AND status IS NULL) *
@@ -23,4 +23,59 @@
 		 ]]>
     </select>
    
+   <select id="findAllByYearAndGradeAndCourseAndLargeCategorAndStatus" 
+   resultType="net.haaim.web.api.clazz.entity.ClassListResponse">
+    	
+		SELECT cc.class_no,
+		       cc.year,
+		       cc.class_name,
+		       cc.start_date,
+		       cc.end_date,
+		       cc.day_time,
+		       bb.count,
+		       (SELECT Group_concat(t.str)
+		        FROM   (SELECT b.class_no,
+		                       concat(a.year, '---', a.grade, '---', a.course, '---', a.large_category, '---', a.medium_category) str
+		                FROM   curriculum a
+		                       JOIN class_curriculum b
+		                         ON a.cno = b.cur_id
+		                WHERE  b.class_no = cc.class_no) t) curriculum,
+		       dd.NAME                                      teacher_name
+		FROM   class cc
+		       JOIN (SELECT class_no,
+		                    Count(member_no) count
+		             FROM   class_members
+		             WHERE  member_type = 1
+		             GROUP  BY class_no) bb
+		         ON cc.class_no = bb.class_no
+		       JOIN (SELECT mem.class_no,
+		                    uu.NAME
+		             FROM   class_members mem
+		                    JOIN USER uu
+		                      ON uu.id = mem.member_no
+		             WHERE  mem.member_type = 2) dd
+		         ON cc.class_no = dd.class_no
+		       JOIN (SELECT c2.class_no,
+		                    c1.grade,
+		                    c1.course,
+		                    c1.large_category
+		             FROM   curriculum c1
+		                    JOIN class_curriculum c2
+		                      ON c1.cno = c2.cur_id) curri
+		         ON cc.class_no = curri.class_no
+		WHERE  1 = 1
+		      
+		 	<if test="year != null">
+				AND cc.year = #{year}
+			</if>
+			<if test="course != null">
+				AND curri.course = #{course}
+			</if>
+			<if test="large_category != null">
+				AND curri.large_category = #{large_category}
+			</if>
+			<if test="status != null">
+				AND cc.status = #{status}
+			</if>
+    </select>
 </mapper>

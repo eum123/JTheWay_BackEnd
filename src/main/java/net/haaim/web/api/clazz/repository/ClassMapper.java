@@ -7,8 +7,13 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.lang.Nullable;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.github.pagehelper.Page;
 
 import net.haaim.web.api.clazz.entity.ClassEntity;
+import net.haaim.web.api.clazz.entity.ClassListResponse;
 import net.haaim.web.api.clazz.entity.DailyClassAttendanceEntity;
 
 @Mapper
@@ -41,4 +46,11 @@ public interface ClassMapper {
 			+ "WHERE status = #{status} "
 			+ "ORDER BY input_date DESC ")
 	List<ClassEntity> findAllByStatus(@Param("status") Integer status);
+	
+	Page<ClassListResponse> findAllByYearAndGradeAndCourseAndLargeCategorAndStatus(
+			@Param("year") @Nullable Integer year,
+			@Param("grade") @Nullable String grade,
+			@Param("course") @Nullable String course,
+			@Param("large_category") @Nullable String largeCategory,
+			@Param("status") @Nullable Integer status);
 }

@@ -18,21 +18,39 @@
     </select>
     <select id="findAllByYearAnyClassNoAndKeyword" resultType="net.haaim.web.api.student.entity.StudentListResponse">
     	
-        SELECT a.year, a.school, a.grade, a.name, a.mobile
-        	, a.parent1_mobile, a.parent2_mobile, a.input_date, b.class_name, b.class_no
-		FROM (
-				SELECT d.year, d.student_no, u.id, u.name, d.school
-					, d.grade, u.mobile, u.input_date, i.parent1_mobile, i.parent2_mobile
-		        FROM user u 
-					JOIN student_detail d ON u.student_no = d.student_no
-		            JOIN student_info i ON u.student_no = i.student_no
-			) a
-			LEFT JOIN (
-					SELECT c.class_no, c.class_name, m.members, c.year 
-		            FROM class c
-						JOIN class_members m ON c.class_no = m.class_no
-				) b 
-				ON a.id = b.members
+        SELECT a.year,
+		       a.school,
+		       a.grade,
+		       a.name,
+		       a.mobile,
+		       a.parent1_mobile,
+		       a.parent2_mobile,
+		       a.input_date,
+		       b.class_name,
+		       b.class_no
+		FROM   (SELECT d.year,
+		               d.student_no,
+		               u.id,
+		               u.name,
+		               d.school,
+		               d.grade,
+		               u.mobile,
+		               u.input_date,
+		               i.parent1_mobile,
+		               i.parent2_mobile
+		        FROM   USER u
+		               JOIN student_detail d
+		                 ON u.student_no = d.student_no
+		               JOIN student_info i
+		                 ON u.student_no = i.student_no) a
+		       LEFT JOIN (SELECT c.class_no,
+		                         c.class_name,
+		                         m.member_no,
+		                         c.year
+		                  FROM   class c
+		                         JOIN class_members m
+		                           ON c.class_no = m.class_no) b
+		              ON a.student_no = b.member_no
 		WHERE 1=1
 		<if test="year != null">
 			AND a.year = #{year}

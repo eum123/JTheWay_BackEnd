@@ -34,6 +34,7 @@ public class CustomUserDetailService implements UserDetailsService {
 				.username(entity.getUserName())
 				.password(entity.getPassword())
 				.authority(Role.getRole(entity.getUType()).getRemark())
+				.uType(entity.getUType())
 				.build();
 	}
 	
@@ -52,5 +53,14 @@ public class CustomUserDetailService implements UserDetailsService {
 	 */
 	public UserEntity save(UserEntity userEntity) {
 		return mapper.save(userEntity);
+	}
+	
+	/** 
+	 * utype 별 전체 목록.
+	 * @param uType
+	 * @return
+	 */
+	public List<UserEntity> findAllByUType(Integer uType) {
+		return mapper.findAllByUType(uType);
 	}
 }
