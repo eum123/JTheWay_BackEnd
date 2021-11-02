@@ -20,10 +20,10 @@ public class CurriculumEntity extends CommonEntity {
 	private Integer year;
 	
 	@NotEmpty(message = "학년은 필수 값입니다.")
-	private Integer grade;
+	private String grade;
 	
 	@NotEmpty(message = "학기/과정은 필수 값입니다.")
-	private Integer course;
+	private String course;
 	private String largeCategory;
 	private String mediumCategory;
 }

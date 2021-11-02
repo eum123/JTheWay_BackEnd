@@ -25,26 +25,6 @@ public class UserController {
 	
 	private final CustomUserDetailService userService;
 	
-//	@ApiOperation(
-//			value="로그인.", 
-//			response = MenuEntity.class)
-	@PostMapping(value = "/login1", produces = MediaType.APPLICATION_JSON_VALUE)
-	public HaaimApiResponse login(
-			@PathVariable(value = "user_name", required = true) String userName,
-			@PathVariable(value = "password", required = true) String password) {
-
-		try {
-			
-			//TODO:
-			
-			return HaaimApiResponse.getSuccessResponse(null);
-		} catch (Exception e) {
-			log.error("search error", e);
-			return HaaimApiResponse.getErrorResponse(e);
-
-		}
-	}
-	
 	/**
 	 * 사용자 전체 목록 조회.
 	 * @param pageNo
@@ -79,6 +59,24 @@ public class UserController {
 		try {
 			
 			return HaaimApiResponse.getSuccessResponse(userService.save(userEntity));
+		} catch (Exception e) {
+			log.error("search error", e);
+			return HaaimApiResponse.getErrorResponse(e);
+
+		}
+	}
+	
+	/** 
+	 * admin에서 사용하며 클래스 등록시 선생 및 학생목록 추출 용.
+	 * 페이징 없음.
+	 * @param uType
+	 * @return
+	 */
+	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+	public HaaimApiResponse all(@RequestParam(value = "u_type") Integer uType) {
+		try {
+			
+			return HaaimApiResponse.getSuccessResponse(userService.findAllByUType(uType));
 		} catch (Exception e) {
 			log.error("search error", e);
 			return HaaimApiResponse.getErrorResponse(e);

@@ -15,13 +15,16 @@ public class CustomUserDetails implements UserDetails{
 	
 	private String username;
 	private String password;
+	private Integer uType;
 	private List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 	
+	
 	@Builder
-	public CustomUserDetails(String username, String password, String authority) {
+	public CustomUserDetails(String username, String password, String authority, Integer uType) {
 		this.username = username;
 		this.password = password;
 		authorities.add(new SimpleGrantedAuthority(authority));
+		this.uType = uType;
 	}
    
 	public void addAuthorities(String authority) {

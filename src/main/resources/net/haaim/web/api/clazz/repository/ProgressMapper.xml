@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.haaim.web.api.clazz.repository.ProgressMapper">
+    <select id="findAllByYearAndGradeAndClassNameAndMemberIdAndOwner" 
+    	resultType="net.haaim.web.api.clazz.entity.ProgressListResponse">
+    	
+    	SELECT cc.class_no,
+		       cc.start_date,
+		       cc.end_date,
+		       cc.class_name,
+		       cc.day_time,
+		       cc.member_no,
+		       u.name
+		FROM   (SELECT a.class_no,
+		               a.start_date,
+		               a.end_date,
+		               a.class_name,
+		               a.day_time,
+		               a.year,
+		               b.member_no
+		        FROM   class a
+		               LEFT JOIN class_members b
+		                      ON a.class_no = b.class_no
+		               LEFT JOIN learn_plan_mngt l
+		                      ON a.class_no = l.class_no
+		        WHERE  1 = 1
+		        <choose>
+			        <when test="u_type != 4">
+			        	AND b.member_type = #{u_type}
+		               	AND b.member_no = #{id}
+			        </when>
+			        <otherwise>
+			        </otherwise>
+		        </choose>
+		               
+		       ORDER  BY a.class_no DESC) cc
+		       LEFT JOIN USER u
+		              ON cc.member_no = u.id
+		 WHERE 1=1
+		 	<if test="member_id != null">
+				AND cc.member_no = #{member_id}
+			</if>
+			<if test="year != null">
+				AND cc.year = #{year}
+			</if>
+		 	<if test="class_name != null">
+				AND cc.class_name like CONCAT('%',#{class_name},'%')
+			</if>
+    </select>
+   
+</mapper>
