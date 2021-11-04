@@ -5,9 +5,12 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.github.pagehelper.Page;
+
 import net.haaim.web.api.exam.entity.DailyTakeExamStatusEntity;
 import net.haaim.web.api.exam.entity.ExamAverageEntity;
-import net.haaim.web.api.exam.entity.ItemPoolEntity;
+import net.haaim.web.api.exam.entity.ExamItemEntity;
+import net.haaim.web.api.exam.entity.ExamListResponse;
 import net.haaim.web.api.exam.entity.MonthlyExamStatusEntity;
 
 @Mapper
@@ -17,7 +20,7 @@ public interface ExamMapper {
 	 * @param studentNo
 	 * @return
 	 */
-	List<ItemPoolEntity> findAllByStudentNo(@Param("studentNo") Integer studentNo);
+	Page<ExamListResponse> findAllByStudentNo(@Param("studentNo") Integer studentNo);
 	
 	/**
 	 * 특정 학생의 월별 시험 상태.
@@ -38,4 +41,14 @@ public interface ExamMapper {
 	 * @return
 	 */
 	List<DailyTakeExamStatusEntity> dailyTakeExamStatus();
+	
+	
+	/**
+	 * 학생명 시험 문제 내용.
+	 * @param studentNo
+	 * @param examNo
+	 * @return
+	 */
+	List<ExamItemEntity> findAllByStudentNoAndExamNo(Integer studentNo, Integer examNo);
+	
 }
