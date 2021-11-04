@@ -4,6 +4,8 @@ import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +14,9 @@ import com.github.pagehelper.PageHelper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.haaim.web.api.common.page.SpringPageHelper;
 import net.haaim.web.api.common.response.HaaimApiResponse;
+import net.haaim.web.api.exam.entity.OnlineQuestionSaveRequest;
 import net.haaim.web.api.exam.service.ExamService;
 import net.haaim.web.api.exam.service.ItemService;
 
@@ -93,13 +97,14 @@ public class ExamController {
 	}
 	
 	/**
+	 * student > 온라인 테스트 목록.
 	 * 학생의 시험 목록.
 	 * @param studentNo
 	 * @param pageNo
 	 * @param pageSize
 	 * @return
 	 */
-	@GetMapping(value = "/exam/{student_no}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/online/list/{student_no}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public HaaimApiResponse examList(
 			@PathVariable(value = "student_no", required = true) Integer studentNo,
 			@RequestParam(value = "page_no", defaultValue = "1") @Nullable Integer pageNo,
@@ -111,7 +116,49 @@ public class ExamController {
 			//mybatis paging
 			PageHelper.startPage(pageNo, pageSize);
 			
-			return HaaimApiResponse.getSuccessResponse(examService.findAllByStudentNo(studentNo));
+			return HaaimApiResponse.getSuccessResponse(SpringPageHelper.convertSpringPage(examService.findAllByStudentNo(studentNo)));
+		} catch (Exception e) {
+			log.error("search error", e);
+			return HaaimApiResponse.getErrorResponse(e);
+
+		}
+	}
+	
+	/**
+	 * student > 온라인 테스트.
+	 * @param studentNo
+	 * @param examNo
+	 * @return
+	 */
+	@GetMapping(value = "/online/question", produces = MediaType.APPLICATION_JSON_VALUE)
+	public HaaimApiResponse exam(
+			@RequestParam(value = "class_no", required = true) Integer classNo,
+			@RequestParam(value = "student_no", required = true) Integer studentNo,
+			@RequestParam(value = "exam_no") @Nullable Integer examNo) {
+		
+		try {
+			
+			return HaaimApiResponse.getSuccessResponse(
+					examService.findAllByStudentNoAndExamNo(classNo, studentNo, examNo));
+		} catch (Exception e) {
+			log.error("search error", e);
+			return HaaimApiResponse.getErrorResponse(e);
+
+		}
+	}
+	
+	/**
+	 * student > 온라인 시험
+	 * 온라인 시험 저장.
+	 * @param entity
+	 * @return
+	 */
+	@PutMapping(value = "/online/save", produces = MediaType.APPLICATION_JSON_VALUE)
+	public HaaimApiResponse save(@RequestBody OnlineQuestionSaveRequest entity) {
+		try {
+			//TODO : 구현 필요.
+			return HaaimApiResponse.getSuccessResponse(
+					examService.saveOnlineQuestion());
 		} catch (Exception e) {
 			log.error("search error", e);
 			return HaaimApiResponse.getErrorResponse(e);

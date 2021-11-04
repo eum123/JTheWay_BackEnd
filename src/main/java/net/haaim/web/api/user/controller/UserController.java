@@ -26,6 +26,7 @@ public class UserController {
 	private final CustomUserDetailService userService;
 	
 	/**
+	 * admin > 사용자 관리.
 	 * 사용자 전체 목록 조회.
 	 * @param pageNo
 	 * @param pageSize

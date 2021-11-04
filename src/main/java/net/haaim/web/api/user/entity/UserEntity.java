@@ -20,4 +20,5 @@ public class UserEntity extends CommonEntity{
 	private String mobile;
 	private String eamil;
 	private Integer state;
+	private String uTypeName;
 }

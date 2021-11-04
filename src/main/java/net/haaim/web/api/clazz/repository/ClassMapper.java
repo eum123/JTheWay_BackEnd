@@ -53,4 +53,15 @@ public interface ClassMapper {
 			@Param("course") @Nullable String course,
 			@Param("large_category") @Nullable String largeCategory,
 			@Param("status") @Nullable Integer status);
+	
+	/**
+	 * class 내용 조회.
+	 * @return
+	 */
+	@Select("SELECT class_no, year, class_name, start_date "
+			+ ", end_date, day_time, textbook, pass_score, description "
+			+ ", status, input_id, input_date, update_id, update_date "
+			+ "FROM class "
+			+ "WHERE class_no = #{class_no} ")
+	ClassEntity findOneByClassNo(@Param("class_no") Integer classNo);
 }
