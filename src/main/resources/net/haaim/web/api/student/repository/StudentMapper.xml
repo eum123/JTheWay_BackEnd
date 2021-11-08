@@ -10,7 +10,7 @@
 			         sum(IF(a.attendance=1,1,0))  attendance,
 			         sum(IF(a.attendance!=1,1,0)) miss
 			FROM     class_mngt a
-			WHERE WHERE    a.student_no = #{studentNo}   
+			WHERE    a.student_no = #{studentNo}   
 				AND date >= #{startDate} 
 				AND      date <= #{endDate}
 			GROUP BY a.date;

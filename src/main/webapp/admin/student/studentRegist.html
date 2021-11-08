@@ -28,8 +28,8 @@
                         <li class="nav-header">
                             <div class="dropdown profile-element">
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                    <span class="block m-t-xs font-bold">{{left.info.user}}</span>
-                                    <span class="text-muted text-xs block">{{left.info.auth}} <b class="caret"></b></span>
+                                    <span class="block m-t-xs font-bold">{{left.info.name}}</span>
+                                    <span class="text-muted text-xs block">{{left.info.utype_name}} <b class="caret"></b></span>
                                 </a>
                                 <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                     <li>
@@ -366,7 +366,7 @@
                             </button>
                             <button
                               type="button"
-                              class="btn btn-w-m btn-success"
+                              class="btn btn-w-m btn-success" @click="save"
                             >
                               등록
                             </button>
@@ -417,7 +417,7 @@
     <script>
       
       $(document).ready(function () {
-        $("#footer").load("../../admin/common/footer.html");
+        $("#footer").load("/admin/common/footer.html");
 
         $(".tagsinput").tagsinput({
           tagClass: "label label-primary",
@@ -444,10 +444,24 @@
           return data;
         },
         mounted: function () {},
+        methods: {
+          save: function() {
+            var saveValue = "";
+            putJson("", saveValue, 
+              function(res){
+                //success
+              }
+            );
+          }
+        },
 
         created: function() {
           //user
-          data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
+          get("/user/info/logon", null,
+              function(res) {
+                data.left.info = res.data;
+              }
+          );
 
           //menu
           get("/system/menu/all", null,

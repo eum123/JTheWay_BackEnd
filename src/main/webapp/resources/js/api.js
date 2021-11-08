@@ -33,6 +33,9 @@ function post(url, param, successFunc, failFunc) {
 function postJson(url, param, successFunc, failFunc) {
     this.callJson("POST", url, param, successFunc, failFunc);
 }
+function putJson(url, param, successFunc, failFunc) {
+    this.callJson("PUT", url, param, successFunc, failFunc);
+}
 
 function callJson(httpMethod, url, param, successFunc, failFunc) {
     $.ajax({
@@ -84,8 +87,8 @@ function postPage(page, url, data, successFunc, failFunc) {
 
 function callPage(httpMethod, page, url, param, successFunc, failFunc) {
     if (!isEmpty(param)) {
-        param.page = page;
-        param.size = LIST_COUNT;
+        param.page_no = page;
+        param.page_size = LIST_COUNT;
     }
 
     $.ajax({
@@ -101,12 +104,14 @@ function callPage(httpMethod, page, url, param, successFunc, failFunc) {
 
                 if (res.success === true) {
 
-                    var totalCount = res.data.totalElements;
-                    if (isEmpty(totalCount)) {
-                        totalCount = 0;
-                    }
-                    var currentPage = res.data.pageable.pageNumbers;
+                    var totalPages = res.data.totalPages;
+                    // if (isEmpty(totalCount)) {
+                    //     totalCount = 0;
+                    // }
 
+                     var currentPage = res.data.pageable.pageNumbers;
+
+                    //0.1.2.3...형식에서 1.2.3.4.형식으려 변경.
                     if (isEmpty(currentPage)) {
                         currentPage = 1;
                     } else {
@@ -114,7 +119,7 @@ function callPage(httpMethod, page, url, param, successFunc, failFunc) {
                     }
 
                     if (successFunc != null) {
-                        successFunc(res, getPageInfo(totalCount, currentPage));
+                        successFunc(res, getPageInfo(totalPages, currentPage));
                     }
                 } else {
                     if (failFunc != null) failFunc(param, res.code, res.code);
@@ -129,13 +134,8 @@ function callPage(httpMethod, page, url, param, successFunc, failFunc) {
 /**
  * page 번호 목록 생성
  */
-function getPageInfo(totalCount, currentPage) {
-    var totalPage = totalCount / LIST_COUNT;
-
-    if (totalCount % LIST_COUNT > 0) {
-        totalPage++;
-    }
-
+function getPageInfo(totalPage, currentPage) {
+    
     //currentPage = 현재 보고있는 페이지
     if (totalPage < currentPage) {
         currentPage = totalPage;

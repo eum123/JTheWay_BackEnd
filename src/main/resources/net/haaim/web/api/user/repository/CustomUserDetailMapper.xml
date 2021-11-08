@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.haaim.web.api.user.repository.CustomUserDetailMapper">
+    <select id="findAllByUTypeAndUseYnAndKeyword" resultType="net.haaim.web.api.user.entity.UserEntity">
+    	
+	 	SELECT id user_name, pwd as password, utype as u_type 
+	   	, name, mobile, email, state, input_id, input_date, update_id, update_date, 
+	   		CASE 
+					WHEN utype = 0 THEN '담임교사' 
+					WHEN utype = 1 THEN '학생' 
+					WHEN utype = 2 THEN '교사' 
+					WHEN utype = 3 THEN '코디' 
+					WHEN utype = 4 THEN '관리자/원장' 
+					ELSE '' 
+				END u_type_name 
+		FROM user 
+		WHERE 1=1
+		<if test="use_yn != null">
+			AND use_yn = #{use_yn} 
+		</if>
+		<if test="utype != null">
+			AND utype = #{utype} 
+		</if>
+		<if test="keyword != null">
+			AND (name like CONCAT('%',#{keyword},'%') OR mobile like CONCAT('%',#{keyword},'%') )
+		</if>
+			
+    </select>
+   
+</mapper>

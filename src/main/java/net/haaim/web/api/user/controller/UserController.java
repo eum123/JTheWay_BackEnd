@@ -2,6 +2,7 @@ package net.haaim.web.api.user.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +14,9 @@ import com.github.pagehelper.PageHelper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.haaim.web.api.common.page.SpringPageHelper;
 import net.haaim.web.api.common.response.HaaimApiResponse;
+import net.haaim.web.api.user.entity.CustomUserDetails;
 import net.haaim.web.api.user.entity.UserEntity;
 import net.haaim.web.api.user.service.CustomUserDetailService;
 
@@ -35,14 +38,18 @@ public class UserController {
 	@GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
 	public HaaimApiResponse findAll(
 			@RequestParam(value = "page_no", defaultValue = "1") @Nullable Integer pageNo,
-			@RequestParam(value = "page_size", defaultValue = "10") @Nullable Integer pageSize) {
+			@RequestParam(value = "page_size", defaultValue = "10") @Nullable Integer pageSize,
+			@RequestParam(value = "utype") @Nullable Integer utype,
+			@RequestParam(value = "use_yn") @Nullable Integer useYn,
+			@RequestParam(value = "keyword") @Nullable String keyword) {
 
 		try {
 			
 			// mybatis paging
 			PageHelper.startPage(pageNo, pageSize);
 			
-			return HaaimApiResponse.getSuccessResponse(userService.findAll());
+			return HaaimApiResponse.getSuccessResponse(
+					SpringPageHelper.convertSpringPage(userService.findAllByUTypeAndUseYnAndKeyword(utype, useYn, keyword)));
 		} catch (Exception e) {
 			log.error("search error", e);
 			return HaaimApiResponse.getErrorResponse(e);
@@ -78,6 +85,24 @@ public class UserController {
 		try {
 			
 			return HaaimApiResponse.getSuccessResponse(userService.findAllByUType(uType));
+		} catch (Exception e) {
+			log.error("search error", e);
+			return HaaimApiResponse.getErrorResponse(e);
+
+		}
+	}
+	
+	/**
+	 * 전체화면
+	 * 로그인 되어 있는 사용자 정보.
+	 * @return
+	 */
+	@GetMapping(value = "/info/logon", produces = MediaType.APPLICATION_JSON_VALUE)
+	public HaaimApiResponse logonInfo() {
+		try {
+			CustomUserDetails logonUser = (CustomUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			
+			return HaaimApiResponse.getSuccessResponse(logonUser);
 		} catch (Exception e) {
 			log.error("search error", e);
 			return HaaimApiResponse.getErrorResponse(e);

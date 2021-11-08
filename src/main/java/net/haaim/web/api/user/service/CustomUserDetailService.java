@@ -6,6 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.Page;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.haaim.web.api.common.Role;
@@ -35,6 +37,9 @@ public class CustomUserDetailService implements UserDetailsService {
 				.password(entity.getPassword())
 				.authority(Role.getRole(entity.getUType()).getRemark())
 				.uType(entity.getUType())
+				.uTypeName(entity.getUTypeName())
+				.name(entity.getName())
+				.studentNo(entity.getStudentNo())
 				.build();
 	}
 	
@@ -42,8 +47,12 @@ public class CustomUserDetailService implements UserDetailsService {
 	 * 전체 목록 조회.
 	 * @return
 	 */
-	public List<UserEntity> findAll() {
+	public Page<UserEntity> findAll() {
 		return mapper.findAll();
+	}
+	
+	public Page<UserEntity> findAllByUTypeAndUseYnAndKeyword(Integer utype, Integer useYn, String keyword) {
+		return mapper.findAllByUTypeAndUseYnAndKeyword(utype, useYn, keyword);
 	}
 	
 	/**

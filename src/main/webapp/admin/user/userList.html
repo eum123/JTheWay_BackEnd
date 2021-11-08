@@ -25,8 +25,8 @@
                         <li class="nav-header">
                             <div class="dropdown profile-element">
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                    <span class="block m-t-xs font-bold">{{left.info.user}}</span>
-                                    <span class="text-muted text-xs block">{{left.info.auth}} <b class="caret"></b></span>
+                                    <span class="block m-t-xs font-bold">{{left.info.name}}</span>
+                                    <span class="text-muted text-xs block">{{left.info.utype_name}} <b class="caret"></b></span>
                                 </a>
                                 <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                     <li>
@@ -116,7 +116,8 @@
                         <div class="col-sm-8">
                           <form role="form" class="form-inline">
                             <div class="form-group">
-                              <select class="form-control" id="user_type">
+                              <select class="form-control" id="utype">
+                                <option value="TOTAL">전체</option>
                                 <option value="4">관리자</option>
                                 <option value="3">원장</option>
                                 <option value="2">교사</option>
@@ -131,7 +132,7 @@
                               </select>
                             </div>
                             <div class="form-group">
-                              <input type="text" class="form_control" id="key" placeholder="이름 또는 전화번호를 입력하세요"/>
+                              <input type="text" class="form_control" id="keyword" placeholder="이름 또는 전화번호를 입력하세요"/>
                             </div>
                             <div class="form-group">
                               <button type="button" class="btn btn-w-m btn-success" @click="search">검색</button>
@@ -163,13 +164,13 @@
                             </thead>
                             <tbody>
                               
-                              <tr v-for="element in body.list.content">
-                                <td>{{element.no}}</td>
+                              <tr v-for="(element, i) in body.list.content">
+                                <td>{{body.list.totalElements - (body.list.pageable.pageNumber * body.list.pageable.pageSize) - i}}</td>
                                 <td>
-                                  {{element.user_type}}
+                                  {{element.utype_name}}
                                 </td>
                                 <td>{{element.name}}</td>
-                                <td>{{element.user_id}}</td>
+                                <td>{{element.user_name}}</td>
                                 <td>{{element.mobile}}</td>
                                 <td>{{element.email}}</td>
                                 <td>{{element.state}}</td>
@@ -234,7 +235,7 @@
     <script>
      
       $(document).ready(function () {
-        $("#footer").load("../../admin/common/footer.html");
+        $("#footer").load("/admin/common/footer.html");
       });
 
       var data = {
@@ -295,7 +296,11 @@
         },
         created: function() {
           //user
-          data.left.info = JSON.parse('{"user":"장덕일","Auth":"원장"}');
+          get("/user/info/logon", null,
+              function(res) {
+                data.left.info = res.data;
+              }
+          );
 
           //menu
           get("/system/menu/all", null,
@@ -305,7 +310,7 @@
           );
 
           //user all
-          getPage(1, "/user/all", null,
+          getPage(1, "/user/list", null,
               function(res, pageInfo) {
                   data.body.list = res.data;
                   data.body.list.pageInfo = pageInfo;
@@ -322,7 +327,7 @@
 
             //데이터 조회
             getPage(page, 
-                "/user/search",
+                "/user/list",
                 parameter,
                 function(res, pageInfo) {
                     data.body.list = res.data;
@@ -337,17 +342,17 @@
         * 검색 조건으로 parameter 생성
         */
         function getSearchParameter() {
-          var key = $("#key").val(); //이름
-          var user_type = $("#user_type option:selected").val();
+          var keyword = $("#keyword").val(); //이름
+          var utype = $("#utype option:selected").val();
           var use_yn = $("#use_yn option:selected").val();
 
           var param = new Object();
-          if (key != "") {
-              param.key = key;
+          if (keyword != "") {
+              param.keyword = keyword;
           }
 
-          if (user_type != "") {
-              param.user_type = user_type;
+          if (utype != "" && utype != 'TOTAL') {
+              param.utype = utype;
           }
 
           if (use_yn != "") {

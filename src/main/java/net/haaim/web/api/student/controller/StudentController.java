@@ -1,6 +1,5 @@
 package net.haaim.web.api.student.controller;
 
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,7 +19,6 @@ import net.haaim.web.api.common.response.HaaimApiResponse;
 import net.haaim.web.api.exam.service.ExamService;
 import net.haaim.web.api.student.service.StudentService;
 import net.haaim.web.api.user.entity.CustomUserDetails;
-import net.haaim.web.common.request.CustomPageRequest;
 
 @Slf4j
 @RestController

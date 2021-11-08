@@ -108,7 +108,7 @@
                                   </div>
                                   <div class="col-md-6">
                                     <span class="text-right"
-                                      ><h2>{{month.attendanceRate}}%</h2></span
+                                      ><h2>{{month.attendance.attendance}}%</h2></span
                                     >
                                   </div>
                                 </div>
@@ -116,7 +116,7 @@
                                   <div class="col-md-12">
                                     <div class="progress progress">
                                       <div
-                                        :style="{width: month.attendanceRate + '%'}"
+                                        :style="{width: month.attendance.attendance + '%'}"
                                         class="progress-bar"
                                       ></div>
                                     </div>
@@ -130,7 +130,7 @@
                                   </div>
                                   <div class="col-md-6">
                                     <span class="text-right"
-                                      ><h2>{{month.examRate}}%</h2></span
+                                      ><h2>{{month.exam.pass}}%</h2></span
                                     >
                                   </div>
                                 </div>
@@ -138,7 +138,7 @@
                                   <div class="col-md-12">
                                     <div class="progress progress">
                                       <div
-                                        :style="{width: month.examRate + '%'}"
+                                        :style="{width: month.exam.pass + '%'}"
                                         class="progress-bar"
                                       ></div>
                                     </div>
@@ -425,13 +425,7 @@
           $("#questionDate").val(new Date().format("yyyyMMdd"));
         },
       });
-      //학생 정보 수신 데이터 처리
-      function studentInfo(res) {
-        if (res != null) {
-          //test
-          data.studentInfo = JSON.parse('{"name": "홍길동"}');
-        }
-      }
+      
       //공지사항 수신 데이터 처리
       function notice(res) {
         if (res != null) {
@@ -474,13 +468,12 @@
 
       function init() {
         //학생정보
-        syncGet(
-          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-          "",
-          studentInfo,
-          null
+        get("/user/info/logon", null,
+            function(res) {
+              data.studentInfo = res.data;
+            }
         );
-
+        
         //공지사항
         syncGet(
           "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
@@ -489,14 +482,19 @@
           null
         );
 
-        //월현황
-        syncGet(
-          "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
-          "",
-          monthly,
-          null
+        //월 출석 현황
+        get("/student/monthly/attendance/status/" + data.studentInfo.student_no, null,
+            function(res) {
+              data.month.attendance = res.data;
+            }
         );
-
+        //월 시험 현황.
+        get("/student/monthly/exam/status/" + data.studentInfo.student_no, null,
+            function(res) {
+              data.month.exam = res.data;
+            }
+        );
+        
         //문제현황
         syncGet(
           "https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json",
