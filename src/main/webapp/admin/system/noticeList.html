@@ -161,8 +161,8 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="element in body.list.content">
-                            <td class="text-center">{{element.no}}</td>
+                          <tr v-for="(element, i) in body.list.content">
+                            <td class="text-center">{{body.list.totalElements - (body.list.pageable.pageNumber * body.list.pageable.pageSize) - i}}</td>
                             <td class="text-center">
                               {{element.title}}
                             </td>
@@ -329,7 +329,7 @@
             toggleLoading();
 
             //데이터 조회
-            getPage(page, "/notice/search", parameter,
+            getPage(page, "/notice/list", parameter,
                 function(res, pageInfo) {
                     data.body.list = res.data;
                     data.body.list.pageInfo = pageInfo;

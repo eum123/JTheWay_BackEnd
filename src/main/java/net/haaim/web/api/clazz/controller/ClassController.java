@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.pagehelper.PageHelper;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.haaim.web.api.clazz.entity.ClassSaveRequest;
@@ -84,6 +86,10 @@ public class ClassController {
 			@RequestParam(value = "status") @Nullable Integer status
 			) {
 		try {
+			
+			// mybatis paging
+			PageHelper.startPage(pageNo, pageSize);
+			
 			return HaaimApiResponse.getSuccessResponse(SpringPageHelper.convertSpringPage(classService.findAllByYearAndGradeAndCourseAndLargeCategorAndStatus(
 					year, grade, course, largeCategory, status )));
 		} catch (Exception e) {

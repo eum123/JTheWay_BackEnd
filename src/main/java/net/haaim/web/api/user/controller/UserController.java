@@ -4,6 +4,7 @@ import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -109,4 +110,21 @@ public class UserController {
 
 		}
 	}
+	
+	/**
+	 * admin > 사용자관리.
+	 * ID 중복 확인.
+	 * @param id
+	 * @return
+	 */
+	@PatchMapping(value = "/duplicate/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public HaaimApiResponse checkUserId(@PathVariable(value = "id", required = true) String id) {
+		try {
+			return HaaimApiResponse.getSuccessResponse(userService.checkId(id));
+		} catch (Exception e) {
+			log.error("search error", e);
+			return HaaimApiResponse.getErrorResponse(e);
+
+		}
+	} 
 }

@@ -60,7 +60,7 @@ public class CodeController {
 	public HaaimApiResponse list(@RequestParam(value = "page_no", defaultValue = "1") @Nullable Integer pageNo,
 			@RequestParam(value = "page_size", defaultValue = "10") @Nullable Integer pageSize,
 			@RequestParam(value = "code_name") @Nullable String codeName,
-			@RequestParam(value = "use_yn", required = false, defaultValue = "1") @Nullable Integer userYn) {
+			@RequestParam(value = "use_yn", required = false) @Nullable Integer userYn) {
 
 		try {
 

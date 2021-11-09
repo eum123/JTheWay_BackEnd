@@ -110,10 +110,12 @@
                                                                 <div id="modal-form" class="modal fade" aria-hidden="true">
                                                                     <div class="modal-dialog">
                                                                         <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h3 class="modal-title" >그룹등록</h3>
+                                                                            </div>
                                                                             <div class="modal-body">
                                                                                 <div class="row">
                                                                                     <div class="col-sm-12">
-                                                                                        <h3 class="m-t-none m-b">그룹등록</h3>
                                                                                         <p>코드 그룹을 등록한다.</p>
                                                                                         <form role="form">
                                                                                             <div class="form-group"><label>GropuCode</label> <input id="add_group_code" type="text" placeholder="group code" class="form-control"></div>
@@ -257,19 +259,21 @@
                     param.code_name = name;
                     param.use_yn = 1;
 
-                    postJson(
+                    putJson(
                         "/code/group/save",
                         param,
                         function(res) {
                             if (res != null) {
                                 data.body.groupCode.push(param);
-                                
+                            } else {
+                                console.log(res);
                             }
                         },
-                        function() {
-                            alert("group code 저장 오류");
+                        function(req, status, msg) {
+                            alert("group code 저장 오류 : " + msg);
                         }
                     );
+                    $('#modal-form').modal('hide');
                 },
                 cancel: function() {
                     location.href = "/admin/system/codeList.html";

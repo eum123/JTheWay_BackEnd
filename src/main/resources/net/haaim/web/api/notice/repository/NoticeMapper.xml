@@ -14,10 +14,14 @@
 				state = #{state}
 				<choose>
 					<when test="title != null">
-						AND title like CONCAT('%',#{title},'%')
-						<if test="contents != null">
-							OR contents like CONCAT('%',#{contents},'%')
-						</if>
+						<choose>
+							<when test="contents != null">
+								AND ( title like CONCAT('%',#{title},'%') OR contents like CONCAT('%',#{contents},'%') )
+							</when>
+							<otherwise>
+								AND title like CONCAT('%',#{title},'%')
+							</otherwise>
+						</choose>
 					</when>
 					<otherwise>
 						<if test="contents != null">

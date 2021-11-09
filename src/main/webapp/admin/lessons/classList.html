@@ -116,10 +116,7 @@
                         <form role="form" class="form-inline">
                           <div class="form-group">
                             <select class="form-control" id="year">
-                              <option>2020</option>
-                              <option>2019</option>
-                              <option>2018</option>
-                              <option>2017</option>
+                              <option v-for="y in body.search.year" :value="y" >{{y}}</option>
                             </select>
                           </div>
                           <div class="form-group">
@@ -150,7 +147,7 @@
                               type="text"
                               placeholder="교사명 입력하세요"
                               class="form-control"
-                              id="name"
+                              id="teacher"
                             />
                           </div>
                           <div class="form-group">
@@ -199,8 +196,8 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="element in body.list.content">
-                            <td class="text-center">{{element.class_no}}</td>
+                          <tr v-for="(element, i) in body.list.content">
+                            <td class="text-center">{{body.list.totalElements - (body.list.pageable.pageNumber * body.list.pageable.pageSize) - i}}</td>
                             <td class="text-center">
                               {{element.year}}
                             </td>
@@ -208,15 +205,17 @@
                               {{element.class_name}}
                             </td>
                             <td class="text-center">
-                              {{element.course}}
+                              <ul>
+                                <li v-for="curri in element.curriculum_list" >{{curri.large_category}}/{{curri.medium_category}}</li>
+                              </ul>
                             </td>
                             <td class="text-center">
-                              {{element.student_cnt}}
+                              {{element.count}}
                             </td>
                             <td class="text-center">
                               {{element.start_date}} ~ {{element.end_date}}
                             </td>
-                            <td class="text-center">{{element.name}}</td>
+                            <td class="text-center">{{element.teacher_name}}</td>
                           </tr>
                         </tbody>
                         <tfoot>
@@ -285,6 +284,9 @@
               list: {
                   pageInfo: ""
               },
+              search: {
+                year: []
+              }
           }
       };
 
@@ -336,6 +338,15 @@
           $("#content").css("display", "");
         },
         created: function() {
+          //year init
+          var yearArray = [];
+          var nowYear = new Date().getFullYear(); 
+
+          for(var i=nowYear ; i > (nowYear - 10); i--) {
+            yearArray.push(i);
+          }
+          data.body.search.year = yearArray;
+
             //user
             get("/user/info/logon", null,
                 function(res) {
@@ -350,11 +361,7 @@
                 }
             );
 
-            //class
-            // data.clazz = JSON.parse(
-            //   '{"list":[{"no":"1","year":"2020","class":"class","curriculum":"중1 > 1학기 > 소인수분해 > 01 소인수분해","number":"10","startTime":"2020","endTime":"class","teacher":"김선생"}],"pagination":{"total":10,"countPerPage":10}}'
-            // );
-            getPage(1, "/lessons/class/all", null,
+            getPage(1, "/class/list", null,
               function(res, pageInfo) {
                   data.body.list = res.data;
                   data.body.list.pageInfo = pageInfo;
@@ -368,7 +375,7 @@
           //start loading
           toggleLoading();
 
-          getPage(page, "/lessons/class/seach", parameter,
+          getPage(page, "/class/list", parameter,
               function(res, pageInfo) {
                   data.body.list = res.data;
                   data.body.list.pageInfo = pageInfo;
@@ -384,15 +391,28 @@
        * 검색 조건으로 parameter 생성
        */
       function getSearchParameter() {
-        var questionDate = $("#questionDate").val(); //출제일자
-        var isTakeExam = $("#isTakeExam option:selected").val(); //응시 여부
-
-        var param = "";
-        if (isTakeExam != "") {
-          param = "isTakeExam=" + isTakeExam;
+        
+        var year = $("#year option:selected").val(); //
+        var grade = $("#grade option:selected").val();
+        var course = $("#course option:selected").val();
+        var large_category = $("#large_category").val(); //
+        var teacher = $("#teacher").val(); //
+        
+        var param = new Object();
+        if (year != "") {
+          param.year = year;
         }
-        if (questionDate != "") {
-          param = "questionDate=" + questionDate + "," + param;
+        if (grade != "") {
+          param.grade = grade;
+        }
+        if (course != "") {
+          param.course = course;
+        }
+        if (large_category != "") {
+          param.large_category = large_category;
+        }
+        if (teacher != "") {
+          param.teacher = teacher;
         }
 
         return param;
