@@ -115,15 +115,12 @@
                       <div class="row">
                         <form role="form" class="form-inline">
                           <div class="form-group">
-                            <select class="form-control" name="year">
-                              <option>2020</option>
-                              <option>2019</option>
-                              <option>2018</option>
-                              <option>2017</option>
+                            <select class="form-control" id="year">
+                              <option v-for="y in body.search.year" :value="y" >{{y}}</option>                           
                             </select>
                           </div>
                           <div class="form-group">
-                            <select class="form-control" name="grade">
+                            <select class="form-control" id="grade">
                               <option>학년전체</option>
                               <option>중1</option>
                               <option>중2</option>
@@ -131,18 +128,13 @@
                             </select>
                           </div>
                           <div class="form-group">
-                            <select class="form-control" name="course">
+                            <select class="form-control" id="course">
                               <option>1학기</option>
                               <option>2학기</option>
                             </select>
                           </div>
                           <div class="form-group">
-                            <select class="form-control" name="large_category">
-                              <option>대분류1</option>
-                              <option>대분류2</option>
-                              <option>대분류3</option>
-                              <option>대분류4</option>
-                            </select>
+                            <input type="text" placeholder="대분류" class="form-control" id="large_category"  />
                           </div>
 
                           <div class="form-group">
@@ -190,8 +182,8 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="element in body.list.content">
-                            <td class="text-center">{{element.no}}</td>
+                          <tr v-for="(element, i) in body.list.content">
+                            <td class="text-center">{{body.list.totalElements - (body.list.pageable.pageNumber * body.list.pageable.pageSize) - i}}</td>
                             <td class="text-center">
                               {{element.year}}
                             </td>
@@ -273,7 +265,10 @@
               list: {
                   pageInfo: ""
               },
-              content: ""
+              content: "",
+              search: {
+                year: []
+              }
           }
       };
 
@@ -323,6 +318,15 @@
           $("#content").css("display", "");
         },
         created: function() {
+          //year init
+          var yearArray = [];
+          var nowYear = new Date().getFullYear(); 
+
+          for(var i=nowYear ; i > (nowYear - 10); i--) {
+            yearArray.push(i);
+          }
+          data.body.search.year = yearArray;
+
           //user
           get("/user/info/logon", null,
               function(res) {
@@ -338,7 +342,7 @@
           );
 
           //curriculum
-          getPage(1, "/lessons/curriculum/all", null,
+          getPage(1, "/curriculum/list", null,
               function(res, pageInfo) {
                   data.body.list = res.data;
                   data.body.list.pageInfo = pageInfo;
@@ -352,7 +356,7 @@
           //start loading
           toggleLoading();
 
-          getPage(page, "/lessons/curriculum/search", parameter,
+          getPage(page, "/curriculum/list", parameter,
               function(res, pageInfo) {
                   data.body.list = res.data;
                   data.body.list.pageInfo = pageInfo;
@@ -374,20 +378,20 @@
         var year = $("#year option:selected").val(); //year
         var grade = $("#grade option:selected").val(); //grade
         var course = $("#course option:selected").val(); //course
-        var largeCategory = $("#largeCategory option:selected").val(); //largeCategory
-
-        var param = "";
+        var largeCategory = $("#largeCategory").val(); //largeCategory
+        
+        var param = new Object();
         if (year != "") {
-          param = "year=" + year;
+          param.year = year;
         }
         if (grade != "") {
-          param = "grade=" + grade;
+          param.grade = grade;
         }
         if (course != "") {
-          param = "course=" + course;
+          param.course = course;
         }
         if (largeCategory != "") {
-          param = "large_category=" + largeCategory;
+          param.large_category = largeCategory;
         }
         return param;
       }

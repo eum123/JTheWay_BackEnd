@@ -101,11 +101,7 @@
                               <td>년도</td>
                               <td>
                                 <select class="form-control" id="year">
-                                  <option value="2021">2020</option>
-                                  <option value="2020" selected>2020</option>
-                                  <option value="2019">2019</option>
-                                  <option value="2018">2018</option>
-                                  <option value="2017">2017</option>
+                                  <option v-for="y in body.search.year" :value="y" >{{y}}</option>
                                 </select>
                               </td>
                             </tr>
@@ -158,7 +154,7 @@
                           <div class="form-group">
                             <button
                               type="button"
-                              class="btn btn-w-m btn-default"
+                              class="btn btn-w-m btn-default" @click="cancel"
                             >
                               취소
                             </button>
@@ -219,6 +215,9 @@
               list: {
                   pageInfo: ""
               },
+              search: {
+                year: []
+              }
           }
       };
 
@@ -246,35 +245,47 @@
             param.large_category = largeCategory;
             param.medium_category = mediumCategory;
 
-            post(
-                "/lessons/curriculum/regist",
+            putJson(
+                "/curriculum/save",
                 param,
                 function(res) {
                     if (res != null) {
-                        console.log(res);
                         alert("저장 성공");
+                        location.href = "/admin/lessons/curriculumList.html";
                     }
                 },
                 function() {
-                    alert("code 저장 오류");
+                    alert("저장 오류");
                 }
             );
           },
+          cancel: function() {
+            location.href = "/admin/lessons/curriculumList.html";
+          },
         },
         created: function() {
-            //user
-            get("/user/info/logon", null,
-                function(res) {
-                  data.left.info = res.data;
-                }
-            );
+          //year init
+          var yearArray = [];
+          var nowYear = new Date().getFullYear(); 
 
-            //menu
-            get("/system/menu/all", null,
-                function(res) {
-                    data.left.menu = res.data;
-                }
-            );
+          for(var i=nowYear ; i > (nowYear - 10); i--) {
+            yearArray.push(i);
+          }
+          data.body.search.year = yearArray;
+
+          //user
+          get("/user/info/logon", null,
+              function(res) {
+                data.left.info = res.data;
+              }
+          );
+
+          //menu
+          get("/system/menu/all", null,
+              function(res) {
+                  data.left.menu = res.data;
+              }
+          );
 
         },
       });
