@@ -30,6 +30,5 @@ public class NoticeEntity extends CommonEntity {
 	private String contents;
 	
 	@Schema(description="표시 여부.", allowableValues = {"0", "1"})
-	@Pattern(regexp = "[0-1]")
 	private Integer state = 1;
 }

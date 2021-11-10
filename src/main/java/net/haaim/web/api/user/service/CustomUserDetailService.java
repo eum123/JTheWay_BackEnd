@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.haaim.web.api.common.Role;
 import net.haaim.web.api.user.entity.CustomUserDetails;
+import net.haaim.web.api.user.entity.IdDuplicationResponse;
 import net.haaim.web.api.user.entity.UserEntity;
 import net.haaim.web.api.user.repository.CustomUserDetailMapper;
 
@@ -71,5 +72,25 @@ public class CustomUserDetailService implements UserDetailsService {
 	 */
 	public List<UserEntity> findAllByUType(Integer uType) {
 		return mapper.findAllByUType(uType);
+	}
+	
+	/**
+	 * ID 중복 확인.
+	 * @param id
+	 * @return
+	 */
+	public IdDuplicationResponse checkId(String id) {
+		UserEntity entity = mapper.findById(id);
+		if(entity == null) {
+			return IdDuplicationResponse.builder()
+						.duplication(false)
+						.message("사용가능한 ID")
+						.build();
+		} else {
+			return IdDuplicationResponse.builder()
+					.duplication(true)
+					.message("사용가능한 ID")
+					.build();
+		}
 	}
 }

@@ -59,8 +59,8 @@
 			AND b.class_no = #{classNo}
 		</if>	
 		<if test="keyword != null">
-			AND a.name like CONCAT('%',#{keyword},'%') OR a.mobile like CONCAT('%',#{keyword},'%')
+			AND (a.name like CONCAT('%',#{keyword},'%') OR a.mobile like CONCAT('%',#{keyword},'%') )
 		</if>	
-		
+		ORDER BY u.input_date DESC
     </select>
 </mapper>

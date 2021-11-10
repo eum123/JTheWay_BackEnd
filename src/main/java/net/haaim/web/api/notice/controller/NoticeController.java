@@ -4,7 +4,7 @@ import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,7 +33,7 @@ public class NoticeController {
 	 * @param entity
 	 * @return
 	 */
-	@PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
 	public HaaimApiResponse save(@RequestBody NoticeEntity entity) {
 
 		try {

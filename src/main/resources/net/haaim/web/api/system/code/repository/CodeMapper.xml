@@ -6,11 +6,14 @@
     <select id="findAllByCodeNameAndUseYn" resultType="net.haaim.web.api.system.code.entity.CodeEntity">
     	SELECT group_code, code, code_name, use_yn, input_id, input_date, update_id, update_date
     	FROM code
-    	WHERE use_yn = #{use_yn}
-    	<choose>
-			<when test="code_name != null">
-				AND code_name like CONCAT('%',#{code_name},'%') 
-			</when>
-		</choose>
+    	WHERE 1=1
+    	<if test="use_yn != null">
+    		AND use_yn = #{use_yn}
+    	</if>
+    	<if test="code_name != null">
+    		AND code_name like CONCAT('%',#{code_name},'%')
+    	</if>
+    	
+		ORDER BY input_date DESC
     </select>
 </mapper>

@@ -94,7 +94,7 @@ public class StudentController {
 	 * @param size
 	 * @return
 	 */
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@GetMapping(value = "/list")
 	public HaaimApiResponse findAll(@RequestParam(value = "page_no", defaultValue = "1") @Nullable Integer pageNo,
 			@RequestParam(value = "page_size", defaultValue = "10") @Nullable Integer pageSize,
 			@RequestParam(value = "year") @Nullable Integer year,

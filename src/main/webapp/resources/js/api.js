@@ -36,6 +36,9 @@ function postJson(url, param, successFunc, failFunc) {
 function putJson(url, param, successFunc, failFunc) {
     this.callJson("PUT", url, param, successFunc, failFunc);
 }
+function patchJson(url, param, successFunc, failFunc) {
+    this.callJson("PATCH", url, param, successFunc, failFunc);
+}
 
 function callJson(httpMethod, url, param, successFunc, failFunc) {
     $.ajax({
@@ -46,11 +49,17 @@ function callJson(httpMethod, url, param, successFunc, failFunc) {
         contentType: "application/json; charset=utf-8",
         async: false,
         success: function(res) {
+            
             if (res != null) {
-                if (successFunc != null) {
-                    successFunc(res);
+                if(res.code == 0 || res.code == 200) {
+                    if (successFunc != null) {
+                        successFunc(res);
+                    }
+                } else {
+                    if (failFunc != null) failFunc(res, res.code, res.msg);
                 }
             }
+            
         },
         error: function(req, status, error) {
             if (failFunc != null) failFunc(req, status, error);
@@ -109,7 +118,7 @@ function callPage(httpMethod, page, url, param, successFunc, failFunc) {
                     //     totalCount = 0;
                     // }
 
-                     var currentPage = res.data.pageable.pageNumbers;
+                     var currentPage = res.data.pageable.pageNumber;
 
                     //0.1.2.3...형식에서 1.2.3.4.형식으려 변경.
                     if (isEmpty(currentPage)) {
@@ -137,11 +146,12 @@ function callPage(httpMethod, page, url, param, successFunc, failFunc) {
 function getPageInfo(totalPage, currentPage) {
     
     //currentPage = 현재 보고있는 페이지
-    if (totalPage < currentPage) {
-        currentPage = totalPage;
-    }
+    // if (totalPage < currentPage) {
+    //     currentPage = totalPage;
+    // }
 
-    var startPage = ((currentPage - 1) / PAGENUMBER_COUNT) * PAGENUMBER_COUNT + 1;
+    var startPage = (Math.floor((currentPage -1) / PAGENUMBER_COUNT)) * PAGENUMBER_COUNT + 1;
+  
     //현재 페이지가 pageCount와 같을 때를 유의하며 (page-1)을 하고
     // +1은 첫페이지가 0이나 10이 아니라 1이나 11로 하기 위함임
     var endPage = startPage + PAGENUMBER_COUNT - 1;
