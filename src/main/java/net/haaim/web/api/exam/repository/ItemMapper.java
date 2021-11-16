@@ -1,14 +1,11 @@
 package net.haaim.web.api.exam.repository;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import net.haaim.web.api.exam.entity.DailyTakeExamStatusEntity;
-import net.haaim.web.api.exam.entity.ExamAverageEntity;
+import com.github.pagehelper.Page;
+
 import net.haaim.web.api.exam.entity.ItemPoolEntity;
-import net.haaim.web.api.exam.entity.MonthlyExamStatusEntity;
 
 @Mapper
 public interface ItemMapper {
@@ -22,7 +19,7 @@ public interface ItemMapper {
 	 * @param question
 	 * @return
 	 */
-	List<ItemPoolEntity> findAllByGradeOrCourseOrMediumCategoryOrUserYnOrQuestion(
+	Page<ItemPoolEntity> findAllByGradeOrCourseOrMediumCategoryOrUserYnOrQuestion(
 			@Param("year") Integer year, 
 			@Param("grade") Integer grade, 
 			@Param("course") Integer course, 

@@ -13,22 +13,22 @@
     	WHERE 1=1
     		
     	<if test="year != null">
-			OR year = #{year} 
+			AND year = #{year} 
 		</if>
 		<if test="grade != null">
-			OR grade = #{grade} 
+			AND grade = #{grade} 
 		</if>
 		<if test="course != null">
-			OR course = #{course} 
+			AND course = #{course} 
 		</if>
 		<if test="medium_category != null">
-			OR medium_category = #{medium_category} 
+			AND medium_category = like CONCAT('%',#{medium_category},'%') 
 		</if>
 		<if test="use_yn != null">
-			OR use_yn = #{use_yn} 
+			AND use_yn = #{use_yn} 
 		</if>
 		<if test="question != null">
-			OR question = #{question} 
+			AND question = #{question} 
 		</if>
     </select>
     

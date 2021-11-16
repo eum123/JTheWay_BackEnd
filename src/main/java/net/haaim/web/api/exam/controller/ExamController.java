@@ -87,8 +87,8 @@ public class ExamController {
 			@RequestParam(value = "question", required = false) String question) {
 		try {
 				
-			return HaaimApiResponse.getSuccessResponse(itemService.findAllByGradeOrCourseOrMediumCategoryOrUserYnOrQuestion(
-					year, grade, course, mediumCategory, useYn, question));
+			return HaaimApiResponse.getSuccessResponse(SpringPageHelper.convertSpringPage(itemService.findAllByGradeOrCourseOrMediumCategoryOrUserYnOrQuestion(
+					year, grade, course, mediumCategory, useYn, question)));
 		} catch (Exception e) {
 			log.error("search error", e);
 			return HaaimApiResponse.getErrorResponse(e);

@@ -115,7 +115,7 @@
                       <div class="row">
                         <form role="form" class="form-inline">
                           <div class="form-group">
-                            <select class="form-control" id="year">
+                            <select class="form-control"   id="year">
                               <option v-for="y in body.search.year" :value="y" >{{y}}</option>
                             </select>
                           </div>
@@ -153,7 +153,7 @@
                           <div class="form-group">
                             <button
                               type="button"
-                              class="btn btn-w-m btn-success"
+                              class="btn btn-w-m btn-success" @click="search"
                             >
                               검색
                             </button>
@@ -323,9 +323,9 @@
               }
           },
           search: function() {
-              if (validate()) {
-                  callAPI(1, getSearchParameter());
-              }
+              
+            callAPI(1, getSearchParameter());
+              
           },
           goRegist: function() {
               location.href = "/admin/lessons/classRegist.html";

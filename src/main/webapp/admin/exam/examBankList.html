@@ -115,11 +115,9 @@
                       <div class="row">
                         <form role="form" class="form-inline">
                           <div class="form-group">
-                            <input
-                              type="text"
-                              placeholder="2020.03.02"
-                              class="form-control" id="year"
-                            />
+                            <select class="form-control"   id="year">
+                              <option v-for="y in body.search.year" :value="y" >{{y}}</option>
+                            </select>
                           </div>
                           <div class="form-group">
                             <input
@@ -130,17 +128,18 @@
                           </div>
                           <div class="form-group">
                             <select class="form-control" id="course">
-                              <option>학년전체</option>
-                              <option>중1</option>
-                              <option>중2</option>
-                              <option>중3</option>
+                              <option value="ALL">학년전체</option>
+                              <option value="1">중1</option>
+                              <option value="2">중2</option>
+                              <option value="3">중3</option>
                             </select>
                           </div>
                           <div class="form-group">
-                            <select class="form-control" id="medium_category">
-                              <option>클래스1</option>
-                              <option>클래서2</option>
-                            </select>
+                            <input
+                              type="text"
+                              placeholder="medium_category"
+                              class="form-control" id="medium_category"
+                            />
                           </div>
                           <div class="form-group">
                             <select class="form-control" id="use_yn">
@@ -193,29 +192,33 @@
                           <tr>
                             <th>NO</th>
                             <th>일자</th>
-                            <th>클래스</th>
-                            <th>시간</th>
-                            <th>담당교사</th>
-                            <th>진도</th>
+                            <th>커리큘럼</th>
+                            <th>유형</th>
+                            <th>문제</th>
+                            <th>난이도</th>
+                            <th>사용여부</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="element in body.list.content">
-                            <td class="text-center">{{element.item_no}}</td>
+                          <tr v-for="(element, i) in body.list.content">
+                            <td class="text-center">{{body.list.totalElements - (body.list.pageable.pageNumber * body.list.pageable.pageSize) - i}}</td>
                             <td class="text-center">
                               {{element.year}}
                             </td>
                             <td class="text-center">
-                              {{element.curriculum}}
+                              {{element.grade}} > {{element.course}} > {{element.large_category}} > {{element.medium_category}}
+                            </td>
+                            <td class="text-center">
+                              {{element.type_group}}
                             </td>
                             <td class="text-center">
                               {{element.question}}
                             </td>
                             <td class="text-center">
-                              {{element.level}}
+                              {{element.level_difficulty}}
                             </td>
                             <td class="text-center">
-                              {{element.usage}}
+                              {{element.use_yn}}
                             </td>
                           </tr>
                         </tbody>
@@ -283,6 +286,9 @@
               list: {
                   pageInfo: ""
               },
+              search: {
+                year: [],
+              },
           }
       };
         
@@ -321,7 +327,7 @@
           },
           search: function() {
               
-              callAPI(1, getSearchParameter());
+              callAPI(true, 1, getSearchParameter());
               
           },
           goRegist: function() {
@@ -335,6 +341,15 @@
           $("#content").css("display", "");
         },
         created: function() {
+          //year init
+          var yearArray = [];
+          var nowYear = new Date().getFullYear(); 
+
+          for(var i=nowYear ; i > (nowYear - 10); i--) {
+            yearArray.push(i);
+          }
+          data.body.search.year = yearArray;
+
           //user
           get("/user/info/logon", null,
               function(res) {
@@ -349,41 +364,31 @@
               }
           );
 
+          callAPI(false, 1, null);
           
-          // getPage(1, "/code/all", null,
-          //     function(res, pageInfo) {
-          //         data.body.list = res.data;
-          //         data.body.list.pageInfo = pageInfo;
-          //     },
-          //     null
-          // );
-          data.body.list = JSON.parse(
-            '{"list":[{"no":"1","year":"2020","curriculum":"중3 > 1학기 > Ⅰ 소인수분해 > 01 소인수분해","type":"A","question":"다항식 f(x)를 x-1/3로 나누었을때의 몫을 Q(x), 나머지를 R라 할 때, f(x)를 3x-1로 나누었을 때의 몫과 나머지를 순서대로 적으면?","level":"*****","usage":"0"}],"pagination":{"total":10,"countPerPage":10}}'
-          );  
-
-           getPage(1, "/exam/bank/all", null,
-              function(res, pageInfo) {
-                  data.body.list = res.data;
-                  data.body.list.pageInfo = pageInfo;
-              }
-          )    
-
         },
       });
 
-      function callAPI(page, parameter) {
-          //start loading
-          toggleLoading();
+      function callAPI(doToggle, page, parameter) {
+          
+          if(doToggle) {
+            //start loading
+            toggleLoading();
+          }
 
-          getPage(page, "/exam/bank/search", parameter,
+          getPage(page, "/exam/item/list", parameter,
               function(res, pageInfo) {
                   data.body.list = res.data;
                   data.body.list.pageInfo = pageInfo;
+              }, 
+              function(req, status, error) {
+                alert(error);
               }
           )
-
-          //end loading
-          toggleLoading();
+          if(doToggle) {
+            //end loading
+            toggleLoading();
+          }
       }
 
      
@@ -394,18 +399,18 @@
         var year = $("#year").val(); //출제일자
         var grade = $("#grade").val(); //출제일자
         var course = $("#course option:selected").val(); //응시 여부
-        var medium_category = $("#medium_category option:selected").val(); //응시 여부
+        var medium_category = $("#medium_category").val(); //응시 여부
         var use_yn = $("#use_yn option:selected").val(); //응시 여부
         var question = $("#question").val(); //출제일자
 
-        var param = "";
+        var param = new Object();
         if (year != "") {
           param.year = year;
         }
         if (grade != "") {
           param.grade = grade;
         }
-        if (course != "") {
+        if (course != "" && course != "ALL") {
           param.course = course;
         }
         if (medium_category != "") {

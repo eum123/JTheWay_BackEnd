@@ -128,52 +128,37 @@
                       <div class="row">
                         <form role="form" class="form-inline">
                           <div class="form-group">
-                            <select class="form-control" name="account">
-                              <option>2020</option>
-                              <option>2021</option>
+                            <select class="form-control" id="year"  >
+                              <option v-for="y in body.search.year" :value="y" >{{y}}</option>
                             </select>
                           </div>
                           <div class="form-group">
-                            <select class="form-control" name="account">
+                            <select class="form-control" id="grade">
                               <option>3학년</option>
                               <option>2학년</option>
                             </select>
                           </div>
                           <div class="form-group">
-                            <select class="form-control" name="account">
-                              <option>대분류1</option>
-                              <option>대분류2</option>
+                            <select class="form-control" id="class_name"  >
+                              <option v-for="clazz in body.search.class" :value="clazz.class_name" >{{clazz.class_name}}</option>
                             </select>
                           </div>
                           <div class="form-group">
-                            <select class="form-control" name="account">
-                              <option>중분류1</option>
-                              <option>중분류2</option>
+                            <select class="form-control" id="member_id"  >
+                              <option v-for="teacher in body.search.teacher" :value="teacher.user_name" >{{teacher.name}}</option>
                             </select>
                           </div>
-                          <div class="form-group">
-                            <select class="form-control" name="account">
-                              <option>사용</option>
-                              <option>미사용</option>
-                            </select>
-                          </div>
-                          <div class="form-group">
-                            <input
-                              type="text"
-                              placeholder="문제"
-                              class="form-control"
-                            />
-                          </div>
+                          
                           <div class="form-group">
                             <button
                               type="button"
-                              class="btn btn-w-m btn-success"
+                              class="btn btn-w-m btn-success" @click="search"
                             >
                               검색
                             </button>
                             <button
                               type="button"
-                              class="btn btn-w-m btn-primary"
+                              class="btn btn-w-m btn-primary" @click="goRegist"
                             >
                               등록
                             </button>
@@ -201,33 +186,30 @@
                         <thead>
                           <tr>
                             <th>NO</th>
-                            <th>년도</th>
-                            <th>커리큘럼</th>
-                            <th>유형</th>
-                            <th>문제</th>
-                            <th>난이도</th>
-                            <th>사용여부</th>
+                            <th>일자</th>
+                            <th>클래스</th>
+                            <th>시간/th>
+                            <th>담당교사</th>
+                            <th>진도</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="element in body.list.content">
-                            <td class="text-center">{{element.no}}</td>
+                          <tr v-for="(element, i) in body.list.content">
+                            <td class="text-center">{{body.list.totalElements - (body.list.pageable.pageNumber * body.list.pageable.pageSize) - i}}</td>
                             <td class="text-center">
-                              {{element.date}}
+                              {{element.start_time}} ~ {{element.end_time}}
                             </td>
                             <td class="text-center">
-                              {{element.class}}
+                              {{element.class_name}}
                             </td>
                             <td class="text-center">
-                              {{element.startTime}} ~ {{element.endTime}}
+                              {{element.day_time}}
                             </td>
                             <td class="text-center">
-                              {{element.teacher}}
+                              {{element.name}}
                             </td>
                             <td class="text-center">
-                              <span v-for="pro in element.progress"
-                                >{{pro.order.name}}:{{pro.order.status}}</span
-                              >
+                              
                             </td>
                           </tr>
                         </tbody>
@@ -299,6 +281,11 @@
               list: {
                   pageInfo: ""
               },
+              search: {
+                year: [],
+                class: [],
+                teacher: []
+              },
           }
       };
 
@@ -335,9 +322,8 @@
               }
           },
           search: function() {
-              if (validate()) {
-                  callAPI(1, getSearchParameter());
-              }
+            //validate
+            callAPI(1, getSearchParameter());
           },
           goRegist: function() {
               location.href = "/admin/lessons/classRegist.html";
@@ -350,6 +336,31 @@
           $("#content").css("display", "");
         },
         created: function() {
+          //year init
+          var yearArray = [];
+          var nowYear = new Date().getFullYear(); 
+
+          for(var i=nowYear ; i > (nowYear - 10); i--) {
+            yearArray.push(i);
+          }
+          data.body.search.year = yearArray;
+
+          //class init
+          get("/class/all", null,
+              function(res) {
+                data.body.search.class = res.data;
+              }
+          );
+
+          //teacher init
+          var param = new Object();
+          param.u_type = 2;
+          get("/user/all", param,
+              function(res) {
+                data.body.search.teacher = res.data;
+              }
+          );
+
           //user
           get("/user/info/logon", null,
               function(res) {
@@ -363,12 +374,14 @@
                   data.left.menu = res.data;
               }
           );
-
-          //test
-          data.progress = JSON.parse(
-            '{"list":[{"no":"1","date":"2020.01.01","class":"class","startTime":"10:00","endTime":"11:00","teacher":"나선생","progress":[{"order":{"name":"A","status":"1"}},{"order":{"name":"B","status":"1"}},{"order":{"name":"C","status":"1"}},{"order":{"name":"D","status":"0"}},{"order":{"name":"E","status":"0"}},{"order":{"name":"F","status":"0"}},{"order":{"name":"G","status":"0"}}]}],"pagination":{"total":10,"countPerPage":10}}'
+          
+          //목록.
+          get("/progress/progress/list", null,
+              function(res) {
+                data.body.list = res.data;
+              }
           );
-
+          
         },
       });
 
@@ -377,7 +390,7 @@
           //start loading
           toggleLoading();
 
-          getPage(page, "/lessons/progress/seach", parameter,
+          getPage(page, "/progress/progress/list", parameter,
               function(res, pageInfo) {
                   data.body.list = res.data;
                   data.body.list.pageInfo = pageInfo;
@@ -392,17 +405,25 @@
        * 검색 조건으로 parameter 생성
        */
       function getSearchParameter() {
-        var questionDate = $("#questionDate").val(); //출제일자
-        var isTakeExam = $("#isTakeExam option:selected").val(); //응시 여부
-
-        var param = "";
-        if (isTakeExam != "") {
-          param = "isTakeExam=" + isTakeExam;
+        
+        var year = $("#year option:selected").val(); //year
+        var grade = $("#grade option:selected").val(); //grade
+        var class_name = $("#class_name option:selected").val(); //class_name
+        var member_id = $("#member_id option:selected").val(); //member_id
+        
+        var param = new Object();
+        if (year != "") {
+          param.year = year;
         }
-        if (questionDate != "") {
-          param = "questionDate=" + questionDate + "," + param;
+        if (grade != "") {
+          param.grade = grade;
         }
-
+        if (class_name != "") {
+          param.class_name = class_name;
+        }
+        if (member_id != "") {
+          param.member_id = member_id;
+        }
         return param;
       }
 

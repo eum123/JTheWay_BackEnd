@@ -143,7 +143,7 @@
                                   <form id="form" action="#" class="wizard-big">
                                     <div class="row">
                                       <div class="col-lg-12">
-                                        <select id="curriculum_list" class="form-control dual_select" multiple>
+                                        <select id="curriculum_list" class="form-control dual_select"   multiple>
                                             <option v-for="element in body.curriculum" v-bind:value="element.no">{{element.year}}/{{element.grade}}/{{element.course}}/{{element.large_category}}/{{element.medium_category}}</option>
                                         </select>
                                       </div>
@@ -239,7 +239,7 @@
                                 <td>
                                   <div class="row">
                                     <div class="col-md-6">
-                                      <select class="form-control" id="teacher_no">
+                                      <select class="form-control" id="teacher_no"  >
                                         <option v-for="teacher in body.teacher" v-bind:value="teacher.no">{{teacher.name}} ({{teacher.user_id}})</option>
                                       </select>
                                     </div>
@@ -254,7 +254,8 @@
                                     <div class="col-md-10">
                                       <select id="student_list" 
                                         data-placeholder="학생 선택"
-                                        class="chosen-select"
+                                        class="chosen-select" 
+                                         
                                         multiple
                                         style="width: 350px;"
                                         tabindex="4"
@@ -291,7 +292,7 @@
                           <div class="form-group">
                             <button
                               type="button"
-                              class="btn btn-w-m btn-default"
+                              class="btn btn-w-m btn-default" @click="cancel"
                             >
                               취소
                             </button>
@@ -459,13 +460,14 @@
             param.teacher_no = $("#teacher_no").val();
             param.description = $("#description").val();
 
-            post(
+            postJson(
                 "/lessons/class/regist",
                 param,
                 function(res) {
                     if (res != null) {
                         console.log(res);
                         alert("저장 성공");
+                        location.href="/admin/lessions/classList.html";
                     }
                 },
                 function() {
@@ -473,6 +475,9 @@
                 }
             );
           },
+          cancel: function() {
+            location.href="/admin/lessions/classList.html";
+          }
           
         }
       });

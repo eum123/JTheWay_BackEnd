@@ -11,8 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Data
 public class ProgressListResponse {
-private Integer classNo;
-	
+	private Integer classNo;
 	private String className;
 	private String startDate;
 	private String endDate;
