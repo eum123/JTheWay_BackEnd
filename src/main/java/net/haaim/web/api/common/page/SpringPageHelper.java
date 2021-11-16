@@ -13,8 +13,13 @@ public class SpringPageHelper {
 	 * @return
 	 */
 	public static Page<?> convertSpringPage(com.github.pagehelper.Page<?> page) {
-
-		PageRequest pageable = CustomPageRequest.of(page.getPageNum(), page.getPageSize(), "unknown");
+		PageRequest pageable;
+		if(page.getPageSize() == 0) {
+			pageable = CustomPageRequest.of(page.getPageNum(), 10, "unknown");
+		} else {
+			pageable = CustomPageRequest.of(page.getPageNum(), page.getPageSize(), "unknown");
+		}
+		 
 		
 		return new PageImpl(page.getResult(), pageable, page.getTotal());
 

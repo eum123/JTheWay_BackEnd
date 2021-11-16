@@ -4,7 +4,6 @@ import java.security.MessageDigest;
 
 public class Crypto {
 	public static String sha256(final String string) {
-		System.out.println("Crypto.sha256 ::::");
 		try {
 			MessageDigest digest = MessageDigest.getInstance("SHA-256");
 			byte[] hash = digest.digest(string.getBytes("UTF-8"));

@@ -77,5 +77,6 @@
 			<if test="status != null">
 				AND cc.status = #{status}
 			</if>
+		ORDER BY cc.input_date DESC
     </select>
 </mapper>

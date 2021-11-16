@@ -115,7 +115,7 @@
                       <div class="row">
                         <form role="form" class="form-inline">
                           <div class="form-group">
-                            <select class="form-control" id="year">
+                            <select class="form-control"   id="year">
                               <option v-for="y in body.search.year" :value="y" >{{y}}</option>
                             </select>
                           </div>
@@ -128,10 +128,10 @@
                           </div>
                           <div class="form-group">
                             <select class="form-control" id="course">
-                              <option>학년전체</option>
-                              <option>중1</option>
-                              <option>중2</option>
-                              <option>중3</option>
+                              <option value="ALL">학년전체</option>
+                              <option value="1">중1</option>
+                              <option value="2">중2</option>
+                              <option value="3">중3</option>
                             </select>
                           </div>
                           <div class="form-group">
@@ -327,7 +327,7 @@
           },
           search: function() {
               
-              callAPI(1, getSearchParameter());
+              callAPI(true, 1, getSearchParameter());
               
           },
           goRegist: function() {
@@ -364,27 +364,31 @@
               }
           );
 
-          get("/exam/item/list", null,
-              function(res) {
-                data.body.list = res.data;
-              }
-          );
+          callAPI(false, 1, null);
+          
         },
       });
 
-      function callAPI(page, parameter) {
-          //start loading
-          toggleLoading();
+      function callAPI(doToggle, page, parameter) {
+          
+          if(doToggle) {
+            //start loading
+            toggleLoading();
+          }
 
           getPage(page, "/exam/item/list", parameter,
               function(res, pageInfo) {
                   data.body.list = res.data;
                   data.body.list.pageInfo = pageInfo;
+              }, 
+              function(req, status, error) {
+                alert(error);
               }
           )
-
-          //end loading
-          toggleLoading();
+          if(doToggle) {
+            //end loading
+            toggleLoading();
+          }
       }
 
      
@@ -399,14 +403,14 @@
         var use_yn = $("#use_yn option:selected").val(); //응시 여부
         var question = $("#question").val(); //출제일자
 
-        var param = "";
+        var param = new Object();
         if (year != "") {
           param.year = year;
         }
         if (grade != "") {
           param.grade = grade;
         }
-        if (course != "") {
+        if (course != "" && course != "ALL") {
           param.course = course;
         }
         if (medium_category != "") {

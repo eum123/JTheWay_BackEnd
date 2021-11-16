@@ -1,8 +1,8 @@
 package net.haaim.web.api.exam.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
+
+import com.github.pagehelper.Page;
 
 import lombok.RequiredArgsConstructor;
 import net.haaim.web.api.exam.entity.ItemPoolEntity;
@@ -24,7 +24,7 @@ public class ItemService {
 	 * @param question
 	 * @return
 	 */
-	public List<ItemPoolEntity> findAllByGradeOrCourseOrMediumCategoryOrUserYnOrQuestion(
+	public Page<ItemPoolEntity> findAllByGradeOrCourseOrMediumCategoryOrUserYnOrQuestion(
 			Integer year, Integer grade, Integer course, String mediumCategory,
 			Integer useYn, String question) {
 

@@ -29,7 +29,7 @@ public class ItemPoolEntity extends CommonEntity {
 	private String typeGroup;
 
 	private String type;
-	private Integer questionType = null;
+	private String questionType = null;
 	private String question = null;
 	private String choice1 = null;
 	private String choice2 = null;

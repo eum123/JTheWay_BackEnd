@@ -128,7 +128,7 @@
                       <div class="row">
                         <form role="form" class="form-inline">
                           <div class="form-group">
-                            <select class="form-control" id="year">
+                            <select class="form-control" id="year"  >
                               <option v-for="y in body.search.year" :value="y" >{{y}}</option>
                             </select>
                           </div>
@@ -139,12 +139,12 @@
                             </select>
                           </div>
                           <div class="form-group">
-                            <select class="form-control" id="class_name">
+                            <select class="form-control" id="class_name"  >
                               <option v-for="clazz in body.search.class" :value="clazz.class_name" >{{clazz.class_name}}</option>
                             </select>
                           </div>
                           <div class="form-group">
-                            <select class="form-control" id="member_id">
+                            <select class="form-control" id="member_id"  >
                               <option v-for="teacher in body.search.teacher" :value="teacher.user_name" >{{teacher.name}}</option>
                             </select>
                           </div>
