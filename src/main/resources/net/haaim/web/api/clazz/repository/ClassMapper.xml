@@ -79,4 +79,37 @@
 			</if>
 		ORDER BY cc.input_date DESC
     </select>
+    <select id="weeklyClassSchedule" resultType="net.haaim.web.api.clazz.entity.WeeklyClassScheduleVO">
+    	<![CDATA[
+			SELECT a.cdate,
+			       a.ctime,
+			       b.class_no,
+			       b.class_name,
+			       b.start_date,
+			       b.end_date,
+			       c.day base_date
+			FROM   class_curriculum a
+			       JOIN class b
+			         ON a.class_no = b.class_no
+			       RIGHT JOIN (SELECT Adddate(#{startDate}, -Dayofweek(#{startDate}) + 1) AS DAY
+			                   UNION ALL
+			                   SELECT Adddate(#{startDate}, -Dayofweek(#{startDate}) + 2) AS DAY
+			                   UNION ALL
+			                   SELECT Adddate(#{startDate}, -Dayofweek(#{startDate}) + 3) AS DAY
+			                   UNION ALL
+			                   SELECT Adddate(#{startDate}, -Dayofweek(#{startDate}) + 4) AS DAY
+			                   UNION ALL
+			                   SELECT Adddate(#{startDate}, -Dayofweek(#{startDate}) + 5) AS DAY
+			                   UNION ALL
+			                   SELECT Adddate(#{startDate}, -Dayofweek(#{startDate}) + 6) AS DAY
+			                   UNION ALL
+			                   SELECT Adddate(#{startDate}, -Dayofweek(#{startDate}) + 7) AS DAY
+			                  ) c
+			               ON Date_format(cdate, '%Y-%m-%d') = c.day
+			WHERE 1=1
+				AND a.status = 1 AND b.status = 1
+			ORDER  BY c.day ASC,
+			          a.input_date ASC 
+		 ]]>
+    </select>
 </mapper>

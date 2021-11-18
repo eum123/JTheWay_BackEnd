@@ -3,7 +3,6 @@ package net.haaim.web.api.clazz.service;
 import java.util.List;
 
 import javax.transaction.Transactional;
-import javax.validation.constraints.NotEmpty;
 
 import org.springframework.stereotype.Service;
 
@@ -16,9 +15,12 @@ import net.haaim.web.api.clazz.entity.ClassListResponse;
 import net.haaim.web.api.clazz.entity.ClassMembersEntity;
 import net.haaim.web.api.clazz.entity.ClassSaveRequest;
 import net.haaim.web.api.clazz.entity.DailyClassAttendanceEntity;
+import net.haaim.web.api.clazz.entity.WeeklyClassScheduleResponse;
+import net.haaim.web.api.clazz.entity.WeeklyClassScheduleVO;
 import net.haaim.web.api.clazz.repository.ClassCurriculumMapper;
 import net.haaim.web.api.clazz.repository.ClassMapper;
 import net.haaim.web.api.clazz.repository.ClassMembersMapper;
+import net.haaim.web.api.common.util.DateHelper;
 
 @RequiredArgsConstructor
 @Service
@@ -109,5 +111,20 @@ public class ClassService {
 				.status(1)
 				.inputId(logonId)
 				.build());
+	}
+	
+	public WeeklyClassScheduleResponse weeklyClassSchedule(String startDate) {
+		String start = startDate;
+		if(start == null) {
+			start = DateHelper.getStartDateByWeek();
+		}
+		
+		List<WeeklyClassScheduleVO> list = mapper.weeklyClassSchedule(start);
+		
+		return WeeklyClassScheduleResponse.builder()
+			.preDate(DateHelper.getStartDateByLastWeek(start))
+			.nextDate(DateHelper.getStartDateByNextWeek(start))
+			.list(list)
+			.build();
 	}
 }
