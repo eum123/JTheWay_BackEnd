@@ -121,4 +121,23 @@ public class ClassController {
 
 		}
 	}
+	
+	/**
+	 * admin > main
+	 * 주별 수업 일
+	 * @param startDate
+	 * @return
+	 */
+	@GetMapping(value = "/weekly/list", produces = MediaType.APPLICATION_JSON_VALUE)
+	public HaaimApiResponse weeklyClassSchedule(
+			@RequestParam(value = "start_date") @Nullable String startDate) {
+		try {
+			
+			return HaaimApiResponse.getSuccessResponse(classService.weeklyClassSchedule(startDate));
+		} catch (Exception e) {
+			log.error("search error", e);
+			return HaaimApiResponse.getErrorResponse(e);
+
+		}
+	}
 }

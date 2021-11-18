@@ -50,9 +50,34 @@ public class DateHelper {
 	 * 주 시작은 일요일.
 	 * @return
 	 */
-	public static String getStartDateByWeekly() {
+	public static String getStartDateByWeek() {
 		LocalDate now = LocalDate.now();
-		LocalDate changeDate = now.minusDays(now.getDayOfWeek().getValue());
+		int dayOfWeek = now.getDayOfWeek().getValue();
+		LocalDate changeDate = now.minusDays(dayOfWeek == 7 ? 0 : dayOfWeek - 1 );
+		return changeDate.format(DateTimeFormatter.ofPattern(YYYYMMDD_FORMAT));
+	}
+	/**
+	 * 지난주의 시작 일자를 구한다.
+	 * 주 시작은 일요일.
+	 * @param baseDate
+	 * @return
+	 */
+	public static String getStartDateByLastWeek(String baseDate) {
+		LocalDate now = LocalDate.parse(baseDate, DateTimeFormatter.ofPattern("yyyyMMdd")).minusDays(7);
+		int dayOfWeek = now.getDayOfWeek().getValue();
+		LocalDate changeDate = now.minusDays(dayOfWeek == 7 ? 0 : dayOfWeek - 1 );
+		return changeDate.format(DateTimeFormatter.ofPattern(YYYYMMDD_FORMAT));
+	}
+	/**
+	 * 다음주의 시작 일자를 구한다.
+	 * 주 시작은 일요일.
+	 * @param baseDate
+	 * @return
+	 */
+	public static String getStartDateByNextWeek(String baseDate) {
+		LocalDate now = LocalDate.parse(baseDate, DateTimeFormatter.ofPattern("yyyyMMdd")).plusDays(7);
+		int dayOfWeek = now.getDayOfWeek().getValue();
+		LocalDate changeDate = now.minusDays(dayOfWeek == 7 ? 0 : dayOfWeek - 1 );
 		return changeDate.format(DateTimeFormatter.ofPattern(YYYYMMDD_FORMAT));
 	}
 }

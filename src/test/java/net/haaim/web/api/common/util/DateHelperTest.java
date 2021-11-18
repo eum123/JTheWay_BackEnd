@@ -66,7 +66,22 @@ public class DateHelperTest {
 	
 	@Test
 	public void getStartDateByWeekly() {
-		String startDateWeekly = DateHelper.getStartDateByWeekly();
+		String startDateWeekly = DateHelper.getStartDateByWeek();
 		System.out.println(startDateWeekly);
+	}
+	
+	@Test
+	public void dateTest() {
+		LocalDate d = LocalDate.parse("20211115", DateTimeFormatter.ofPattern("yyyyMMdd"));
+		System.out.println(d);
+		System.out.println(d.getDayOfMonth());
+	}
+	
+	@Test
+	public void getStartDateByNextWeek() {
+		String baseDate = "20210404";
+		
+		System.out.println(DateHelper.getStartDateByNextWeek(baseDate));
+		
 	}
 }

@@ -8,13 +8,13 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.lang.Nullable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.pagehelper.Page;
 
 import net.haaim.web.api.clazz.entity.ClassEntity;
 import net.haaim.web.api.clazz.entity.ClassListResponse;
 import net.haaim.web.api.clazz.entity.DailyClassAttendanceEntity;
+import net.haaim.web.api.clazz.entity.WeeklyClassScheduleVO;
 
 @Mapper
 public interface ClassMapper {
@@ -64,4 +64,12 @@ public interface ClassMapper {
 			+ "FROM class "
 			+ "WHERE class_no = #{class_no} ")
 	ClassEntity findOneByClassNo(@Param("class_no") Integer classNo);
+	
+	
+	/**
+	 * 주별 수업 목록.
+	 * @param startDate
+	 * @return
+	 */
+	List<WeeklyClassScheduleVO> weeklyClassSchedule(String startDate);
 }

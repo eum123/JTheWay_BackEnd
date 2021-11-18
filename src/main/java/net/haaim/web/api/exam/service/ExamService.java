@@ -55,7 +55,7 @@ public class ExamService {
 	 */
 	public List<ExamAverageEntity> classAverageInWeekly() {
 		//주 첫번재 일자 구하기.
-		String startDate = DateHelper.getStartDateByWeekly();
+		String startDate = DateHelper.getStartDateByWeek();
 		return examMapper.classAverageInWeekly(startDate);
 	}
 	
