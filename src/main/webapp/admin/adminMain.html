@@ -470,7 +470,7 @@
 
             //주간 일정.
             var term = "1";
-            get("/exam/class/average", term,
+            get("/class/weekly/list", null,
                 function(res) {
                     data.left.weeklySchedule = res.data;
                 }

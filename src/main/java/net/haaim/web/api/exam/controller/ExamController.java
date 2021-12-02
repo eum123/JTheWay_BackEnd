@@ -32,6 +32,7 @@ public class ExamController {
 	private final ItemService itemService;
 
 	/**
+	 * admin > main
 	 * 기간별 클래스 시험 평균.
 	 * @param term
 	 * @return
